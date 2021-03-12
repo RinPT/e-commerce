@@ -6,6 +6,7 @@ Table users {
   email varchar(96) [unique]
   password varchar(64)
   status tinyint(1)
+  user_group int
   ip_address varchar(40)
   created_at timestamp
   updated_at timestamp
@@ -39,3 +40,20 @@ Table countries {
 }
 
 Ref: "countries"."cid" < "user_address"."country_id"
+
+Table user_groups {
+  gid int [pk, increment]
+  name varchar(32)
+  permissions longtext
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table user_perms {
+  perm_id int [pk, increment]
+  perm_name varchar(32)
+  created_at timestamp
+  updated_at timestamp
+}
+
+Ref: "user_groups"."gid" < "users"."user_group"
