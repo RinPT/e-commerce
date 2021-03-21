@@ -132,9 +132,9 @@ Ref: products.product_id < comments.product_id
 
 Table advertisements {
   ad_id bigint [pk, increment]
+  category_id bigint
   banner text
   description text
-  category text
   created_at timestamp
   updated_at timestamp
 }
