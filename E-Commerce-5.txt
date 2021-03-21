@@ -153,7 +153,7 @@ Table log {
   
 }
 
-Table ticket {
+Table tickets {
   ticket_id int [pk, increment]
   ticket_creation_date timestamp
   user_id int //id of person who made the support request
@@ -169,12 +169,10 @@ Table ticket_messages {
   content text
 }
 
-Ref: "users"."uid" < "ticket"."user_id"
+Ref: "users"."uid" < "tickets"."user_id"
 
-Ref: "users"."uid" < "ticket"."support_id"
+Ref: "users"."uid" < "tickets"."support_id"
 
 Ref: "users"."uid" < "ticket_messages"."user_id"
 
-Ref: "ticket"."ticket_id" < "ticket_messages"."related_ticket"
-
-Ref: "products"."product_description" < "discounts"."discount_code"
+Ref: "tickets"."ticket_id" < "ticket_messages"."related_ticket"
