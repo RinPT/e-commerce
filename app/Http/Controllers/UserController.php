@@ -12,6 +12,10 @@ use Validator;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index(User $user)
     {
     	return view('users.UserProfile',[
@@ -38,7 +42,7 @@ class UserController extends Controller
     		'username' => 'required|max:255',
     		'email'=> 'required|email|max:255',
     		'phone' => 'max:255',
-    		
+
     	]);
 
 
@@ -68,7 +72,7 @@ class UserController extends Controller
     		'password' =>'required|confirmed', //it will look for any data you submited with '_confirmed' and make sure these 2 match
     	]);
 
-		if (password_verify($request->old_password, $user->password)) 
+		if (password_verify($request->old_password, $user->password))
 		{
 			$user->password =  Hash::make($request-> password);
 			$user->save();

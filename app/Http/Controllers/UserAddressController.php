@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class UserAddressController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
     	$user=auth()->user();
@@ -20,15 +25,15 @@ class UserAddressController extends Controller
     }
 
     public function destroy(Request $request,UserAdress $useradress)
-    {	
+    {
     	$address_id = func_get_args()[3];
-    
+
 
     	$useraddress=UserAdress::where('address_id',$address_id);
     	$useraddress->delete();
 
-        return redirect()-> back();
-		
+        return back();
+
     }
 
     public function show()
@@ -60,7 +65,7 @@ class UserAddressController extends Controller
     	'telephone' => $request-> telephone,
     	'user_id' => $user-> user_id,
 
-    	]); 
+    	]);
 
     	return redirect()-> route('user.address',$user);
 
@@ -105,7 +110,7 @@ class UserAddressController extends Controller
 
         $useraddress->save();
 
-      
+
         return redirect()-> route('user.address',$user);
     }
 }

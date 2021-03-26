@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+    public function __construct() {
+        $this->middleware('guest');
+    }
+
     public function index()
     {
     	return view('auth.register');
@@ -35,7 +39,7 @@ class RegisterController extends Controller
 
     	'username' => $request-> username,
     	'email' => $request-> email,
-    	'password' => Hash::make($request-> password),//to not to store password as plaintext in the database 
+    	'password' => Hash::make($request-> password),//to not to store password as plaintext in the database
     	]); //creates a user in the database
 
     	//sign the user in
