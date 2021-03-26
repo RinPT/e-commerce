@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Route;
 
 //Home Page:
 
-Route::get('/', [HomeController::class, 'index'])-> name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Authorization :
 
-Route::post('/logout', [LogoutController::class, 'store'])-> name('logout');
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
