@@ -42,3 +42,4 @@ Route::group(['prefix' => "/userprofile"], function() {
 
 Route::get('/products', [ProductsController::class, 'index'])->name('products');
 Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
+Route::delete('/prducts/{id}', [ProductsController::class, 'destroy'])->name('product.delete');

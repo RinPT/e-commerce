@@ -73,11 +73,26 @@
                                     <h5 class="card-title">{{ $product->name }}</h5>
                                     <p class="card-text">{{ $product->description }}</p>
                                     <p>Price: <span class="text-secondary">{{ $product->price }}₺</span> | Cargo Price: <span class="text-secondary">{{ $product->cargo_price }}₺</span></p>
-                                    <a href="#" class="btn btn-primary">See product</a>
+                                    <div class="form-group d-flex justify-content-between">
+                                        <a href="#" class="btn btn-primary">See product</a>
+                                        <form action="{{ route('product.delete', $product->product_id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-link">Delete product</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                @else
+                    <div class="col">
+                        <div class="card shadow-lg p-3 mb-5 bg-white rounded d-flex justify-content-center" style="width: 100%;">
+                            <div class="mt-2 d-flex justify-content-center">
+                                <h5 class="card-title">No Products Yet!</h5>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>
