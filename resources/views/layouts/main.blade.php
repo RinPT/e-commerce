@@ -27,13 +27,13 @@
                         <a href="{{ route('home')}}" class="nav-link"> Home </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"> Products </a>
+                        <a href="{{ route('products') }}" class="nav-link"> Products </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     @auth
                        <li class="nav-item">
-                          <a href="{{route('user.profile',auth()->user())}}" class="nav-link"> {{ auth()-> user() -> username }} </a>
+                          <a href="{{route('user.profile',auth()->user())}}" class="nav-link"> {{ auth()->user()->username }} </a>
                        </li>
                        <li class="nav-item">
                           <form action="{{ route('logout')}}" method="post" class="nav-link">
