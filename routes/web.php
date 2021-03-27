@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,6 @@ Route::group(['prefix' => "/userprofile"], function() {
     Route::get('/{user:username}/newaddress', [UserAddressController::class, 'show']) -> name('address.add'); //shows a new address adding form
     Route::post('/{user:username}/newaddress', [UserAddressController::class, 'store']) -> name('address.store'); //save the new added address
 });
+
+Route::get('/products', [ProductsController::class, 'index'])->name('products');
+Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
