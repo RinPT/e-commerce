@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Ticket_Department_Cfields extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'cargo_price',
-    ];
+    public $table = 'Ticket_Department_Cfields';
+    protected $primaryKey = 'ticket_dep_cfield_id';
 }

@@ -11,7 +11,7 @@ class Permissions extends Model
     public $table = 'Permissions';
     protected $primaryKey = 'permission_id';
     protected $fillable = [
-        'permission_name',
+        'perm_name',
         
     ];
 }

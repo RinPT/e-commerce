@@ -5,6 +5,7 @@
         <div class="d-flex justify-content-center">
             <div class="w-8/12 bg-white p-6 rounded-lg">
                 <h> Home Page </h>
+                 <a href="{{ route('admin')}}" class="nav-link"> Admin</a>
             </div>
           </div>
     </main>

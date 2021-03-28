@@ -34,11 +34,4 @@ class ProductsController extends Controller
 
         return back();
     }
-
-    public function destroy($id) {
-
-        $product = Product::find($id);
-        $product->delete();
-        return back();
-    }
 }

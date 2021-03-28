@@ -34,10 +34,6 @@
             </li>
 
             <li>
-               <a href="{{ route('home')}}" class="p-3"> My Tickets </a>
-            </li>
-
-            <li>
                <div>
 			      	<form action="{{route('user.destroy',$user)}}" method="post">
 			      		@csrf

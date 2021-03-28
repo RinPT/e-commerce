@@ -47,7 +47,7 @@
                     @foreach ($products as $product)
                         <div class="col">
                             <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
-                                <div id="carousel{{ $product->product_id }}" class="carousel slide" data-ride="carousel">
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <img class="card-img-top" src="/image/products/watch.jpg" alt="First slide" style="height: 22rem">
@@ -59,11 +59,11 @@
                                             <img class="card-img-top" src="/image/products/watch.jpg" alt="Third slide" style="height: 22rem">
                                         </div>
                                     </div>
-                                    <a class="carousel-control-prev" href="#carousel{{ $product->product_id }}" role="button" data-slide="prev">
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carousel{{ $product->product_id }}" role="button" data-slide="next">
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
                                     </a>
@@ -73,26 +73,11 @@
                                     <h5 class="card-title">{{ $product->name }}</h5>
                                     <p class="card-text">{{ $product->description }}</p>
                                     <p>Price: <span class="text-secondary">{{ $product->price }}₺</span> | Cargo Price: <span class="text-secondary">{{ $product->cargo_price }}₺</span></p>
-                                    <div class="form-group d-flex justify-content-between">
-                                        <a href="#" class="btn btn-primary">See product</a>
-                                        <form action="{{ route('product.delete', $product->product_id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-link">Delete product</button>
-                                        </form>
-                                    </div>
+                                    <a href="#" class="btn btn-primary">See product</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                @else
-                    <div class="col">
-                        <div class="card shadow-lg p-3 mb-5 bg-white rounded d-flex justify-content-center" style="width: 100%;">
-                            <div class="mt-2 d-flex justify-content-center">
-                                <h5 class="card-title">No Products Yet!</h5>
-                            </div>
-                        </div>
-                    </div>
                 @endif
             </div>
         </div>
