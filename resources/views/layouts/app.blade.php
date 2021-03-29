@@ -198,7 +198,7 @@
                         <nav class="main-nav">
                             <ul class="menu">
                                 <li>
-                                    <a href="demo1.html">Home</a>
+                                    <a href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li>
                                     <a href="shop.html">Categories</a>
@@ -304,7 +304,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="#">Pages</a>
                                     <ul>
                                         <li><a href="about-us.html">About</a></li>
@@ -598,7 +598,7 @@
 			<!-- End Search Form -->
 			<ul class="mobile-menu mmenu-anim">
 				<li>
-					<a href="demo1.html">Home</a>
+					<a href="{{ route('home') }}">Home</a>
 				</li>
 				<li>
 					<a href="#" class="active">Categories</a>
