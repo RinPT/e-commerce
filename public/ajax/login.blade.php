@@ -9,24 +9,22 @@
                     <a class="nav-link" href="#register">Register</a>
                 </li>
             </ul>
+
             <div class="tab-content">
                 <div class="tab-pane active" id="signin">
-                    <form action="#">
+                    <form action="{{ route('login') }}" method="POST">
                         <div class="form-group">
-                            <label for="singin-email">Username or email address:</label>
-                            <input type="text" class="form-control" id="singin-email" name="singin-email" required />
+                            <label for="singin-email">Email address:</label>
+                            <input type="email" class="form-control" name="email" />
                         </div>
                         <div class="form-group">
                             <label for="singin-password">Password:</label>
-                            <input type="password" class="form-control" id="singin-password" name="singin-password"
-                                required />
+                            <input type="password" class="form-control" name="password" />
                         </div>
                         <div class="form-footer">
                             <div class="form-checkbox">
-                                <input type="checkbox" class="custom-checkbox" id="signin-remember"
-                                    name="signin-remember" />
-                                <label class="form-control-label font-secondary" for="signin-remember">Remember
-                                    me</label>
+                                <input type="checkbox" class="custom-checkbox" name="remember" />
+                                <label class="form-control-label font-secondary" for="remember">Remember me</label>
                             </div>
                             <a href="#" class="lost-link font-secondary">Lost your password?</a>
                         </div>
@@ -41,17 +39,28 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab-pane" id="register">
-                    <form action="#">
+                    <form action="{{ route('register') }}" method="POST">
                         <div class="form-group">
-                            <label for="singin-email">Your email address:</label>
-                            <input type="email" class="form-control" id="register-email" name="register-email"
-                                required />
+                            <label for="name">Your Name:</label>
+                            <input type="text" class="form-control" name="name" />
                         </div>
                         <div class="form-group">
-                            <label for="singin-password">Password:</label>
-                            <input type="password" class="form-control" id="register-password" name="register-password"
-                                required />
+                            <label for="surname">Your Surname:</label>
+                            <input type="text" class="form-control" name="surname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email:</label>
+                            <input type="email" class="form-control" name="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" name="password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Password Again:</label>
+                            <input type="password" class="form-control" name="password_confirmation"/>
                         </div>
                         <div class="form-footer">
                             <div class="form-checkbox">

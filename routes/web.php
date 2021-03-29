@@ -21,8 +21,7 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
 
 Route::group(['prefix' => "/userprofile"], function() {
@@ -83,7 +82,7 @@ Route::group(['prefix' => "/admin"], function() {
 
 
     //Group Operations :
-    Route::get('/user_group/add', [AdminController::class, 'add_user_group_display']) -> name('add.user_group_display'); //display user_group_add form 
+    Route::get('/user_group/add', [AdminController::class, 'add_user_group_display']) -> name('add.user_group_display'); //display user_group_add form
     Route::post('/user_group/add/done', [AdminController::class, 'add_user_group']) -> name('add.user_group'); //adds the new user_group
     Route::delete('/user_group/delete/{group}', [AdminController::class, 'delete_group'])-> name('delete.group'); //deletes the specific user_group
     Route::post('/user_group/update_permissions/{group}', [AdminController::class, 'update_group_permissions']) -> name('update.group_permissions'); //updates status of the ticket
