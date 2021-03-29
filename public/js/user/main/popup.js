@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - Popup
+ * Riode Plugin - Popup
  * 
  * @requires magnificPopup
  * @instance multiple
@@ -91,7 +91,7 @@ function Popup(options, preset) {
         }
     }
 
-    Donald.popup = function (options, preset) {
+    Riode.popup = function (options, preset) {
         return new Popup(options, preset);
     }
 })(jQuery);

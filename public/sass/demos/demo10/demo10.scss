@@ -16,8 +16,8 @@
 @import '../../config/variables';
 
 // Color 
-$primary-color: #a7372b;
-$secondary-color: #333;
+$primary-color: #d53f31;
+$secondary-color: #a7372b;
 
 // Font
 $second-font-family: 'Oswald', sans-serif;
@@ -69,6 +69,7 @@ $second-font-family: 'Oswald', sans-serif;
 @import '../../components/tooltip';
 @import '../../components/titles';
 @import '../../components/widgets';
+@import '../../components/accordion';
 
 /* 6. header */
 @import '../../base/header/header';

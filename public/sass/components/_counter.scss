@@ -2,17 +2,19 @@
     Counter
 ---------------------------------------------- */
 .count-to {
-    font-size: 4rem;
+    display: inline-block;
+    margin-bottom: 1.6rem;
+    font-size: 5rem;
     font-weight: 700;
-    letter-spacing: -.025em;
+    letter-spacing: -.064em;
     line-height: 1;
 
     &::after {
         content: '+';
     }
 }
+
 .count-title {
-    color: inherit;
-    font-weight: 400;
-    letter-spacing: -.025em;
+    margin-bottom: .7rem;
+    font-size: 2rem;
 }

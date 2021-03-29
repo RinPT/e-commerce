@@ -13,7 +13,7 @@
 @include set-default(
 	(
 		footer: (
-            font-family: "'Open Sans', sans-serif",
+            font-family: $font-family,
             font-size: 1.3rem,
             letter-spacing: false,
             background: #222,
@@ -21,13 +21,13 @@
             _link-active-color: #fff,
 
             top: (
-                padding: 3.5rem 0,
+                padding: 4rem 0,
                 border-top: false,
                 border-bottom: 1px solid #333,
                 background: false,
             ),
             middle: (
-                padding: 3rem 0 0,
+                padding: 4.2rem 0 1.8rem,
                 letter-spacing: false,
                 border-bottom: 1px solid #333,
                 background: false,
@@ -37,12 +37,12 @@
                         padding: .6rem 0,
                         margin-bottom: .9rem,
                         font-family: inherit,
-                        font-size: 1.4rem,
-                        font-weight: 700,
+                        font-size: 1.6rem,
+                        font-weight: 600,
                         letter-spacing: 0,
                         line-height: false,
-                        text-transform: false,
-                        color: #ccc, 
+                        text-transform: capitalize,
+                        color: #e1e1e1, 
                     ),
                     body: (
                         padding: 8px 0 0,
@@ -50,12 +50,12 @@
                     ),
                     list-item: (
                         line-height: 1.2,
-                        margin-bottom: 13px,
+                        margin-bottom: 15px,
                     ),
                     label: (
                         font-family: false,
                         font-size: false,
-                        font-weight: 600,  
+                        font-weight: 500,  
                         letter-spacing: false,
                         line-height: false,
                         text-transform: uppercase,
@@ -63,16 +63,19 @@
                     )
                 )
             ),
+            main: (
+                padding: 2.6rem 0 0.4rem
+            ),
             bottom: (
-                padding: 2.8rem 0,
+                padding: 2.6rem 0 3rem,
                 background: false,
             ),
             copyright: (
                 font-family: false,
-                font-size: 1.2rem,
-                font-weight: false,
+                font-size: 1.4rem,
+                font-weight: 500,
                 color: false,
-                letter-spacing: false,
+                letter-spacing: -.01em,
                 line-height: 1.5,
             ),
             social-link: (
@@ -99,19 +102,19 @@
                     padding: 0,
                     margin-bottom: .5rem,
                     font-family:  inherit,
-                    font-size: 1.4rem,
-                    font-weight: 700,
-                    letter-spacing: 0,
-                    text-transform: false,
+                    font-size: 2rem,
+                    font-weight: 600,
+                    letter-spacing: -.015em,
+                    text-transform: inherit,
                     line-height: 1,
-                    color: #ccc,
+                    color: #fff,
                 ),
                 desc: (
-                    margin-bottom: 0,
+                    margin-bottom: .1rem,
                     font-family:  inherit,
-                    font-size: false,
+                    font-size: 1.4rem,
                     font-weight: false,
-                    letter-spacing: false,
+                    letter-spacing: -.005em,
                     text-transform: false,
                     line-height: 1.23,
                     color: #999,
@@ -121,8 +124,10 @@
                 ),
                 input: (
                     padding: false,
+                    min-height: 100%,
                     border: 0,
-                    color: false,
+                    border-radius: .3rem,
+                    color: $grey-color,
                     background: #2c2c2c,
                 ),
                 btn: (
@@ -183,10 +188,10 @@
     .widget-instagram {
         .widget-body {
             padding-top: 0;
-            margin: -5px -4px;
+            margin: -5px;
         }
         .col-3 {
-            padding: 5px 4px;
+            padding: 5px;
         }
         img {
             display: block;
@@ -197,6 +202,15 @@
     label {
         @include print_css( footer, middle, widget, label );
     }
+}
+
+.widget.widget-info a {
+    font-weight: 500;
+}
+
+// Footer Main
+.footer-main {
+    @include print_css( footer, main );
 }
 
 // Footer Bottom
@@ -238,10 +252,7 @@
         margin-bottom: 2rem;
     }
     .footer-middle {
-        padding: 3rem 0 2rem;
-        .widget {
-            margin-bottom: 2rem;
-        }
+        padding: 4.8rem 0 4.8rem;
         .widget-body {
             padding: 0;
         }
@@ -277,6 +288,9 @@
         max-width: 35rem;
         width: 100%;
     }
+    .input-wrapper-inline {
+        height: 4.9rem;
+    }
     .input-wrapper {
         @include css( max-width, footer, newsletter, form, max-width );
     }
@@ -292,6 +306,62 @@
     p {
         @include print_css( footer, newsletter, desc );
     }
+    .btn {
+        padding: 1.2em 1.33em 1.07em;
+        i {
+            font-size: 1.6rem;
+            margin: -.4rem 0 0 .6rem;
+        }
+    }
+}
+// Widget category
+.footer .widget-category {
+    .category-box {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        margin-bottom: 2rem;
+    }
+    .category-name {
+        margin-bottom: 0;
+        margin-right: 2.4rem;
+        font-size: 1.4rem;
+        letter-spacing: 0;
+        color: $light-color;
+    } 
+    a {
+        display: inline-block;
+        position: relative;
+        margin-right: 2rem;
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: $grey-color;
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 100%;
+            border-bottom: 1px solid;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        &:hover {
+            &::before {
+                transform: scale(1);
+            }
+        }
+        &:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            height: 14px;
+            margin-left: 1rem;
+            top: 50%;
+            border-left: 1px solid #454545;
+            transform: translateY(-50%);
+        }
+    }
+    
 }
 // Widget About
 .footer .widget-about {
@@ -319,33 +389,18 @@
     > * {
         flex: 1;
     }
-    .cart-dropdown:hover .cart-toggle {
-        color: #222;
-    }
-    .cart-toggle,
     .search-toggle {
         padding: 0;
         color: inherit;
     }
-    .cart-dropdown.dir-up::after {
-        bottom: 100%;
-    }
-    .dropdown-box,
-    .input-wrapper {
-        margin-bottom: 2rem;
-        &::after {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 0;
-            bottom: -2rem;
-            width: 100%;
-            height: 2rem;
-        }
-    }
     .header-search.show,
     .header-search:hover {
         color: #222
+    }
+    .hs-toggle .input-wrapper {
+        min-width: 29rem;
+        right: 1.5rem;
+        margin-bottom: 2rem;
     }
 }
 .sticky-link {
@@ -354,10 +409,16 @@
     align-items: center;
     margin: 1.5rem 0 1.3rem;
     i {
+        width: 2.3rem;
+        height: 2.4rem;
+        text-align: center;
         font-size: 2.3rem;
         line-height: 1;
         transform: translateY(0);
         transition: transform .35s ease;
+        &.d-icon-search {
+            font-size: 1.9rem;
+        }
     }
     span {
         margin-top: .8rem;
@@ -376,7 +437,7 @@
 
         i {
             transform: translateY(-5px);
-            transition: transform .35s ease;
+            //transition: transform .35s ease;
         }
     }
 }
@@ -390,5 +451,11 @@
 @include mq(md) {
     .sticky-footer {
         display: none;
+    }
+}
+
+@include mq(lg, max) {
+    .footer-middle .row > div:last-child .widget {
+        margin-bottom: 1rem;
     }
 }

@@ -8,6 +8,7 @@
             - Tips
 
         - MobileMenu 
+        
             - MobileMenuWrapper
             - MobileMenuContainer
             - MobileMenu
@@ -26,14 +27,14 @@
             ),
             // Ancestor
             ancestor: (
-                _gap: 2.3rem,
-                padding: 1.4rem 0,
+                _gap: 3rem,
+                padding: 1.3rem 0,
                 font-family: false,
                 font-size: false,
                 font-weight: 700,
                 letter-spacing: inherit,
                 line-height: 1,
-                text-transform: uppercase,
+                text-transform: capitalize,
                 color: false,
                 _active-color: false,
             ),
@@ -70,7 +71,6 @@
             submenu: (
                 padding: 2rem 0,
                 background: #fff,
-                font-family: $second-font-family,
                 font-size: 1.4rem,
                 font-weight: 400,
                 line-height: 1.5,
@@ -92,7 +92,6 @@
                 padding: 2rem 1.5rem,
                 background: #222529,
                 border-color: #2e3237,
-                font-family: $second-font-family
             ),
             // Mobile Menu Item
             item: (
@@ -100,7 +99,7 @@
             ),
             // Active
             active: ( 
-                background: #2e3237,
+                background: false,
                 color: false,
                 border: false
             ),
@@ -120,47 +119,47 @@
         ),
         category-menu: (
             padding: false,
-            background: #feecd4,
+            background: #fef0e3,
             border: false,
             _item-active-color: $primary-color,
             // Title
             title: (
-                padding: .7rem 0,
+                padding: 1.8rem .2rem 1.8rem,
                 margin: 0,
                 border-bottom: false,
-                text-transform: uppercase,
-                font-size: 1.4rem,
-                font-weight: 600,
+                text-transform: capitalize,
+                font-size: 1.8rem,
+                font-weight: 700,
                 font-family: $font-family,
-                line-height: 2.58,
-                letter-spacing: -.01em,
-                color: #4d463c
+                line-height: 1,
+                letter-spacing: -.05em,
+                color: #222
             ),
             // Ancestor
             ancestor: (
-                _split-line: 1px solid #f2dfc7,
-                margin: false,
-                padding: 1.6rem 0,
-                min-height: false,
-                text-transform: capitalize,
-                font-size: 1.4rem,
-                font-family: $second-font-family,
+                padding: 1.2rem 0 1.3rem,
                 font-weight: 400,
+                font-size: 1.3rem,
+                line-height: 1.46,
                 letter-spacing: -.01em,
-                line-height: 1.4,
-                color: #7e6e59,
+                text-transform: capitalize,
+                color: #675545,
+                _split-line: 1px solid #f0e0d1,
+                margin: false,
+                min-height: false,
             ),
             // Icon
             icon: (
-                margin-right: .9rem,
-                font-size: 1.8rem,
+                margin-right: 1rem,
+                padding-left: .2rem,
+                font-size: 2rem,
                 color: #666,
             ),
             // Submenu
             submenu: (
                 padding: 2rem 0,
                 background: #fff,
-                font-family: $second-font-family,
+                font-family: $font-family,
                 font-size: 1.4rem,
                 font-weight: false,
                 line-height: 1.5,
@@ -237,7 +236,7 @@
             position: relative;
             @include print_css( menu, ancestor );
             &::after { 
-                margin-left: .6rem;
+                margin-left: .8rem;
             }
         }
         > ul,
@@ -256,12 +255,12 @@
             .megamenu {
                 top: 100%;
             }
-            &::after {
-                visibility: visible;
-                opacity: 1;
-                top: calc(100% - 20px);
-                transform: translate3d(-50%, 0, 0);
-            }
+            // &::after {
+            //     visibility: visible;
+            //     opacity: 1;
+            //     top: calc(100% - 20px);
+            //     transform: translate3d(-50%, 0, 0);
+            // }
         }
     }
     .submenu {
@@ -281,20 +280,20 @@
                 margin-top: 0;
             }
         }
-        &::after {
-            content: '';
-            position: absolute;
-            z-index: 1000;
-            left: 50%;
-            top: -9999px;
-            transform: translate3d(-50%, -8px, 0);
-            border: 11px solid transparent;
-            border-bottom: 11px solid #fff;
-            transition: opacity .2s ease-out, transform .2s ease-out;
-            visibility: hidden;
-            opacity: 0;
-            cursor: pointer;
-        }
+        // &::after {
+        //     content: '';
+        //     position: absolute;
+        //     z-index: 1000;
+        //     left: 50%;
+        //     top: -9999px;
+        //     transform: translate3d(-50%, -8px, 0);
+        //     border: 11px solid transparent;
+        //     border-bottom: 11px solid #fff;
+        //     transition: opacity .2s ease-out, transform .2s ease-out;
+        //     visibility: hidden;
+        //     opacity: 0;
+        //     cursor: pointer;
+        // }
     }
     &.no-arrow {
         > li {
@@ -318,7 +317,7 @@
             vertical-align: middle;
             font-family: 'Font Awesome 5 Free';
             font-weight: 700;
-            font-size: .8rem;
+            font-size: 1.1rem;
             color: inherit;
             content: '\f054';
         }
@@ -442,7 +441,7 @@
                 content: '';
                 display: block;
                 position: absolute;
-                bottom: 10px;
+                bottom: 9px;
                 left: 0;
                 width: 100%;
                 height: 2px;
@@ -493,6 +492,9 @@
     img {
         height: 100%;
         object-fit: cover;
+    }
+    .btn-link:hover {
+        color: $primary-color;
     }
 }
 .menu-banner1 {
@@ -554,7 +556,7 @@
     right: 0;
     bottom: 0;
     z-index: 10000;
-    font-family: $second-font-family;
+    font-family: $font-family;
     transition: visibility .4s;
 }
 
@@ -574,6 +576,7 @@
         margin-bottom: .6rem;
         height: 4rem;
         .form-control {
+            min-height: 4rem;
             color: #7a8088;
             border: 1px solid;
             @include css( border-color, mobile-menu, container, border-color);
@@ -587,14 +590,19 @@
             border-color: $primary-color;
             color: #fff;
             font-size: 1.4rem;
+            border-radius: 3px;
             i {
-                margin: 0;
+                margin: 0 0 .5rem;
+                font-size: inherit;
             }
         }
     }
     .mobile-menu {
         margin-bottom: .5rem;
         @include css( background, mobile-menu, container, background);
+    }
+    .tab {
+        margin-top: 3rem;
     }
     .tab-content {
         background-color: transparent;
@@ -605,7 +613,7 @@
     .nav-link {
         margin-bottom: -2px;
         color: #fff;
-        font-size: 14px;
+        font-size: 13px;
         padding: 10px;
     }
     .tab-pane {
@@ -627,6 +635,18 @@
         border-radius: 7px;
         cursor: pointer;
     }
+}
+
+@include mq(xs, max) {
+    @include set-default (
+        (
+            mobile-menu: (
+                container: (
+                    max-width: 27rem
+                )
+            )
+        )
+    )
 }
 
 // MobileMenu
@@ -664,7 +684,7 @@
             display: inline-block;
             margin-bottom: 1px;
             font-size: 2rem;
-            margin-right: .5rem;
+            margin-right: 1rem;
             line-height: 0;
             vertical-align: middle;
         }
@@ -710,6 +730,7 @@
     position: fixed;
     left: calc(100vw - 50px);
     top: 25px;
+    z-index: 10001;
     i {
         font-size: 2.8rem;
         color: #e1e1e1;
@@ -794,6 +815,7 @@
         vertical-align: middle;
         line-height: 0;
         @include print_css( category-menu, icon );
+        
     }
     > li {
         > a {
@@ -819,6 +841,88 @@
     .submenu {
         > a::after {
             font-size: 1rem;
+        }
+        .megamenu {
+            min-width: 68.5rem;
+            padding: 0 0 0 .9rem;
+            > li {
+                padding: 0 1rem;
+                flex: 1;
+                &:last-child {
+                    padding-right: 0;
+                    flex: none;
+                }
+            }
+            .menu-title {
+                padding: 2.7rem 0rem 0.2rem;
+                font-size: 1.4rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: -.025em;
+            }
+            .divider {
+                height: 1px;
+                width: 100%;
+                margin: 0;
+            }
+            ul {
+                position: relative;
+                left: 0;
+                top: 0;
+                padding: 0;
+                font-size: 1.3rem;
+                opacity: 1;
+                visibility: visible;
+                box-shadow: none;
+                min-width: auto;
+                z-index: auto;
+                transform: none;
+                li {
+                    padding: 0;
+                    line-height: 1.2;
+                    a {
+                        padding: 0.7rem 0;
+                    }
+                }
+            }
+            .menu-banner {
+                .banner-content {
+                    left: 3rem;
+                }
+                .banner-subtitle {
+                    font-size: 1.4rem;
+                }
+                .banner-title {
+                    font-size: 2.4rem;
+                    line-height: 1.2;
+                    margin-bottom: 2.8rem;
+                }
+                .btn-md {
+                    padding: 0.7em 1.41em 0.7em 1.41em;
+                }
+            }
+            .menu-banner5 {
+                .banner-content {
+                    top: 2.6rem;
+                }
+                .banner-subtitle {
+                    margin-bottom: 1.1rem;
+                }
+                .banner-title {
+                    line-height: 1.25;
+                }
+            }
+            &.type2 {
+                display: block;
+                min-width: 88rem;
+                padding: 0 1rem 2rem;
+                .menu-title {
+                    padding-top: 1.5rem;
+                }
+                figure {
+                    text-align: center;
+                }
+            }
         }
     }
     ul {

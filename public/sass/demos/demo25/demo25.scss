@@ -19,7 +19,7 @@
 
 $primary-color: #2a9cf5;
 $secondary-color: #ff7271;
-$primary-color-dark: #242c37;
+$primary-color-dark: #222;
 
 /* 2. mixins */
 @import '../../mixins/breakpoints';
@@ -55,6 +55,7 @@ $primary-color-dark: #242c37;
 @import '../../components/page-header';
 @import '../../components/titles';
 @import '../../components/icons';
+@import '../../components/icon-boxes';
 @import '../../components/tooltip';
 @import '../../components/buttons';
 @import '../../components/products';

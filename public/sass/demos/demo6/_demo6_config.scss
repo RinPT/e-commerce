@@ -5,86 +5,91 @@ Demo 6
     (
         header: (
             middle: (
-                padding-top: 3rem,
-                padding-bottom: 3rem,
-                font-family: $font-family,
-                font-weight: 400,
-                font-size: 1.4rem,
-                letter-spacing: 0,
-                color: #666,
+                padding-top: 2.8rem,
+                padding-bottom: 2.6rem,
+                font-size: 1.6rem,
+                font-weight: 600,
+                color: $secondary-color,
+                login: (
+                    padding-bottom: 0
+                ),
                 logo: (
-                    margin-right: 0
+                    margin-right: 0,
+                    margin-bottom: 0
                 )
             ),
-            mmenu-toggle: (
-                color: #666
+            main-nav: (
+                margin-left: 0
             ),
             cart: (
-                label: (
-                    text-transform: false,
-
-                    price: (
-                        color: false,
+                count: (
+                    font-size: 1.6rem,
+                    hover: (
+                        color: $primary-color
                     )
                 ),
-                count: (
-                    font-size: false,
-                    font-weight: false,
-                    color: false,
-                    transition: none,
-                    hover: (
-                        color: false,
-                    )
+                label: (
+                    padding-top: .3rem,
+                    text-transform: none
                 )
             )
         ),
         menu: (
             ancestor: (
+                font-size: 1.6rem,
+                font-weight: 600,
                 text-transform: none,
-                font-size: 1.4rem,
-                font-family: inherit,
-                font-weight: 400
+                _gap: 2.2rem
             )
         ),
         product: (
-            font-family: $font-family,
             body: (
                 padding-top: 1.7rem,
                 padding-bottom: 1.7rem
             ),
-            price: (
-                color: $primary-color
-            ),
             name: (
-                padding-right: 2rem,
+                margin-bottom: .6rem
+            ),
+            price: (
+                font-weight: 400
             )
         ),
         footer: (
-            font-family: $font-family,
-            font-size: 1.4rem,
-            color: #ccc,
+            _link-active-color: $primary-color,
             middle: (
-                padding: 3.6rem 0 2.8rem,
+                padding: 3.9rem 0 2.8rem,
+                border-bottom: 1px solid #2a2a2a,
                 widget: (
-                    margin-bottom: 2.5rem,
-
+                    margin-bottom: 1.9rem,
                     body: (
                         display: flex,
-                        justify-content: center,
                         flex-wrap: wrap,
+                        justify-content: center,
+                        font-size: 1.4rem,
                         color: #ccc,
+                        letter-spacing: 0.007em
                     ),
                     list-item: (
-                        margin: 5px 11px 10px,
+                        margin-left: 1.3rem,
+                        margin-right: 1.3rem
                     )
                 )
             ),
             bottom: (
-                padding: 2.55rem 0
+                padding-bottom: 2.5rem
+            ),
+            social-link: (
+                color: #ccc,
+                border-color: #ccc
             ),
             copyright: (
-                font-family: $font-family,
+                font-size: 1.2rem,
                 color: #777
+            )
+        ),
+        product-single: (
+            price: (
+                color: $primary-color
             )
         )
     )

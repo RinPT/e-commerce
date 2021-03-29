@@ -5,14 +5,16 @@ Demo 28 Variables
     (
         base: (
             title: (
-                margin-bottom: 0,
+                padding-top: 3px,
+                margin-bottom: 4px,
                 font-size: 3rem,
                 text-transform: false,
                 letter-spacing: -0.025em,
+                line-height: 1.2,
 
                 desc: (
                     color: false,
-                    letter-spacing: -0.025em,
+                    line-height: 1.86
                 )
             )
         ),
@@ -20,23 +22,30 @@ Demo 28 Variables
             font-family: $font-family,
 
             top: (
-                background: #f4f4f4
+                background: #fff,
+                border-bottom: false
             ),
             middle: (
-                padding-top: 2.5rem,
-                padding-bottom: 2.4rem,
+                padding: 0,
                 color: false,
+                background-color: #222,
                 font-size: 1.3rem,
                 font-weight: 600,
                 text-transform: uppercase,
+                logo: (
+                    margin-right: 5rem
+                )
             ),
             bottom: (
-                background: $secondary-color,
+                background-color: #353535,
                 text-transform: capitalize,
                 color: #fff,
                 font-size: 1.5rem,
             ),
             cart: (
+                toggle: (
+                    padding: 0.7rem 0 0.5rem,
+                ),
                 label: (
                     margin: 0 1rem 0 0,
 
@@ -55,6 +64,11 @@ Demo 28 Variables
                     color: inherit,
                 )
             ),
+            wishlist: (
+                icon: (
+                    font-size: 3rem
+                )
+            ),
             search: (
                 toggle: (
                     padding: 1.5rem 0,
@@ -70,10 +84,17 @@ Demo 28 Variables
         menu: (
             ancestor: (
                 _gap: 2rem,
-                padding: 2rem 0,
-                font-size: false,
-                font-weight: false,
+                display: block,
+                padding: 15px,
+                color: #aeaeae,
+                font-size: 1.4rem,
+                font-weight: 600,
+                line-height: 1.72,
                 text-transform: false,
+                letter-spacing: -.025em,
+                transition: opacity .3s,
+                white-space: nowrap
+
             ),
             submenu: (
                 text-transform: none,
@@ -81,7 +102,7 @@ Demo 28 Variables
         ),
         product: (
             price: (
-                color: $primary-color,
+                color: #222,
             ),
             rating: (
                 _star-color: #444,
@@ -96,17 +117,21 @@ Demo 28 Variables
             top: (
                 padding: 2rem 0,
                 border-bottom: false,
-                background: $primary-color
+                background: #02BCB7
             ),
             middle: (
-                padding: 4rem 0 0,
+                padding: 82px 0px 48px 0px,
                 letter-spacing: -0.015em,
+                border-bottom-width: 0,
 
                 widget: (
                     body: (
-                        letter-spacing: -.015em
+                        letter-spacing: normal
                     )
                 )
+            ),
+            bottom: (
+                position: relative
             ),
             copyright: (
                 color: #777

@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - Product Single
+ * Riode Plugin - Product Single
  * 
  * @requires OwlCarousel
  * @requires ImagesLoaded (only quickview needs)
@@ -32,7 +32,7 @@ function ProductSingle($el) {
         self.thumbsCount = self.$thumbsDots.length;
         self.$productThumb = self.$thumbsDots.eq(0);
         self._isPgvertical = self.$thumbsWrap.parent().hasClass('pg-vertical');
-        self.thumbsIsVertical = self._isPgvertical && window.innerWidth >= Donald.desktop_width;
+        self.thumbsIsVertical = self._isPgvertical && window.innerWidth >= Riode.desktop_width;
 
         // register events
         self.$thumbDown.on('click', function (e) {
@@ -51,7 +51,7 @@ function ProductSingle($el) {
 
         // refresh thumbs
         thumbsRefresh(self);
-        Donald.$window.on('resize', function () {
+        Riode.$window.on('resize', function () {
             thumbsRefresh(self);
         });
     }
@@ -93,7 +93,7 @@ function ProductSingle($el) {
         }
 
         var oldIsVertical = 'undefined' == typeof self.thumbsIsVertical ? false : self.thumbsIsVertical; // is vertical?
-        self.thumbsIsVertical = self._isPgvertical && window.innerWidth >= Donald.desktop_width;
+        self.thumbsIsVertical = self._isPgvertical && window.innerWidth >= Riode.desktop_width;
 
         if (self.thumbsIsVertical) { // enable vertical product gallery thumbs.
             // disable thumbs carousel
@@ -163,7 +163,7 @@ function ProductSingle($el) {
                 $product.closest('.product-popup').length ||
                 document.body.classList.contains('home')
             ) {
-                Donald.minipopup.open({
+                Riode.minipopup.open({
                     message: 'Successfully added.<a href="cart.html" class="btn btn-link btn-sm btn-slide-right btn-infinite">View Cart<i class="la la-long-arrow-right"></i></a>',
                     productClass: ' product-cart',
                     name: name,
@@ -200,7 +200,7 @@ function ProductSingle($el) {
         // bind
         if (self.isQuickview) {
             recalcDetailsHeight = recalcDetailsHeight.bind(this);
-            Donald.ratingTooltip();
+            Riode.ratingTooltip();
         }
 
         // init thumbs
@@ -218,9 +218,9 @@ function ProductSingle($el) {
         });
 
         // if this is created after document ready, init plugins
-        if ('complete' === Donald.status) {
-            Donald.slider($slider);
-            Donald.quantityInput($el.find('.quantity'));
+        if ('complete' === Riode.status) {
+            Riode.slider($slider);
+            Riode.quantityInput($el.find('.quantity'));
         }
 
         initVariation(this);
@@ -294,7 +294,7 @@ function ProductSingle($el) {
 
     }
 
-    Donald.productSingle = function ($el, options) {
+    Riode.productSingle = function ($el, options) {
         if ($el && $el.length === 1) {
             return new ProductSingle($el.eq(0), options);
         }

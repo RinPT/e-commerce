@@ -37,6 +37,10 @@
         position: relative;
     }
 }
+.banner-radius { 
+    border-radius: 1rem; 
+    overflow: hidden;
+}
 .banner-subtitle {
     letter-spacing: -.025em;
     line-height: 1;

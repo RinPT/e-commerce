@@ -3,7 +3,7 @@
 ------------------------------------------- */
 
 // 1. Colors
-$primary-color: #26b !default;
+$primary-color: #26c !default;
 $primary-color-dark:  #222 !default;
 $secondary-color: #d26e4b !default;
 $alert-color: #b10001 !default; 
@@ -14,10 +14,11 @@ $light-color: #ccc !default;
 $grey-color: #999 !default;
 $border-color: #e1e1e1 !default;
 $border-color-light: #eee !default;
+$white-color: #fff !default;
 
 // 2. Font-families
 $alt-font-family: sans-serif !default;
-$second-font-family: 'Open Sans', $alt-font-family !default;
+$second-font-family: Poppins, $alt-font-family !default;
 $font-family: Poppins, $alt-font-family !default;
 $third-font-family: 'Open Sans', $alt-font-family !default;
 
@@ -37,5 +38,5 @@ $social-tumblr: #304e6c;
 $social-vk: #6383a8;
 $social-whatsapp: #3c8a38;
 $social-xing: #1a7576;
-$social-instagram: #3b6994;
+$social-instagram: #7c4a3a;
 $social-paypal: #1a7576;

@@ -5,36 +5,35 @@ Demo 3
     (
         base: (
             title: (
-                line-height: 2.5,
+                font-size: 2rem,
+                line-height: 2.75,
                 margin-bottom: 2rem,
+                letter-spacing: -.02em,
                 border: (
-                    color: #e1e1e1,
-                    height: 1px
+                    color: #eee,
+                    _height: 1px
                 )
             )
         ),
         header: (
-            top: (
-                background: #eeeeee
-            ),
             bottom: (
-                color: #fff
-            ),
-            inner-wrap: (
-                background: $secondary-color,
-                padding: 0 2.4rem
-            ),
-            sticky: (
-                padding-top: 1rem,
-                padding-bottom: 1rem,
-                font-size: 1.3rem,
+                padding: 0 2.2rem,
+                background: #28475c,
                 color: #fff,
-                background: $secondary-color
+                font-weight: 600,
+                letter-spacing:-.015em
+            ),
+            search: (
+                simple: (
+                    color: #e2e2e2
+                )
             )
         ),
         menu: (
             ancestor: (
-                padding: 2rem 0
+                padding: 2rem 0,
+                font-weight: 600,
+                letter-spacing: -.015em
             )
         ),
         category-menu: (
@@ -43,66 +42,77 @@ Demo 3
             border: 1px solid $border-color,
             ancestor: ( 
                 border-bottom: false,
-                padding: 1.2rem 0,
-                line-height: 1,
-                min-height: 3.9rem,
-                // letter-spacing: .025em,
-                font-weight: 300,
+                padding: 1rem 0,
                 color: #333,
-                font-family: $font-family,
                 _split-line: false
             ),
             title: (
-                margin: 0 0 1.1rem,
-                padding: 1.7rem 0 1.3rem,
-                line-height: 1,
-                border-bottom: 1px solid $border-color
+                padding: 1.7rem 0rem 1.7rem,
+                font-weight: 600,
+                border-bottom: 1px solid #e1e1e1,
+                letter-spacing: -.035em,
             ),
             icon: (
-                margin-bottom: 2px,
-                font-size: 1.7rem,
-                margin-right: .9rem,
-                margin-top: -1px,
-                color: #666
+                padding-left: 0,
+                color: #222,
+                margin-bottom: .2rem
             )
         ),
         product: (
-            margin-bottom: 2px,
             body: (
-                padding-top: 1.4rem,
-                padding-bottom: 1rem
+                padding-top: 1.2rem,
+                padding-bottom: .8rem
             ),
             label: (
                 new: (
-                    background: #fff,
-                    color: $primary-color,
+                    background: #0162d2
                 ),
                 sale: (
                     background: $primary-color
                 )
+            ),
+            price: (
+                margin-bottom: .5rem
             ),
             rating: (
                 _star-color: $primary-color
             )
         ),
         post: (
-            body: (
-                padding: 1.9rem 0 2.5rem
+            detail: (
+                padding: 1.9rem 0 1rem
+            ),
+            meta: (
+                margin-bottom: .7rem,
+                font-size: 1.2rem,
             ),
             info: (
                 margin-bottom: .7rem,
                 color: #666
             ),
             title: (
-                margin-bottom: 1.5rem,
-                font-size: 1.4rem,
-                font-family: $second-font-family,
-                letter-spacing: 0,
-                line-height: 1.2,
-                color: #222
+                margin-bottom: 1rem,
+                font-size: 1.6rem,
+                letter-spacing: -.025em,
+                line-height: 1.5
+            )
+        ),
+        product-single: (
+            rating: (
+                color: $primary-color
+            )
+        ),
+        footer: (
+            middle: (
+                padding-bottom: 1.5rem
             ),
-            btn: (
-                _icon-gap: .5rem
+            bottom: (
+                padding: 3rem 0 2.8rem
+            ),
+            newsletter: (
+                title: (
+                    color: #e1e1e1
+                )
             )
         )
     )

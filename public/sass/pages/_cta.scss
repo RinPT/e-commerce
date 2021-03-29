@@ -136,7 +136,6 @@
         &:hover,
         &:active,
         &:focus {
-            color: $primary-color;
             border-color: #fff;
         }
     }
@@ -144,20 +143,27 @@
 // 3 Columns
 .banner-group {
     .banner-title {
-        margin-bottom: .1rem;
-        font-size: 2.2em;
+        font-size: 3em;
+        line-height: 1.2;
+        letter-spacing: -.02em;
     }
     .banner-subtitle {
         margin-bottom: 1.8rem;
-        font-size: 1.3em;
-        &::after {
-            margin-top: 1.8rem;
-            content: '';
-            display: block;
-            width: 3.5rem;
-            height: .4rem;
-            background-color: #222;
+        font-size: 1.4em;
+        line-height: 1.2;
+        letter-spacing: .01em;
+    }
+    .btn {
+        font-weight: 500;
+        i {
+            margin-left: .8rem;
+            font-size: 1.9rem;
+            vertical-align: middle;
         }
+    }
+    img {
+        min-height: 22rem;
+        object-fit: cover;
     }
 }
 .banner-3 {
@@ -166,27 +172,30 @@
 }
 .banner-4 {
     background-color: #ccc;
-    figure {
-        border: 1.5em solid $primary-color;
-        img {
-            width: 100%;
-            max-height: 25rem;
+    .banner-content {
+        padding: 0 2.9rem;
+        > div { padding-top: .2rem; }
+    }
+    .banner-subtitle {
+        margin-bottom: -0.4rem;
+        letter-spacing: -.0428em;
+        line-height: 1.3;
+        span {
+            font-family: 'Segoe Script', sans-serif;
+            font-size: 1.71em;
         }
     }
     .banner-title {
-        margin-bottom: .2rem;  
-        font-size: 3em;
-        white-space: nowrap;
+        font-size: 5em;
     }
-    .banner-subtitle {
-        font-size: 2em;
-        &::after { content: none; }
+    .btn { 
+        padding: 1.5em 2.1em 1.5em 2.1em;
+        font-size: 1.2rem;
     }
-    .btn { padding: .76em 1.36em; }
 }
 .banner-5 {
     background-color: #ccc;
-    .banner-content { right: 3.9%; }
+    .banner-content { right: 10.5%; }
 }
 
 // Expanded Newsletter
@@ -199,7 +208,7 @@
 		letter-spacing: .01em;
     }
     .icon-box-icon {
-		margin: 0 2.4rem 0 .2rem;
+		margin: 0 2.4rem 0 0;
         font-size: 4.5rem;
     }
     .icon-box-title {
@@ -212,23 +221,29 @@
             border: 1px solid #e4e4e4;
             border-right: 0;
         }
-        .btn { padding: 1em 2.6em; }
+        .btn { padding: 1em 2.7em; }
     }
 }
 // Expanded on Background
 .banner-background {
-    padding: 10.7rem 0;
+    padding: 9.4rem 0 10.3rem;
     background-color: #6b6b6b;
-    .banner-title {
-        margin-bottom: .9rem;
-        font-size: 3em; 
-    }
-
     .banner-subtitle {
-        font-size: 1.8em;
-        line-height: 1.34;
+        margin-bottom: 1.6rem;
+        font-family: 'Segoe Script', sans-serif;
+        font-size: 3em;
+        line-height: 1.6;
     }
-    
+    .banner-title {
+        margin-bottom: .7rem;
+        font-size: 5em;
+        letter-spacing: -.025em;
+    }
+    p {
+        margin-bottom: 2.8rem;
+        font-weight: 500;
+        font-size: 1.8em;
+    }
     .input-wrapper {
         max-width: 60rem;
         width: 100%;
@@ -242,6 +257,30 @@
             font-size: 1.2rem;
         }
         .btn { min-width: 12.3rem; }
+    }
+    .btn { 
+        padding: 1.22em 2.7em;
+        font-weight: 600;
+    }
+}
+.label-star {
+    align-items: center;
+    padding: 9px 7px 5px;
+    border-radius: .3rem;
+    line-height: 1;
+    &::before, &::after {
+        animation: 4s linear 0s infinite rotateStar;
+        content: '\f005';
+        display: inline-block;
+        margin: .5rem .5rem .5rem 1.5rem;
+        vertical-align: middle;
+        font-family: 'Font Awesome 5 Free';
+        font-size: .467em;
+        font-weight: 400;
+    }
+    &::before {
+        margin-left: .5rem;
+        animation-direction: reverse;
     }
 }
 // Responsive
@@ -271,6 +310,11 @@
         padding: 0 3rem;
     }
 	.banner-newsletter .icon-box { justify-content: center; }
+}
+@include mq(md,max) {
+    .banner-4 .banner-content {
+        display: block !important; 
+    }
 }
 @include mq( sm, max ) {
     .banner { font-size: .9rem; }

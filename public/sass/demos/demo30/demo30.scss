@@ -43,6 +43,7 @@ $light-color: #f1f1f1;
 @import '../../base/spacing';
 
 /* 5, components */
+@import '../../components/accordion.scss';
 @import '../../components/alerts';
 @import '../../components/animation';
 @import '../../components/comments';

@@ -69,10 +69,18 @@
 .text-uppercase {
     text-transform: uppercase !important;
 }
+.text-none {
+    text-transform: none !important;
+}
 .text-center {
     text-align: center!important;
 }
-
+.text-left {
+    text-align: left !important;
+}
+.text-right {
+    text-align: right !important;
+}
 // Text Color
 .text-white {
     color: #fff !important;

@@ -2,10 +2,6 @@
     Testimonial
 ---------------------------------------------- */
 
-.testimonial {
-    font-family: $second-font-family;
-}
-
 .testimonial blockquote {    
     position: relative;
     margin-bottom: 2rem;
@@ -91,7 +87,7 @@
 
 //  Centered
 .testimonial-centered {
-    padding: 3.8rem 3rem;
+    padding: 3.8rem 3rem 4rem;
     background-color: #f6f7f9;
     text-align: center;
     .testimonial-info {
@@ -119,7 +115,6 @@
     .testimonial-title {
         margin-bottom: 2.6rem; 
         font: {
-            family: $second-font-family;
             size: 1.8rem;
         }
         letter-spacing: 0;  

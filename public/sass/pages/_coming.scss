@@ -23,10 +23,11 @@
     }
     .countdown-period {
         display: block;
-        font-weight: 300;
         font-size: 1.6rem;
         text-align: center;
         text-transform: lowercase;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .countdown-section:not(:first-child)::before {
         content: ':';
@@ -40,7 +41,7 @@
 
 @media (max-width: 479px), (min-width: 768px) and (max-width: 991px) {
     .countdown-coming .countdown-amount {
-        padding: 0 2.4rem;
+        padding: 0 2.1rem;
     }
 }
 
@@ -59,7 +60,6 @@
         font-weight: 900;
     }
     p {
-        font-weight: 300;
         line-height: 2.15;
         letter-spacing: -.01em;
     }
@@ -69,13 +69,15 @@
     .form-control {
         font-weight: 300;
         border-color: #dadada;
-        padding: 1.25rem 13rem 1.25rem 1.5rem;
+        padding: 1.15rem 13rem 1.15rem 1.5rem;
     }
     .btn {
         position: absolute;
         right: 0;
         top: 0;
-        padding: 1.6rem 1.5rem 1.6rem 2.5rem;
+        padding: 1.55rem 2.85rem;
+        font-size: 1.3rem;
+        border-radius: 0;
         &:hover {
             background: $primary-color;
             color: #fff;
@@ -90,5 +92,13 @@
 @include mq(xs, max) {
     .coming-section {
         padding-bottom: 1px;
+    }
+    .countdown-coming {
+        .countdown-amount {
+            font-size: 2.7rem;
+        }
+        .countdown-period {
+            font-size: 1.3rem;
+        }
     }
 }

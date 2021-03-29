@@ -5,54 +5,63 @@ Demo 13 Variables
     (
         base: (
             title: (
-                font-size: 1.6rem,
+                font-size: 2rem,
                 font-weight: 700,
-                letter-spacing: -.025em,
-                line-height: 1.75,
+                letter-spacing: 0,
+                line-height: 28px,
                 color: #444
             )
         ),
         header: (
             middle: (
+                padding: 3.4rem 0 3.4rem,
                 color: #fff,
                 font-size: 1.3rem,
                 font-weight: 600,
                 background: transparent,
                 logo: (
                     margin-right: 3.6rem
+                ),
+                login: (
+                    icon: (
+                        font-size: 2.7rem
+                    )
                 )
+            ),
+            sticky: (
+                padding-top: 1.8rem,
+                padding-bottom: 1.7rem
+            ),
+            main-nav: (
+                margin: 0,
+                padding: false,
+                background: false
             ),
             wishlist: (
-                label: (
-                    text-transform: uppercase,
-                    _gap: .8rem,
-                ),
                 icon: (
                     margin-top: -2px,
-                    font-size: 2.1rem,
-                )
-            ),
-            login: (
-                icon: (
-                    font-size: 1.9rem
+                    font-size: 2.8rem,
                 )
             )
         ),
         menu: (
             ancestor: (
-                font-weight: 600
-            )
+                padding: 1.1rem 0,
+                font-size: 1.4rem,
+                font-weight: 600,
+                letter-spacing: normal,
+                line-height: 1,
+                text-transform: uppercase
+            ),
         ),
         product: (
             label: (
-                new: (
-                    background: $secondary-color
-                ),
-                sale: (
-                    background: $primary-color
-                )
+            ),
+            name: (
+                margin-bottom: .2rem
             ),
             price: (
+                margin-bottom: .2rem,
                 color: $primary-color
             ),
             body: (
@@ -62,7 +71,6 @@ Demo 13 Variables
         post: (
             title: (
                 margin-bottom: 1.3rem,
-                font-family: $second-font-family,
                 font-weight: 400,
                 letter-spacing: 0,
                 text-transform: none,
@@ -76,6 +84,23 @@ Demo 13 Variables
             ),
             btn: (
                 _icon-gap: .6rem
+            )
+        ),
+        footer: (
+            middle: (
+                widget: (
+                    title: (
+                        color: #ccc
+                    )
+                )
+            ),
+            bottom: (
+                padding: 2.7rem 0 2.8rem
+            ),
+            newsletter: (
+                title: (
+                    color: #e1e1e1
+                )
             )
         )
     )

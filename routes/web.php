@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -22,6 +23,8 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
+Route::get('/account', [AccountController::class, 'index'])->name('account');
 
 
 Route::group(['prefix' => "/userprofile"], function() {

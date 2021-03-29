@@ -4,21 +4,43 @@ Demo 21 Variables
 @include set(
 	(
 		base: (
-			title: (
-				font-size: 2rem,
-				letter-spacing: 0
-			),
 			page-wrapper: (
 				margin-left: 60px
+			),
+			title: (
+				letter-spacing: -.02em
+			)
+		),
+		header: (
+			search: (
+				simple: (
+					color: #e1e1e1,
+				)
+			),
+			middle: (
+				padding-top: 2.7rem,
+				logo: (
+					margin-right: 7.8rem
+				)
+			),
+			mmenu-toggle: (
+				color: #222
 			)
 		),
 		product: (
 			body: (
-				padding-top: 1.8rem,
+				padding-top: 1.4rem,
 				padding-bottom: 0
+			),
+			price: (
+				letter-spacing: -.025em
 			)
 		),
 		post: (
+			meta: (
+				margin-bottom: .4rem,
+				letter-spacing: 0
+			),
 			body: (
 				padding: 1.9rem 0 1.5rem,
 			),
@@ -27,27 +49,42 @@ Demo 21 Variables
 			),
 			title: (
 				text-transform: none,
-				margin-bottom: 1.5rem,
+				margin-bottom: 1.2rem,
+				margin-left: -2px,
 				padding-left: 2px,
-				font-family: $second-font-family,
-				font-size: 1.4rem,
+				font-size: 1.8rem,
+				font-weight: 700,
+				line-height: 1.5,
 				letter-spacing: 0,
 			)
 		),
 		footer: (
 			middle: (
-				padding: 4.6rem 0 0,
-				letter-spacing: -.016em,
+				padding: 82px 0px 37px,
+				border-bottom: 1px solid #333,
 				widget: (
-					margin-bottom: 3.3rem,
+					margin-bottom: 2.6rem,
 					title: (
-						margin-bottom: 1.7rem,
-						letter-spacing: 0
+						letter-spacing: 0,
+						margin-bottom: 1.1rem,
 					),
 					body: (
-						padding: 1px 0 0
+						padding: .9rem 0 0
 					)
 				)
+			),
+			bottom: (
+				padding: 2.7rem 0 2.8rem
+			),
+			about: (
+				logo: (
+					position: relative,
+					top: -2px
+				)
+			),
+			social-link: (
+				width: 2.9rem,
+				height: 2.9rem
 			)
 		),
 		category-menu: (

@@ -2,12 +2,11 @@
     Element Category Page
 ---------------------------------------------- */
 
-.categories-section {
-    &.ellipse-section {
-        .title {
-            margin-bottom: 4rem;
-        }
-    }
+// section {
+//     margin-bottom: 6.8rem;
+// }
+.default-section {
+    margin-top: 8.8rem;
 }
 .masonry-section {
     .height-x1 {
@@ -57,10 +56,10 @@
         &.masonry-section,
         &.badge-section {
             .height-x1 {
-                height: 15rem;
+                height: 18rem;
             }
             .height-x2 {
-                height: 30rem;
+                height: 36rem;
             }
         }
     }

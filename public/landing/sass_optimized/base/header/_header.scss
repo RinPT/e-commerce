@@ -300,7 +300,7 @@
     .header-middle {
         .header-left,
         .header-right {
-            flex: 1;
+            flex: auto;
         }
         .header-right {
             justify-content: flex-end;
@@ -315,6 +315,7 @@
     }
     .mobile-menu-toggle {
         display: block;
+        margin-right: 1.5rem;
         svg { stroke: $primary-color; }
     }
 }

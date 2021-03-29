@@ -12,8 +12,11 @@
 9. demos
 */
 
+
 /* 1. config */
 @import '../../config/variables';
+$primary-color: #2879fe;
+$secondary-color: #fec248;
 
 /* 2. mixins */
 @import '../../mixins/breakpoints';
@@ -36,6 +39,7 @@
 @import '../../base/spacing';
 
 /* 5, components */
+@import '../../components/alerts';
 @import '../../components/animation';
 @import '../../components/banners';
 @import '../../components/buttons';
@@ -61,6 +65,7 @@
 @import '../../components/tooltip';
 @import '../../components/titles';
 @import '../../components/widgets';
+@import '../../components/instagram';
 
 /* 6. header */
 @import '../../base/header/header';

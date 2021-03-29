@@ -1,5 +1,5 @@
 /**
- * Donald Dependent Plugin - Slider
+ * Riode Dependent Plugin - Slider
  * 
  * @requires OwlCarousel
  * @instance multiple
@@ -38,7 +38,7 @@ function Slider($el, options) {
             len = els.length;
         for (i = 0; i < len; ++i) {
             if (!els[i].classList.contains('active')) {
-                var animates = Donald.byClass('appear-animate', els[i]),
+                var animates = Riode.byClass('appear-animate', els[i]),
                     j;
                 for (j = animates.length - 1; j >= 0; --j) {
                     animates[j].classList.remove('appear-animate');
@@ -57,8 +57,8 @@ function Slider($el, options) {
         $el.find('.owl-item.active .slide-animate').each(function () {
             var $animation_item = $(this),
                 settings = $.extend(true, {},
-                    Donald.animationOptions,
-                    Donald.parseOptions($animation_item.data('animation-options'))
+                    Riode.animationOptions,
+                    Riode.parseOptions($animation_item.data('animation-options'))
                 ),
                 duration = settings.duration,
                 delay = settings.delay,
@@ -78,7 +78,7 @@ function Slider($el, options) {
                     $animation_item.css('width', width);
                 }
                 duration = duration ? duration : '0.75s';
-                var temp = Donald.requestTimeout(function () {
+                var temp = Riode.requestTimeout(function () {
                     $animation_item.addClass('show-content');
                 }, (delay ? Number((delay).slice(0, -1)) * 1000 + 200 : 200));
 
@@ -101,7 +101,7 @@ function Slider($el, options) {
         self.prev = self.next;
         $el.find('.owl-item .slide-animate').each(function () {
             var $animation_item = $(this),
-                settings = $.extend(true, {}, Donald.animationOptions, Donald.parseOptions($animation_item.data('animation-options')));
+                settings = $.extend(true, {}, Riode.animationOptions, Riode.parseOptions($animation_item.data('animation-options')));
             $animation_item.removeClass(settings.name);
             // $animation_item.removeClass($animation_item.data('show-content'));
             // $animation_item.css('animation-play-state','paused');
@@ -119,13 +119,13 @@ function Slider($el, options) {
                 /* clear all animations that are running. */
                 if ($el.hasClass("animation-slider")) {
                     for (var i = 0; i < self.timers.length; i++) {
-                        Donald.deleteTimeout(self.timers[i]);
+                        Riode.deleteTimeout(self.timers[i]);
                     }
                     self.timers = [];
                 }
                 $el.find('.owl-item.active .slide-animate').each(function () {
                     var $animation_item = $(this),
-                        settings = $.extend(true, {}, Donald.animationOptions, Donald.parseOptions($animation_item.data('animation-options'))),
+                        settings = $.extend(true, {}, Riode.animationOptions, Riode.parseOptions($animation_item.data('animation-options'))),
                         duration = settings.duration,
                         delay = settings.delay,
                         aniName = settings.name;
@@ -144,7 +144,7 @@ function Slider($el, options) {
                     }
                     //$this.addClass('show-content');
                     duration = duration ? duration : '0.75s';
-                    var temp = Donald.requestTimeout(function () {
+                    var temp = Riode.requestTimeout(function () {
                         $animation_item.addClass('show-content');
                         self.timers.splice(self.timers.indexOf(temp), 1)
                     }, (delay ? Number((delay).slice(0, -1)) * 1000 + Number((duration).slice(0, -1)) * 500 : Number((duration).slice(0, -1)) * 500));
@@ -176,7 +176,7 @@ function Slider($el, options) {
     }
 
     Slider.zoomImage = function () {
-        Donald.zoomImage(this.$element);
+        Riode.zoomImage(this.$element);
     }
 
     Slider.zoomImageRefresh = function () {
@@ -188,8 +188,8 @@ function Slider($el, options) {
                 if (typeof elevateZoom !== 'undefined') {
                     elevateZoom.refresh();
                 } else {
-                    Donald.zoomImageOptions.zoomContainer = $this.parent();
-                    $this.elevateZoom(Donald.zoomImageOptions);
+                    Riode.zoomImageOptions.zoomContainer = $this.parent();
+                    $this.elevateZoom(Riode.zoomImageOptions);
                 }
             }
         });
@@ -230,7 +230,7 @@ function Slider($el, options) {
         });
 
         // extend user options
-        $.extend(true, settings, Donald.parseOptions($el.attr('data-owl-options')), options);
+        $.extend(true, settings, Riode.parseOptions($el.attr('data-owl-options')), options);
 
         onSliderInitialized = onSliderInitialized.bind(this);
         onSliderTranslate = onSliderTranslate.bind(this);
@@ -251,11 +251,11 @@ function Slider($el, options) {
         $el.owlCarousel(settings);
     }
 
-    Donald.slider = function (selector, options) {
-        Donald.$(selector).each(function () {
+    Riode.slider = function (selector, options) {
+        Riode.$(selector).each(function () {
             var $this = $(this);
 
-            Donald.call(function () {
+            Riode.call(function () {
                 new Slider($this, options);
             });
         });

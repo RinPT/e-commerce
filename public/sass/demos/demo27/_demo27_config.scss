@@ -4,9 +4,11 @@ Demo 27 Variables
 @include set(
 	(
 		base: (
+			_container-width: 1320px,
 			title: (
+				font-size: 20px,
 				margin-bottom: 1.9rem,
-				letter-spacing: 0,
+				letter-spacing: -.3px,
 				border: (
 					width: 1px,
 					color: #e1e1e1
@@ -18,8 +20,9 @@ Demo 27 Variables
 			_link-active-color: #fff,
 			top: (
 				background: $primary-color,
-				color: rgba(255,255,255,.8),
+				color: #fff,
 				border-bottom: 1px solid rgba(255,255,255,.15),
+				_links-gap: 2.5rem,
 			),
 			middle: (
 				padding-top: 2.5rem,
@@ -29,8 +32,8 @@ Demo 27 Variables
 				background: $primary-color
 			),
 			bottom: (
-				padding-top: 2.1rem,
-				padding-bottom: 2.1rem,
+				padding-top: 2.2rem,
+				padding-bottom: 2.3rem,
 				font-size: 1.3rem,
 				color: #777,
 			),
@@ -70,7 +73,6 @@ Demo 27 Variables
 			),
 			title: (
 				margin-bottom: 1.5rem,
-				font-family: $second-font-family,
 				font-size: 1.4rem,
 				letter-spacing: 0
 			),
@@ -89,10 +91,28 @@ Demo 27 Variables
 		footer: (
 			letter-spacing: -.015em,
 			middle: (
-				padding: 4rem 0 0
+				padding: 82px 0px 39px 0px
 			),
+			bottom: (
+				padding: 2.8rem 0
+			),
+			about: (
+                logo: (
+					margin-top: .4rem,
+                    margin-bottom: 2rem,
+                ),
+                p: (
+                    margin-bottom: 2.7rem,
+                    letter-spacing: -.015em
+                )
+            ),
 			copyright: (
-				color: #777
+				color: #666,
+				letter-spacing: -.015em
+			),
+			social-link: (
+				width: 2.9rem,
+				height: 2.9rem
 			)
 		)
 	)

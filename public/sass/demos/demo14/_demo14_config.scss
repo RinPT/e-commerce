@@ -5,11 +5,24 @@ Demo 14 Variables
     (
         header: (
             top: (
-                background: #f4f4f4
+                login: (
+                    icon: (
+                        margin-right: .8rem
+                    )
+                )
+            ),
+            middle: (
+                padding-top: 2.8rem,
+                logo: (
+                    margin-right: 0,
+                    margin-bottom: 0
+                )
             ),
             bottom: (
+                padding-bottom: 0,
+                margin-bottom: 2rem,
                 color: #fff,
-                font-weight: 700
+                font-weight: 600
             ),
             sticky: (
                 padding-top: 0,
@@ -19,42 +32,53 @@ Demo 14 Variables
             ),
             category: (
                 toggle: (
-                    padding: 1.7rem 2rem 1.7rem 1.8rem
-                ),
-                
+                    padding: 1.5rem,
+                    border-radius: 3px 0 0 3px,
+                    icon: (
+                        font-size: 22px
+                    )
+                )
             ),
             inner-wrap: (
-                background: #444,
-                padding-right: 2rem
+                background: #313438,
+                padding-right: 2rem,
+                border-radius: 3px
             ),
             main-nav: (
                 margin-left: 2rem
-            )
+            ),
         ),
         menu: (
             ancestor: (
-                padding: 2rem 0,
-                font-weight: 700
+                _gap: 3.2rem,
+                padding: 1.95rem 0,
+                font-weight: 600
             )
         ),
         category-menu: (
-            padding: .5rem 0 .4rem,
+            padding: 0,
             background: transparent,
+            title: (
+                padding: 1.55rem 0
+            ),
             ancestor: ( 
-                _split-line: 1px solid #e4e5e5,
-                padding: 1.5rem 0 1.5rem .2rem,
+                _split-line: 1px solid #eee,
+                padding: 1.55rem 0 1.55rem,
                 min-height: 4.4rem,
                 line-height: 1,
-                font-size: 1.4rem,
-                text-transform: none,
+                font-size: 1.3rem,
+                text-transform: capitalize,
                 font-weight: 400,
                 letter-spacing: 0,
                 color: #222
             ),
             icon: (
-                margin-right: .8rem,
-                font-size: 1.8rem,
-                color: rgb(8, 7, 7)
+                margin-top: -3px,
+                margin-right: 9px,
+                margin-bottom: 0,
+                margin-left: -2px,
+                font-size: 2rem,
+                color: #222
             )
         ),
         product: (
@@ -72,6 +96,22 @@ Demo 14 Variables
             ),
             rating: (
                 _star-color: #fed076
+            )
+        ),
+        footer: (
+            middle: (
+                widget: (
+                    title: (
+                        color: #ccc,
+                        letter-spacing: -.025em
+                    )
+                )
+            ),
+            bottom: (
+                padding: 2.6rem 0 2.9rem
+            ),
+            copyright: (
+                font-weight: 500
             )
         )
     )

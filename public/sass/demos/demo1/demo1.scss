@@ -76,5 +76,9 @@
 /* 7. footer */
 @import '../../base/footer/footer';
 
-/* 8. Demos */
+/* 8. pages */
+@import '../../pages/cta';
+@import '../../pages/blog';
+
+/* 9. Demos */
 @import 'demo1_custom';

@@ -1,5 +1,5 @@
 /**
- * Donald Dependent Plugins
+ * Riode Dependent Plugins
  */
 
 (function () {
@@ -30,7 +30,7 @@
         }
     };
 
-    Donald.appear = function (el, fn, options) {
+    Riode.appear = function (el, fn, options) {
         var settings = {
             data: undefined,
             accX: 0,
@@ -45,7 +45,7 @@
 
         checks.push({ el: el, fn: fn, options: settings });
         if (!timerId) {
-            timerId = Donald.requestTimeout(checkAll, 100);
+            timerId = Riode.requestTimeout(checkAll, 100);
         }
     }
 
@@ -56,7 +56,7 @@
 
 (function ($) {
 
-    Donald.zoomImageOptions = {
+    Riode.zoomImageOptions = {
         responsive: true,
         zoomWindowFadeIn: 750,
         zoomWindowFadeOut: 500,
@@ -65,26 +65,26 @@
         cursor: 'crosshair'
     };
 
-    Donald.zoomImageObjects = [], // issue
+    Riode.zoomImageObjects = [], // issue
         /**
          * @function zoomImage
          * 
          * @requires elevateZoom
          * @param {jQuery} $el
          */
-        Donald.zoomImage = function ($el) {
+        Riode.zoomImage = function ($el) {
             if ($.fn.elevateZoom && $el) {
                 (('string' === typeof $el) ? $($el) : $el)
                     .find('img').each(function () {
                         var $this = $(this);
-                        Donald.zoomImageOptions.zoomContainer = $this.parent();
-                        $this.elevateZoom(Donald.zoomImageOptions);
-                        Donald.zoomImageObjects.push($this);
+                        Riode.zoomImageOptions.zoomContainer = $this.parent();
+                        $this.elevateZoom(Riode.zoomImageOptions);
+                        Riode.zoomImageObjects.push($this);
                     });
             }
         }
-    Donald.zoomImageOnResize = function () {
-        Donald.zoomImageObjects.forEach(function ($img) {
+    Riode.zoomImageOnResize = function () {
+        Riode.zoomImageObjects.forEach(function ($img) {
             $img.each(function () {
                 var elevateZoom = $(this).data('elevateZoom');
                 elevateZoom && elevateZoom.refresh();
@@ -99,10 +99,10 @@
      * @requires jQuery.countTo
      * @param {string} selector
      */
-    Donald.countTo = function (selector) {
+    Riode.countTo = function (selector) {
         if ($.fn.countTo) {
-            Donald.$(selector).each(function () {
-                Donald.appear(this, function () {
+            Riode.$(selector).each(function () {
+                Riode.appear(this, function () {
                     var $this = $(this);
                     setTimeout(function () {
                         $this.countTo({
@@ -123,9 +123,9 @@
      * @requires countdown
      * @param {string} selector
      */
-    Donald.countdown = function (selector) {
+    Riode.countdown = function (selector) {
         if ($.fn.countdown) {
-            Donald.$(selector).each(function () {
+            Riode.$(selector).each(function () {
                 var $this = $(this),
                     untilDate = $this.data('until'),
                     compact = $this.data('compact'),
@@ -170,9 +170,9 @@
      * @param {string} selector
      * @param {object} option
      */
-    Donald.priceSlider = function (selector, option) {
+    Riode.priceSlider = function (selector, option) {
         if (typeof noUiSlider === 'object') {
-            Donald.$(selector).each(function () {
+            Riode.$(selector).each(function () {
                 var self = this;
 
                 noUiSlider.create(self, $.extend(true, {
@@ -197,7 +197,7 @@
     }
 
 
-    Donald.isotopeOptions = {
+    Riode.isotopeOptions = {
         itemsSelector: '.grid-item',
         layoutMode: 'masonry',
         percentPosition: true,
@@ -212,15 +212,15 @@
      * @param {string} selector,
      * @param {object} options
      */
-    Donald.isotopes = function (selector, options) {
+    Riode.isotopes = function (selector, options) {
         if (typeof imagesLoaded === 'function' && $.fn.isotope) {
             var self = this;
 
-            Donald.$(selector).each(function () {
+            Riode.$(selector).each(function () {
                 var $this = $(this),
                     settings = $.extend(true, {},
                         self.isotopeOptions,
-                        Donald.parseOptions($this.attr('data-grid-options')),
+                        Riode.parseOptions($this.attr('data-grid-options')),
                         options ? options : {}
                     );
                 $this.isotope(settings);
@@ -234,9 +234,9 @@
      * @requires isotope
      * @param {string} selector
      */
-    Donald.initNavFilter = function (selector) {
+    Riode.initNavFilter = function (selector) {
         if ($.fn.isotope) {
-            Donald.$(selector).on('click', function (e) {
+            Riode.$(selector).on('click', function (e) {
                 var $this = $(this),
                     filterValue = $this.attr('data-filter'),
                     filterTarget = $this.parent().parent().attr('data-target');
@@ -254,12 +254,12 @@
      * @requires themePluginParallax
      * @param {string} selector
      */
-    Donald.parallax = function (selector, options) {
+    Riode.parallax = function (selector, options) {
         if ($.fn.themePluginParallax) {
-            Donald.$(selector).each(function () {
+            Riode.$(selector).each(function () {
                 var $this = $(this);
                 $this.themePluginParallax(
-                    $.extend(true, Donald.parseOptions($this.attr('data-parallax-options')), options)
+                    $.extend(true, Riode.parseOptions($this.attr('data-parallax-options')), options)
                 );
             });
         }
@@ -271,8 +271,8 @@
      * @param {string} selector
      */
 
-    Donald.headerToggleSearch = function (selector) {
-        var $search = Donald.$(selector);
+    Riode.headerToggleSearch = function (selector) {
+        var $search = Riode.$(selector);
         $search.find('.form-control').on('focusin', function (e) {
             $search.addClass('show');
         });
@@ -282,16 +282,16 @@
     }
 
 
-    Donald.stickyHeaderOptions = {
-        activeScreenWidth: Donald.desktop_width
+    Riode.stickyHeaderOptions = {
+        activeScreenWidth: Riode.desktop_width
     }
     /**
      * @function stickyHeader
      * Init sticky header
      * @param {string} selector
      */
-    Donald.stickyHeader = function (selector) {
-        var $stickyHeader = Donald.$(selector);
+    Riode.stickyHeader = function (selector) {
+        var $stickyHeader = Riode.$(selector);
         if ($stickyHeader.length == 0) return;
 
         var height, top, isWrapped = false;
@@ -311,17 +311,17 @@
             }
 
             // wrap sticky header
-            if (!isWrapped && window.innerWidth >= Donald.stickyHeaderOptions.activeScreenWidth) {
+            if (!isWrapped && window.innerWidth >= Riode.stickyHeaderOptions.activeScreenWidth) {
                 isWrapped = true;
                 $stickyHeader.wrap('<div class="sticky-wrapper" style="height:' + height + 'px"></div>');
             }
 
-            Donald.$window.off('resize', stickyHeaderWrap);
+            Riode.$window.off('resize', stickyHeaderWrap);
         };
 
         // define refresh function
         var stickyHeaderRefresh = function () {
-            var isFixed = window.innerWidth >= Donald.stickyHeaderOptions.activeScreenWidth && window.pageYOffset >= top;
+            var isFixed = window.innerWidth >= Riode.stickyHeaderOptions.activeScreenWidth && window.pageYOffset >= top;
 
             // fix or unfix
             if (isFixed) {
@@ -335,16 +335,16 @@
 
         // register events
         window.addEventListener('scroll', stickyHeaderRefresh, { passive: true });
-        Donald.$window.on('resize', stickyHeaderWrap);
-        Donald.$window.on('resize', stickyHeaderRefresh);
+        Riode.$window.on('resize', stickyHeaderWrap);
+        Riode.$window.on('resize', stickyHeaderRefresh);
 
         // init
-        Donald.call(stickyHeaderWrap, 500);
-        Donald.call(stickyHeaderRefresh, 500);
+        Riode.call(stickyHeaderWrap, 500);
+        Riode.call(stickyHeaderRefresh, 500);
     }
 
-    Donald.stickyDefaultOptions = {
-        minWidth: Donald.desktop_width,
+    Riode.stickyDefaultOptions = {
+        minWidth: Riode.desktop_width,
         maxWidth: 20000,
         top: false,
         hide: false, // hide when it is not sticky.
@@ -356,11 +356,11 @@
      * @param {string, Object} selector
      * @param {Object} settings
      */
-    Donald.stickyContent = function (selector, settings) {
-        var $stickyContents = Donald.$(selector),
+    Riode.stickyContent = function (selector, settings) {
+        var $stickyContents = Riode.$(selector),
             offsetTop = 0,
             offsetBottom = 0,
-            options = $.extend({}, Donald.stickyDefaultOptions, settings);
+            options = $.extend({}, Riode.stickyDefaultOptions, settings);
 
         if (0 == $stickyContents.length) return;
 
@@ -419,7 +419,7 @@
                     }
                 }
             });
-            // Donald.$window.off('resize', initStickyContent);
+            // Riode.$window.off('resize', initStickyContent);
         }
 
         var refreshStickyContent = function (e) {
@@ -446,13 +446,13 @@
             });
         }
 
-        Donald.call(initStickyContent, 550);
-        Donald.call(refreshStickyContent, 560);
+        Riode.call(initStickyContent, 550);
+        Riode.call(refreshStickyContent, 560);
 
-        Donald.call(function () {
+        Riode.call(function () {
             window.addEventListener('scroll', refreshStickyContent, { passive: true });
-            Donald.$window.on('resize', initStickyContent);
-            Donald.$window.on('resize', refreshStickyContent);
+            Riode.$window.on('resize', initStickyContent);
+            Riode.$window.on('resize', refreshStickyContent);
         }, 700);
 
     }
@@ -462,8 +462,8 @@
      * Register events for alert
      * @param {string} selector
      */
-    Donald.alert = function (selector) {
-        Donald.$body.on('click', selector + ' .btn-close', function (e) {
+    Riode.alert = function (selector) {
+        Riode.$body.on('click', selector + ' .btn-close', function (e) {
             $(this).closest(selector).fadeOut(function () {
                 $(this).remove();
             });
@@ -476,8 +476,8 @@
      * Register events for accordion
      * @param {string} selector
      */
-    Donald.accordion = function (selector) {
-        Donald.$body.on('click', selector, function (e) {
+    Riode.accordion = function (selector) {
+        Riode.$body.on('click', selector, function (e) {
             var $this = $(this),
                 $header = $this,
                 $body = $this.closest('.card').find($this.attr('href')),
@@ -495,7 +495,7 @@
                 } else if ($body.hasClass('collapsed')) {
 
                     if ($parent.find('.expanded').length > 0) {
-                        if (Donald.isIE) {
+                        if (Riode.isIE) {
                             slideToggle($parent.find('.expanded'), function () {
                                 slideToggle($body);
                             });
@@ -546,9 +546,9 @@
      * Register events for tab
      * @param {string} selector
      */
-    Donald.tab = function (selector) {
+    Riode.tab = function (selector) {
 
-        Donald.$body
+        Riode.$body
 
             // tab nav link
             .on('click', '.tab .nav-link', function (e) {
@@ -588,7 +588,7 @@
      * 
      * @param {string} selector
      */
-    Donald.playableVideo = function (selector) {
+    Riode.playableVideo = function (selector) {
         $(selector + ' .video-play').on('click', function (e) {
             var $video = $(this).closest(selector);
             if ($video.hasClass('playing')) {
@@ -608,7 +608,7 @@
     }
 
 
-    Donald.animationOptions = {
+    Riode.animationOptions = {
         name: 'fadeIn',
         duration: '1.2s',
         delay: '.2s'
@@ -618,14 +618,14 @@
      * 
      * @param {string} selector
      */
-    Donald.appearAnimate = function (selector) {
-        Donald.$(selector).each(function () {
+    Riode.appearAnimate = function (selector) {
+        Riode.$(selector).each(function () {
             var el = this;
-            Donald.appear(el, function () {
+            Riode.appear(el, function () {
                 if (el.classList.contains('appear-animate')) {
-                    var settings = $.extend({}, Donald.animationOptions, Donald.parseOptions(el.getAttribute('data-animation-options')));
+                    var settings = $.extend({}, Riode.animationOptions, Riode.parseOptions(el.getAttribute('data-animation-options')));
 
-                    Donald.call(function () {
+                    Riode.call(function () {
                         el.style['animation-duration'] = settings.duration;
                         el.style['animation-delay'] = settings.delay;
                         el.classList.add(settings.name);
@@ -648,23 +648,23 @@
      * @requires themeSticky
      * @param {string} selector
      */
-    Donald.stickySidebar = function (selector) {
+    Riode.stickySidebar = function (selector) {
         if ($.fn.themeSticky) {
-            Donald.$(selector).each(function () {
+            Riode.$(selector).each(function () {
                 var $this = $(this);
-                $this.themeSticky($.extend(Donald.stickySidebarOptions, Donald.parseOptions($this.attr('data-sticky-options'))));
+                $this.themeSticky($.extend(Riode.stickySidebarOptions, Riode.parseOptions($this.attr('data-sticky-options'))));
                 $this.trigger('recalc.pin');
             });
         }
     }
-    Donald.recalcAll = function (selector) {
+    Riode.recalcAll = function (selector) {
         if ($.fn.themeSticky) {
-            Donald.$(selector).each(function () {
+            Riode.$(selector).each(function () {
                 $(this).trigger('recalc.pin');
             });
         }
     }
-    Donald.stickySidebarOptions = {
+    Riode.stickySidebarOptions = {
         autoInit: true,
         minWidth: 991,
         containerSelector: '.sticky-sidebar-wrapper',
@@ -683,8 +683,8 @@
      * 
      * Find all .ratings-full from root, and initialize tooltip.
      */
-    Donald.ratingTooltip = function (root) {
-        var els = Donald.byClass('ratings-full', root ? root : document.body),
+    Riode.ratingTooltip = function (root) {
+        var els = Riode.byClass('ratings-full', root ? root : document.body),
             len = els.length;
 
         var ratingHandler = function () {
@@ -701,12 +701,12 @@
     /**
      * @function initPopups
      */
-    Donald.initPopups = function () {
+    Riode.initPopups = function () {
 
         // Register Login Popup
         $('a.login, .login-link').on('click', function (e) {
             e.preventDefault();
-            Donald.popup({
+            Riode.popup({
                 items: {
                     src: $(this).attr('href')
                 }
@@ -716,7 +716,7 @@
         // Register "Register" Popup
         $('.register-link').on('click', function (e) {
             e.preventDefault();
-            Donald.popup({
+            Riode.popup({
                 items: {
                     src: $(this).attr('href')
                 },
@@ -731,7 +731,7 @@
         // Register "Play Video" Popup
         $('.btn-iframe').on('click', function (e) {
             e.preventDefault();
-            Donald.popup({
+            Riode.popup({
                 items: {
                     src: $(this).attr('href')
                 }
@@ -739,9 +739,9 @@
         });
 
         // Open newsletter Popup after 7.5s in home pages
-        if (Donald.$body.hasClass('home') && Donald.getCookie('hideNewsletterPopup') !== 'true') {
+        if (Riode.$body.hasClass('home') && Riode.getCookie('hideNewsletterPopup') !== 'true') {
             setTimeout(function () {
-                Donald.popup({
+                Riode.popup({
                     items: {
                         src: 'ajax/newsletter.html'
                     },
@@ -751,7 +751,7 @@
                     callbacks: {
                         beforeClose: function () {
                             // if "do not show" is checked
-                            $('#hide-newsletter-popup')[0].checked && Donald.setCookie('hideNewsletterPopup', true, 7);
+                            $('#hide-newsletter-popup')[0].checked && Riode.setCookie('hideNewsletterPopup', true, 7);
                         }
                     },
                 });
@@ -760,10 +760,10 @@
     }
 
 
-    Donald.initPurchasedMinipopup = function () {
-        if (Donald.byClass('product-single').length || Donald.byClass('main-content').length) {
+    Riode.initPurchasedMinipopup = function () {
+        if (Riode.byClass('product-single').length || Riode.byClass('main-content').length) {
             setInterval(function () {
-                Donald.minipopup.open({
+                Riode.minipopup.open({
                     message: 'Someone just purchased below.',
                     productClass: ' product-list-sm',
                     name: 'Daisy Bag Sonia by Sonia Rykiel',
@@ -772,15 +772,15 @@
                     price: '$199',
                     rating: 5
                 }, function ($box) {
-                    Donald.ratingTooltip($box[0]);
+                    Riode.ratingTooltip($box[0]);
                 });
             }, 60000);
         }
     }
 
-    Donald.initScrollTopButton = function () {
+    Riode.initScrollTopButton = function () {
         // register scroll top button
-        var domScrollTop = Donald.byId('scroll-top');
+        var domScrollTop = Riode.byId('scroll-top');
 
         domScrollTop.addEventListener('click', function (e) {
             $('html, body').animate({ scrollTop: 0 }, 600);
@@ -795,7 +795,7 @@
             }
         }
 
-        Donald.call(refreshScrollTop, 500);
+        Riode.call(refreshScrollTop, 500);
         window.addEventListener('scroll', refreshScrollTop, { passive: true });
     }
 
@@ -805,7 +805,7 @@
      * @param {function} fn
      * @param {number} delay
      */
-    Donald.requestTimeout = function (fn, delay) {
+    Riode.requestTimeout = function (fn, delay) {
         var handler = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
         if (!handler) {
             return setTimeout(fn, delay);
@@ -830,7 +830,7 @@
          * @param {number} step
          * @param {number} timeOut
          */
-        Donald.requestInterval = function (fn, step, timeOut) {
+        Riode.requestInterval = function (fn, step, timeOut) {
             var handler = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
             if (!handler) {
                 if (!timeOut)
@@ -865,7 +865,7 @@
          * @function deleteTimeout
          * @param {number} timerID
          */
-        Donald.deleteTimeout = function (timerID) {
+        Riode.deleteTimeout = function (timerID) {
             if (!timerID) {
                 return;
             }
@@ -885,10 +885,10 @@
     // Private Properties
 
     var showMobileMenu = function () {
-        Donald.$body.addClass('mmenu-active');
+        Riode.$body.addClass('mmenu-active');
     };
     var hideMobileMenu = function () {
-        Donald.$body.removeClass('mmenu-active');
+        Riode.$body.removeClass('mmenu-active');
     };
 
     /**
@@ -914,7 +914,7 @@
             });
 
             // calc megamenu position
-            Donald.$window.on('resize', function () {
+            Riode.$window.on('resize', function () {
                 $('.main-nav .megamenu').each(function () {
                     var $this = $(this),
                         left = $this.offset().left,
@@ -941,7 +941,7 @@
             $('.mobile-menu-toggle').on('click', showMobileMenu);
             $('.mobile-menu-overlay').on('click', hideMobileMenu);
             $('.mobile-menu-close').on('click', hideMobileMenu);
-            Donald.$window.on('resize', hideMobileMenu);
+            Riode.$window.on('resize', hideMobileMenu);
         },
         initFilterMenu: function () {
             $('.search-ul li').each(function () {
@@ -964,11 +964,11 @@
                 var $box = $menu.find('.dropdown-box');
                 if ($box.length) {
                     var top = $('.main').offset().top + $box[0].offsetHeight;
-                    if (window.pageYOffset > top || window.innerWidth < Donald.desktop_width) {
+                    if (window.pageYOffset > top || window.innerWidth < Riode.desktop_width) {
                         $menu.removeClass('show');
                     }
                     window.addEventListener('scroll', function () {
-                        if (window.pageYOffset <= top && window.innerWidth >= Donald.desktop_width) {
+                        if (window.pageYOffset <= top && window.innerWidth >= Riode.desktop_width) {
                             $menu.removeClass('show');
                         }
                     }, { passive: true });
@@ -976,23 +976,23 @@
                         e.preventDefault();
                     })
                     $menu.on("mouseover", function (e) {
-                        if (window.pageYOffset > top && window.innerWidth >= Donald.desktop_width) {
+                        if (window.pageYOffset > top && window.innerWidth >= Riode.desktop_width) {
                             $menu.addClass('show');
                         }
                     })
                     $menu.on("mouseleave", function (e) {
-                        if (window.pageYOffset > top && window.innerWidth >= Donald.desktop_width) {
+                        if (window.pageYOffset > top && window.innerWidth >= Riode.desktop_width) {
                             $menu.removeClass('show');
                         }
                     })
                 }
                 if ($menu.hasClass('with-sidebar')) {
-                    var sidebar = Donald.byClass('sidebar');
+                    var sidebar = Riode.byClass('sidebar');
                     if (sidebar.length) {
                         $menu.find('.dropdown-box').css('width', sidebar[0].offsetWidth - 20);
 
                         // set category menu's width same as sidebar.
-                        Donald.$window.on('resize', function () {
+                        Riode.$window.on('resize', function () {
                             $menu.find('.dropdown-box').css('width', (sidebar[0].offsetWidth - 20));
                         });
                     }
@@ -1025,5 +1025,5 @@
         }
     }
 
-    Donald.menu = Menu;
+    Riode.menu = Menu;
 })(jQuery);

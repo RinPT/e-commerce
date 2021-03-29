@@ -16,8 +16,8 @@
 @import '../../config/variables';
 
 //Color
-$primary-color: #333;
-$secondary-color: #ff9089;
+$primary-color: #222;
+$secondary-color: #ff675d;
 
 /* 2. mixins */
 @import '../../mixins/breakpoints';
@@ -79,7 +79,6 @@ $secondary-color: #ff9089;
 @import '../../pages/shop';
 @import '../../pages/product-single';
 
-@import '../../pages/categories';
 
 /* 9. Demos */
 @import 'demo2_custom';

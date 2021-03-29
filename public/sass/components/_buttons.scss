@@ -22,14 +22,13 @@
     background-color: #e4eaec;
     color: #222;
     outline: 0;
-    border-radius: 0;
-    padding: 1em 2em;
+    padding: 1.22em 2.78em;
     font: {
         weight: 700;
         size: 1.4rem;
-        family: 'Open Sans', sans-serif;
+        family: $font-family;
     }
-    letter-spacing: -0.025em;
+    letter-spacing: 0;
     line-height: 1.2;
     text-transform: uppercase;
     text-align: center;
@@ -48,8 +47,10 @@
 
     i {
         display: inline-block;
+        vertical-align: middle;
         margin-left: .4rem;
         line-height: 0;
+        font-size: 1.9rem;
         &::before {
             margin: 0;
         }
@@ -118,6 +119,7 @@
     justify-content: center;
     i {
         margin-right: .7rem;
+        margin-left: 0;
     }
 }
 
@@ -337,7 +339,7 @@
 
 // Other Button Styles
 .btn-disabled {
-    pointer-events: none;
+    cursor: not-allowed;
     background-color: #e4eaec !important;
     color: #999 !important;
     border-color: #e4eaec !important;
@@ -349,18 +351,10 @@
 }
 .btn {
     &.btn-rounded {
-        border-radius: 2px;
+        border-radius: 3px;
         &::before,
         &::after {
-            border-radius: 2px;
-        }
-    }
-
-    &.btn-ellipse {
-        border-radius: 24px;
-        &::before,
-        &::after {
-            border-radius: 24px;
+            border-radius: 3px;
         }
     }
 
@@ -372,16 +366,16 @@
     }
 
     &.btn-lg {
-        padding: 1.3em 2.54em;
+        padding: 1.5em 3.42em;
     }
     &.btn-md {
-        padding: .84em 1.33em;
+        padding: 1.07em 2.15em;
         font-size: 1.3rem;
     }
  
     &.btn-sm {
-        padding: .62em 1.22em;
-        font-size: 1.2rem;
+        padding: 0.92em 1.61em;
+        font-size: 1.3rem;
     }
 }
 .btn.btn-link {
@@ -396,6 +390,7 @@
 .btn-primary {
     @include button-variant($primary-color);
 }
+
 
 .btn-secondary {
     @include button-variant($secondary-color);
@@ -414,15 +409,15 @@
 }
 
 .btn-white {
-    color: #666;
+    color: $dark-color;
     background-color: #fff;
     border-color: #fff;
     &:hover,
     &:active,
     &:focus {
-        color: #666;
-        border-color: #fff;
-        background-color: #fff; 
+        color: $white-color;
+        border-color: $primary-color;
+        background-color: $primary-color; 
     }
     &.btn-outline {
         color: #fff;

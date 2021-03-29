@@ -23,13 +23,12 @@
     margin-bottom: -.1rem;
     padding: 1.6rem .2rem;
     font: {
-        size: 1.5rem;
-        weight: 600;
+        size: 1.6rem;
+        weight: 700;
     } 
     line-height: 1;
-    letter-spacing: -.01em;
+    letter-spacing: 0;
     text-align: center;
-    text-transform: uppercase;
     border-radius: 0;
     border: 0;
     transition: border .35s, color .35s, background-color .35s;
@@ -76,6 +75,9 @@
     padding: 2.3rem 0;
     line-height: 1.72;
     color: #666;
+    p {
+        line-height: 1.72;
+    }
 }
 
 .tab-nav-simple {
@@ -190,7 +192,6 @@
     }
     .tab-content {
         flex: 1;
-        padding-left: 2rem;
     }
     .nav-item {
         margin-right: 0;
@@ -216,7 +217,7 @@
         }
     }   
     .tab-pane {
-        padding: 1.7rem 0;
+        padding: 1.7rem 2rem;
     }
  
     &.tab-simple {

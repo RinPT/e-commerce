@@ -15,11 +15,10 @@
 @include set-default(
 	(
 		header: (
-            font-family: "'Open Sans', sans-serif",
+            font-family: $font-family,
             letter-spacing:  -.025em,
             color: false,
             background: #fff,
-            border-bottom: false,
             // Link's color
             _link-color: false,
             // Link's color when it is hover or active
@@ -35,19 +34,32 @@
 				padding-top: false,
 				padding-bottom: false,
 				color: false,
-				background: #f2f3f5,
-				border-bottom: false,
+				background: false,
+				border-bottom: 1px solid $border-color,
                 font-family: false,
-				font-size: 1.1rem,
+				font-size: 1.2rem,
 				font-weight: false,
-                letter-spacing: -0.014em,
-                text-transform: uppercase,
-                _links-gap: 2rem,
+                letter-spacing: -0.025em,
+                text-transform: false,
+                _links-gap: 2.3rem,
+                wishlist: (
+                    margin-right: 2rem,
+                    icon: (
+                        margin-right: .6rem,
+                        font-size: 1.7rem
+                    )
+                ),
+                login: (
+                    icon: (
+                        margin-right: .9rem,
+                        font-size: 1.5rem,
+                    )
+                )
 			),
             // Header Middle
 			middle: (
-				padding-top: 2.8rem,
-                padding-bottom: 2.8rem,
+				padding-top: 2.7rem,
+                padding-bottom: 2.7rem,
 				color: #222,
 				background: #fff,
 				border-bottom: false,
@@ -57,21 +69,36 @@
                 letter-spacing: false,
                 text-transform: false,
                 logo: (
-                    margin-right: 4.1rem,
+                    margin-right: 8rem,
+                    margin-bottom: .1rem,
                     _mobile-margin-right: 2rem
                 ),
+                login: (
+                    margin-right: 2rem,
+                    padding-bottom: .2rem,
+                    icon: (
+                        font-size: 2.3rem
+                    )
+                ),
+                compare: (
+                    margin-right: 3.5rem,
+                    icon: (
+                        font-size: 3.2rem,
+                        margin-bottom: .1rem
+                    )
+                )
 			),
             // Header Bottom
 			bottom: (
 				padding-top: false,
-				padding-bottom: false,
-				color: false,
+				padding-bottom: 1.5rem,
+				color: $dark-color,
 				background: #fff,
 				border-top: false,
 				border-bottom: false,
                 font-family: false,
-				font-size: 1.3rem,
-				font-weight: false,
+				font-size: 1.4rem,
+				font-weight: 700,
                 letter-spacing: false,
                 text-transform: false,
             ),
@@ -81,15 +108,15 @@
             ),
             // Sticky Header
             sticky: (
-                padding-top: 1.3rem,
-                padding-bottom: 1.3rem,
+                padding-top: 1.5rem,
+                padding-bottom: 1.4rem,
                 background: false,
                 box-shadow: 0 2px 5px rgba(0,0,0,0.1),
                 color: false
             ),
             // MainMenu
             main-nav: (
-                margin: false,
+                margin: 0 0 0 .3rem,
                 padding: false,
                 background: false
             ),
@@ -97,21 +124,36 @@
             mmenu-toggle: (
                 color: #222,
             ),
+            //Select box
+            select: (
+                max-width: false,
+                padding-left: 1.1rem,
+                padding-right: 3rem,
+                border: 0,
+                font-weight: 400,
+                font-size: 1.3rem,
+                letter-spacing: 0,
+                z-index: 1,
+            ),
             // Header Search
             search: (
                 // Toggle Search
                 toggle: (
                     padding: 1.1rem 0,
-                    width: 30rem
+                    width: 31rem
                 ),
                 // Expanded Search
                 expanded: (
-                    width: 53rem,
-                    height: false
+                    width: 65rem,
+                    height: 4.5rem
+                ),
+                //Simple Search
+                simple: (
+                    color: $primary-color
                 ),
                 // Shape is round
                 round: (
-                    width: 26rem,
+                    width: 52.2rem,
                     height: false
                 )
             ),
@@ -120,19 +162,6 @@
 				max-width: 200px
             ),
             // Links            
-            // Login
-            login: (
-                label: (
-                    _gap: .9rem,
-                    font-weight: inherit,
-                    text-transform: uppercase
-                ),
-                icon: (
-                    margin-top: -2px,
-                    font-size: 1.7rem,
-                    line-height: 1
-                )
-            ),
             // Call
             call: (
                 label: (
@@ -149,15 +178,22 @@
             ),
             // Wishlist
             wishlist: (
-                label: (
-                    _gap: false,
-                    font-weight: inherit,
-                    text-transform: false,
-                ),
                 icon: (
-                    font-size: false
+                    font-size: 2.8rem
                 )
             ),
+            contact: (
+                icon: (
+                    margin-right: .7rem,
+                    font-size: 1.7rem,
+                )
+            ),
+            help: (
+                icon: (
+                    margin-right: .7rem,
+                    font-size: 1.7rem,
+                )
+            )
 		)
 	)
 );
@@ -195,7 +231,7 @@
 }
 
 .header-border {
-    border-bottom: 1px solid $border-color-light;
+    border-bottom: 1px solid $border-color;
 }
 .has-center {
     .header-left,
@@ -210,6 +246,9 @@
         margin-right: 2rem;
     }
 }
+.header-left {
+    flex: 1;
+}
 .header-left,
 .header-right,
 .header-center {
@@ -218,7 +257,12 @@
 }
 .header-right {
     margin-left: auto;
+    a {
+        display: flex;
+        align-items: center;
+    }
 }
+
 .header-top {
     @include print_css(header, top);
     .header-right {
@@ -227,6 +271,37 @@
             &:first-child {
                 margin-left: 0;
             }
+        }
+    }
+    .divider {
+        margin: 0 -.3rem 0 2rem;
+    }
+    .contact {
+        margin-right: .2rem;
+        line-height: 1;
+        i {
+            @include print_css( header, contact, icon );
+        }
+    }
+    .help {
+        line-height: 1;
+        i {
+            @include print_css( header, help, icon );
+        }
+    }
+    .login-link, .register-link {
+        i {
+            @include print_css( header, top, login, icon );
+        }
+    }
+    .delimiter {
+        margin: 0 .5rem;
+        color: #aaa;
+    }
+    .wishlist {
+        @include print_css ( header, top, wishlist );
+        i {
+            @include print_css ( header, top, wishlist, icon );
         }
     }
 }
@@ -238,14 +313,72 @@
 }
 .header-middle {
     @include print_css(header, middle);
+    .login-link {
+        display: flex;
+        align-items: center;
+        @include css( color, header, _link-color );
+        @include print_css(header, middle, login);
+        span {
+            cursor: pointer;
+            @include print_css(header, middle, login, label);
+        }
+        i {
+            @include print_css(header, middle, login, icon);
+        }
+        i + span { @include css( margin-left, header, login, label, _gap ); }
+        &:hover {
+            @include css( color, header, _link-active-color );
+        }
+    }
     .logo {
-        @include css( margin-right, header, middle, logo, margin-right );
+        @include print_css( header, middle, logo );
+    }
+    .compare {
+        @include print_css( header, middle, compare );
+        i {
+            @include print_css( header, middle, compare, icon );
+        }
     }
     .main-nav {
         margin-right: 1.5rem;
     }
     .header-right .cart-dropdown {
-        margin-right: 0 !important;
+        > a::after {
+            content: none;
+        }
+    }
+    .icon-box {
+        margin-right: 1.8rem;
+        padding-bottom: .1rem;
+        transition: none;
+        &:hover {
+            .icon-box-icon, p, .icon-box-title {
+                color: inherit;
+            }
+        }
+    }
+    .icon-box-icon, p, .icon-box-title {
+        transition: color .3s;
+    }
+    .icon-box-icon {
+        margin-bottom: 0;
+        padding: 0;
+        font-size: 3rem;
+    }
+    .icon-box-title {
+        margin-bottom: .5rem;
+        font-size: 1.1rem;
+        font-weight: 400;
+        text-transform: capitalize;
+        line-height: 1;
+        letter-spacing: -.027em;
+    }
+    p {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: $dark-color;
+        letter-spacing: -.0428em;
+        line-height: 1;
     }
 }
 .logo {
@@ -256,15 +389,23 @@
 }
 .header-bottom {
     @include print_css(header, bottom);
+    .header-right {
+        margin-right: .3rem;
+        i {
+            margin-right: 1rem;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+    }
 }
 // Welcome message
 .welcome-msg {
     margin: 0;
-    padding: 7px 0;
+    padding: 1.1rem 0;
     font-size: inherit;
     font-weight: inherit;
     font-family: inherit;
-    letter-spacing: inherit;
+    letter-spacing: -.0125em;
     line-height: 1.5;
     white-space: nowrap;
 }
@@ -283,7 +424,7 @@
         padding: 1.1rem 1.5rem;
         border: 0;
         background-color: #eee;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         letter-spacing: inherit;
     }
     .btn-search {
@@ -292,21 +433,18 @@
         background-color: $primary-color;
         border: 0;
         color: #fff;
-        font-size: 1.4rem;
+        font-size: 2rem;
         i {
-            margin: 0;
+            margin: 0 .1rem .6rem 0;
+            vertical-align: middle;
+            font-size: 2rem;
         }
     }
     .select-box {
         background-color: #f4f4f4;
         select {
             position: relative;
-            max-width: 116px;
-            padding-left: 20px;
-            padding-right: 15px;
-            border: 0;
-            font-weight: 600;
-            z-index: 1;
+            @include print_css( header, select );
         }
     }
     &.hs-toggle {
@@ -315,8 +453,8 @@
             right: -1.5rem;
             top: 100%;
             @include css( min-width, header, search, toggle, width );
-            padding: 2rem;
-            height: 8rem;
+            padding: 1.5rem;
+            height: auto;
             background-color: #fff;
             box-shadow: 0 2px 35px rgba(0,0,0,0.1);
             visibility: hidden;
@@ -325,68 +463,69 @@
             z-index: 100;
             transition: transform .4s .2s, visibility .4s .2s, opacity .4s .2s;
         }
-        &::after {
-            content: '';
-            position: absolute;
-            z-index: 1000;
-            left: 50%;
-            top: calc(100% - 19px);
-            transform: translate3d(-50%, -5px, 0);
-            border: 11px solid transparent;
-            border-bottom: 11px solid #fff;
-            visibility: hidden; 
-            opacity: 0;
-            transition: transform .4s .2s, visibility .4s .2s, opacity .2s .2s;
-        }
-        &:hover,
-        &.show {
-            .input-wrapper {
-                transform: translate3d(0, 0, 0);
-                visibility: visible;
-                transition: transform .4s;
-                opacity: 1;
-            }
-            &::after {
-                visibility: visible;
-                transform: translate3d(-50%, 0, 0);
-                opacity: 1;
-                transition: transform .4s;
-            }
-        }
         &:hover {
             color: $primary-color;
+        }
+        .form-control {
+            padding: 1.4rem 2rem;
+            background-color: #f4f4f4;
+        }
+        .btn-search {
+            background-color: #f4f4f4;
+            min-width: 5rem;
+            font-size: 1.8rem;
+            color: #222;
+            border-radius: 0;
+            i {
+                margin-bottom: .4rem;
+                font-size: inherit;
+            }
         }
     }
     &.hs-expanded {
         @include css( max-width, header, search, expanded, width );
         width: 100%;
+        margin: 0 auto;
+        flex: 1;
         .input-wrapper {
             width: 100%;
+            border: 2px solid $primary-color;
+            border-radius: .5rem;
             @include css( height, header, search, expanded, height );
-            
         }
         .select-box {
             width: 13.2rem;
-            margin-right: 2px;
-            border-radius: 2rem 0 0 2rem;
-            color: #444;
+            border-radius: .5rem 0 0 .5rem;
+            color: #666;
             &,
             select {
                 cursor: pointer;
             }
             &::before {
-                right: 15px;
+                right: 11px;
+                font-size: 1rem;
+            }
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 8px;
+                right: -3px;
+                height: 25px;
+                border-right: 1px solid #e1e1e1;
             }
         }
         input.form-control {
             flex: 1;
+            min-height: 100%;
+            padding-left: 1.9rem;
+            padding-right: 1.9rem;
+            letter-spacing: 0;  
             color: #ababab;
             background-color: #f4f4f4;
-            margin-right: 2px;
         }
         .btn-search {
-            padding-right: 5px;
-            border-radius: 0 1.9rem 1.9rem 0;
+            min-width: 4.7rem;
             background-color: #f4f4f4;
             color: #444;
             font-size: 1.6rem;
@@ -402,15 +541,17 @@
         }
     }
     &.hs-simple {
+        flex: 1;
+        margin-right: 2rem;
         @include css( max-width, header, search, round, width );
-        width: 100%;
         .input-wrapper {
             @include css( height, header, search, round, height );
         }
         input.form-control {
-            padding: 0 4rem 0 2rem;
-            border-radius: 25px;
-            border: 1px solid #e1e1e1;
+            padding: 0 5rem 0 1.55rem;
+            border-radius: 5px;
+            border: 2px solid;
+            @include css( border-color, header, search, simple, color );
             font-family: inherit;
             background-color: #fff;
             color: #999;
@@ -419,14 +560,24 @@
             position: absolute;
             background: transparent;
             color: #333;
-            min-width: 43px;
+            min-width: 48px;
             height: 100%;
-            border-radius: 25px;
+            border-radius: 5px;
             right: 0;
             &:hover {
                 color: $primary-color;
             }
         }
+    }
+}
+
+.header .header-search.hs-toggle:hover,
+.header-search.hs-toggle.show {
+    .input-wrapper {
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+        transition: transform .4s;
+        opacity: 1;
     }
 }
 .mobile-search {
@@ -489,33 +640,6 @@
     @include print_css( header, main-nav );
 }
 
-
-// Other
-.header {
-    .login,
-    .call {
-        margin-right: 1.5rem;
-    }
-}
-// Header Login
-.login {
-    display: flex;
-    align-items: center;
-    @include css( color, header, _link-color );
-    @include print_css(header, login);
-    span {
-        cursor: pointer;
-        @include print_css(header, login, label);
-    }
-    i {
-        @include print_css(header, login, icon);
-    }
-    i + span { @include css( margin-left, header, login, label, _gap ); }
-    &:hover {
-        @include css( color, header, _link-active-color );
-    }
-}
-
 // Header Call
 .call {
     display: flex;
@@ -538,16 +662,7 @@
 // Wishlist
 
 .wishlist {
-	display: inline-flex;
-	align-items: center;
-	transition: color .3s;
-    @include css( color, header, _link-color );
-    @include print_css(header, wishlist);
-    span {
-        @include print_css(header, wishlist, label);
-        cursor: pointer;
-    }
-    i + span { @include css( margin-left, header, wishlist, label, _gap ); }
+    margin-right: 1.5rem;
     i {
         @include print_css( header, wishlist, icon );
         cursor: pointer;
@@ -596,6 +711,7 @@
 // Mobile Menu Toggle
 .mobile-menu-toggle {
     display: none;
+    margin-right: 2rem;
     font-size: 2.5rem;
     @include css( color, header, mmenu-toggle, color );
 
@@ -633,23 +749,12 @@
         .logo {
             @include css( margin-right, header, middle, logo, _mobile-margin-right );
         }
-        .divider {
-            display: none;
-        }
     }
 }
 
-@include mq(1023px, max) {
-    .header .login span, .header .wishlist span { display: none; }
-}
-
 @include mq(lg, max) {
-    .header {
-        .main-nav,
-        .divider,
-        .login {
-            display: none;
-        }
+    .header .main-nav {
+        display: none;
     }
     .header-top {
         .header-left {
@@ -657,22 +762,19 @@
         }
     }
     .header-middle {
-        .header-left,
-        .header-right {
-            flex: 1;
-        }
         .header-right {
             justify-content: flex-end;
+
+            .divider {
+                display: none;
+            }
         }
         .header-center {
             margin-left: auto;
             margin-right: auto;
         }
-        .logo {
-            margin-right: 0;
-        }
-        .header-search {
-            display: none;
+        .compare {
+            margin-right: 1.5rem;
         }
     }
     .mobile-menu-toggle {
@@ -680,10 +782,17 @@
     }
 }
 @include mq(md, max) {
-    .header .cart-dropdown {
-        display: none;
+    .header-middle {
+        .mobile-search { display: block; }
+        .header-search {
+            display: none;
+        }
     }
-    .header-middle .mobile-search { display: block; }
+    .header-top {
+        .login-link, .register-link, .divider, .delimiter {
+            display: none;
+        }
+    }
 }
 // Welcome message animation.
 @include mq(480px, max) {
@@ -692,6 +801,15 @@
             position: relative;
             overflow: hidden;
         }
+    }
+    .header-middle {
+        .logo {
+            margin-right: 0; 
+        }
+        .wishlist, .divider {
+            display: none;
+        }
+        .icon-box { margin-right: 1rem; }
     }
     .welcome-msg {
         transform: translateX(0);
@@ -731,6 +849,27 @@
     }
 }
 
+.label-block {
+    span {
+        display: block;
+    }
+    .cart-name {
+        margin-bottom: .5rem;
+        font-size: 1.1rem;
+        font-weight: 400;
+        text-transform: capitalize;
+        ::after { content: none; }
+    }
+    .cart-price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: -.05em;
+    }
+    &.cart-toggle i {
+        font-size: 3rem;
+    }
+}
+
 // Mobile Link ( new )
 .mobile-link {
     display: block;
@@ -747,8 +886,5 @@
 @include mq(md) {
     .mobile-link {
         display: none;
-    }
-    .mobile-menu-toggle {
-        color: $primary-color;
     }
 }

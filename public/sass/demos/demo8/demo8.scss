@@ -44,9 +44,11 @@ $second-font-family: 'Oswald', sans-serif;
 @import '../../base/spacing';
 
 /* 5, components */
+@import '../../components/accordion';
 @import '../../components/animation';
 @import '../../components/alerts';
 @import '../../components/banners';
+@import '../../components/blog';
 @import '../../components/buttons';
 @import '../../components/categories';
 @import '../../components/comments';

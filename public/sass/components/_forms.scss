@@ -17,7 +17,7 @@
 .form-control {
     display: block;
     width: 100%;
-    min-height: 4rem;
+    min-height: 4.5rem;
     padding: .85rem 2rem;
     border: 1px solid #e3e3e3;
     font-size: 1.4rem;
@@ -68,6 +68,7 @@ textarea {
     opacity: 0;
 
     + label {
+        display: block;
         position: relative;
         padding-left: 2.4rem;
         cursor: pointer;
@@ -114,8 +115,8 @@ textarea {
         width: auto;
         height: 100%;
         padding-left: 9px;
-        padding-right: 27px;
-        border: 1px solid #e3e3e3;
+        padding-right: 25px;
+        border: 1px solid #d7d7d7;
         border-radius: 2px;
         color: inherit;
         background-color: transparent;
@@ -143,7 +144,7 @@ textarea {
 }
 
 .select-box option {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 @media (-ms-high-contrast: active), (-ms-high-contrast: none) {
     select::-ms-expand { display: none }
@@ -163,7 +164,7 @@ input::-webkit-inner-spin-button {
 
 .input-group {
     display: inline-flex;
-    width: 10.4rem;
+    width: 11rem;
     @include css(height, form, input-group, height);
 
     .form-control {
@@ -180,7 +181,7 @@ input::-webkit-inner-spin-button {
     }
     button {
         padding: 0;
-        width: 2.8rem;
+        width: 3.1rem;
         @if ( get(form, input-group, border-color) ) {
             border: 1px solid get(form, input-group, border-color);
         }
@@ -247,7 +248,7 @@ input[type="radio"]:checked ~ label::after {
     position: relative;
     max-width: 61.3rem;
     width: 100%;
-    height: 40px;
+    height: 45px;
     .btn {
         line-height: 1;
     }
@@ -301,19 +302,22 @@ input[type="radio"]:checked ~ label::after {
 .btn-absolute {
     input.form-control {
         width: 100%;
-        padding-left: 1.2rem;
-        color: #999;
+        padding: 1rem 4rem 1rem 1.5rem;
+        color: #666;
         font-size: 1.3rem;
     }
     .btn {
         position: absolute;
         width: auto;
         height: 100%;
-        min-width: 4.4rem;
+        min-width: 4.3rem;
         right: 0;
-        font-size: 1.3rem;
+        font-size: 1.7rem;
         &:hover {
             color: $primary-color;
+        }
+        i {
+            margin-left: 0;
         }
     }
 }

@@ -6,22 +6,16 @@ Demo 30 Variables
         base: (
             title: (
                 margin-bottom: 3rem,
-                font-size: 2.4rem,
-                letter-spacing: -0.025em,
+                font-size: 2rem,
+                letter-spacing: normal,
                 text-transform: none,
-                color: #333,
-
-                border: (
-                    color: #f4f4f4,
-                    _active-color: #333,
-                    line-height: 40px
-                )
+                color: #333
             ),
         ),
         header: (
             middle: (
-                padding-top: 2.4rem,
-                padding-bottom: 2.4rem,
+                padding-top: 2.3rem,
+                padding-bottom: 2.1rem,
                 color: #2f3945
             ),
             call: (
@@ -41,27 +35,32 @@ Demo 30 Variables
                 ),
                 icon: (
                     color: false,
-                    font-size: 2.6rem
+                    font-size: 2.4rem
                 )
             ),
             wishlist: (
                 icon: (
-                    font-size: 2.6rem
+                    font-size: 2.2rem
                 )
             ),
             login: (
                 icon: (
                     font-size: 2.6rem
                 )
-            )
+            ),
+            sticky: (
+                padding-top: 1.3rem,
+                padding-bottom: 1.1rem
+            ),
         ),
         menu: (
             ancestor: (
-                _gap: 4.2rem,
+                _gap: 2.8rem,
                 font-family: $font-family,
                 font-size: 1.4rem,
-                font-weight: 600,
+                font-weight: 700,
                 color: #333,
+                letter-spacing: normal
             )
         ),
         post: (
@@ -74,7 +73,6 @@ Demo 30 Variables
             title: (
                 text-transform: none,
                 font-size: 1.4rem,
-                font-family: $second-font-family,
                 letter-spacing: 0,
                 color: #444
             ),
@@ -88,17 +86,21 @@ Demo 30 Variables
 
             top: (
                 padding: 3.1rem 0 2.6rem,
-                border-bottom: 1px solid #eaecf0,
+                border-bottom: 1px solid #e1e1e1,
             ),
             middle: (
-                border-bottom: 1px solid #eaecf0,
+                border-bottom: false,
+                padding: 70px 0px 58px 0px,
 
                 widget: (
+                    margin-bottom: 0,
                     title: (
                         margin-bottom: .8rem,
                         color: #333,
-                        font-family: $font-family,
-                        font-weight: 700,
+                        font-size: 18px,
+                        text-transform: uppercase,
+                        line-height: 19.2px,
+                        letter-spacing: .2px
                     ),
                     body: (
                         color: #777,
@@ -110,10 +112,13 @@ Demo 30 Variables
                 ),
             ),
             bottom: (
-                padding: 1.8rem 0,
+                padding: 3.5rem 0,
+                border-top: 1px solid #e1e1e1
             ),
             copyright: (
-                letter-spacing: -0.015em,
+                color: #777,
+                font-size: 13px,
+                font-weight: 400
             ),
         ),
         product: (
@@ -122,7 +127,7 @@ Demo 30 Variables
                 padding-bottom: 1.2rem,
             ),
             price: (
-                color: #369
+                color: #222
             )
         )
     )

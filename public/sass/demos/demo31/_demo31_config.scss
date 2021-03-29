@@ -4,7 +4,7 @@ Demo 31 Variables
 @include set(
     (
         base: (
-            _container-width: 1510px,
+            _container-width: 1520px,
         ),
         header: (
             _link-active-color: #fff,
@@ -17,27 +17,23 @@ Demo 31 Variables
                 background-color: $primary-color,
                 logo: (
                     margin-right: 0,
+                    margin-bottom: false
+
                 )
             ),
             // Logo
             logo: (
                 max-width: 250px,
                 background-color: $secondary-color,
-                padding: 2.9rem,
+                padding: 26.5px 26px
             ),
             main-nav: (
-                margin-left: 3.9rem,
-            ),
-            search: (
-                round: (
-                    width: 35rem,
-                    height: false
-                ),
+                margin-left: 3.9rem
             ),
             wishlist: (
+                margin-right: 2.1rem,
                 icon: (
-                    font-size: 2.6rem,
-                    margin: 2px 28px 0px 0px,
+                    font-size: 2.7rem
                 )
             ),
             cart: (
@@ -81,13 +77,26 @@ Demo 31 Variables
         menu: (
             // Ancestor
             ancestor: (
-                _gap: 2.8rem,
+                _gap: 2.47rem,
                 text-transform: initial,
                 font-size: 1.4rem,
                 font-family: $font-family,
                 font-weight: 600,
+                letter-spacing: normal,
                 _active-color: #fff,
             ),
+        ),
+        product: (
+            label: (
+                new: (
+                    color: false,
+                    background: $secondary-color
+                ),
+                sale: (
+                    color: false,
+                    background: $primary-color
+                ),
+            )
         ),
         product-single: (
             name: (
@@ -118,23 +127,30 @@ Demo 31 Variables
         ),
         footer: (
             top: (
-                padding: 3rem 0,
+                padding: 3.5rem 0 3.1rem,
+                border-bottom: false
             ),
             middle: (
-                border-bottom: 1px solid #282828,
+                border-bottom: false,
+                padding: 63px 0 17px,
                 widget: (    
                     title: (
                         text-transform: initial,
                         font-size: 1.5rem,
                         color: #fff,
                         font-family: $font-family,
-                        letter-spacing: -0.025em,
-                        font-weight: 700,
+                        letter-spacing: .7px,
+                        font-weight: 600,
+                        margin-bottom: 1.1rem,
+                        line-height: 1.1
                     ),
                     label: (
-                        color: #a6a6a6,
+                        color: #777,
                         font-family: $font-family,
                         margin-bottom: 1.1rem,
+                        font-weight: 700,
+                        letter-spacing: 0,
+                        line-height: 1.2
                     ),
                     body: (
                         font-size: 1.3rem,
@@ -145,20 +161,22 @@ Demo 31 Variables
                         display: flex,
                         flex-direction: column,
                         margin-bottom: 11px,
-                        letter-spacing: -0.02em,
+                        letter-spacing: -.1px,
                         
                     )
                 )
             ),
             bottom: (
-                padding: 3.4rem 0 3.8rem 0,
+                padding: 3rem 0 2.9rem 0,
+                border-top: 1px solid #333,
             ),
             social-link: (
-                width: 4.6rem,
-                height: 4.6rem,
+                width: 4rem,
+                height: 4rem,
                 font-size: 1.9rem,
                 color: #FFFFFF,
                 border-color: #6381B3,
+                margin-right: 10px
             ),
             newsletter: (
                 title: (
@@ -168,16 +186,21 @@ Demo 31 Variables
                 ),
                 desc: (
                     font-size: 1.4rem,
-                    line-height: 1.1,
-                    letter-spacing: .01em,
+                    line-height: 18px,
+                    letter-spacing: -.3px,
+                    opacity: .8
                 ),
                 form: (
-                    max-width: 56rem,
+                    max-width: 60rem
                 ),
                 btn: (
-                    padding: 1em 2.6em,
+                    font-size: 13px
                 )
-            )
+            ),
+            copyright: (
+                font-weight: 400,
+                letter-spacing: 0,
+            ),
         )
     )
 );

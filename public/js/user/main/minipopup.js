@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - MiniPopup
+ * Riode Plugin - MiniPopup
  * 
  * @instance single
  */
@@ -64,7 +64,7 @@
             // init area
             var area = document.createElement('div');
             area.className = "minipopup-area";
-            Donald.byClass('page-wrapper')[0].appendChild(area);
+            Riode.byClass('page-wrapper')[0].appendChild(area);
 
             $area = $(area);
             $area.on('click', '.btn-close', function (e) {
@@ -81,14 +81,14 @@
                 settings = $.extend(true, {}, self.defaults, options),
                 $box;
 
-            settings.detailTemplate = Donald.parseTemplate(
+            settings.detailTemplate = Riode.parseTemplate(
                 (null != settings.count ? settings.priceQuantityTemplate : settings.priceTemplate),
                 settings
             )
             if (null != settings.rating) {
-                settings.detailTemplate += Donald.parseTemplate(settings.ratingTemplate, settings);
+                settings.detailTemplate += Riode.parseTemplate(settings.ratingTemplate, settings);
             }
-            $box = $(Donald.parseTemplate(settings.template, settings));
+            $box = $(Riode.parseTemplate(settings.template, settings));
 
             // open
             $box
@@ -113,7 +113,7 @@
                         self.pause();
                         e.stopPropagation();
                     });
-                    Donald.$body.on('touchstart', function () {
+                    Riode.$body.on('touchstart', function () {
                         self.resume();
                     });
 
@@ -165,6 +165,6 @@
         }
     }
 
-    Donald.minipopup = Minipopup;
+    Riode.minipopup = Minipopup;
 
 })(jQuery);

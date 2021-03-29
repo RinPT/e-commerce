@@ -17,9 +17,8 @@
 @import '../../config/variables';
 
 //Color
-$primary-color: #d26e4b;
-$secondary-color: #333;
-$second-font-family: Jost, $alt-font-family;
+$primary-color: #ffa372;
+$secondary-color: #444;
 $font-family: Jost, $alt-font-family;
 
 /* 2. mixins */
@@ -76,6 +75,7 @@ $font-family: Jost, $alt-font-family;
 
 /* 8. Pages */
 @import '../../pages/product-single';
+@import '../../pages/shop';
 
 /* 8. Demos */
 @import 'demo6_custom';

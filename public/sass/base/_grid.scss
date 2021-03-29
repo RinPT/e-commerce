@@ -120,6 +120,10 @@
         flex: 0 0 83.3333%;
         max-width: 83.3333%;
     }
+    .col-xxl-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
     .col-xxl-2 {
         flex: 0 0 16.6666%;
         max-width: 16.6666%;
@@ -240,7 +244,7 @@ $border-bottom-color: #f4f4f4 !default;
 .split-line> * {
     margin-bottom: 3rem;
     padding-bottom: 3rem;
-    border-bottom: 1px solid $border-bottom-color;
+    border-bottom: 1px solid $border-right-color;
     &::after {
         content: '';
         display: block;
@@ -249,7 +253,7 @@ $border-bottom-color: #f4f4f4 !default;
         position: absolute;
         right: 0;
         top: 0;
-        background-color: #e1e1e1;
+        background-color: $border-right-color;
     }
 }
 #{split-line-nthclasses()} {

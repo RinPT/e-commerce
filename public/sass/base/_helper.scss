@@ -76,7 +76,20 @@
 .overflow-hidden {
     overflow: hidden !important;
 }
-
+@include mq(xl) {
+    .d-xl-none {
+        display: none !important;
+    }
+    .d-xl-block {
+        display: block !important;
+    }
+    .d-xl-flex {
+        display: flex !important;
+    }
+    .d-xl-inline-flex {
+        display: inline-flex !important;
+    }
+}
 @include mq(lg) {
     .d-lg-none {
         display: none !important;
@@ -114,6 +127,10 @@
 }
 
 // Font Weight
+.font-weight-bolder {
+    font-weight: 800 !important;
+}
+
 .font-weight-bold {
     font-weight: 700 !important;
 }

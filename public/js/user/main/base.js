@@ -1,15 +1,15 @@
 /**
- * Donald Main JavaScript File
+ * Riode Main JavaScript File
  */
 'use strict';
 
 /**
- * Donald Object
+ * Riode Object
  */
-window.Donald = {};
+window.Riode = {};
 
 /**
- * Donald Base
+ * Riode Base
  */
 (function ($) {
 
@@ -17,23 +17,23 @@ window.Donald = {};
      * Get Scrollbar's Width
      * @return {number} width
      */
-    Donald.getScrollbarWidth = function () {
+    Riode.getScrollbarWidth = function () {
         return window.innerWidth - document.body.clientWidth;
     }
 
     // Properties & Status
-    Donald.$window = $(window);
-    Donald.$body = $(document.body);
-    Donald.status = '';
-    // Donald.desktop_width = 992 - Donald.getScrollbarWidth();
-    Donald.desktop_width = 992;
+    Riode.$window = $(window);
+    Riode.$body = $(document.body);
+    Riode.status = '';
+    // Riode.desktop_width = 992 - Riode.getScrollbarWidth();
+    Riode.desktop_width = 992;
 
     // Detect Internet Explorer
-    Donald.isIE = navigator.userAgent.indexOf("Trident") >= 0;
+    Riode.isIE = navigator.userAgent.indexOf("Trident") >= 0;
     // Detect Edge
-    Donald.isEdge = navigator.userAgent.indexOf("Edge") >= 0;
+    Riode.isEdge = navigator.userAgent.indexOf("Edge") >= 0;
     // Detect Mobile
-    Donald.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    Riode.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     /**
      * Make a macro task
@@ -41,7 +41,7 @@ window.Donald = {};
      * @param {function} fn
      * @param {number} delay
      */
-    Donald.call = function (fn, delay) {
+    Riode.call = function (fn, delay) {
         setTimeout(fn, delay);
     }
 
@@ -50,7 +50,7 @@ window.Donald = {};
      * @param {string} options
      * @return {object} options
      */
-    Donald.parseOptions = function (options) {
+    Riode.parseOptions = function (options) {
         return 'string' == typeof options ?
             JSON.parse(options.replace(/'/g, '"').replace(';', '')) :
             {};
@@ -62,7 +62,7 @@ window.Donald = {};
      * @param {object} vars
      * @return {string} parsed template
      */
-    Donald.parseTemplate = function (template, vars) {
+    Riode.parseTemplate = function (template, vars) {
         return template.replace(/\{\{(\w+)\}\}/g, function () {
             return vars[arguments[1]];
         });
@@ -73,7 +73,7 @@ window.Donald = {};
      * @param {string} id
      * @return {HTMLElement} element
      */
-    Donald.byId = function (id) {
+    Riode.byId = function (id) {
         return document.getElementById(id);
     }
 
@@ -83,7 +83,7 @@ window.Donald = {};
      * @param {HTMLElement} element this can be omitted.
      * @return {HTMLCollection}
      */
-    Donald.byTag = function (tagName, element) {
+    Riode.byTag = function (tagName, element) {
         return element ?
             element.getElementsByTagName(tagName) :
             document.getElementsByTagName(tagName);
@@ -95,7 +95,7 @@ window.Donald = {};
      * @param {HTMLElement} element this can be omitted.
      * @return {HTMLCollection}
      */
-    Donald.byClass = function (className, element) {
+    Riode.byClass = function (className, element) {
         return element ?
             element.getElementsByClassName(className) :
             document.getElementsByClassName(className);
@@ -107,7 +107,7 @@ window.Donald = {};
      * @param {string} value Cookie value
      * @param {number} exdays Expire period
      */
-    Donald.setCookie = function (name, value, exdays) {
+    Riode.setCookie = function (name, value, exdays) {
         var date = new Date();
         date.setTime(date.getTime() + (exdays * 24 * 60 * 60 * 1000));
         document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
@@ -118,7 +118,7 @@ window.Donald = {};
      * @param {string} name Cookie name
      * @return {string} Cookie value
      */
-    Donald.getCookie = function (name) {
+    Riode.getCookie = function (name) {
         var n = name + "=";
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; ++i) {
@@ -138,7 +138,7 @@ window.Donald = {};
      * @param {string|jQuery} selector
      * @return {jQuery|Object} jQuery Object or {each: $.noop}
      */
-    Donald.$ = function (selector) {
+    Riode.$ = function (selector) {
         if (selector instanceof jQuery) {
             return selector;
         }

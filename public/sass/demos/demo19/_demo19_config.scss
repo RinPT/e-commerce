@@ -7,18 +7,21 @@ Demo 19 Variables
 			title: (
 				font-size: 2.4rem,
 				font-weight: 700,
-				margin-bottom: 2.4rem
+				margin-bottom: 2.7rem
 			),
 		),
 		header: (
 			middle: (
-				padding-top: 3rem,
-				padding-bottom: 3rem,
+				padding-top: 2.8rem,
+				padding-bottom: 2.6rem,
 				color: #222,
 				background: #fff,
+				font-size: 1.4rem,
 				font-weight: 700,
+				letter-spacing: 0,
 				logo: (
-					margin-right: 3.6rem,
+					max-width: 15.3rem,
+					margin-right: 4.7rem,
 				),
 			),
 			wishlist: (
@@ -30,63 +33,70 @@ Demo 19 Variables
 					padding-bottom: 2px
 				),
 			),
+			sticky: (
+				padding-top: 1.8rem,
+				padding-bottom: 1.6rem
+			),
+			mmenu-toggle: (
+				color: #222
+			)
 		),
 		menu: (
 			ancestor: (
 				font-weight: 700,
-				_gap: 2.4rem,
+				_gap: 3rem,
 			)
 		),
 		product: (
 			rating: (
 				_star-color: #666,
 			),
+			name: (
+				margin-bottom: .2rem
+			),
+			price: (
+				margin-bottom: 1px
+			)
 		),
 		footer: (
-			font-family: $font-family,
-			middle: (
-				padding: 4.7rem 0 0,
-				border-color: #282828,
-				widget: (
-					margin-bottom: 2.9rem,
-					title: (
-						margin-bottom: .6rem,
-						font-weight: 600,
-						color: #999,
-					),
-					body: (
-						padding-top: 0,
-						color: #666
-					),
-					label: (
-						font-weight: 600,
-						color: #999
-					),
-					list-item: (
-						margin-bottom: 1.1rem,
-					),
-				)
-			),
-			bottom: (
-				padding: 3.5rem 0,
-			),
-			copyright: (
-				font-family: $font-family,
-				letter-spacing: .005em,
-				color: #777,
-			),
-			newsletter: (
-				title: (
-					color: false,
+            font-family: $font-family,
+            middle: (
+                padding: 7.5rem 0 2.1rem,
+                font-family: $font-family,
+                font-weight: 400,
+                border-color: #333,
+                widget: (
+                    margin-bottom: 2.9rem,
+                    title: (
+                        margin-bottom: 1.3rem,
+                        font-weight: 600,
+                    ),
+                    body: (
+                        padding: 0.4rem 0 0,
+                        color: #999,
+                    ),
+                    list-item: (
+                        margin-bottom: 1.5rem
+                    )
+                ),
+            ),
+            bottom: (
+                padding: 3.3rem 0
+            ),
+            copyright: (
+                font-family: $font-family,
+                letter-spacing: 0,
+                color: #777,
+            ),
+            newsletter: (
+                title: (
                     margin-bottom: .9rem
-				),
-				desc: (
-					margin-bottom: 2.5rem,
+                ),
+                desc: (
                     line-height: 1.54,
-					font-family: $font-family,
-					color: inherit,
-				),
-			),
-		)
+                    color: #666
+                )
+            )
+        ),
 	)
 )

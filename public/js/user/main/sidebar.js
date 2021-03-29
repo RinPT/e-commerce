@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - Sidebar
+ * Riode Plugin - Sidebar
  * 
  * @instance multiple
  * 
@@ -14,20 +14,20 @@ function Sidebar(name) {
     'use strict';
 
     // Private Properties
-    var is_mobile = window.innerWidth < Donald.desktop_width;
+    var is_mobile = window.innerWidth < Riode.desktop_width;
 
     var onResizeNavigationStyle = function () {
-        if (window.innerWidth < Donald.desktop_width && !is_mobile) {
+        if (window.innerWidth < Riode.desktop_width && !is_mobile) {
             this.$sidebar.find('.sidebar-content, .filter-clean').removeAttr('style');
             this.$sidebar.find('.sidebar-content').attr('style', '');
             this.$sidebar.siblings('.toolbox').children(':not(:first-child)').removeAttr('style');
-        } else if (window.innerWidth >= Donald.desktop_width) {
+        } else if (window.innerWidth >= Riode.desktop_width) {
             if (!this.$sidebar.hasClass('closed') && is_mobile) {
                 this.$sidebar.addClass('closed')
                 this.$sidebar.find('.sidebar-content').css('display', 'none');
             }
         }
-        is_mobile = window.innerWidth < Donald.desktop_width;
+        is_mobile = window.innerWidth < Riode.desktop_width;
     }
 
     // Public Properties
@@ -48,11 +48,11 @@ function Sidebar(name) {
 
             if (self.isNavigation) {
                 onResizeNavigationStyle = onResizeNavigationStyle.bind(this);
-                Donald.$window.on('resize', onResizeNavigationStyle);
+                Riode.$window.on('resize', onResizeNavigationStyle);
             }
 
-            Donald.$window.on('resize', function () {
-                Donald.$body.removeClass(name + '-active');
+            Riode.$window.on('resize', function () {
+                Riode.$body.removeClass(name + '-active');
             });
 
             // Register toggle event
@@ -61,14 +61,14 @@ function Sidebar(name) {
                 .on('click', function (e) {
                     self.toggle();
                     $(this).blur();
-                    Donald.recalcAll('.sticky-sidebar');
+                    Riode.recalcAll('.sticky-sidebar');
                     e.preventDefault();
                 });
 
             // Register close event
             self.$sidebar.find('.sidebar-overlay, .sidebar-close')
                 .on('click', function (e) {
-                    Donald.$body.removeClass(name + '-active');
+                    Riode.$body.removeClass(name + '-active');
                     e.preventDefault();
                 });
         }
@@ -79,7 +79,7 @@ function Sidebar(name) {
         var self = this;
 
         // if fixed sidebar
-        if (window.innerWidth >= Donald.desktop_width && self.$sidebar.hasClass('sidebar-fixed')) {
+        if (window.innerWidth >= Riode.desktop_width && self.$sidebar.hasClass('sidebar-fixed')) {
 
             // is closed ?
             var isClosed = self.$sidebar.hasClass('closed');
@@ -154,18 +154,18 @@ function Sidebar(name) {
             self.$sidebar.find('.sidebar-overlay .sidebar-close').css('margin-left', - (window.innerWidth - document.body.clientWidth));
 
             // activate sidebar
-            Donald.$body
+            Riode.$body
                 .toggleClass(self.name + '-active')
                 .removeClass('closed');
 
             // issue
-            if (window.innerWidth >= 1200 && Donald.$body.hasClass('with-flex-container')) {
+            if (window.innerWidth >= 1200 && Riode.$body.hasClass('with-flex-container')) {
                 $('.owl-carousel').trigger('refresh.owl.carousel');
             }
         }
     }
 
-    Donald.sidebar = function (name) {
+    Riode.sidebar = function (name) {
         return new Sidebar().init(name);
     }
 })(jQuery);

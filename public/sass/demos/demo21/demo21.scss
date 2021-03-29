@@ -52,6 +52,7 @@ $secondary-color: #ff7c12;
 @import '../../components/page-header';
 @import '../../components/popups';
 @import '../../components/titles';
+@import '../../components/accordion';
 @import '../../components/icons';
 @import '../../components/tooltip';
 @import '../../components/buttons';
@@ -76,6 +77,7 @@ $secondary-color: #ff7c12;
 /* 8. Pages */
 @import '../../pages/shop';
 @import '../../pages/product-single';
+@import '../../pages/cta';
 
 /* 9. Demos */
 @import 'demo21_custom';

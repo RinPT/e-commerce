@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - Shop
+ * Riode Plugin - Shop
  * 
  * @requires Minipopup
  * @requires noUiSlider
@@ -15,7 +15,7 @@
         var selector = '.select-menu';
 
         // show or hide select menu
-        Donald.$body.on('mousedown', '.select-menu', function (e) {
+        Riode.$body.on('mousedown', '.select-menu', function (e) {
             var $selectMenu = $(e.currentTarget),
                 $target = $(e.target),
                 isOpened = $selectMenu.hasClass('opened');
@@ -78,11 +78,11 @@
             e.preventDefault();
         });
 
-        Donald.$body.on('click', '.select-menu a', function (e) {
+        Riode.$body.on('click', '.select-menu a', function (e) {
             e.preventDefault();
         });
 
-        Donald.$body.on('click', '.select-item i', function (e) {
+        Riode.$body.on('click', '.select-item i', function (e) {
             $(e.currentTarget).parent().fadeOut(function () {
                 var $this = $(this),
                     $link = $this.data('link');
@@ -99,12 +99,12 @@
         });
 
         // if click is happend outside of select menu, hide it
-        Donald.$body.on('mousedown', function (e) {
+        Riode.$body.on('mousedown', function (e) {
             $('.select-menu').removeClass('opened');
         });
 
         // active filter item
-        Donald.$body.on('click', '.filter-items a', function (e) {
+        Riode.$body.on('click', '.filter-items a', function (e) {
             var $ul = $(this).closest('.filter-items');
             if (!$ul.hasClass('search-ul') && !$ul.parent().hasClass('select-menu')) {
                 $(this).parent().toggleClass('active');
@@ -115,16 +115,16 @@
 
 
     var initProductsQuickview = function () {
-        Donald.$body.on('click', '.btn-quickview', function (e) {
+        Riode.$body.on('click', '.btn-quickview', function (e) {
             e.preventDefault();
-            Donald.popup({
+            Riode.popup({
                 items: {
                     src: "ajax/quickview.html"
                 },
                 callbacks: {
                     ajaxContentAdded: function () {
                         this.wrap.imagesLoaded(function () {
-                            Donald.productSingle($('.mfp-product .product-single'));
+                            Riode.productSingle($('.mfp-product .product-single'));
                         });
                     }
                 }
@@ -134,7 +134,7 @@
 
     var initProductsCartAction = function () {
         // Add to cart in products
-        Donald.$body.on('click', '.btn-product-icon.btn-cart, .btn-product.btn-cart', function (e) {
+        Riode.$body.on('click', '.btn-product-icon.btn-cart, .btn-product.btn-cart', function (e) {
             e.preventDefault();
 
             var $product = $(this).closest('.product');
@@ -160,7 +160,7 @@
                 // product.count = $product.find('.quantity').val() ? $product.find('.quantity').val() : 1;
                 // addCartProducts( product );
 
-                Donald.minipopup.open({
+                Riode.minipopup.open({
                     message: 'Successfully added.<a href="cart.html" class="btn btn-link btn-sm btn-slide-right btn-infinite">View Cart<i class="la la-long-arrow-right"></i></a>',
                     productClass: ' product-cart',
                     name: $product.find('.product-name').text(),
@@ -209,7 +209,7 @@
 
     // Infinite Scroll Load
     var initProductsScrollLoad = function ($obj) {
-        var $wrapper = Donald.$($obj)
+        var $wrapper = Riode.$($obj)
             , top;
         var loadProducts = function (e) {
             if (window.pageYOffset > top + $wrapper.outerHeight() - window.innerHeight - 150 && 'loading' != $wrapper.data('load-state')) {
@@ -256,13 +256,13 @@
             initProductsCartAction();
             initProductsLoad();
             initProductsScrollLoad('.scroll-load');
-            Donald.call(Donald.ratingTooltip, 500);
+            Riode.call(Riode.ratingTooltip, 500);
             this.initProductType('slideup');
             this.initVariation();
 
             // Functions for shop page
             initSelectMenu();
-            Donald.priceSlider('.filter-price-slider');
+            Riode.priceSlider('.filter-price-slider');
         },
 
         initVariation: function (type) {
@@ -295,7 +295,7 @@
                     $this.height($this.height() - hidden_height);
                 });
 
-                $(Donald.byClass('product-slideup-content'))
+                $(Riode.byClass('product-slideup-content'))
                     .on('mouseenter touchstart', function (e) {
                         var $this = $(this),
                             hidden_height = $this.find('.product-hide-details').outerHeight(true);
@@ -334,5 +334,5 @@
 
     }
 
-    Donald.shop = Shop;
+    Riode.shop = Shop;
 })(jQuery);

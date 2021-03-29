@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - Product Single Page
+ * Riode Plugin - Product Single Page
  * 
  * @requires Slider
  * @requires ProductSingle
@@ -14,7 +14,7 @@
     var $product;
 
     var alertCartAdded = function () {
-        $(Donald.parseTemplate(ProductSinglePage.templateCartAddedAlert, {
+        $(Riode.parseTemplate(ProductSinglePage.templateCartAddedAlert, {
             name: $product.find('h1.product-name').text()
         }))
             .insertBefore($product).fadeIn();
@@ -71,7 +71,7 @@
                     closeOnScroll: false,
                 });
                 photoswipe.init();
-                Donald.photoswipe = photoswipe;
+                Riode.photoswipe = photoswipe;
             }
         }
     }
@@ -104,14 +104,14 @@
                 // if home page, init single products
                 if (document.body.classList.contains('home')) {
                     $product.each(function () {
-                        Donald.productSingle($(this));
+                        Riode.productSingle($(this));
                     });
 
                     return null;
 
                     // else, init single product page
                 } else {
-                    if (Donald.productSingle($product) === null) {
+                    if (Riode.productSingle($product) === null) {
                         return null;
                     }
                 }
@@ -140,8 +140,8 @@
 
             // image zoom for grid type
 
-            //Donald.zoomImage('.product-gallery:not(.product-gallery-carousel)');
-            Donald.zoomImage('.product-gallery.row');
+            //Riode.zoomImage('.product-gallery:not(.product-gallery-carousel)');
+            Riode.zoomImage('.product-gallery.row');
 
             // image full
             $product.on('click', '.product-image-full', openFullImage);
@@ -155,6 +155,6 @@
         }
     }
 
-    Donald.productSinglePage = ProductSinglePage;
+    Riode.productSinglePage = ProductSinglePage;
 
 })(jQuery);

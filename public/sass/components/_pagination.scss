@@ -9,10 +9,13 @@
     font-size: 1.4rem;
     letter-spacing: .01em;
     justify-content: center;
+    color: #222;
 }
-.page-link-prev,
-.page-link-next {
-    font-weight: 600;
+
+.page-link-prev, .page-link-next {
+    i {
+        font-size: 1.9rem;
+    }
 }
 .page-link-prev i {
     margin-right: .5rem;
@@ -32,20 +35,19 @@
     border: .1rem solid transparent;
     transition: border .3s;
 
-    :hover > &,
+    :hover:not(.disabled) > &,
     .active > & {
         border-color: #dadada;
         color: #222;
     }
     .disabled > & {
-        color: #ccc;
+        color: #aaa;
     }
 }
 .page-link-next,
 .page-link-prev {
     min-width: 8rem;
     padding: 1.2rem;
-    text-transform: uppercase; 
 }
 .page-item:not(:last-child) {
     margin-right: .5rem;
@@ -63,7 +65,7 @@
 }
 .show-info {
     margin: 0;
-    color: #ccc;
+    color: #222;
 
     span {
         margin: 0 .5rem;

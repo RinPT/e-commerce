@@ -17,7 +17,8 @@
 @import '../../config/variables';
 
 //Color 
-$primary-color: #a06694;
+$primary-color: #d3986a;
+$dark-color: #333;
 
 /* 2. mixins */
 @import '../../mixins/breakpoints'; 
@@ -66,6 +67,7 @@ $primary-color: #a06694;
 @import '../../components/titles';
 @import '../../components/tooltip';
 @import '../../components/widgets';
+@import '../../components/accordion';
 
 /* 6. header */
 @import '../../base/header/header';

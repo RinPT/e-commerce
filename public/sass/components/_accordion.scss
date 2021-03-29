@@ -13,12 +13,11 @@
 	}
 }
 .card-header {
-	text-transform: uppercase;
+	text-transform: capitalize;
 	font: {
-		size: 1.5rem;
+		size: 1.8rem;
 		weight: 600;
 	}
-	letter-spacing: -.01em;
 	line-height: 1;
 	color: #222;
 	
@@ -35,26 +34,30 @@
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			right: .4rem;
+			right: .5rem;
 			font: {
-				family: 'Donald';
-				size: 1.4rem;
+				family: "riode";
+				size: 1.8rem;
 				weight: 400;
 			}
 			letter-spacing: -.01em;
 			color: #222;
 		}
 	}
+
+	.collapse {
+		color: $primary-color;
+	}
 }
 
 .expand {
 	&::after {
-		content: '\e968';
+		content: '\e953';
 	}
 }
 .collapse {
 	&::after {
-		content: '\e967';
+		content: '\e952';
 	}
 }
 
@@ -69,10 +72,7 @@
 // Simple
 .accordion-simple {
 	.card {
-		border-top: 1px solid #ebebeb;
-		&:last-child {
-			border-bottom: 1px solid #ebebeb;
-		}
+		border-top: 1px solid $border-color;
 	}
 }
 
@@ -95,25 +95,14 @@
 
 // Toggle Icon Plus
 .accordion-plus {
-	.card-header {
-		a {
-			&::after {
-				font: {
-					size: 1.3rem;
-					weight: 400;
-				}
-				color: #666;
-			}
-		}
-	}
 	.expand {
 		&::after {
-			content: '\e96d';
+			content: '\f2c3';
 		}
 	}
 	.collapse {
 		&::after {
-			content: '\e96c';
+			content: '\f28f';
 		}
 	}
 }
@@ -128,7 +117,7 @@
 
 	.card-header {
 		a::after {
-			right: 2rem;
+			right: 2.3rem;
 		}
 	}
 }
@@ -136,11 +125,11 @@
 // Border Style
 .accordion-border {
 	.card {
-		border-top: 1px solid #ebebeb;
-		border-left: 1px solid #ebebeb;
-		border-right: 1px solid #ebebeb;
+		border-width: 1px 1px 0;
+		border-style: solid;
+		border-color: $border-color;
 		&:last-child {
-			border-bottom: 1px solid #ebebeb;
+			border-bottom: 1px solid $border-color;
 		}
 	}
 } 
@@ -198,7 +187,7 @@
 			a {
 				padding-top: 1.8rem;
 				padding-bottom: 1.8rem;
-				background-color: $primary-color;
+				background-color: #3377cc;
 				color: #fff;
 				&::after {
 					color: #fff;

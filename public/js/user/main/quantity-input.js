@@ -1,5 +1,5 @@
 /**
- * Donald Plugin - QuantityInput
+ * Riode Plugin - QuantityInput
  * 
  * @instance multiple
  */
@@ -75,7 +75,7 @@ function QuantityInput($el) {
         //     dispatchEvent($original, event.type)
         // });
 
-        Donald.$body.on('mouseup', self.stop)
+        Riode.$body.on('mouseup', self.stop)
             .on('touchend', self.stop)
             .on('touchcancel', self.stop);
     }
@@ -85,34 +85,34 @@ function QuantityInput($el) {
         var self = this;
         self.value = self.$value.val();
         self.value < self.max && self.$value.val( ++ self.value );
-        self.increaseTimer = Donald.requestTimeout(function(){
+        self.increaseTimer = Riode.requestTimeout(function(){
             self.speed = 1;
-            self.increaseTimer = Donald.requestInterval(function() {
+            self.increaseTimer = Riode.requestInterval(function() {
                 self.$value.val( self.value = Math.min( self.value + Math.floor(self.speed *= 1.05), self.max ) );
             }, 50);
         }, 400);
     }
 
     QuantityInput.prototype.stop = function(e) {
-        Donald.deleteTimeout( this.increaseTimer );
-        Donald.deleteTimeout( this.decreaseTimer );
+        Riode.deleteTimeout( this.increaseTimer );
+        Riode.deleteTimeout( this.decreaseTimer );
     }
 
     QuantityInput.prototype.startDecrease = function() {
         var self = this;
         self.value = self.$value.val();
         self.value > self.min && self.$value.val( -- self.value );
-        self.decreaseTimer = Donald.requestTimeout(function(){
+        self.decreaseTimer = Riode.requestTimeout(function(){
             self.speed = 1;
-            self.decreaseTimer = Donald.requestInterval(function() {
+            self.decreaseTimer = Riode.requestInterval(function() {
                 self.$value.val( self.value = Math.max( self.value - Math.floor(self.speed *= 1.05), self.min ) );
             }, 50);
         }, 400);
     }
 
-    Donald.quantityInput = function(selector) {
+    Riode.quantityInput = function(selector) {
 
-        Donald.$(selector).each(function() {
+        Riode.$(selector).each(function() {
 
             var $this = $(this);
 

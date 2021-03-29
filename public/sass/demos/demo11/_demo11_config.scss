@@ -6,6 +6,10 @@ Demo 11 Variables
     (
         base: (
             title: (
+                font-size: 2rem,
+                font-weight: 700,
+                line-height: 2.25,
+                letter-spacing: -.009em,
                 margin-bottom: 2rem,
                 border: (
                     color: #f4f4f4,
@@ -20,24 +24,31 @@ Demo 11 Variables
             sticky: (
                 padding-top: 0,
                 padding-bottom: 0,
-                background: transparent,
+                background-color: #333,
                 box-shadow: none
             ),
             inner-wrap: (
-                padding-right: 2.4rem,
-                background: #444
+                padding-right: 1.7rem,
+                background-color: #333
             ),
             main-nav: (
-                margin: 0 2.4rem,
+                margin: 0 1.8rem,
             ),
             category: (
                 toggle: (
-                    padding: 1.7rem 1.7rem
+                    padding: 1.5rem 1.5rem 1.5rem 1.6rem,
+
+                    icon: (
+                        font-size: 2.38rem,
+                    )
                 )
             )
         ),
         menu: (
             ancestor: (
+                _gap: 3rem,
+                text-transform: uppercase,
+                font-weight: 600,
                 padding: 2rem 0
             )
         ),
@@ -48,35 +59,47 @@ Demo 11 Variables
             body: (
                 padding-bottom: 0
             ),
+            name: (
+                margin-bottom: .2rem
+            ),
             price: (
-                color: $primary-color
+                margin-bottom: .2rem
             )
         ),
         post: (
-            body: (
-                padding: 1.9rem 0 2.5rem
-            ),
-            info: (
-                margin-bottom: .7rem
-            ),
-            title: (
-                margin-bottom: 1.5rem,
-                text-transform: none,
-                font-size: 1.4rem,
-                font-family: $second-font-family,
-                letter-spacing: 0,  
-                color: #444
-            )
-        ),
+			body: (
+				padding: 1.9rem 0 1.8rem,
+			),
+			meta: (
+				margin-bottom: .8rem
+			),
+			info: (
+				margin-bottom: .7rem
+			),
+			title: (
+				text-transform: none,
+				margin-bottom: 1.3rem,
+				margin-left: -2px,
+				padding-left: 2px,
+				font-size: 1.6rem,
+				letter-spacing: 0,
+			),
+			icon: (
+				_gap: .6rem
+			),
+			detail: (
+				padding: 2.3rem 0 1.8rem
+			)
+		),
         category-menu: (
-            padding: .6rem 0 .5rem,
-            background: #f2f3f5,
+            padding: 0.5rem 0 0.4rem,
+            background-color: #f2f3f5,
             ancestor: ( 
                 _split-line: 1px solid #e4e5e5,
-                padding: 1.5rem 0 1.5rem .4rem,
+                padding: 1.4rem 0 1.5rem 0.4rem,
                 min-height: 4.4rem,
                 line-height: 1,
-                letter-spacing: 0,
+                letter-spacing: -.025em,
                 font-size: 1.4rem,
                 text-transform: none,
                 font-weight: 400,
@@ -89,11 +112,37 @@ Demo 11 Variables
                 color: #666
             )
         ),
-        footer: (
-            middle: (
-                padding-top: 4.6rem,
-                letter-spacing: -.015em
+        widget: (
+            title: (
+                border-bottom: 1px solid $border-color-light
             )
-        )
+        ),
+        footer: (
+			middle: (
+				padding: 82px 0px 40px 0px
+			),
+			bottom: (
+				padding: 2.7rem 0 2.8rem
+			),
+			about: (
+                logo: (
+					margin-top: -1px,
+                    margin-bottom: 1.9rem,
+                ),
+                p: (
+                    margin-bottom: 2.7rem,
+                    letter-spacing: -.008em
+                )
+            ),
+			copyright: (
+                color: #666,
+                font-weight: 500,
+				letter-spacing: -.01em
+			),
+			social-link: (
+				width: 2.9rem,
+				height: 2.9rem
+			)
+		)
     )
 )

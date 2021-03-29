@@ -46,7 +46,6 @@
 				if (options.minWidth && $window.width() <= options.minWidth) {
 					if ($this.parent().is(".pin-wrapper")) { $this.unwrap(); }
 					$this.css({ width: "", left: "", top: "", position: "" });
-					$this.removeClass(options.activeClass);
 					disabled = true;
 					continue;
 				} else {
@@ -131,6 +130,7 @@
 
 				var $container = options.containerSelector ? ($this.closest(options.containerSelector).length ? $this.closest(options.containerSelector) : $(options.containerSelector)) : $(document.body),
 					isFitToTop = ($this.outerHeight() + data.pad.top) <= window_height;
+
 				data.end = $container.offset().top + $container.height();
 				if (isFitToTop) {
 					data.to = $container.offset().top + $container.height() - $this.outerHeight() - data.pad.bottom - data.pb;
@@ -181,9 +181,10 @@
 					var padTop = parseInt($this.parent().parent().css('padding-top'));
 					// Reset the sideSortables style when scrolling to the top.
 					if (scrollY + data.pad.top - padTop <= data.parentTop) {
-						$this.removeClass(options.activeClass);
 						$this.css({ position: "", top: "", bottom: "", left: "" });
 						fixedSideTop[i] = fixedSideBottom[i] = false;
+
+						if (options.activeClass) { $this.removeClass(options.activeClass); }
 					} else if (scrollY >= data.to) {
 						$this.css({
 							left: "",
@@ -242,6 +243,8 @@
 									bottom: ''
 								}).css("position", "fixed");
 								if (options.activeClass) { $this.addClass(options.activeClass); }
+							} else if ( ! fixedSideBottom[i] && fixedSideTop[i] && $this.css('position') == 'absolute' && $this.offset().top >= scrollY + data.pad.top) {
+								fixedSideTop[i] = false;
 							}
 						} else {
 							fixedSideTop[i] = false;

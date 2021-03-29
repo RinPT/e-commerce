@@ -10,14 +10,15 @@ Demo 16 Variables
             _link-active-color: #ccc,
             top: (
                 background: $primary-color,
-                color: #fff
+                color: #fff,
+                border-bottom: none
             ),
             middle: (
-                padding-top: 3rem,
-                padding-bottom: 3rem
+                padding-top: 2.7rem,
+                padding-bottom: 2.6rem
             ),
             bottom: (
-                font-weight: 700,
+                font-weight: 600,
                 color: #444,
                 border-top: 1px solid #e1e1e1,
                 border-bottom: 1px solid #e1e1e1,
@@ -27,6 +28,7 @@ Demo 16 Variables
                     padding: 1.35rem 0
                 ),
                 label: (
+                    text-transform: none,
                     price: (
                         color: inherit,
                     )
@@ -40,59 +42,67 @@ Demo 16 Variables
             ),
             search: (
                 toggle: (
-                    padding: 1.65rem 0,
+                    padding: 1.6rem 0,
                 )
-            )
+            ),
+			mmenu-toggle: (
+				color: #222
+			)
         ),
         menu: (
             ancestor: (
-                padding: 2rem 0
+                padding: 2rem 0,
+                font-weight: 600,
             )
         ),
         product: (
             price: (
-                margin-bottom: 1.5rem,
-                color: $primary-color,
+                margin-bottom: 0rem,
             ),
             body: (
                 padding-bottom: 0
+            ),
+            name: (
+                margin-bottom: .2rem
             )
         ),
         post: (
             title: (
                 text-transform: none,
-                font-size: 1.6rem,
-                font-weight: 600,
-                font-family: $second-font-family,
-                letter-spacing: 0,
-                color: #444
+                font-size: 1.8rem,
+                font-weight: 700,
+                letter-spacing: 0
+            ),
+            meta: (
+                margin-bottom: .4rem,
             ),
             content: (
-                margin-bottom: 2rem,
+                margin-bottom: 1.8rem,
                 _row-count: 3
             ),
             calendar: (
-                color: #fff,
                 border: 0,
-                background: $primary-color,
+                opacity: 1,
+                text-transform: uppercase,
             ),
             btn: (
                 _icon-gap: .7rem,
             ),
         ),
         footer: (
-            background: #1d1d1d,
+            bottom: (
+                padding: 2.7rem 0 2.8rem
+            ),
+            copyright: (
+                letter-spacing: 0
+            ),
             middle: (
-                padding-top: 4.6rem,
-                letter-spacing: -.016rem,
-                border-color: #292929,
+                padding: 8.6rem 0 3.7rem,
+                letter-spacing: 0,
                 widget: (
-                    margin-bottom: 2.6rem,
+                    margin-bottom: 2.3rem,
                     title: (
-                        letter-spacing: 0
-                    ),
-                    body: (
-                        padding-top: .9rem
+                        margin-bottom: 1.1rem
                     )
                 )
             )

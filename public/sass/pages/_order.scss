@@ -1,55 +1,59 @@
 .order {
-    &.main {
-        border-top: 1px solid #e1e1e1;
-    }
-
     .title {
         font-size: 2rem;
-        font-weight: 700;
     }
 
     .order-message {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2.4rem;
-        font-weight: 700;
-        color: $dark-color;
+        max-width: 34rem;
         padding: 3rem;
-        border: 2px solid #e1e1e1;
-        border-radius: 3px;
-
-        i {
-            font-size: 2.8rem;
-            color: #a8c26e;
-            margin-top: -.1rem;
-            margin-right: 1.5rem;
+        box-shadow: 0 5px 20px 0 rgba(0,0,0,0.1);
+        border-radius: 1rem;
+        .icon-box-icon {
+            margin-right: 3.2rem;   
+        }
+        svg {
+            width: 5rem;
+            height: 5rem;
+            stroke: $primary-color;
+        }
+        .icon-box-title {
+            font-size: 1.8rem;
         }
     }
     .order-results {
         display: flex;
+        flex-wrap: wrap;
+        margin: 4.8rem 0 1.9rem;
     }
 
     .overview-item {
         display: flex;
+        position: relative;
         flex-direction: column;
-        text-align: center;
-        font-size: 1.8rem;
-        flex: 1;
-
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+        &:not(:last-child) {
+            margin-right: 3rem;
+            padding-right: 3.1rem;
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                display: block;
+                transform: translateY(-50%);
+                width: 1px;
+                height: 42px;
+                background: #e1e1e1;
+            }
+        }
+        span {
+            text-transform: uppercase;
+        }
         strong {
             color: $dark-color;
-        }
-        
-    }
-
-    .address-info {
-        border-bottom: 1px solid #e1e1e1;   
-
-        p {
-            color: #666;
-            font-family: $font-family;
-            line-height: 2.15;
+            font-weight: 600;
+            font-size: 2rem;
         }
     }
 
@@ -61,25 +65,39 @@
     .summary-subtotal:last-child {
         border-bottom: none;
     }
+    
+    .address-info {
+        border-bottom: 1px solid #e1e1e1;   
+
+        p {
+            color: #666;
+            font-family: $font-family;
+            line-height: 2.15;
+        }
+    }
 }
 
 .order-details {
     border: 1px solid #e1e1e1;
     border-radius: 3px;
-    padding: 0 3rem;
+    padding: .4rem 3rem;
 }
 
 .order-details-table {
     .product-name {
+        padding: 1.6rem 0 1.8rem;
         font-size: 1.4rem;
         font-weight: 400;
-        line-height: 3.5;
+        line-height: 1.42;
+        color: #000;
+        white-space: inherit;
 
         i {
             font-size: 1rem;
         }
         span {
             font-weight: 700;
+            color: #222;
         }
     }
 
@@ -95,41 +113,32 @@
     .summary-subtotal-price, .product-price {
         text-align: right;
     }
-    .summary-subtotal-price { font-weight: 600; }
+    .summary-subtotal-price { 
+        font-weight: 600; 
+        color: $body-color;
+    }
 
     .product-price {
         font-size: 1.4rem;
         color: #666;
         font-weight: 400;
-        padding-top: 1.5rem;
+        padding-top: 1.2rem;
     }
 
     thead {
         border-bottom: 1px solid #e1e1e1;
+        .summary-subtitle {
+            font-size: 1.8rem;
+        }
     }
 
     tbody tr:first-child {
         td { 
-            padding-top: 2rem;
+            padding-top: 3.2rem;
 
             &.product-price {
-                padding-top: 3.3rem;
+                padding-top: 2.8rem;
             }
-        }
-    }
-}
-
-@include mq(lg, 'max') {
-    .order {
-        .order-results {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .overview-item {
-            min-width: 33.3%;
-            margin-bottom: 3rem;
         }
     }
 }
@@ -139,20 +148,15 @@
         .order-message {
             font-size: 2rem;
         }
-
-        .order-results {
-            display: flex;
-            flex-direction: column;
-        }
-
         .overview-item {
             flex-direction: row;
             width: 100%;
-            margin-bottom: 1rem;
-
+            align-items: center;
+            &:not(:last-child)::after {
+                content: none;
+            }
             span {
-                width: 50%;
-                text-align: left;
+                margin-right: 2rem;
             }
         }
     }
@@ -190,20 +194,11 @@
     }
 
     .step-by .title.title-step { 
-        font-size: 1.6rem;
+        font-size: 1.8rem;
 
-        &::before {
+        &::after {
             font-size: 1.4rem;
             top: 50%;
-        }
-    }
-
-    .order-details-table {
-        tbody {
-            .product-name {
-                white-space: pre-wrap;
-                line-height: 2;
-            }
         }
     }
 }

@@ -16,8 +16,8 @@
 @import '../../config/variables';
 
 //Color 
-$primary-color: #ed711b;
-$secondary-color: #252429;
+$primary-color: #ff802b;
+$secondary-color: #333;
 
 /* 2. mixins */
 @import '../../mixins/breakpoints'; 
@@ -65,6 +65,7 @@ $secondary-color: #252429;
 @import '../../components/tooltip';
 @import '../../components/titles';
 @import '../../components/widgets';
+@import '../../components/instagram';
 
 /* 6. header */
 @import '../../base/header/header';

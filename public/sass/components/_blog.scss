@@ -14,8 +14,50 @@
 	(
 		post: (
             padding: false,
-            body: (
-                padding: 2.7rem 0 2.5rem
+            font-family: $font-family,
+            detail: (
+                padding: 2.3rem 0 2rem,
+            ),
+
+            // Info
+            meta: (
+                margin-bottom: .6rem,
+                font-family: inherit,
+                font-size: 1.3rem,
+                text-transform: false,
+                font-weight: inherit,
+                line-height: 1.2,
+                letter-spacing: false,
+                color: #999,
+                info: (
+                    font-weight: 600,
+                    color: $dark-color
+                )
+            ),
+
+             // Title
+            title: (
+                margin-bottom: .5rem,
+                text-transform: capitalize,
+                font-family: false,
+                font-size: 1.8rem,
+                font-weight: 700,
+                line-height: 1.5,
+                letter-spacing: false,
+                color: false,
+            ),
+
+            // Content
+            content: (
+                margin-bottom: 1.8rem,
+                text-transform: false,
+                font-family: false,
+                font-size: false,
+                font-weight: false,
+                line-height: 1.72,
+                letter-spacing: 0,
+                _row-count: 3,
+                color: #666,
             ),
 
             // Calendar
@@ -23,12 +65,12 @@
                 width: 4.5rem,
                 height: 4.7rem,
                 background: rgba(255,255,255,.8),
-                color: $primary-color,
-                border: 2px solid,
-                font-family: $second-font-family,
+                color: $dark-color,
+                border: false,
                 font-weight: 600,
                 line-height: 1,
                 letter-spacing: false,
+                border-radius: .3rem,
                 day: (
                     font-size: 1.6rem
                 ),
@@ -37,46 +79,9 @@
                 )
             ),
 
-            // Title
-            title: (
-                margin-bottom: 1rem,
-                text-transform: uppercase,
-                font-family: false,
-                font-size: 1.5rem,
-                font-weight: 600,
-                line-height: 1.2,
-                letter-spacing: -.015em,
-                color: false,
-            ),
-
-            // Content
-            content: (
-                margin-bottom: 1.6rem,
-                text-transform: false,
-                font-family: false,
-                font-size: false,
-                font-weight: false,
-                line-height: 1.72,
-                letter-spacing: 0,
-                _row-count: 2,
-                color: #666,
-            ),
-
-            // Info
-            info: (
-                margin-bottom: .9rem,
-                text-transform: false,
-                font-family: $second-font-family,
-                font-size: 1.3rem,
-                font-weight: false,
-                line-height: 1,
-                letter-spacing: false,
-                color: #999,
-            ),
-
             // Button
             btn: (
-                _icon-gap: 5px
+                _icon-gap: 8px
             )
         )
     )
@@ -145,28 +150,62 @@
 }
 
 .post-details {
-    @include print_css( post, body );
+    @include print_css( post, detail );
 }
+
+.post-meta {
+    @include print_css( post, meta );
+    a, span {
+        @include print_css( post, meta, info );
+    }
+    a {
+        text-transform: capitalize;
+        &:hover {
+            color: $primary-color;
+        }
+    }
+    span {
+        transition: color .3s;
+    }
+    .post-author { 
+        text-transform: uppercase;
+    }
+    .post-comment {
+        @include print_css ( post, meta );
+        &:hover {
+            span {
+                color: inherit;
+            }
+        }
+    }
+}
+
 .post-title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
     @include print_css( post, title );
 }
 .post-content {
     @include text-block( #{get(post, content, _row-count)} );
     @include print_css( post, content );
 }
-.post-meta, .post-cats {
-    @include print_css( post, info );
-}
-.post-sm {
-    .post-details {
-        padding: 2.2rem .3rem 2rem;
+
+
+@include mq('sm') {
+    .post-classic .post-title {
+        font-size: 2.4rem;
     }
 }
 
+.post-sm .post-details {
+    padding: 2.2rem .3rem 2rem;
+}
+
 .post-video {
+    .post-media {
+        position: relative;
+    }
     .video-play {
         display: inline-block;
         position: absolute;
@@ -184,9 +223,6 @@
         &::before {
             content: '\f144';
         }
-    }
-    .post-media {
-        position: relative;
     }
     video  {
         display: none;
@@ -237,12 +273,12 @@
 // List
 .post-list {
     margin-bottom: 2rem;
+    .post-details {
+        padding: 2rem 0; 
+    }
     img {
         min-height: 20rem;
         object-fit: cover;
-    }
-    .post-details {
-        padding: 2rem 0;
     }
 }
 @include mq(sm) {
@@ -280,7 +316,6 @@
         text-transform: none;
         font: {
             size: inherit;
-            family: $second-font-family;
             weight: 400
         }
         line-height: 1.69;
@@ -299,9 +334,9 @@
     align-items: center;
     margin-bottom: 2rem;
     .post-media {
-        max-width: 10rem;
-        flex: 0 0 10rem;
-        height: 10rem;
+        max-width: 9rem;
+        flex: 0 0 9rem;
+        height: 9rem;
         img {
             height: 100%;
             object-fit: cover;
@@ -312,19 +347,28 @@
         margin-left: 1.6rem;
     }
     .post-meta {
-        margin-bottom: .9rem;
-        font-size: 1.3rem;
-        text-transform: uppercase;
+        margin-bottom: .4rem;
+        a {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: $grey-color;
+        }
     }
     .post-title {
         margin-bottom: 0;
         white-space: normal;
         text-transform: none;
         font-size: 1.4rem;
-        font-weight: 400;
+        font-weight: 600;
         letter-spacing: 0;
-        line-height: 1.43;
     }
+}
+
+.post-col {
+	.post {
+		margin: 0;
+		padding: 1rem .3rem;
+	}
 }
 
 // Image-gap
@@ -339,7 +383,6 @@
         box-shadow: 0px 0px 7px 0px rgba(0,0,0,.1);
     }
 }
-
 
 // Overlay
 .post-mask {
@@ -358,10 +401,12 @@
         pointer-events: none;
         z-index: 1;
     }
-
+    img {
+        min-height: 19rem;
+    }
     &.gradient {
         &::before {
-            height: 80%;
+            height: 50%;
             background: linear-gradient(to bottom, rgba(125,185,232,0) 0%, #000 100%);
         }
     }
@@ -369,35 +414,35 @@
         position: absolute;
         padding: 0;
         left: 3rem;
-        right: 3rem; 
-        bottom: 2.8rem; 
+        right: 3rem;
+        bottom: 2.2rem;
         z-index: 2;
+        transform: translateY(4rem);
+        transition: transform .4s;
     }
-    .post-meta,
-    .post-cats {
-        color: #ebebeb;
+    .post-meta {
+        color: $white-color;
+        a, span {
+            color: inherit;
+        }
         a {
-            &:hover {
-                color: #fff;
-            }
+            font-weight: 400;
         }
     }
     .post-title {
         margin: 0;
-        white-space: normal;
+        //white-space: normal;
         text-transform: none;
-        font-size: 1.8rem;
         line-height: 1.32;
         color: #fff;
         a:hover {
             color: #fff;
         }
     }
-    .post-cats {
-        color: #fff;
-        a:hover {
-            color: #fff;
-        }
+    .btn-link {
+        margin-top: 1.5rem;
+        opacity: 0;
+        transition: opacity .4s;
     }
     &:hover {    
         .post-media {
@@ -405,34 +450,59 @@
                 opacity: .1;
             }
         }
+        .post-details {
+            transform: translateY(0);
+        }
+        .btn-link {
+            opacity: 1;
+        }
+    }
+}
+
+//Post Frame
+.post-frame {
+    padding: 2rem 2rem 0;
+    box-shadow: 0px 5px 20px 3px rgba(0, 0, 0, 0.05);
+    .post-details {
+        padding: 2.2rem 0 2rem;
+    }
+    // .post-title {
+    //     letter-spacing: 0;
+    // }
+    .post-content {
+        margin-bottom: 1.8rem;
+        line-height: 1.72;
     }
 }
 
 // Filters
 ul.blog-filters {
+    padding-top: 4rem;
+    margin-bottom: 2rem;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
     color: #333;
-    li:not(:last-child) {
-        margin-right: 4rem;
+    border-top: 1px solid $border-color;
+    li {
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
+    .nav-filter {
+        letter-spacing: 0;
     }
 }
 .blog-filters {
     span {
-        margin-left: 1rem;
-        color: #ccc;
+        margin-left: .8rem;
+        color: #aaa;
     }
     li {
         padding: 0;
         margin-right: .8rem;
-        border-bottom: 2px solid transparent;
         line-height: 2.143;
+        border-bottom: 2px solid transparent;
     }
-}
-
-// Grid
-.post-col {
-    .post {
-        margin-bottom: 2rem;
+    a.nav-filter {
+        border-width: 2px;
     }
 }

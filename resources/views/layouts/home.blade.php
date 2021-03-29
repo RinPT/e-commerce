@@ -147,10 +147,15 @@
                         <!-- End Header Search -->
                     </div>
                     <div class="header-right">
-                        <a href="{{ route('login') }}">
-                            <i class="user icon"></i>
-                            <span>Login</span>
-                        </a>
+                        @guest
+                            <a href="{{ route('login') }}">
+                                <i class="user icon"></i>
+                                <span>Login</span>
+                            </a>
+                        @endguest
+                            <a href="#">
+                                <span>{{ auth()->user()->username }}</span>
+                            </a>
                         <!-- End Login -->
                         <span class="divider"></span>
                         <div class="dropdown cart-dropdown">

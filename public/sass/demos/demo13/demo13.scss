@@ -17,7 +17,7 @@
 
 // Color 
 $primary-color: #a6c76c;
-$secondary-color: #252429;
+$secondary-color: #d26e4b;
 // Font
 $third-font-family: 'Segoe Script', sans-serif;
 
@@ -42,6 +42,7 @@ $third-font-family: 'Segoe Script', sans-serif;
 @import '../../base/spacing';
 
 /* 5, components */
+@import '../../components/accordion';
 @import '../../components/alerts';
 @import '../../components/animation';
 @import '../../components/banners';
