@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="account">
-                            <form action="{{ route('account.update', $user) }}" method="POST" class="form">
+                            <form action="{{ route('account.update', auth()->user()) }}" method="POST" class="form">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">

@@ -13,10 +13,10 @@
                         <div class="tab tab-nav-simple tab-nav-boxed form-tab">
                             <ul class="nav nav-tabs nav-fill" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#signin">Log in</a>
+                                    <a class="nav-link active" href="{{ route('login') }}">Log in</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#register">Register</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
                                 </li>
                             </ul>
 

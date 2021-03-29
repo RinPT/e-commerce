@@ -72,9 +72,17 @@
                         <span class="divider"></span>
                         <a href="contact-us.html" class="contact d-lg-show"><i class="fas fa-map-marker-alt"></i></i>Contact</a>
                         <a href="#" class="help d-lg-show"><i class="far fa-question-circle"></i> Need Help</a>
-                        <a class="login-link" href="ajax/login.html" data-toggle="login-modal"><i class="far fa-user"></i></i>Sign in</a>
-                        <span class="delimiter">/</span>
-                        <a class="register-link ml-0" href="ajax/login.html" data-toggle="login-modal">Register</a>
+
+                        @auth
+                            <a class="link d-flex" href="{{ route('account') }}"><i class="far fa-user mr-1"></i></i>{{ auth()->user()->username }}</a>
+                        @endauth
+
+                        @guest
+                            <a class="link d-flex" href="{{ route('login') }}"><i class="far fa-user mr-1"></i></i>Log in</a>
+                            <span class="delimiter">/</span>
+                            <a class="link ml-0" href="{{ route('register') }}">Register</a>
+                        @endguest
+
                         <!-- End of Login -->
                     </div>
                 </div>
