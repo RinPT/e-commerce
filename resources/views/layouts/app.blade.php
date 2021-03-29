@@ -36,6 +36,9 @@
 
 	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -68,12 +71,9 @@
                         </div>
                         <!-- End DropDown Menu -->
                         <span class="divider"></span>
-                        <a href="contact-us.html" class="contact d-lg-show"><i class="d-icon-map"></i>Contact</a>
-                        <a href="#" class="help d-lg-show"><i class="d-icon-info"></i> Need Help</a>
-                        <a class="login-link" href="ajax/login.html" data-toggle="login-modal"><i
-                                class="d-icon-user"></i>Sign in</a>
-                        <span class="delimiter">/</span>
-                        <a class="register-link ml-0" href="ajax/login.html" data-toggle="login-modal">Register</a>
+                        <a href="contact-us.html" class="contact d-lg-show"><i class="fas fa-map-marker-alt"></i>Contact</a>
+                        <a href="#" class="help d-lg-show"><i class="far fa-question-circle"></i> Need Help</a>
+                        <a href="{{ route('account') }}" data-toggle="login-modal"><i class="fas fa-user mr-1"></i>{{ auth()->user()->username }}</a>
                         <!-- End of Login -->
                     </div>
                 </div>

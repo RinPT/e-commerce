@@ -22,16 +22,18 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::post('/register', [RegisterController::class, 'store'])->name('register');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/account', [AccountController::class, 'index'])->name('account');
+Route::post('/account/{user}', [AccountController::class, 'update_info'])->name('account.update'); //updates user info
 
 
 Route::group(['prefix' => "/userprofile"], function() {
     //User :
     Route::get('/{user:username}', [UserController::class, 'index']) -> name('user.profile'); //display userprofile
     Route::delete('/{user:username}', [UserController::class, 'destroy']) -> name('user.destroy'); //delete user
-    Route::post('/{user:username}/update', [UserController::class, 'update_info'])-> name('user.update'); //updates user info
+    Route::post('/{user:username}/update', [UserController::class, 'update_info'])-> name('user.update');
     Route::post('/{user:username}/passwordchange', [UserController::class, 'update_password'])-> name('user.password'); //updates user password
 
 

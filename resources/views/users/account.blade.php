@@ -140,36 +140,29 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="account">
-                            <form action="#" class="form">
+                            <form action="{{ route('account.update', $user) }}" method="POST" class="form">
+                                @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label>First Name *</label>
-                                        <input type="text" class="form-control" name="first_name" required="">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" name="name" value="{{ auth()->user()->name }}">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label>Last Name *</label>
-                                        <input type="text" class="form-control" name="last_name" required="">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" name="surname" value="{{ auth()->user()->surname }}">
                                     </div>
                                 </div>
 
-                                <label>Display Name *</label>
-                                <input type="text" class="form-control mb-0" name="display_name" required="">
+                                <label>Display Name</label>
+                                <input type="text" class="form-control mb-0" name="username" value="{{ auth()->user()->username }}">
                                 <small class="d-block form-text mb-7">This will be how your name will be displayed
                                     in the account section and in reviews</small>
 
-                                <label>Email Address *</label>
-                                <input type="email" class="form-control" name="email" required="">
-                                <fieldset>
-                                    <legend>Password Change</legend>
-                                    <label>Current password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control" name="current_password">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}">
 
-                                    <label>New password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control" name="new_password">
-
-                                    <label>Confirm new password</label>
-                                    <input type="password" class="form-control" name="confirm_password">
-                                </fieldset>
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control" name="phone" value="{{ auth()->user()->phone }}">
 
                                 <button type="submit" class="btn btn-primary">SAVE CHANGES</button>
                             </form>

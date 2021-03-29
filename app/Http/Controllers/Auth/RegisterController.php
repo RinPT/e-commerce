@@ -13,6 +13,10 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function index() {
+        return view('users.register');
+    }
+
     public function store(Request $request)
     {
     	$this -> validate($request, [
@@ -41,6 +45,7 @@ class RegisterController extends Controller
     	]); // signs user in by their email and their password, it authenticates them.
     	or similarly :
 		*/
+
     	auth()->attempt($request->only('email','password'));
 
     	//redirect user
