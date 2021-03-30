@@ -32,10 +32,7 @@ Route::post('/account/{user:username}/password', [AccountController::class, 'upd
 
 Route::group(['prefix' => "/userprofile"], function() {
     //User :
-    Route::get('/{user:username}', [UserController::class, 'index']) -> name('user.profile'); //display userprofile
     Route::delete('/{user:username}', [UserController::class, 'destroy']) -> name('user.destroy'); //delete user
-    Route::post('/{user:username}/update', [UserController::class, 'update_info'])-> name('user.update');
-    Route::post('/{user:username}/passwordchange', [UserController::class, 'update_password'])-> name('user.password'); //updates user password
 
 
 
