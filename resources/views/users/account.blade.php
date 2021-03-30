@@ -34,16 +34,15 @@
                     </ul>
                     <div class="tab-content col-lg-9 col-md-8">
                         <div class="tab-pane active" id="dashboard">
-                            <p class="mb-0">
-                                Hello <span>User</span> (not <span>User</span>? <a href="#"
-                                    class="text-primary">Log out</a>)
-                            </p>
                             <p class="mb-8">
-                                From your account dashboard you can view your <a href="#orders"
-                                    class="link-to-tab text-primary">recent orders</a>, manage your shipping and billing
+                                From your account dashboard you can view your recent orders, manage your shipping and billing
                                     addresses,<br>and edit your password and account details</a>.
                             </p>
-                            <a href="shop.html" class="btn btn-dark btn-rounded">Go To Shop<i class="d-icon-arrow-right"></i></a>
+                            <form action="{{ route('account.delete' , auth()->user()) }}" method="POST" class="form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-primary btn-rounded"><span class="d-flex align-items-center">Delete Account<i class="fas fa-trash-alt ml-2"></i></i></span></button>
+                            </form>
                         </div>
                         <div class="tab-pane" id="orders">
                             <table class="order-table">

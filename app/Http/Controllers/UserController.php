@@ -23,13 +23,7 @@ class UserController extends Controller
     	]);
     }
 
-    public function destroy(User $user)
-    {
-        //to delete the user from the system
-        $user->delete();
-
-        return redirect()-> route('home');
-    }
+    
 
     
 

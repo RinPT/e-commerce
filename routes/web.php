@@ -28,14 +28,12 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/account', [AccountController::class, 'index'])->name('account');
 Route::post('/account/{user:username}', [AccountController::class, 'update_info'])->name('account.update'); //updates user info
 Route::post('/account/{user:username}/password', [AccountController::class, 'update_password'])->name('password.update');
+Route::delete('/account/{user:username}/delete', [AccountController::class, 'destroy'])->name('account.delete');
 
 
 Route::group(['prefix' => "/userprofile"], function() {
     //User :
     Route::delete('/{user:username}', [UserController::class, 'destroy']) -> name('user.destroy'); //delete user
-
-
-
 
     //User Address Operations :
     Route::get('/{user}/address', [UserAddressController::class, 'index']) -> name('user.address'); //display all saved addresses of this user

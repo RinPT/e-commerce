@@ -67,4 +67,11 @@ class AccountController extends Controller
 
     	return back();
     }
+
+	public function destroy(User $user) {
+        
+        $user->delete();
+
+        return redirect()->route('home');
+    }
 }
