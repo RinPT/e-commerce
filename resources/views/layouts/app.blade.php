@@ -73,7 +73,16 @@
                         <span class="divider"></span>
                         <a href="contact-us.html" class="contact d-lg-show"><i class="fas fa-map-marker-alt"></i>Contact</a>
                         <a href="#" class="help d-lg-show"><i class="far fa-question-circle"></i> Need Help</a>
-                        <a href="{{ route('account') }}" data-toggle="login-modal"><i class="fas fa-user mr-1"></i>{{ auth()->user()->username }}</a>
+                        
+                        @guest
+                            <a class="login-link" href="ajax/login.html" data-toggle="login-modal"><i class="fas fa-user mr-1"></i>Sign in</a>
+                            <span class="delimiter">/</span>
+                            <a class="register-link ml-0" href="ajax/login.html" data-toggle="login-modal">Register</a>
+                        @endguest
+
+                        @auth
+                            <a href="{{ route('account') }}" data-toggle="login-modal"><i class="fas fa-user mr-1"></i>{{ auth()->user()->username }}</a>
+                        @endauth
                         <!-- End of Login -->
                     </div>
                 </div>
