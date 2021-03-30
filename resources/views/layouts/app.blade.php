@@ -75,15 +75,21 @@
                         <a href="#" class="help d-lg-show"><i class="far fa-question-circle"></i> Need Help</a>
                         
                         @guest
-                            <a class="login-link" href="ajax/login.html" data-toggle="login-modal"><i class="fas fa-user mr-1"></i>Sign in</a>
-                            <span class="delimiter">/</span>
-                            <a class="register-link ml-0" href="ajax/login.html" data-toggle="login-modal">Register</a>
+                            <a href="{{ route('login') }}"><i class="fas fa-user mr-1"></i>Log in</a>
+                            <span class="delimiter mr-0">/</span>
+                            <a class="ml-1" href="{{ route('register') }}">Register</a>
                         @endguest
 
                         @auth
-                            <a href="{{ route('account') }}" data-toggle="login-modal"><i class="fas fa-user mr-1"></i>{{ auth()->user()->username }}</a>
+                            <a href="{{ route('account') }}"><i class="fas fa-user mr-1"></i>{{ auth()->user()->username }}</a>
+                            <span class="delimiter mr-0">/</span>
+                            <form action="{{ route('logout') }}" method="POST" class="nav-link ml-1 mb-1" >
+                                @csrf
+                                <button style="font-size: 11px" type="submit" class="btn btn-link">Logout</button>
+                            </form>
                         @endauth
                         <!-- End of Login -->
+
                     </div>
                 </div>
             </div>

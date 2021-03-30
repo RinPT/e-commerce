@@ -31,9 +31,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#account">Account details</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Logout</a>
-                        </li>
                     </ul>
                     <div class="tab-content col-lg-9 col-md-8">
                         <div class="tab-pane active" id="dashboard">
