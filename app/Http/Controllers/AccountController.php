@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class AccountController extends Controller
 {
@@ -39,10 +43,30 @@ class AccountController extends Controller
     	$user->email = $request-> email;
     	$user->phone = $request-> phone;
     	$user->gender = $request-> gender;
-
+		//$user->date_of_birth = $request-> date_of_birth;
 
     	$user->save();
 
     	return back();
+    }
+
+	public function update_password(User $user, Request $request) {
+		$this -> validate($request, [
+			'old_password' => 'required',
+    		'password' =>'required|confirmed',
+    	]);
+
+		if (password_verify($request->old_password, $user->password)) {
+			$user->password = Hash::make($request-> password);
+			$user->save();
+		}
+
+		else {
+			throw ValidationException::withMessages(['old_password' => 'You entered your old password wrong !! Please re-enter']);
+		}
+
+    	return view('users.UserProfile', [
+    		'user'=>$user
+    	]);
     }
 }

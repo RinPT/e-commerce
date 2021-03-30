@@ -163,6 +163,22 @@
 
                                 <button type="submit" class="btn btn-primary">SAVE CHANGES</button>
                             </form>
+                            <form action="{{ route('password.update', auth()->user()) }}" method="POST" class="form">
+                                @csrf
+                                <fieldset>
+                                    <legend>Password Change</legend>
+                                    <label>Current password</label>
+                                    <input type="password" class="form-control" name="old_password">
+
+                                    <label>New password</label>
+                                    <input type="password" class="form-control" name="password">
+
+                                    <label>Confirm new password</label>
+                                    <input type="password" class="form-control" name="password_confirmation">
+
+                                    <button type="submit" class="btn btn-primary">Reset Password</button>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>

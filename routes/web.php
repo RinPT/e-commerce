@@ -26,7 +26,8 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/account', [AccountController::class, 'index'])->name('account');
-Route::post('/account/{user}', [AccountController::class, 'update_info'])->name('account.update'); //updates user info
+Route::post('/account/{user:username}', [AccountController::class, 'update_info'])->name('account.update'); //updates user info
+Route::post('/account/{user:username}/password', [AccountController::class, 'update_password'])->name('password.update');
 
 
 Route::group(['prefix' => "/userprofile"], function() {
