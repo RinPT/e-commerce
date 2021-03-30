@@ -25,10 +25,16 @@
                                     <form action="{{ route('login') }}" method="POST" class="form">
                                         @csrf
                                         <label>Email address</label>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <input type="email" class="form-control mb-2" name="email">
+                                        @error('email')
+                                            <p style="color: red">{{ $message }}</p>
+                                        @enderror
 
                                         <label>Password</label>
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control mb-2" name="password">
+                                        @error('password')
+                                            <p style="color: red">{{ $message }}</p>
+                                        @enderror
 
                                         <button type="submit" class="btn btn-primary btn-reveal-right">Login</button>
                                     </form>

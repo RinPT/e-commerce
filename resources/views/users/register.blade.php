@@ -23,22 +23,41 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="register">
                                     <form action="{{ route('register') }}" method="POST" class="form">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label>First Name <span style="color: rgb(200, 0, 0)">*</span></label>
-                                                <input type="text" class="form-control" name="name" required>
+                                                <input type="text" class="form-control mb-2" name="name" value="{{ old('name') }}">
+                                                @error('name')
+                                                <p class="" style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Last Name <span style="color: rgb(200, 0, 0)">*</span></label>
-                                                <input type="text" class="form-control" name="surname" required>
+                                                <input type="text" class="form-control mb-2" name="surname" value="{{ old('surname') }}">
+                                                @error('surname')
+                                                <p style="color: red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
 
+                                        <label class="mt-2">Username <span style="color: rgb(200, 0, 0)">*</span></label>
+                                        <input type="text" class="form-control mb-2" name="username" value="{{ old('username') }}">
+                                        @error('username')
+                                            <p style="color: red">{{ $message }}</p>
+                                        @enderror
+
                                         <label>Email address <span style="color: rgb(200, 0, 0)">*</span></label>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <input type="email" class="form-control mb-2" name="email" value="{{ old('email') }}">
+                                        @error('email')
+                                            <p style="color: red">{{ $message }}</p>
+                                        @enderror
 
                                         <label>Password</label>
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control mb-2" name="password">
+                                        @error('password')
+                                            <p style="color: red">{{ $message }}</p>
+                                        @enderror
 
                                         <label>Password again</label>
                                         <input type="password" class="form-control" name="password_confirmation">
