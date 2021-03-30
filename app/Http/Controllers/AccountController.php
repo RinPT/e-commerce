@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Intervention\Image\Facades\Image as Image;
-use Illuminate\Support\Facades\Storage;
+use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Validator;
+use Illuminate\Support\Facades\Storage;
+use Dotenv\Exception\ValidationException;
+use Intervention\Image\Facades\Image as Image;
 
 class AccountController extends Controller
 {
@@ -69,7 +70,7 @@ class AccountController extends Controller
     }
 
 	public function destroy(User $user) {
-        
+
         $user->delete();
 
         return redirect()->route('home');

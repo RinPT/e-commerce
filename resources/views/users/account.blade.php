@@ -23,7 +23,7 @@
                             <a class="nav-link" href="#orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#downloads">Downloads</a>
+                            <a class="nav-link" href="#downloads">Add Product</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#address">Address</a>
@@ -36,13 +36,17 @@
                         <div class="tab-pane active" id="dashboard">
                             <p class="mb-8">
                                 From your account dashboard you can view your recent orders, manage your shipping and billing
-                                    addresses,<br>and edit your password and account details</a>.
+                                    addresses,<br>and edit your password and account details.
                             </p>
-                            <form action="{{ route('account.delete' , auth()->user()) }}" method="POST" class="form">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-primary btn-rounded"><span class="d-flex align-items-center">Delete Account<i class="fas fa-trash-alt ml-2"></i></i></span></button>
-                            </form>
+                            <div class="row">
+                                <div class="col-9 d-flex justify-content-between">
+                                    <form action="{{ route('account.delete' , auth()->user()) }}" method="POST" class="form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-primary btn-rounded"><span class="d-flex align-items-center">Delete Account<i class="fas fa-trash-alt ml-2"></i></span></button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane" id="orders">
                             <table class="order-table">
@@ -102,8 +106,23 @@
                             </table>
                         </div>
                         <div class="tab-pane" id="downloads">
-                            <p class="mb-4 text-body">No downloads available yet.</p>
-                            <a href="#" class="btn btn-primary btn-link btn-underline">Browser Products<i class="d-icon-arrow-right"></i></a>
+                            <p class="mb-4 text-body">Fill all necessary fields to create a product!</p>
+                            <form action="{{ route('product.create') }}" method="POST" class="form">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="text" class="form-control" @error('product_name') style="border-color: red" @enderror name="product_name" id="product_name" placeholder="Product Name" value="">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <textarea class="form-control" @error('product_description') style="border-color: red" @enderror name="product_description" id="product_description" rows="3" placeholder="Product Description">{{ old('product_description') }}</textarea>
+                                </div>
+                                <div class="form-group mt-3 d-flex">
+                                    <input type="number" class="form-control" @error('price') style="border-color: red" @enderror name="price" id="price" placeholder="Price">
+                                    <input type="number" class="form-control" @error('cargo_price') style="border-color: red" @enderror name="cargo_price" id="cargo_price" placeholder="Cargo Price">
+                                </div>
+
+                                <button type="submit" class="btn btn-link">Add Product</button>
+
+                            </form>
                         </div>
                         <div class="tab-pane" id="address">
                             <p class="mb-2">The following addresses will be used on the checkout page by default.
@@ -158,7 +177,7 @@
                                 <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}">
 
                                 <label>Phone Number</label>
-                                <input type="text" class="form-control" name="phone" value="{{ auth()->user()->phone }}">
+                                <input type="tel" class="form-control" name="phone" value="{{ auth()->user()->phone }}">
 
                                 <button type="submit" class="btn btn-primary">SAVE CHANGES</button>
                             </form>
