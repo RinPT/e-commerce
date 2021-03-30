@@ -21,16 +21,20 @@
 			wf.async = true;
 			s.parentNode.insertBefore( wf, s );
 		} )( document );
-	</script>
 
+	</script>
 
 	<link rel="stylesheet" type="text/css" href="/vendor/fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.min.css">
 
 	<!-- Plugins CSS File -->
 	<link rel="stylesheet" type="text/css" href="/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/photoswipe.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/default-skin/default-skin.min.css">
 
-	<!-- Main CSS File -->
+    <!-- Main CSS File -->
+    <link rel="stylesheet" type="text/css" href="css/demo1.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
 
 </head>
@@ -754,8 +758,19 @@
 	<script src="/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
 	<script src="/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
 	<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/vendor/sticky/sticky.min.js"></script>
+	<script src="/vendor/owl-carousel/owl.carousel.min.js"></script>
+	<script src="/vendor/photoswipe/photoswipe.min.js"></script>
+	<script src="/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="/vendor/parallax/parallax.min.js"></script>
+
+
 	<!-- Main JS File -->
 	<script src="/js/user/main.min.js"></script>
+
+
+
+
 </body>
 
 </html>

@@ -7,8 +7,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserAddressController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductProfileController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 //Home Page:
@@ -30,6 +31,8 @@ Route::post('/account/{user:username}', [AccountController::class, 'update_info'
 Route::post('/account/{user:username}/password', [AccountController::class, 'update_password'])->name('password.update');
 Route::delete('/account/{user:username}/delete', [AccountController::class, 'destroy'])->name('account.delete');
 
+Route::get('/store', StoreController::class)->name('store');
+Route::get('/product/{product:name}', ProductProfileController::class)->name('product');
 
 Route::group(['prefix' => "/userprofile"], function() {
     //User Address Operations :
