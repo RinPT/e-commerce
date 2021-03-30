@@ -12,10 +12,10 @@
 */
 /* 1. config */
 /* -------------------------------------------
-	Variables 
+	Variables
 ------------------------------------------- */
 /* 2. mixins */
-/* 
+/*
 Demo 21 Variables
 */
 /* 3. plugins */
@@ -3909,8 +3909,8 @@ blockquote {
 
 @font-face {
   font-family: "donald";
-  src: url("../fonts/donald-icon.eot?5gap68");
-  src: url("../fonts/donald-icon.eot?5gap68#iefix") format("embedded-opentype"), url("../fonts/donald-icon.ttf?5gap68") format("truetype"), url("../fonts/donald-icon.woff?5gap68") format("woff"), url("../fonts/donald-icon.svg?5gap68#donald-icon") format("svg");
+  src: url("/fonts/donald-icon.eot?5gap68");
+  src: url("/fonts/donald-icon.eot?5gap68#iefix") format("embedded-opentype"), url("/fonts/donald-icon.ttf?5gap68") format("truetype"), url("/fonts/donald-icon.woff?5gap68") format("woff"), url("/fonts/donald-icon.svg?5gap68#donald-icon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -4620,7 +4620,7 @@ Other Styles
 }
 
 /* -------------------------------------------
-	Widget 
+	Widget
 ------------------------------------------- */
 .widget-title {
   margin-bottom: 2rem;
@@ -6023,7 +6023,7 @@ button.mfp-arrow {
 }
 
 /* -------------------------------------------
-	Tooltips 
+	Tooltips
 ------------------------------------------- */
 .tooltiptext {
   position: absolute;
@@ -6594,7 +6594,7 @@ button.mfp-arrow {
 }
 
 /* -------------------------------------------
-    Products 
+    Products
         - Default
         - Classic
         - Slideup
@@ -9049,7 +9049,7 @@ figure:hover .overlay-visible {
         -Header
         -Welcome-msg
         -Header Search
-        -Other 
+        -Other
             - Login
             - Call
             - Wishlist
@@ -10084,7 +10084,7 @@ figure:hover .overlay-visible {
             - MenuBanner
             - Tips
 
-        - MobileMenu 
+        - MobileMenu
             - MobileMenuWrapper
             - MobileMenuContainer
             - MobileMenu
@@ -11871,7 +11871,7 @@ aside .service-list .icon-box1 i {
   }
 }
 /* 9. Demos */
-/* 
+/*
 Demo 21
 */
 .sticky-header.fixed {
