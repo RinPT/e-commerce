@@ -65,8 +65,6 @@ class AccountController extends Controller
 			throw ValidationException::withMessages(['old_password' => 'You entered your old password wrong !! Please re-enter']);
 		}
 
-    	return view('users.UserProfile', [
-    		'user'=>$user
-    	]);
+    	return back();
     }
 }
