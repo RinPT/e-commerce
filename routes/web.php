@@ -32,9 +32,6 @@ Route::delete('/account/{user:username}/delete', [AccountController::class, 'des
 
 
 Route::group(['prefix' => "/userprofile"], function() {
-    //User :
-    Route::delete('/{user:username}', [UserController::class, 'destroy']) -> name('user.destroy'); //delete user
-
     //User Address Operations :
     Route::get('/{user}/address', [UserAddressController::class, 'index']) -> name('user.address'); //display all saved addresses of this user
     Route::get('/{user:username}/address/{user_address}', [UserAddressController::class, 'display']) -> name('address.display'); //display specific address update form
