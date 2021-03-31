@@ -180,6 +180,8 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            @else
+
                             @endif
                         </div>
                         <hr/>

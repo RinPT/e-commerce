@@ -1,5 +1,5 @@
-/* 
-Demo 9 
+/*
+Demo 9
 */
 // Header
 .header-top {
@@ -56,7 +56,7 @@ Demo 9
     .banner {
         overflow: hidden;
     }
-    
+
     &.owl-carousel .owl-nav {
         button {
             font-size: 45px;
@@ -65,7 +65,7 @@ Demo 9
             width: 1em;
             height: 1em;
             border: none;
-             
+
             i {
                 display: none;
             }
@@ -124,7 +124,7 @@ Demo 9
                 position: absolute;
                 bottom: 5px;
                 content: '';
-                background: url('../images/demos/demo9/highlight.png') center right / contain no-repeat;
+                background: url('images/demos/demo9/highlight.png') center right / contain no-repeat;
                 height: 9px;
                 left: 2px;
                 width: 19.6rem;
@@ -226,7 +226,7 @@ Demo 9
     }
 }
 
-// Categories 
+// Categories
 .category {
     border-radius: 3px;
     overflow: hidden;
@@ -290,7 +290,7 @@ Demo 9
     .banner {
         border-radius: 10px;
         overflow: hidden;
-        
+
         img {
             min-height: 28.6rem;
             object-fit: cover;
@@ -345,8 +345,8 @@ Demo 9
     }
 
     .post-title { white-space: normal; }
-    .btn { 
-        padding: 13px 27px 13px 27px; 
+    .btn {
+        padding: 13px 27px 13px 27px;
         background-color: #333;
         border-color: #333;
         margin-bottom: 3px;
@@ -371,7 +371,7 @@ Demo 9
         letter-spacing: -0.9px;
         margin-bottom: .7rem;
     }
-    p { 
+    p {
         font-size: 1.6em;
         line-height: 1.25em;
         margin-bottom: 2.5rem;
@@ -422,11 +422,11 @@ Demo 9
 
 // Footer
 .footer-middle {
-    .widget:not(.widget-about) { 
+    .widget:not(.widget-about) {
 		margin-bottom: 3.8rem;
 		margin-top: .4rem;
     }
-    
+
 	.widget-about {
 		margin-bottom: 3.5rem;
 	}

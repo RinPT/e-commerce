@@ -383,7 +383,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="about-us.html">About Us</a>
+                                    <a href="{{ route('store') }}">Store</a>
                                 </li>
                             </ul>
                         </nav>
