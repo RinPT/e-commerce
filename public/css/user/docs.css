@@ -4440,7 +4440,7 @@ ul.blog-filters {
   .element .element-img {
     width: 90px;
     height: 70px;
-    background-image: url(/images/elements.png);
+    background-image: url(../images/elements.png);
     background-repeat: no-repeat;
     transition: opacity .3s, visibility .3s; }
   .element .element-hover-img {
@@ -4449,7 +4449,7 @@ ul.blog-filters {
     height: 70px;
     left: 50%;
     top: 1.2rem;
-    background-image: url(/images/elements.png);
+    background-image: url(../images/elements.png);
     transform: translateX(-50%);
     visibility: hidden;
     opacity: 0;

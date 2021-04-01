@@ -7,9 +7,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProductProfileController;
-use App\Http\Controllers\StoreController;
+use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
 //Home Page:
@@ -31,8 +31,6 @@ Route::post('/account/{user:username}', [AccountController::class, 'update_info'
 Route::post('/account/{user:username}/password', [AccountController::class, 'update_password'])->name('password.update');
 Route::delete('/account/{user:username}/delete', [AccountController::class, 'destroy'])->name('account.delete');
 
-Route::get('/store', StoreController::class)->name('store');
-Route::get('/product/{product:name}', ProductProfileController::class)->name('product');
 
 Route::group(['prefix' => "/userprofile"], function() {
     //User Address Operations :
@@ -54,11 +52,17 @@ Route::post('/products', [ProductsController::class, 'create'])->name('product.c
 //Admin :
 
 Route::group(['prefix' => "/admin"], function() {
+
     //Complain Operations :
-    Route::get('', [AdminController::class, 'index'])->name('admin');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.admin');
     Route::post('/complains/{complains}', [AdminController::class, 'update_complain']) -> name('update.complain'); //updates status of the complain
     Route::delete('/complains/{complains}', [AdminController::class, 'delete_complain'])-> name('delete.complain'); //deletes the specific complain
+    
     //Ticket Operations :
+    Route::get('/tickets/author', [TicketController::class, 'getAuthorTickets']) -> name('admin.view_author_tickets'); 
+    Route::get('/tickets/store', [TicketController::class, 'getStoreTickets']) -> name('admin.view_store_tickets'); 
+    Route::get('/tickets/create', [TicketController::class, 'getCreateTicket']) -> name('admin.view_create_new_ticket'); 
+
     Route::post('/tickets/{tickets}', [AdminController::class, 'update_ticket']) -> name('update.ticket'); //updates status of the ticket
     Route::delete('/tickets/{tickets}', [AdminController::class, 'delete_ticket'])-> name('delete.ticket'); //deletes the specific ticket
     Route::get('/tickets/reply/{tickets}', [AdminController::class, 'reply_ticket_display']) -> name('reply.ticket_display'); //display reply form of a specific ticket
@@ -77,7 +81,7 @@ Route::group(['prefix' => "/admin"], function() {
     Route::post('/configs/add/done', [AdminController::class, 'add_config']) -> name('add.config'); //adds the new configuration
 
     //Permission Operations:
-    Route::get('/permission/add', [AdminController::class, 'add_permission_display']) -> name('add.permission_display'); //display permission_add form of a specific ticket
+    Route::get('/permissions', [AdminController::class, 'add_permission_display']) -> name('add.permission_display'); //display permission_add form of a specific ticket
     Route::post('/permission/add/done', [AdminController::class, 'add_permission']) -> name('add.permission'); //adds the new permission
     Route::delete('/permission/{permissions}', [AdminController::class, 'delete_permission'])-> name('delete.permission'); //deletes the specific permission
 
@@ -89,7 +93,6 @@ Route::group(['prefix' => "/admin"], function() {
     Route::post('/user_group/update_permissions/{group}', [AdminController::class, 'update_group_permissions']) -> name('update.group_permissions'); //updates status of the ticket
     Route::post('/user_group/add/member', [AdminController::class, 'add_user_to_group']) -> name('add.user_to_group'); //adds the a registered user to a group
     Route::post('/user_group/remove/member', [AdminController::class, 'remove_user_from_group']) -> name('remove.user_from_group'); //removes the a registered user from a group
-
 
 });
 

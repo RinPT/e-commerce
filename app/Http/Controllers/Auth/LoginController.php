@@ -27,5 +27,5 @@ class LoginController extends Controller
     		//with() place the message into the session() so you can access it on the views with session('status')
     	}
     	return redirect()-> route('home');
-    }
+    }	
 }

@@ -8844,16 +8844,16 @@ Other Styles
 }
 
 /* Unused components
-@import '/components/accordion';
-@import '/components/alerts';
-@import '/components/elements';
-@import '/components/instagram';
-@import '/components/overlay';
-@import '/components/page-header';
-@import '/components/pagination';
-@import '/components/sidebar';
-@import '/components/sidebar-shop';
-@import '/components/testimonials';
+@import '../../components/accordion';
+@import '../../components/alerts';
+@import '../../components/elements';
+@import '../../components/instagram';
+@import '../../components/overlay';
+@import '../../components/page-header';
+@import '../../components/pagination';
+@import '../../components/sidebar';
+@import '../../components/sidebar-shop';
+@import '../../components/testimonials';
 */
 /* 6. header */
 /* -------------------------------------------
