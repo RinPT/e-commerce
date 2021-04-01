@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/default-skin/default-skin.min.css">
 
     <!-- Main CSS File -->
-    <link rel="stylesheet" type="text/css" href="css/demo1.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/demo1.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
 
 </head>
