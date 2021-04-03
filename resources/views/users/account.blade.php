@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+	<!-- Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+@endsection
+
 @section('content')
 
     <main class="main account">

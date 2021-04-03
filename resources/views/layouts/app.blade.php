@@ -24,14 +24,17 @@
 	</script>
 
 
-	<link rel="stylesheet" type="text/css" href="/vendor/fontawesome-free/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.min.css">
 
-	<!-- Plugins CSS File -->
-	<link rel="stylesheet" type="text/css" href="/vendor/magnific-popup/magnific-popup.min.css">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" type="text/css" href="/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/owl-carousel/owl.carousel.min.css">
 
-	<!-- Main CSS File -->
-	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" type="text/css" href="/css/user/demo1.min.css">
+
+    @yield('stylesheet')
 
 </head>
 
@@ -749,13 +752,18 @@
 			<!-- End MobileMenu -->
 		</div>
 	</div>
-	<!-- Plugins JS File -->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
-	<script src="/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-	<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-	<!-- Main JS File -->
-	<script src="/js/user/main.min.js"></script>
+
+    <!-- Plugins JS File -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/parallax/parallax.min.js"></script>
+    <script src="/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
+    <script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/vendor/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Main JS File -->
+    <script src="/js/user/main.min.js"></script>
+
+    @yield('javaScript')
 </body>
 
 </html>
