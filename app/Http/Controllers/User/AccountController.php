@@ -22,9 +22,11 @@ class AccountController extends Controller
         ]);
     }
 
-    public function update_info(User $user, Request $request)
+    public function update_info(Request $request)
     {
-    	//validate request
+        $user = User::findOrFail(auth()->user()->user_id);
+
+        //validate request
     	$this -> validate($request, [
 
     		'name' => 'required|max:255',
@@ -38,20 +40,23 @@ class AccountController extends Controller
 
     	//update user information in the database
 
-    	$user->name = $request-> name;
-    	$user->surname = $request-> surname;
-    	$user->username = $request-> username;
-    	$user->email = $request-> email;
-    	$user->phone = $request-> phone;
-    	$user->gender = $request-> gender;
+    	$user->name = $request->name;
+    	$user->surname = $request->surname;
+    	$user->username = $request->username;
+    	$user->email = $request->email;
+    	$user->phone = $request->phone;
+    	$user->gender = $request->gender;
 		//$user->date_of_birth = $request-> date_of_birth;
 
     	$user->save();
 
-    	return back();
+    	return back()->with('info', 'Account Information Updated!');
     }
 
-	public function update_password(User $user, Request $request) {
+	public function update_password(Request $request) {
+
+        $user = User::findOrFail(auth()->user()->user_id);
+
 		$this -> validate($request, [
 			'old_password' => 'required',
     		'password' =>'required|confirmed',
@@ -66,10 +71,12 @@ class AccountController extends Controller
 			throw ValidationException::withMessages(['old_password' => 'You entered your old password wrong !! Please re-enter']);
 		}
 
-    	return back();
+    	return back()->with('pass', 'Password Has Changed!');
     }
 
-	public function destroy(User $user) {
+	public function destroy() {
+
+        $user = User::findOrFail(auth()->user()->user_id);
 
         $user->delete();
 
