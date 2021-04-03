@@ -19,7 +19,7 @@ class CreateTicketsTable extends Migration
             //$table->foreign('store_id')->references('store_id')->on('Store');
             $table->text('title');
             $table->text('message');
-            $table->enum('status',['read', 'unread','completed','incomplete']);
+            $table->enum('status',['open', 'closed', 'answered']);
             $table->enum('urgency',['high', 'medium','low']);
             $table->json('attachments');
             $table->tinyInteger('store_unread');

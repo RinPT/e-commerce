@@ -24,8 +24,9 @@ class AdminController extends Controller
   		$ticket_replies=Ticket_Replies::get();
     	$complains=Complains::get();
     	$tickets=Tickets::get();
+		$users=User::get();
 
-    	return view('admin',[
+    	return view('admin.admin',[
     		'complains'=> $complains,
     		'tickets' => $tickets,
     		'ticket_replies'=>$ticket_replies,
@@ -33,8 +34,10 @@ class AdminController extends Controller
     		'configs' => $configs,
     		'permissions'=> $permissions,
     		'group'=> $group,
+			'users' => $users,
     	]);
     }
+
 
     public function update_complain(Request $request, Complains $complains)
     {
@@ -52,6 +55,7 @@ class AdminController extends Controller
     	return $this->index();
     }
 
+
     public function update_ticket(Request $request, Tickets $tickets)
     {
 
@@ -68,7 +72,6 @@ class AdminController extends Controller
 
     	return $this->index();
     }
-
 
     public function reply_ticket(Request $request, Tickets $tickets)
     {
@@ -89,12 +92,13 @@ class AdminController extends Controller
     public function reply_ticket_display(Request $request, Tickets $tickets)
     {
 
-    	return view('ticket_reply',[
+    	return view('admin.ticket_reply',[
     		'tickets'=> $tickets,
 
 
     	]);
     }
+	
 
     public function delete_reply(Request $request, Ticket_Replies $ticket_replies)
     {
@@ -133,7 +137,7 @@ class AdminController extends Controller
 
     public function add_config_display(Request $request)
     {
-    	return view('add_configs');
+    	return view('admin.add_configs');
 
     }
 
@@ -150,8 +154,8 @@ class AdminController extends Controller
 
     public function add_permission_display(Request $request)
     {
-    	return view('add_permission');
-
+    	$permissions= Permissions::get();
+        return view('admin.add_permissions');
     }
 
     public function add_permission(Request $request)
@@ -173,7 +177,7 @@ class AdminController extends Controller
 
     public function add_user_group_display(Request $request)
     {
-    	return view('add_user_group');
+    	return view('admin.add_user_group');
 
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin.sidebar')
 
 @section('content')
 
@@ -134,7 +134,7 @@
 											    <td> {{$ticket_replies->ticket_reply_id}} </td>
 											    <td> {{$ticket_replies->author_id}} </td>
 											    <td> {{$ticket_replies->rate}} </td>
-											     <td> {{$ticket_replies->attachmenst}} </td>
+											    <td> {{$ticket_replies->attachmenst}} </td>
 											    <td> {{$ticket_replies->ticket_id}} </td>
 											    <td> {{$ticket_replies->store_id}} </td>
 											    <td>
@@ -171,7 +171,7 @@
 											    <td> {{$activity_logs->log_id}} </td>
 											    <td> {{$activity_logs->user_id}} </td>
 											    <td> {{$activity_logs->username}} </td>
-											     <td> {{$activity_logs->author_id}} </td>
+											    <td> {{$activity_logs->author_id}} </td>
 											    <td> {{$activity_logs->description}} </td>
 											    <td> {{$activity_logs->ip_address}} </td>
 											    <td>
