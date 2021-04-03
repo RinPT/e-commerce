@@ -15,7 +15,6 @@ Route::post('/account/new_address', [AddressController::class, 'store'])->name('
 
 Route::group(['prefix' => "/userprofile"], function() {
     //User Address Operations :
-    Route::get('/{user:username}/address/{user_address}', [UserAddressController::class, 'display']) -> name('address.display');
     Route::post('/{user:username}/address/{user_address}', [UserAddressController::class, 'update'])-> name('address.update');
     Route::delete('/{user:username}/address/{user_address}', [UserAddressController::class, 'destroy'])-> name('address.destroy');
 });
