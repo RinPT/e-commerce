@@ -3,6 +3,20 @@
 @section('stylesheet')
 	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -133,30 +147,62 @@
                             <p class="mb-2">The following addresses will be used on the checkout page by default.
                             </p>
                             <div class="row">
-                                <div class="col-sm-6 mb-4">
-                                    <div class="card card-address">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-uppercase">Billing Address</h5>
-                                            <p>John Doe<br>
-                                                Riode Company<br>
-                                                Steven street<br>
-                                                El Carjon, CA 92020
-                                            </p>
-                                            <a href="#" class="btn btn-link btn-secondary btn-underline">Edit <i
-                                                    class="far fa-edit"></i></a>
+                                @if ($addresses->count())
+                                    @foreach ($addresses as $address)
+                                        <div class="col-sm-4 mb-4">
+                                            <div class="card card-address">
+                                                <div class="card-body border border-secondary rounded">
+                                                    <h5 class="mb-1">{{ $address->address_type }}</h5>
+                                                    <hr/>
+                                                    <p><strong>{{ $address->name }} {{ $address->surname }}</strong><br>
+                                                        {{ $address->address }}<br>
+                                                        {{ $address->city }}<br>
+                                                        {{ $address->postcode }}
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 mb-4">
-                                    <div class="card card-address">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-uppercase">Shipping Address</h5>
-                                            <p>You have not set up this type of address yet.</p>
-                                            <a href="#" class="btn btn-link btn-secondary btn-underline">Edit <i
-                                                    class="far fa-edit"></i></a>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="row">
+                                <form action="{{ route('address.add') }}" method="POST" class="form">
+                                    @csrf
+                                    <fieldset>
+                                        @if(session('newAddress'))
+                                        <p class="text-success">{{ session('pass') }}</p>
+                                        @endif
+
+                                        <legend>Add New Address</legend>
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="name">
+
+                                        <label>Surname</label>
+                                        <input type="text" class="form-control" name="surname">
+
+                                        <label>Country</label>
+                                        <input type="text" class="form-control" name="counrty_id" placeholder="Country" disabled>
+
+                                        <label>City</label>
+                                        <input type="text" class="form-control" name="city">
+
+                                        <label>Address</label>
+                                        <textarea class="form-control" name="address" rows="2" style="resize: none" placeholder="Street, Apartment No and Other Information"></textarea>
+
+                                        <label>Address Type</label>
+                                        <input type="text" class="form-control" name="address_type" placeholder="Example: Home, Work, etc.">
+
+                                        <label>Postcde</label>
+                                        <input type="number" class="form-control" name="postcode">
+
+                                        <label>Phone</label>
+                                        <input type="tel" class="form-control" name="telephone">
+
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-link text-primary">Add New Addres <i class="far fa-edit"></i></button>
                                         </div>
-                                    </div>
-                                </div>
+                                    </fieldset>
+                                </form>
                             </div>
                         </div>
                         <div class="tab-pane" id="account">

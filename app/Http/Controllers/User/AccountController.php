@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use Validator;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Dotenv\Exception\ValidationException;
-use Intervention\Image\Facades\Image as Image;
+use Illuminate\Validation\ValidationException;
 
 class AccountController extends Controller
 {
@@ -16,9 +15,14 @@ class AccountController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(User $user) {
+    public function index() {
+
+        $user = User::findOrFail(auth()->user()->user_id);
+        $addresses = UserAddress::latest()->paginate(20);
+
         return view('users.account', [
             'user' => $user,
+            'addresses' => $addresses,
         ]);
     }
 
