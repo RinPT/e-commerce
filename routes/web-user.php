@@ -13,9 +13,9 @@ use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/account', [AccountController::class, 'index'])->name('account');
-Route::post('/account/{user:username}', [AccountController::class, 'update_info'])->name('account.update'); //updates user info
-Route::post('/account/{user:username}/password', [AccountController::class, 'update_password'])->name('password.update');
-Route::delete('/account/{user:username}/delete', [AccountController::class, 'destroy'])->name('account.delete');
+Route::post('/account', [AccountController::class, 'update_info'])->name('account.update'); //updates user info
+Route::post('/account/password', [AccountController::class, 'update_password'])->name('password.update');
+Route::delete('/account/delete', [AccountController::class, 'destroy'])->name('account.delete');
 
 
 Route::group(['prefix' => "/userprofile"], function() {

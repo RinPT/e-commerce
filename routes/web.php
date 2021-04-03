@@ -12,6 +12,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
+
+include('web-user.php');
+include('web-admin.php');
+
 //Home Page:
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
