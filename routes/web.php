@@ -18,9 +18,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Authorization :
 
-Route::post('/logoutcid', [LogoutController::class, 'store'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/logingi', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
