@@ -1,11 +1,11 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 @section('content')
 
             <main>
                 <div class="justify-content-center">
                     <div class="w-8/12 p-6 rounded-lg">
                         <h> New Permission : </h>
-                        <form action="{{route('add.permission')}}" method="post">        
+                        <form action="{{route('add.permission')}}" method="post">
                             @csrf
                             <div style="width:50%; display: block; padding-left: 25%;">
                             <label for="name ">Enter Permission Name :</label>

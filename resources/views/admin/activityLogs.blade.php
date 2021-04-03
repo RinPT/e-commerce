@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 @section('content')
 
     <main>
@@ -8,11 +8,11 @@
                     <div class="card-actions">
                         <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
                         <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
-                    </div>        
+                    </div>
                     <h2 class="card-title">Activity Logs</h2>
                 </header>
                 <div class="card-body">
-                    <table class="table table-responsive-lg table-bordered table-striped table-sm mb-0">                            
+                    <table class="table table-responsive-lg table-bordered table-striped table-sm mb-0">
                         @if($activity_logs->count())
                         <table style="width:100%">
                             <tr>
@@ -39,12 +39,12 @@
                                             <button type="submit" class="text-blue-500">Delete This Log</button>
                                     </form>
                                     </td>
-                                </tr>                
+                                </tr>
                             @endforeach
-                        </table>  
+                        </table>
                 @else
                     <p> There are no activities yet. </p>
-                @endif        
+                @endif
                     </table>
                 </div>
             </section>

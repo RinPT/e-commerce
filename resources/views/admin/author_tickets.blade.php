@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 
 @section('custom-styles')
 <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
@@ -34,7 +34,7 @@
             </thead>
             <tbody>
             @if($tickets->count())
-                @foreach($tickets as $ticket)									
+                @foreach($tickets as $ticket)
                 <tr>
                     <td>#{{ $ticket ->ticket_id}}</td>
                     <td>eklencek</td>
@@ -55,7 +55,7 @@
                         <a class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                         <a class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
                     </td>
-                </tr>                                                
+                </tr>
                 @endforeach
             @endif
             </tbody>

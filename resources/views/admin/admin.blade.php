@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 
 @section('content')
 
@@ -11,7 +11,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Complains</h2>
 					</header>
 					<div class="card-body">
@@ -29,7 +29,7 @@
                                 <tr>
                                 <td> {{$complains->complain_id}} </td>
                                 <td> {{$complains->message}} </td>
-                                <td> 
+                                <td>
                                     <form action="{{route('update.complain',$complains)}}" method="post">
 
                                     @csrf
@@ -48,7 +48,7 @@
                                 <td> {{$complains->sender_uid}} </td>
                                 <td> {{$complains->product_id}} </td>
                                 <td>
-                                                    
+
 
                                     <form action="{{route('delete.complain',$complains)}}" method="post">
                                             @csrf
@@ -66,8 +66,8 @@
 					</div>
 				</section>
 			</div>
-        </div>	
-        
+        </div>
+
         <div class="row">
             <div class="col">
 				<section class="card">
@@ -76,7 +76,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Tickets</h2>
 					</header>
 					<div class="card-body">
@@ -99,7 +99,7 @@
 								    <td> {{$tickets->store_id}} </td>
 								    <td> {{$tickets->title}} </td>
 								    <td> {{$tickets->message}} </td>
-								    <td> 
+								    <td>
 								      	<form action="{{route('update.ticket',$tickets)}}" method="post">
 
 				            			@csrf
@@ -119,7 +119,7 @@
 								    <td> {{$tickets->attachments}} </td>
 								    <td> {{$tickets->department_id}} </td>
 								    <td>
-								      			 
+
 
 									<form action="{{route('delete.ticket',$tickets)}}" method="post">
 										@csrf
@@ -130,9 +130,9 @@
 
 									</td>
 								</tr>
-    		
+
 							@endforeach
-						</table>  
+						</table>
 				        @else
 					        <p> There are no tickets yet. </p>
 				        @endif
@@ -149,7 +149,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Ticket Replies</h2>
 					</header>
 					<div class="card-body">
@@ -182,9 +182,9 @@
 
 												</td>
 											</tr>
-			    		
+
 										@endforeach
-									</table>  
+									</table>
 							@else
 								<p> There are no ticket replies yet. </p>
 							@endif
@@ -201,7 +201,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Activity Logs</h2>
 					</header>
 					<div class="card-body">
@@ -234,9 +234,9 @@
 
 												</td>
 											</tr>
-			    		
+
 										@endforeach
-									</table>  
+									</table>
 							@else
 								<p> There are no activities yet. </p>
 							@endif
@@ -253,7 +253,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Configs</h2>
 					</header>
 					<div class="card-body">
@@ -270,8 +270,8 @@
                                            @foreach($configs as $configs)
                                                <tr>
                                                    <td> {{$configs->configs_id}} </td>
-                                                   <td> 
-                                                   <form action="{{route('update.config',$configs)}}" method="post">                        
+                                                   <td>
+                                                   <form action="{{route('update.config',$configs)}}" method="post">
                                                        @csrf
                                                            <input type="text" name="key" placeholder="Configuration Key" value="{{$configs->key}}" />
 
@@ -289,7 +289,7 @@
                                                    </td>
                                                </tr>
                                            @endforeach
-                                       </table>  
+                                       </table>
                                @else
                                    <p> There are no configurations yet. </p>
                                @endif
@@ -306,7 +306,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Permissions</h2>
 					</header>
 					<div class="card-body">
@@ -330,9 +330,9 @@
                                                            <button type="submit" class="text-blue-500">Delete This Permission</button>
                                                    </form>
                                                    </td>
-                                               </tr>   
+                                               </tr>
                                            @endforeach
-                                       </table>  
+                                       </table>
                                @else
                                    <p> There are no permissions yet. </p>
                                @endif
@@ -349,7 +349,7 @@
 							<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
 							<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
 						</div>
-						
+
 						<h2 class="card-title">Groups</h2>
 					</header>
 					<div class="card-body">
@@ -370,7 +370,7 @@
 			            		<tr>
 			            			<td> {{$group->group_id}} </td>
 			            				<td> {{$group->name}} </td>
-			            				<td> 
+			            				<td>
 			            				<form action="{{route('update.group_permissions',$group)}}" method="post">
 			            				@csrf
 			            				    <input type="text" name="permissions" placeholder="Group permissions" value="{{$group->permissions}}" />
@@ -387,9 +387,9 @@
 			            					<button type="submit" class="text-blue-500">Delete This Group</button>
 			            				</form>
 			            			</td>
-			            		</tr>			    		
+			            		</tr>
 			            		@endforeach
-			            	</table>  
+			            	</table>
 			            @else
 			            	<p> There are no groups yet. </p>
 			            @endif

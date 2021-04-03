@@ -7,15 +7,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserAddressController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => "/admin"], function() {
 
+    Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
+    Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('admin.home');
+
     //Complain Operations :
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.admin');
+    //Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.admin');
     Route::post('/complains/{complains}', [AdminController::class, 'update_complain']) -> name('update.complain'); //updates status of the complain
     Route::delete('/complains/{complains}', [AdminController::class, 'delete_complain'])-> name('delete.complain'); //deletes the specific complain
 

@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 
 @section('content')
 
@@ -23,7 +23,7 @@
 				      		<tr>
 				      		<td> {{$complains->complain_id}} </td>
 				      		<td> {{$complains->message}} </td>
-				      		<td> 
+				      		<td>
 				      			<form action="{{route('update.complain',$complains)}}" method="post">
 
             					@csrf
@@ -42,7 +42,7 @@
 				      		<td> {{$complains->sender_uid}} </td>
 				      		<td> {{$complains->product_id}} </td>
 				      		<td>
-				      			 
+
 
 					      		<form action="{{route('delete.complain',$complains)}}" method="post">
 							      		@csrf
@@ -78,7 +78,7 @@
 								    <td> {{$tickets->store_id}} </td>
 								    <td> {{$tickets->title}} </td>
 								    <td> {{$tickets->message}} </td>
-								    <td> 
+								    <td>
 								      	<form action="{{route('update.ticket',$tickets)}}" method="post">
 
 				            			@csrf
@@ -98,7 +98,7 @@
 								    <td> {{$tickets->attachments}} </td>
 								    <td> {{$tickets->department_id}} </td>
 								    <td>
-								      			 
+
 
 									<form action="{{route('delete.ticket',$tickets)}}" method="post">
 										@csrf
@@ -109,9 +109,9 @@
 
 									</td>
 								</tr>
-    		
+
 							@endforeach
-						</table>  
+						</table>
 				@else
 					<p> There are no tickets yet. </p>
 				@endif
@@ -146,9 +146,9 @@
 
 												</td>
 											</tr>
-			    		
+
 										@endforeach
-									</table>  
+									</table>
 							@else
 								<p> There are no ticket replies yet. </p>
 							@endif
@@ -183,9 +183,9 @@
 
 												</td>
 											</tr>
-			    		
+
 										@endforeach
-									</table>  
+									</table>
 							@else
 								<p> There are no activities yet. </p>
 							@endif
@@ -207,7 +207,7 @@
 											<tr>
 											    <td> {{$configs->configs_id}} </td>
 
-												<td> 
+												<td>
 												<form action="{{route('update.config',$configs)}}" method="post">
 													@csrf
 														<input type="text" name="key" placeholder="Configuration Key" value="{{$configs->key}}" />
@@ -231,9 +231,9 @@
 
 												</td>
 											</tr>
-			    		
+
 										@endforeach
-									</table>  
+									</table>
 							@else
 								<p> There are no configurations yet. </p>
 							@endif
@@ -254,7 +254,7 @@
 											<tr>
 											    <td> {{$permissions->permission_id}} </td>
 											    <td> {{$permissions->perm_name}} </td>
-												
+
 											    <td>
 												<form action="{{route('delete.permission',$permissions)}}" method="post">
 													@csrf
@@ -266,9 +266,9 @@
 
 												</td>
 											</tr>
-			    		
+
 										@endforeach
-									</table>  
+									</table>
 							@else
 								<p> There are no permissions yet. </p>
 							@endif
@@ -292,7 +292,7 @@
 										<tr>
 											    <td> {{$group->group_id}} </td>
 											    <td> {{$group->name}} </td>
-											    <td> 
+											    <td>
 											    <form action="{{route('update.group_permissions',$group)}}" method="post">
 													@csrf
 														<input type="text" name="permissions" placeholder="Group permissions" value="{{$group->permissions}}" />
@@ -301,7 +301,7 @@
 												</form>
 
 												</td>
-												
+
 											    <td>
 												<form action="{{route('delete.group',$group)}}" method="post">
 													@csrf
@@ -310,9 +310,9 @@
 												</form>
 												</td>
 										</tr>
-			    		
+
 									@endforeach
-							</table>  
+							</table>
 							@else
 								<p> There are no groups yet. </p>
 							@endif

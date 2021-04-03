@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 @section('content')
 
 <main>
@@ -19,14 +19,14 @@
 				<tr>
 					<td> {{$group->group_id}} </td>
 					<td> {{$group->name}} </td>
-					<td> 
+					<td>
 					<form action="{{route('update.group_permissions',$group)}}" method="post">
 						@csrf
 							<input type="text" name="permissions" placeholder="Group permissions" value="{{$group->permissions}}" />
 
 							<button type="submit" class="text-blue-500">Update Group Permissions </button>
 					</form>
-					</td>												
+					</td>
 					<td>
 					<form action="{{route('delete.group',$group)}}" method="post">
 						@csrf
@@ -34,9 +34,9 @@
 							<button type="submit" class="text-blue-500">Delete This Group</button>
 					</form>
 					</td>
-				</tr>			    		
+				</tr>
 			@endforeach
-	</table>  
+	</table>
 	@else
 		<p> There are no groups yet. </p>
 	@endif

@@ -1,4 +1,4 @@
-@extends('layouts.admin.sidebar')
+@extends('layouts.admin.main')
 
 @section('custom-styles')
     <link rel="stylesheet" href="/admin/vendor/jquery-ui/jquery-ui.css" />
@@ -29,7 +29,7 @@
             <p class="card-subtitle">You can create a new ticket below.</p>
         </header>
         <div class="card-body">
-            <form action="{{route('add.user_group')}}" method="post">            
+            <form action="{{route('add.user_group')}}" method="post">
                 @csrf
 
                 <div class="form-group row">
@@ -83,7 +83,7 @@
                     <div class="col-lg-6 text-center">
                         <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Create</button>
                     </div>
-                </div>   
+                </div>
             </form>
         </div>
     </section>
