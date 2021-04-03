@@ -40,7 +40,7 @@
                             </p>
                             <div class="row">
                                 <div class="col-9 d-flex justify-content-between">
-                                    <form action="{{ route('account.delete' , auth()->user()) }}" method="POST" class="form">
+                                    <form action="{{ route('account.delete') }}" method="POST" class="form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-primary btn-rounded"><span class="d-flex align-items-center">Delete Account<i class="fas fa-trash-alt ml-2"></i></span></button>
@@ -155,7 +155,10 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="account">
-                            <form action="{{ route('account.update', auth()->user()) }}" method="POST" class="form">
+                            @if(session('status'))
+                                <p class="text-danger">{{ session('info') }}<p>
+                            @endif
+                            <form action="{{ route('account.update') }}" method="POST" class="form">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -181,9 +184,13 @@
 
                                 <button type="submit" class="btn btn-primary">SAVE CHANGES</button>
                             </form>
-                            <form action="{{ route('password.update', auth()->user()) }}" method="POST" class="form">
+                            <form action="{{ route('password.update') }}" method="POST" class="form">
                                 @csrf
                                 <fieldset>
+                                    @if(session('pass'))
+                                    <p class="text-danger">{{ session('pass') }}</p>
+                                    @endif
+
                                     <legend>Password Change</legend>
                                     <label>Current password</label>
                                     <input type="password" class="form-control" name="old_password">
