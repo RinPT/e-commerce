@@ -43,7 +43,6 @@ class UserAddressController extends Controller
     	return view('users.AddUserAddress',[
     	'user'=> $user,
         'countries' => $countries,
-
     ]);
     }
 

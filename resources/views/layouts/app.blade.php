@@ -6,7 +6,11 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-	<title>Riode - Ultimate eCommerce</title>
+	<title>Riode - Ultimate eCommerce Template</title>
+
+	<meta name="keywords" content="HTML5 Template" />
+	<meta name="description" content="Riode - Ultimate eCommerce Template">
+	<meta name="author" content="D-THEMES">
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="/images/icons/favicon.png">
@@ -32,6 +36,8 @@
 
 	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 </head>
 
@@ -67,7 +73,7 @@
                         <span class="divider"></span>
                         <a href="contact-us.html" class="contact d-lg-show"><i class="fas fa-map-marker-alt"></i>Contact</a>
                         <a href="#" class="help d-lg-show"><i class="far fa-question-circle"></i> Need Help</a>
-
+                        
                         @guest
                             <a href="{{ route('login') }}"><i class="fas fa-user mr-1"></i>Log in</a>
                             <span class="delimiter mr-0">/</span>

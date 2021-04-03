@@ -30,17 +30,14 @@ Route::post('/account/{user:username}', [AccountController::class, 'update_info'
 Route::post('/account/{user:username}/password', [AccountController::class, 'update_password'])->name('password.update');
 Route::delete('/account/{user:username}/delete', [AccountController::class, 'destroy'])->name('account.delete');
 
+//User Address Operations :
+Route::get('/{user}/address', [AccountController::class, 'index']) -> name('user.address'); //display all saved addresses of this user
+Route::get('/{user:username}/address/{user_address}', [AccountController::class, 'show_update_address']) -> name('address.display'); //display specific address update form
+Route::post('/{user:username}/address/{user_address}', [AccountController::class, 'store_updated_address'])-> name('address.update'); //updates specific address
+Route::delete('/{user:username}/address/{user_address}', [AccountController::class, 'destroy_address'])-> name('address.destroy'); //deletes the specific address
+Route::get('/{user:username}/newaddress', [AccountController::class, 'show_add_address']) -> name('address.add'); //shows a new address adding form
+Route::post('/{user:username}/newaddress', [AccountController::class, 'store_new_address']) -> name('address.store'); //save the new added address
 
-Route::group(['prefix' => "/userprofile"], function() {
-    //User Address Operations :
-    Route::get('/{user}/address', [UserAddressController::class, 'index']) -> name('user.address'); //display all saved addresses of this user
-    Route::get('/{user:username}/address/{user_address}', [UserAddressController::class, 'display']) -> name('address.display'); //display specific address update form
-    Route::post('/{user:username}/address/{user_address}', [UserAddressController::class, 'update'])-> name('address.update'); //updates specific address
-    Route::delete('/{user:username}/address/{user_address}', [UserAddressController::class, 'destroy'])-> name('address.destroy'); //deletes the specific address
-    Route::get('/{user:username}/newaddress', [UserAddressController::class, 'show']) -> name('address.add'); //shows a new address adding form
-    Route::post('/{user:username}/newaddress', [UserAddressController::class, 'store']) -> name('address.store'); //save the new added address
-
-});
 
 //Products:
 

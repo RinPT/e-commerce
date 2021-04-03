@@ -4,7 +4,6 @@
   <div class="flex justify-center">
 
     <div class="w-8/12 bg-white p-6 rounded-lg">
-    	<h> here </h>
             <form action="{{route('address.update',[$user,$useraddress])}}" method="post">
             @csrf
 

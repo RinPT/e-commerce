@@ -19,7 +19,7 @@
       	</div>
 
             <div class="mb-4">
-                  <label for="surname" class="sr-only"> Surame </label>
+                  <label for="surname" class="sr-only"> Surname </label>
                   <input type="text" name="surname" id="surname" placeholder="Your Surname" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('surname') border-red-500 @enderror" value="{{ old('surname')}}">
 
                   @error('surname')

@@ -33,7 +33,7 @@
                 <ul class="navbar-nav">
                     @auth
                        <li class="nav-item">
-                          <a href="{{route('user.profile',auth()->user())}}" class="nav-link"> {{ auth()->user()->username }} </a>
+                          <a href="{{route('account')}}" class="nav-link"> {{ auth()->user()->username }} </a>
                        </li>
                        <li class="nav-item">
                           <form action="{{ route('logout')}}" method="post" class="nav-link">
