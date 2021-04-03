@@ -74,7 +74,10 @@ class AccountController extends Controller
     	return back()->with('pass', 'Password Has Changed!');
     }
 
-	public function destroy(User $user) {
+	public function destroy() {
+
+        $user = User::findOrFail(auth()->user()->user_id);
+
         $user->delete();
 
         return redirect()->route('home');
