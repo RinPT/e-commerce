@@ -1,20 +1,35 @@
 <?php
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use \App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => "/admin"], function() {
 
+    Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
+    Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');
+
+    Route::get('/pwreset', [AdminHomeController::class, 'index'])->name('admin.pwreset');
+
     Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('admin.home');
+
+    Route::get('/authors', [AuthorController::class, 'index'])->name('admin.authors');
+    Route::get('/author/create', [AuthorController::class, 'create'])->name('admin.author.create');
+    Route::post('/author/create', [AuthorController::class, 'store'])->name('admin.author.store');
+    Route::get('/author/{id}/update/', [AuthorController::class, 'edit'])->name('admin.author.edit');
+    Route::post('/author/{id}/update/', [AuthorController::class, 'update'])->name('admin.author.update');
+    Route::get('/author/{id}/delete/', [AuthorController::class, 'destroy'])->name('admin.author.delete');
+
+    Route::get('/stores', [AdminHomeController::class, 'index'])->name('admin.stores');
+    Route::get('/store/create', [AdminHomeController::class, 'create'])->name('admin.store.create');
+    Route::post('/store/create', [AdminHomeController::class, 'store'])->name('admin.store.store');
+    Route::get('/store/{id}/update/', [AdminHomeController::class, 'edit'])->name('admin.store.edit');
+    Route::post('/store/{id}/update/', [AdminHomeController::class, 'update'])->name('admin.store.update');
+    Route::get('/store/{id}/delete/', [AdminHomeController::class, 'destroy'])->name('admin.store.delete');
+
 
     //Complain Operations :
     //Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.admin');

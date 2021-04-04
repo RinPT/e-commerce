@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
 
     <title>@yield('title')</title>
-    <meta name="keywords" content="HTML5 Admin Template" />
-    <meta name="description" content="Porto Admin - Responsive HTML5 Template">
-    <meta name="author" content="okler.net">
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -25,14 +22,10 @@
     <link rel="stylesheet" href="/admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
 
     <!-- Specific Page Vendor CSS -->
-    @yield('custom-styles')
-
-    <!--(remove-empty-lines-end)-->
+    @yield('styles')
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="/admin/css/theme.css" />
-
-    <!--(remove-empty-lines-end)-->
 
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="/admin/css/custom.css">
@@ -122,6 +115,16 @@
                                         <li>
                                             <a class="nav-link" href="">
                                                General Settings
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                E-mail Settings
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                SEO Settings
                                             </a>
                                         </li>
                                         <li>
@@ -304,12 +307,12 @@
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="{{route('add.user_group_display')}}">
+                                            <a class="nav-link" href="{{route('admin.author.create')}}">
                                                 Add New Author
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{ route('admin.authors') }}">
                                                 Authors
                                             </a>
                                         </li>
@@ -448,22 +451,7 @@
                             </ul>
                         </nav>
                     </div>
-
-                    <script>
-                        // Maintain Scroll Position
-                        if (typeof localStorage !== 'undefined') {
-                            if (localStorage.getItem('sidebar-left-position') !== null) {
-                                var initialPosition = localStorage.getItem('sidebar-left-position'),
-                                    sidebarLeft = document.querySelector('#sidebar-left .nano-content');
-
-                                sidebarLeft.scrollTop = initialPosition;
-                            }
-                        }
-                    </script>
-
-
                 </div>
-
             </aside>
             <!-- end: sidebar -->
 
@@ -475,12 +463,22 @@
                         </ol>
                     </div>
                 </header>
-
                 @yield('content')
-
             </section>
         </div>
     </section>
+
+    <script>
+        // Maintain Scroll Position
+        if (typeof localStorage !== 'undefined') {
+            if (localStorage.getItem('sidebar-left-position') !== null) {
+                var initialPosition = localStorage.getItem('sidebar-left-position'),
+                    sidebarLeft = document.querySelector('#sidebar-left .nano-content');
+
+                sidebarLeft.scrollTop = initialPosition;
+            }
+        }
+    </script>
 
     <!-- Vendor -->
     <script src="/admin/vendor/jquery/jquery.js"></script>
@@ -494,14 +492,8 @@
     <script src="/admin/vendor/magnific-popup/jquery.magnific-popup.js"></script>
     <script src="/admin/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 
-    @yield('custom-scripts')
-
-    <script src="/admin/vendor/dropzone/dropzone.js"></script>
-
     <!-- Specific Page Vendor -->
-
-
-    <!--(remove-empty-lines-end)-->
+    @yield('scripts')
 
     <!-- Theme Base, Components and Settings -->
     <script src="/admin/js/theme.js"></script>
@@ -511,21 +503,7 @@
 
     <!-- Theme Initialization Files -->
     <script src="/admin/js/theme.init.js"></script>
-    <!-- Analytics to Track Preview Website -->
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-42715764-8', 'auto');
-        ga('send', 'pageview');
-    </script>
 
-    <script>
-        $(document).ready( function () {
-        $('#datatable-custom').dataTable();
-    } );
-    </script>
-
+    @yield('end-scripts')
 </body>
 </html>
