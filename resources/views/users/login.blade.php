@@ -39,17 +39,16 @@
                                 <div class="tab-pane active" id="signin">
                                     <form action="{{ route('login') }}" method="POST">
                                         @csrf
+
+                                        @if(session('status'))
+                                            <p class="text-danger">{{ session('status') }}</p>
+                                        @endif
+
                                         <div class="form-group mb-3">
-                                            <input type="text" class="form-control" name="email" @error('email')style="border-color: red;"@enderror placeholder="Username or Email Address" value="{{ old('email') }}"/>
-                                            @error('email')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
+                                            <input type="text" class="form-control" name="email" placeholder="Username or Email Address" value="{{ old('email') }}"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" @error('password')style="border-color: red;"@enderror placeholder="Password"/>
-                                            @error('password')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
+                                            <input type="password" class="form-control" name="password" placeholder="Password"/>
                                         </div>
                                         <div class="form-footer">
                                             <div class="form-checkbox">
