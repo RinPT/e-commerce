@@ -37,13 +37,19 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="signin">
-                                    <form action="{{ route('login') }}" method="POST" class="form">
+                                    <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                         <div class="form-group mb-3">
-                                            <input type="text" class="form-control" name="email" placeholder="Username or Email Address" value="{{ old('email') }}"/>
+                                            <input type="text" class="form-control" name="email" @error('email')style="border-color: red;"@enderror placeholder="Username or Email Address" value="{{ old('email') }}"/>
+                                            @error('email')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" placeholder="Password"/>
+                                            <input type="password" class="form-control" name="password" @error('password')style="border-color: red;"@enderror placeholder="Password"/>
+                                            @error('password')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <div class="form-footer">
                                             <div class="form-checkbox">
@@ -56,43 +62,51 @@
                                         </div>
                                         <button type="submit" class="btn btn-dark btn-block btn-rounded">Login</button>
                                     </form>
-                                    <div class="form-choice text-center">
-                                        <label class="ls-m">or Login With</label>
-                                        <div class="social-links">
-                                            <a href="#" class="social-link social-google fab fa-google border-no"></a>
-                                            <a href="#" class="social-link social-facebook fab fa-facebook-f border-no"></a>
-                                            <a href="#" class="social-link social-twitter fab fa-twitter border-no"></a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="tab-pane" id="register">
-                                    <form action="#">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="register-email" name="register-email" placeholder="Your Email address *"
-                                                required />
+                                    <form action="{{ route('register') }}" method="POST" class="form">
+                                        @csrf
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: red;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>
+                                            @error('name')
+                                                <p class="text-danger">There is an error</p>
+                                            @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" id="register-password" name="register-password" placeholder="Password *"
-                                                required />
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="surname" @error('surname')style="border-color: red;"@enderror placeholder="Your Surname" value="{{ old('surname') }}"/>
+                                            @error('surname')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="username" @error('username')style="border-color: red;"@enderror placeholder="Your Username" value="{{ old('username') }}"/>
+                                            @error('username')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="email" class="form-control mb-0" name="email" @error('email')style="border-color: red;"@enderror placeholder="Your Email address" value="{{ old('email') }}"/>
+                                            @error('email')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="password" class="form-control mb-0" name="password" @error('password')style="border-color: red;"@enderror placeholder="Password"/>
+                                            @error('password')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="password" class="form-control mb-0" name="password_confirmation" placeholder="Password Again"/>
                                         </div>
                                         <div class="form-footer">
                                             <div class="form-checkbox">
-                                                <input type="checkbox" class="custom-checkbox" id="register-agree" name="register-agree"
-                                                    required />
-                                                <label class="form-control-label" for="register-agree">I agree to the
-                                                    privacy policy</label>
+                                                <input type="checkbox" class="custom-checkbox" id="register-agree" name="register-agree"/>
+                                                <label class="form-control-label" for="register-agree">I agree to the privacy policy</label>
                                             </div>
                                         </div>
-                                        <button class="btn btn-dark btn-block btn-rounded" type="submit">Register</button>
+                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Register</button>
                                     </form>
-                                    <div class="form-choice text-center">
-                                        <label class="ls-m">or Register With</label>
-                                        <div class="social-links">
-                                            <a href="#" class="social-link social-google fab fa-google border-no"></a>
-                                            <a href="#" class="social-link social-facebook fab fa-facebook-f border-no"></a>
-                                            <a href="#" class="social-link social-twitter fab fa-twitter border-no"></a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
