@@ -11,19 +11,19 @@ class LoginController extends Controller
         return view('users.login');
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+
     	$this -> validate($request, [
     		'email'=> 'required|email',
     		'password' =>'required',
     	]);
 
 
-    	if(!auth()->attempt($request->only('email','password'), $request-> remember))
-    	{
-    		return back()-> with('status','Invalid Login Details');
+    	if(!auth()->attempt($request->only('email','password'), $request->remember)) {
+
+    		return back()->with('status','Invalid Login Details');
     	}
 
-    	return redirect()-> route('home');
+    	return redirect()->route('home');
     }
 }
