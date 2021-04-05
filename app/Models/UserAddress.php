@@ -9,7 +9,6 @@ class UserAddress extends Model
 {
     use HasFactory;
     public $table = 'user_address';
-    protected $primaryKey = 'address_id';
 
     protected $fillable = [
         'name',
@@ -25,4 +24,8 @@ class UserAddress extends Model
     	'postcode',
     	'telephone',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

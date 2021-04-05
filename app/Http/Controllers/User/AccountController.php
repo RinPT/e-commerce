@@ -17,7 +17,7 @@ class AccountController extends Controller
 
     public function index() {
 
-        $user = User::findOrFail(auth()->user()->user_id);
+        $user = User::findOrFail(auth()->user()->id);
         $addresses = UserAddress::latest()->paginate(20);
 
         return view('users.account', [
@@ -28,7 +28,7 @@ class AccountController extends Controller
 
     public function update_info(Request $request)
     {
-        $user = User::findOrFail(auth()->user()->user_id);
+        $user = User::findOrFail(auth()->user()->id);
 
         //validate request
     	$this -> validate($request, [
@@ -59,7 +59,7 @@ class AccountController extends Controller
 
 	public function update_password(Request $request) {
 
-        $user = User::findOrFail(auth()->user()->user_id);
+        $user = User::findOrFail(auth()->user()->id);
 
 		$this -> validate($request, [
 			'old_password' => 'required',
@@ -80,7 +80,7 @@ class AccountController extends Controller
 
 	public function destroy() {
 
-        $user = User::findOrFail(auth()->user()->user_id);
+        $user = User::findOrFail(auth()->user()->id);
 
         $user->delete();
 

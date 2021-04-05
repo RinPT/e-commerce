@@ -22,14 +22,6 @@
 @section('content')
 
     <main class="main account">
-        <nav class="breadcrumb-nav">
-            <div class="container">
-                <ul class="breadcrumb">
-                    <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
-                    <li>Account</li>
-                </ul>
-            </div>
-        </nav>
         <div class="page-content mt-4 mb-10 pb-6">
             <div class="container">
                 <h2 class="title title-center mb-10">My Account</h2>
@@ -159,10 +151,69 @@
                                                         {{ $address->city }}<br>
                                                         {{ $address->postcode }}
                                                     </p>
+                                                    <div class="d-flex justify-content-between mr-3">
+                                                        <button type="button" class="btn btn-link text-primary ml-2" style="font-size: 12px" data-toggle="modal" data-target="#editAddress{{ $address->id }}">Edit <i class="far fa-edit"></i></button>
+
+                                                        <form action="{{ route('address.destroy', $address->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-link text-danger" style="font-size: 12px">Remove <i class="fas fa-trash-alt"></i></button>
+                                                        </form>
+                                                        <!-- Address Modal -->
+                                                        <div class="modal fade" id="editAddress{{ $address->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Address</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="{{ route('address.update', $address->id) }}" method="POST" class="form">
+                                                                            @csrf
+                                                                            <label>Name</label>
+                                                                            <input type="text" class="form-control" name="name" value="{{ $address->name }}">
+
+                                                                            <label>Surname</label>
+                                                                            <input type="text" class="form-control" name="surname" value="{{ $address->surname }}">
+
+                                                                            <label>Country</label>
+                                                                            <input type="text" class="form-control" name="counrty_id" placeholder="Country" disabled value="{{ $address->country_id }}">
+
+                                                                            <label>City</label>
+                                                                            <input type="text" class="form-control" name="city" value="{{ $address->city }}">
+
+                                                                            <label>Address</label>
+                                                                            <textarea class="form-control" name="address" rows="2" style="resize: none" placeholder="Street, Apartment No and Other Information">{{ $address->address }}</textarea>
+
+                                                                            <label>Address Type</label>
+                                                                            <input type="text" class="form-control" name="address_type" placeholder="Example: Home, Work, etc." value="{{ $address->address_type }}">
+
+                                                                            <label>Postcde</label>
+                                                                            <input type="number" class="form-control" name="postcode" value="{{ $address->postcode }}">
+
+                                                                            <label>Phone</label>
+                                                                            <input type="tel" class="form-control" name="telephone" value="{{ $address->telephone }}">
+
+                                                                            <div class="d-flex justify-content-end">
+                                                                                <button type="button" class="btn btn-link text-danger mr-1" data-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-link text-primary ml-1">Save changes</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
+                                @else
+                                    <div class="col-sm-4 mb-0 d-flex justify-content-center">
+                                        <div class="shadow-lg mt-2 mb-0 bg-white rounded text-primary d-flex justify-content-center">There aren't any addresses!</div>
+                                    </div>
                                 @endif
                             </div>
                             <div class="row">
@@ -199,7 +250,7 @@
                                         <input type="tel" class="form-control" name="telephone">
 
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-link text-primary">Add New Addres <i class="far fa-edit"></i></button>
+                                            <button type="submit" class="btn btn-link text-primary">Add New Addres</button>
                                         </div>
                                     </fieldset>
                                 </form>
@@ -235,7 +286,7 @@
 
                                 <button type="submit" class="btn btn-primary">SAVE CHANGES</button>
                             </form>
-                            <form action="{{ route('password.update') }}" method="POST" class="form">
+                            <form action="{{ route('account.password.update') }}" method="POST" class="form">
                                 @csrf
                                 <fieldset>
                                     @if(session('pass'))

@@ -33,22 +33,11 @@ class RegisterController extends Controller
     	'username' => $request->username,
     	'email' => $request->email,
     	'password' => Hash::make($request-> password),
+        'last_logged_ipaddress' => "127.0.0.1"
     	]);
-
-    	//sign the user in
-
-    	//auth()-> user(); returns the currently signed in user
-    	/*
-    	auth()-> attempt([
-    	'email'=> $request->email,
-    	'password'=> $request->password,
-    	]); // signs user in by their email and their password, it authenticates them.
-    	or similarly :
-		*/
 
     	auth()->attempt($request->only('email','password'));
 
-    	//redirect user
     	return redirect()->route('home');
     }
 }

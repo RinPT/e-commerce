@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\UserAddressController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     public $table = 'users';
-    protected $primaryKey = 'user_id';
+
     protected $fillable = [
         'name',
         'surname',
@@ -28,7 +29,7 @@ class User extends Authenticatable
         'status',
         'user_group',
         'store',
-        'ip_address'
+        'last_logged_ipaddress'
     ];
 
     /**
@@ -49,4 +50,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function addresses() {
+        return $this->hasMany(UserAddress::class);
+    }
 }
