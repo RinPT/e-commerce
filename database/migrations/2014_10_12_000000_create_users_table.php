@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->json('group')->default("[]");
             $table->json('store')->default("[]");
             $table->tinyinteger('status')->default(0);
-            $table->string('last_logged_ipaddress',40);
+            $table->string('last_logged_ipaddress',40)->default("127.0.0.1");
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

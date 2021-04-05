@@ -19,7 +19,7 @@ class CreateStore extends Migration
             $table->text('logo')->nullable();
             $table->text('url');
             $table->string('tax_no')->unique();
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->string('city');
             $table->text('address');
             $table->string('phone');

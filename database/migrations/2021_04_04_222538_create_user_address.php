@@ -15,15 +15,15 @@ class CreateUserAddress extends Migration
     {
         Schema::create('user_address', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string("name");
             $table->string("surname");
             $table->enum('user_type', ['individual', 'institutional']);
             $table->string("company")->nullable();
             $table->string("tax_no")->nullable();
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->string("city");
-            $table->string("address");
+            $table->text("address");
             $table->string("address_type");
             $table->string("postcode");
             $table->string("telephone");
