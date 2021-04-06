@@ -1,77 +1,111 @@
 @extends('layouts.app')
 
-@section('content')
-    <hr/>
-    <main class="main">
-        <div class="container">
+@section('stylesheet')
+	<!-- Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
 
-            <div class="row d-flex justify-content-center">
-                <h2 class="d-flex justify-content-center mb-0">Welcome</h2>
-                <h6 class="d-flex justify-content-center mt-n2">Login or Register to Donald and start filling your chart</h6>
-                <div class="col-6">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
+@endsection
+
+@section('content')
+    <main class="main">
+        <div class="page-content mt-6 pb-2 mb-10">
+            <div class="container">
+                <div class="login-popup">
                     <div class="form-box">
                         <div class="tab tab-nav-simple tab-nav-boxed form-tab">
-                            <ul class="nav nav-tabs nav-fill" role="tablist">
+                            <ul class="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                                    <a class="nav-link border-no lh-1 ls-normal" href="#signin">Login</a>
                                 </li>
+                                <li class="delimiter">or</li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                                    <a class="nav-link active border-no lh-1 ls-normal" href="#register">Register</a>
                                 </li>
                             </ul>
-
                             <div class="tab-content">
+                                <div class="tab-pane" id="signin">
+                                    <form action="{{ route('login') }}" method="POST">
+                                        @csrf
+
+                                        @if(session('status'))
+                                            <p class="text-danger">{{ session('status') }}</p>
+                                        @endif
+
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control" name="email" placeholder="Username or Email Address" value="{{ old('email') }}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password" placeholder="Password"/>
+                                        </div>
+                                        <div class="form-footer">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox"
+                                                    name="remember" />
+                                                <label class="form-control-label" for="signin-remember">Remember
+                                                    me</label>
+                                            </div>
+                                            <a href="#" class="lost-link">Lost your password?</a>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Login</button>
+                                    </form>
+                                </div>
                                 <div class="tab-pane active" id="register">
                                     <form action="{{ route('register') }}" method="POST" class="form">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label>First Name <span style="color: rgb(200, 0, 0)">*</span></label>
-                                                <input type="text" class="form-control mb-2" name="name" value="{{ old('name') }}">
-                                                @error('name')
-                                                <p class="" style="color: red">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label>Last Name <span style="color: rgb(200, 0, 0)">*</span></label>
-                                                <input type="text" class="form-control mb-2" name="surname" value="{{ old('surname') }}">
-                                                @error('surname')
-                                                <p style="color: red">{{ $message }}</p>
-                                                @enderror
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: red;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>
+                                            @error('name')
+                                                <p class="text-danger">There is an error</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="surname" @error('surname')style="border-color: red;"@enderror placeholder="Your Surname" value="{{ old('surname') }}"/>
+                                            @error('surname')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="username" @error('username')style="border-color: red;"@enderror placeholder="Your Username" value="{{ old('username') }}"/>
+                                            @error('username')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="email" class="form-control mb-0" name="email" @error('email')style="border-color: red;"@enderror placeholder="Your Email address" value="{{ old('email') }}"/>
+                                            @error('email')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="password" class="form-control mb-0" name="password" @error('password')style="border-color: red;"@enderror placeholder="Password"/>
+                                            @error('password')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="password" class="form-control mb-0" name="password_confirmation" placeholder="Password Again"/>
+                                        </div>
+                                        <div class="form-footer">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="register-agree" name="register-agree"/>
+                                                <label class="form-control-label" for="register-agree">I agree to the privacy policy</label>
                                             </div>
                                         </div>
-
-                                        <label class="mt-2">Username <span style="color: rgb(200, 0, 0)">*</span></label>
-                                        <input type="text" class="form-control mb-2" name="username" value="{{ old('username') }}">
-                                        @error('username')
-                                            <p style="color: red">{{ $message }}</p>
-                                        @enderror
-
-                                        <label>Email address <span style="color: rgb(200, 0, 0)">*</span></label>
-                                        <input type="email" class="form-control mb-2" name="email" value="{{ old('email') }}">
-                                        @error('email')
-                                            <p style="color: red">{{ $message }}</p>
-                                        @enderror
-
-                                        <label>Password</label>
-                                        <input type="password" class="form-control mb-2" name="password">
-                                        @error('password')
-                                            <p style="color: red">{{ $message }}</p>
-                                        @enderror
-
-                                        <label>Password again</label>
-                                        <input type="password" class="form-control" name="password_confirmation">
-
-                                        <button type="submit" class="btn btn-primary btn-reveal-right">Register</button>
+                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Register</button>
                                     </form>
-                                    <div class="form-choice text-center">
-                                        <label class="font-secondary">Sign in with social account</label>
-                                        <div class="social-links">
-                                            <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
-                                            <a href="#" class="social-link social-twitter fab fa-twitter"></a>
-                                            <a href="#" class="social-link social-google fab fa-google"></a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
