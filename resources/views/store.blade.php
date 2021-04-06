@@ -1,15 +1,29 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+    <!-- Plugins CSS File -->
+	<link rel="stylesheet" type="text/css" href="/vendor/nouislider/nouislider.min.css">
+
+	<!-- Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
+@endsection
+
 @section('content')
     <main class="main">
-        <nav class="breadcrumb-nav">
-            <div class="container">
-                <ul class="breadcrumb">
-                    <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
-                    <li>Shop</li>
-                </ul>
-            </div>
-        </nav>
         <div class="page-content pb-10 mb-3">
             <div class="container">
                 <div class="row gutter-lg main-content-wrap">
@@ -211,4 +225,9 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('javaScript')
+    <script src="/vendor/sticky/sticky.min.js"></script>
+    <script src="/vendor/nouislider/nouislider.min.js"></script>
 @endsection
