@@ -46,7 +46,7 @@ class AddressController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        return back()->with('add.update', 'Address Updated Successfully!');
+        return back()->with('address.update', 'Address Updated Successfully!');
     }
 
     public function destroy($address_id) {

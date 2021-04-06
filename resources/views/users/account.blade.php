@@ -136,8 +136,16 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="address">
-                            <p class="mb-2">The following addresses will be used on the checkout page by default.
-                            </p>
+                            <p class="mb-2">The following addresses will be used on the checkout page by default.</p>
+
+                            @if(session('newAddress'))
+                                <p class="text-success">{{ session('newAddress') }}</p>
+                            @elseif(session('address.update'))
+                                <p class="text-primary">{{ session('address.update') }}</p>
+                            @elseif(session('address.delete'))
+                                <p class="text-danger">{{ session('address.delete') }}</p>
+                            @endif
+
                             <div class="row">
                                 @if ($addresses->count())
                                     @foreach ($addresses as $address)
@@ -211,8 +219,8 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="col-sm-4 mb-0 d-flex justify-content-center">
-                                        <div class="shadow-lg mt-2 mb-0 bg-white rounded text-primary d-flex justify-content-center">There aren't any addresses!</div>
+                                    <div class="row mt-4">
+                                        <div class="col-6 d-flex justify-content-center rounded p-2" style="background-color: rgba(202, 202, 202, 0.171)"><strong>There aren't any address!</strong></div>
                                     </div>
                                 @endif
                             </div>
@@ -220,10 +228,6 @@
                                 <form action="{{ route('address.add') }}" method="POST" class="form">
                                     @csrf
                                     <fieldset>
-                                        @if(session('newAddress'))
-                                        <p class="text-success">{{ session('newAddress') }}</p>
-                                        @endif
-
                                         <legend>Add New Address</legend>
                                         <label>Name</label>
                                         <input type="text" class="form-control" name="name">
