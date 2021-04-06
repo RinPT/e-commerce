@@ -221,7 +221,7 @@
                                     @csrf
                                     <fieldset>
                                         @if(session('newAddress'))
-                                        <p class="text-success">{{ session('pass') }}</p>
+                                        <p class="text-success">{{ session('newAddress') }}</p>
                                         @endif
 
                                         <legend>Add New Address</legend>
