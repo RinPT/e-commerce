@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-2-5 col-xl-1-5">
-                    <i class="card-big-info-icon bx bx-plus-circle"></i>
+                    <i class="card-big-info-icon bx bx-pencil"></i>
                     <h2 class="card-big-info-title">Update Group</h2>
                     <p class="card-big-info-desc">You can update group by changing the information below.</p>
                 </div>

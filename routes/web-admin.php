@@ -37,7 +37,7 @@ Route::group(['prefix' => "/admin"], function() {
     Route::post('/author/create', [AuthorController::class, 'store'])->name('admin.author.store');
     Route::get('/author/{id}/update/', [AuthorController::class, 'edit'])->name('admin.author.edit');
     Route::post('/author/{id}/update/', [AuthorController::class, 'update'])->name('admin.author.update');
-    Route::get('/author/{id}/delete/', [AuthorController::class, 'destroy'])->name('admin.author.delete');
+    Route::get('/author/{id}/delete/', [AuthorController::class, 'destroy'])->name('admin.author.destroy');
 
     Route::get('/stores', [AdminHomeController::class, 'index'])->name('admin.stores');
     Route::get('/store/create', [AdminHomeController::class, 'create'])->name('admin.store.create');

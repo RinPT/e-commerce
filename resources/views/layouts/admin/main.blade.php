@@ -300,7 +300,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-parent">
+                                <li class="nav-parent @if(str_contains(url()->current(),'author'))) nav-expanded @endif">
                                     <a class="nav-link" href="#">
                                         <i class='bx bx-user-circle' ></i>
                                         <span>Author Management</span>

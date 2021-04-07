@@ -54,7 +54,8 @@ class PermController extends Controller
     {
         try {
             Perm::findOrFail($id)->update([
-                'name' => $request->name
+                'name' => $request->name,
+                'updated_at' => Carbon::now()
             ]);
             return back()->with('success', 'Information updated successfully');
         } catch (\Exception $e) { // It's actually a QueryException but this works too

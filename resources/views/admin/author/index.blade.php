@@ -14,16 +14,27 @@
                 <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
             </div>
 
-            <h2 class="card-title">Author's Tickets</h2>
-            <p class="card-subtitle">You can see all available author's tickets below.</p>
+            <h2 class="card-title">Authors</h2>
+            <p class="card-subtitle">You can see all available authors below.</p>
         </header>
         <div class="card-body">
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Success</strong> {{ Session::get('success') }}
+                </div>
+            @endif
+            @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Error!</strong> {{ Session::get('error') }}
+                </div>
+            @endif
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
                 <thead>
                 <tr>
                     <th>Author ID</th>
                     <th>Name - Surname</th>
-                    <th>Username</th>
                     <th>Email</th>
                     <th>Groups</th>
                     <th>Status</th>
@@ -32,29 +43,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                @if($authors->count())
                     @foreach($authors as $author)
                         <tr>
-                            <td>{{ $authors->author_id }}</td>
+                            <td>{{ $author->id }}</td>
                             <td>{{ $author->name." ".$author->surname }}</td>
-                            <td>{{ $author->username }}</td>
                             <td>{{ $author->email }}</td>
-                            <td>{{ $author->permissions  }}</td>
+                            <td>
+                                @foreach($author->groups as $group)
+                                    <span class="badge badge-dark">{{ $group }}</span>
+                                @endforeach
+                            </td>
                             <td>
                                 @if($author->status)
                                     <span class="badge badge-success">Active</span>
                                 @else
-                                    <span class="badge badge-danger">Passive</span>
+                                    <span class="badge badge-danger">Inactive</span>
                                 @endif
                             </td>
-                            <td>{{ $ticket->created_at->format('d.m.Y H:i') }}</td>
+                            <td>{{ $author->created_at->format('d.m.Y H:i') }}</td>
                             <td>
-                                <a class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
+                                <a href="{{ route('admin.author.edit',$author->id) }}" class="btn btn-success btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ route('admin.author.destroy',$author->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
                             </td>
                         </tr>
                     @endforeach
-                @endif
                 </tbody>
             </table>
         </div>

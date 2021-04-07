@@ -27,7 +27,7 @@
                             <strong>Error!</strong> {{ Session::get('error') }}
                         </div>
                     @endif
-                    <form action="{{ route('admin.group.create') }}" class="form-horizontal form-bordered mt-5" method="post">
+                    <form action="{{ route('admin.group.store') }}" class="form-horizontal form-bordered mt-5" method="post">
                         @csrf
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
