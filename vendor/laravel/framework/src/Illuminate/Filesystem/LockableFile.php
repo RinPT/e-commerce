@@ -68,7 +68,7 @@ class LockableFile
         $this->handle = @fopen($path, $mode);
 
         if (! $this->handle) {
-            throw new Exception('Unable to create lockable file: '.$path.'. Please ensure you have permission to create files in this location.');
+            throw new Exception('Unable to create lockable file: '.$path.'. Please ensure you have perm to create files in this location.');
         }
     }
 

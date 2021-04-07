@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use App\Http\Controllers\Admin\PermController as PermController;
+use App\Http\Controllers\Admin\GroupController as GroupController;
 use \App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +17,20 @@ Route::group(['prefix' => "/admin"], function() {
 
     Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('admin.home');
+
+    Route::get('/perms', [PermController::class, 'index'])->name('admin.perms.index');
+    Route::get('/perm/create', [PermController::class, 'create'])->name('admin.perm.create');
+    Route::post('/perm/create', [PermController::class, 'store'])->name('admin.perm.store');
+    Route::get('/perm/{id}/update/', [PermController::class, 'edit'])->name('admin.perm.edit');
+    Route::post('/perm/{id}/update/', [PermController::class, 'update'])->name('admin.perm.update');
+    Route::get('/perm/{id}/delete/', [PermController::class, 'destroy'])->name('admin.perm.destroy');
+
+    Route::get('/groups', [GroupController::class, 'index'])->name('admin.groups.index');
+    Route::get('/group/create', [GroupController::class, 'create'])->name('admin.group.create');
+    Route::post('/group/create', [GroupController::class, 'store'])->name('admin.group.store');
+    Route::get('/group/{id}/update/', [GroupController::class, 'edit'])->name('admin.group.edit');
+    Route::post('/group/{id}/update/', [GroupController::class, 'update'])->name('admin.group.update');
+    Route::get('/group/{id}/delete/', [GroupController::class, 'destroy'])->name('admin.group.destroy');
 
     Route::get('/authors', [AuthorController::class, 'index'])->name('admin.authors');
     Route::get('/author/create', [AuthorController::class, 'create'])->name('admin.author.create');
@@ -60,8 +76,8 @@ Route::group(['prefix' => "/admin"], function() {
 
     //Permission Operations:
     Route::get('/permissions', [AdminController::class, 'add_permission_display']) -> name('add.permission_display'); //display permission_add form of a specific ticket
-    Route::post('/permission/add/done', [AdminController::class, 'add_permission']) -> name('add.permission'); //adds the new permission
-    Route::delete('/permission/{permissions}', [AdminController::class, 'delete_permission'])-> name('delete.permission'); //deletes the specific permission
+    Route::post('/perm/add/done', [AdminController::class, 'add_permission']) -> name('add.perm'); //adds the new perm
+    Route::delete('/perm/{permissions}', [AdminController::class, 'delete_permission'])-> name('delete.perm'); //deletes the specific perm
 
 
     //Group Operations :

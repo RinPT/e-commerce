@@ -143,7 +143,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     }
 
     /**
-     * Set the public permission value.
+     * Set the public perm value.
      *
      * @param int $permPublic
      *
@@ -157,7 +157,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     }
 
     /**
-     * Set the private permission value.
+     * Set the private perm value.
      *
      * @param int $permPrivate
      *
@@ -574,7 +574,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
         $map = ['-' => '0', 'r' => '4', 'w' => '2', 'x' => '1'];
         $permissions = strtr($permissions, $map);
 
-        // split up the permission groups
+        // split up the perm groups
         $parts = str_split($permissions, 3);
 
         // convert the groups
@@ -654,7 +654,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     }
 
     /**
-     * Get the public permission value.
+     * Get the public perm value.
      *
      * @return int
      */
@@ -664,7 +664,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     }
 
     /**
-     * Get the private permission value.
+     * Get the private perm value.
      *
      * @return int
      */

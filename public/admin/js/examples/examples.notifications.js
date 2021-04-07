@@ -929,7 +929,7 @@ Theme Version: 	3.1.0
 			PNotify.desktop.permission();
 			(new PNotify({
 				title: 'Desktop ' + type.charAt(0).toUpperCase() + type.slice(1),
-				text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular notice.',
+				text: 'If you\'ve given me perm, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular notice.',
 				type: type,
 				desktop: {
 					desktop: true
@@ -944,7 +944,7 @@ Theme Version: 	3.1.0
 		PNotify.desktop.permission();
 		(new PNotify({
 			title: 'Sticky Desktop Notice',
-			text: 'I\'m a sticky notice, so you\'ll have to close me yourself. (Some systems don\'t allow sticky notifications.) If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular notice.',
+			text: 'I\'m a sticky notice, so you\'ll have to close me yourself. (Some systems don\'t allow sticky notifications.) If you\'ve given me perm, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular notice.',
 			hide: false,
 			desktop: {
 				desktop: true
@@ -958,7 +958,7 @@ Theme Version: 	3.1.0
 		PNotify.desktop.permission();
 		(new PNotify({
 			title: 'Desktop Custom Icon',
-			text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular notice.',
+			text: 'If you\'ve given me perm, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular notice.',
 			desktop: {
 				desktop: true,
 				icon: 'img/!happy-face.png'

@@ -239,7 +239,7 @@ EOT;
     considered a literary or artistic work. "You" means an individual or
     entity exercising rights under this License who has not previously
     violated the terms of this License with respect to the Work, or who
-    has received express permission from the Licensor to exercise rights
+    has received express perm from the Licensor to exercise rights
     under this License despite a previous violation. "Publicly Perform"
     means to perform public recitations of the Work and to communicate to
     the public those public recitations, by any means or process,
@@ -377,7 +377,7 @@ EOT;
     assert or imply any connection with, sponsorship or endorsement by the
     Original Author, Licensor and/or Attribution Parties, as appropriate,
     of You or Your use of the Work, without the separate, express prior
-    written permission of the Original Author, Licensor and/or Attribution
+    written perm of the Original Author, Licensor and/or Attribution
     Parties. Except as otherwise agreed in writing by the Licensor or as
     may be otherwise permitted by applicable law, if You Reproduce,
     Distribute or Publicly Perform the Work either by itself or as part of

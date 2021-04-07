@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductCoupone extends Migration
+class CreateProductCoupon extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProductCoupone extends Migration
      */
     public function up()
     {
-        Schema::create('product_coupone', function (Blueprint $table) {
+        Schema::create('product_coupon', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->string('code')->unique();
@@ -31,6 +31,6 @@ class CreateProductCoupone extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_coupone');
+        Schema::dropIfExists('product_coupon');
     }
 }

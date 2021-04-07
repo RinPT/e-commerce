@@ -324,7 +324,7 @@
                                                    <td> {{$permissions->permission_id}} </td>
                                                    <td> {{$permissions->perm_name}} </td>
                                                    <td>
-                                                   <form action="{{route('delete.permission',$permissions)}}" method="post">
+                                                   <form action="{{route('delete.perm',$permissions)}}" method="post">
                                                        @csrf
                                                        @method('DELETE')
                                                            <button type="submit" class="text-blue-500">Delete This Permission</button>

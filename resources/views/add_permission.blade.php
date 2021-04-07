@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-center">
             <div class="w-8/12 bg-white p-6 rounded-lg">
                 <h> New Permission : </h>
-                <form action="{{route('add.permission')}}" method="post">
+                <form action="{{route('add.perm')}}" method="post">
 
 				    @csrf
 					<label for="name ">Enter Permission Name :</label>

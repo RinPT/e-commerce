@@ -3072,7 +3072,7 @@ dîner en la compagnie des nouveaux venus, et l'on passa dans la
 grande salle, où madame Lefrançois, par pompe, avait fait dresser
 les quatre couverts.
 
-Homais demanda la permission de garder son bonnet grec, de peur
+Homais demanda la perm de garder son bonnet grec, de peur
 des coryzas.
 
 Puis, se tournant vers sa voisine:
@@ -11077,7 +11077,7 @@ ne serait pas, après tout, extrêmement ruineux.
 suivies.
 
 Et voilà comme elle s'y prit pour obtenir de son époux la
-permission d'aller à la ville, une fois la semaine, voir son
+perm d'aller à la ville, une fois la semaine, voir son
 amant. On trouva même, au bout d'un mois, qu'elle avait fait des
 progrès considérables.
 
@@ -11812,7 +11812,7 @@ Elle se passa la main sur le front, et répondit:
 libre, tu comprends, si je sais que le moindre retard te
 bouleverse ainsi.
 
-C'était une manière de permission qu'elle se donnait de ne point
+C'était une manière de perm qu'elle se donnait de ne point
 se gêner dans ses escapades. Aussi en profita-t-elle tout à son
 aise, largement. Lorsque l'envie la prenait de voir Léon, elle
 partait sous n'importe quel prétexte, et, comme il ne l'attendait
@@ -15190,12 +15190,12 @@ EOT;
     Creating the works from public domain print editions means that no
     one owns a United States copyright in these works, so the Foundation
     (and you!) can copy and distribute it in the United States without
-    permission and without paying copyright royalties.  Special rules,
+    perm and without paying copyright royalties.  Special rules,
     set forth in the General Terms of Use part of this license, apply to
     copying and distributing Project Gutenberg-tm electronic works to
     protect the PROJECT GUTENBERG-tm concept and trademark.  Project
     Gutenberg is a registered trademark, and may not be used if you
-    charge for the eBooks, unless you receive specific permission.  If you
+    charge for the eBooks, unless you receive specific perm.  If you
     do not charge anything for copies of this eBook, complying with the
     rules is very easy.  You may use this eBook for nearly any purpose
     such as creation of derivative works, reports, performances and
@@ -15282,21 +15282,21 @@ EOT;
 
     1.E.2.  If an individual Project Gutenberg-tm electronic work is derived
     from the public domain (does not contain a notice indicating that it is
-    posted with permission of the copyright holder), the work can be copied
+    posted with perm of the copyright holder), the work can be copied
     and distributed to anyone in the United States without paying any fees
     or charges.  If you are redistributing or providing access to a work
     with the phrase "Project Gutenberg" associated with or appearing on the
     work, you must comply either with the requirements of paragraphs 1.E.1
-    through 1.E.7 or obtain permission for the use of the work and the
+    through 1.E.7 or obtain perm for the use of the work and the
     Project Gutenberg-tm trademark as set forth in paragraphs 1.E.8 or
     1.E.9.
 
     1.E.3.  If an individual Project Gutenberg-tm electronic work is posted
-    with the permission of the copyright holder, your use and distribution
+    with the perm of the copyright holder, your use and distribution
     must comply with both paragraphs 1.E.1 through 1.E.7 and any additional
     terms imposed by the copyright holder.  Additional terms will be linked
     to the Project Gutenberg-tm License for all works posted with the
-    permission of the copyright holder found at the beginning of this work.
+    perm of the copyright holder found at the beginning of this work.
 
     1.E.4.  Do not unlink or detach or remove the full Project Gutenberg-tm
     License terms from this work, or any files containing a part of this
@@ -15359,7 +15359,7 @@ EOT;
 
     1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg-tm
     electronic work or group of works on different terms than are set
-    forth in this agreement, you must obtain permission in writing from
+    forth in this agreement, you must obtain perm in writing from
     both the Project Gutenberg Literary Archive Foundation and Michael
     Hart, the owner of the Project Gutenberg-tm trademark.  Contact the
     Foundation as set forth in Section 3 below.

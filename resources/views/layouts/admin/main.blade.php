@@ -13,13 +13,13 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="/admin/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/admin/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/animate/animate.compat.css">
 
     <link rel="stylesheet" href="/admin/vendor/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="/admin/vendor/boxicons/css/boxicons.min.css" />
     <link rel="stylesheet" href="/admin/vendor/magnific-popup/magnific-popup.css" />
-    <link rel="stylesheet" href="/admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="/admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
 
     <!-- Specific Page Vendor CSS -->
     @yield('styles')
@@ -272,29 +272,29 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-parent">
+                                <li class="nav-parent @if(str_contains(url()->current(),'perm') || str_contains(url()->current(),'group')) nav-expanded @endif">
                                     <a class="nav-link" href="#">
                                         <i class='bx bxs-key'></i>
                                         <span>Permission Management</span>
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="">
+                                            <a class="nav-link" href="{{ route('admin.perm.create') }}">
                                                 Add New Permission
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="">
+                                            <a class="nav-link" href="{{ route('admin.group.create') }}">
                                                 Add New Group
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="">
+                                            <a class="nav-link" href="{{ route('admin.perms.index') }}">
                                                 Permissions
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="">
+                                            <a class="nav-link" href="{{ route('admin.groups.index') }}">
                                                 Groups
                                             </a>
                                         </li>
@@ -481,15 +481,15 @@
     </script>
 
     <!-- Vendor -->
-    <script src="/admin/vendor/jquery/jquery.js"></script>
+    <script src="/admin/vendor/jquery/jquery.min.js"></script>
     <script src="/admin/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
     <script src="/admin/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="/admin/vendor/popper/umd/popper.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="/admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/admin/vendor/common/common.js"></script>
     <script src="/admin/vendor/nanoscroller/nanoscroller.js"></script>
-    <script src="/admin/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="/admin/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="/admin/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 
     <!-- Specific Page Vendor -->
