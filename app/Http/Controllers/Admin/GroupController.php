@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Models\Perm;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -56,7 +57,8 @@ class GroupController extends Controller
         try {
             Group::findOrFail($id)->update([
                 'name' => $request->name,
-                'permissions' => is_null($request->perms) ? [] : json_encode($request->perms)
+                'permissions' => is_null($request->perms) ? [] : json_encode($request->perms),
+                'updated_at' => Carbon::now()
             ]);
             return back()->with('success', 'Information updated successfully');
         } catch (\Exception $e) {
