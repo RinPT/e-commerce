@@ -14,4 +14,8 @@ class StoreController extends Controller
             'products' => $products
         ]);
     }
+
+    public function products() {
+        $this->hasMany(Product::class);
+    }
 }
