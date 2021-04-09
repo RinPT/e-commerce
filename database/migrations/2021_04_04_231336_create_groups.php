@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateGroups extends Migration
@@ -19,6 +20,33 @@ class CreateGroups extends Migration
             $table->json('permissions')->default('[]');
             $table->timestamps();
         });
+
+        DB::table('groups')->insert([
+            [
+                'name' => 'admin',
+                'permissions' => "[1,2,3,4,5,6,7,8,9,10,11,12,13]",
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'user',
+                'permissions' => "[]",
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'store',
+                'permissions' => "[]",
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'technical support',
+                'permissions' => "[]",
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+        ]);
     }
 
     /**

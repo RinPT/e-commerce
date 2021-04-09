@@ -55,7 +55,7 @@
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="/admin/img/!logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="/admin/img/!logged-user.jpg" />
+                            <img src="{{ asset('photo/author/default.png') }}" alt="" class="rounded-circle" data-lock-picture="{{ asset('photo/author/default.png') }}" />
                         </figure>
                         <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                             <span class="name">Berk ÇETİN</span>

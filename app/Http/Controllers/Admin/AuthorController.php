@@ -39,6 +39,15 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         try {
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                if ($file->isValid()) {
+                    $filename = strtotime(Carbon::now()).".".$file->getClientOriginalExtension();
+                    $file->storeAs('photo/author',$filename, 'public_html');
+                }else{
+                    return back()->with('error', 'An error occurred while uploading the file.');
+                }
+            }
             Author::create([
                 'name' => $request->name,
                 'surname' => $request->surname,
@@ -46,7 +55,7 @@ class AuthorController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'gender' => $request->gender,
-                'photo' => $request->photo,
+                'photo' => $filename ?? "",
                 'group' => json_encode($request->groups),
                 'status' => is_null($request->status) ? 0 : 1,
                 'created_at' => Carbon::now(),
@@ -89,13 +98,29 @@ class AuthorController extends Controller
             return back()->with('error', 'There is already an author for this username.');
         }
 
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            if ($file->isValid()) {
+                $oldPhoto = Author::findOrFail($id)->photo;
+                if(file_exists(public_path('photo/author/'.$oldPhoto))){
+                    unlink(public_path('photo/author/'.$oldPhoto));
+                }
+                $filename = strtotime(Carbon::now()).".".$file->getClientOriginalExtension();
+                $file->storeAs('photo/author',$filename, 'public_html');
+                Author::findOrFail($id)->update([
+                    'photo' => $filename,
+                ]);
+            }else{
+                return back()->with('error', 'An error occurred while uploading the file.');
+            }
+        }
+
         Author::findOrFail($id)->update([
             'name' => $request->name,
             'surname' => $request->surname,
             'username' => $request->username,
             'email' => $request->email,
             'gender' => $request->gender,
-            'photo' => $request->photo,
             'group' => json_encode($request->groups),
             'status' => is_null($request->status) ? 0 : 1,
             'updated_at' => Carbon::now()

@@ -33,10 +33,9 @@
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
                 <thead>
                 <tr>
-                    <th>Perm ID</th>
+                    <th>Group ID</th>
                     <th>Name</th>
                     <th>Creation Date</th>
-                    <th>Updation Date</th>
                     <th>#</th>
                 </tr>
                 </thead>
@@ -44,12 +43,13 @@
                     @foreach($groups as $group)
                         <tr>
                             <td>{{ $group->id }}</td>
-                            <td>{{ $group->name }}</td>
+                            <td class="text-capitalize">{{ $group->name }}</td>
                             <td>{{ is_null($group->created_at) ? "-" : $group->created_at->format('d.m.Y H:i') }}</td>
-                            <td>{{ is_null($group->updated_at) ? "-" : $group->updated_at->format('d.m.Y H:i') }}</td>
                             <td>
+                                @if(!in_array($group->id,[1,2,3]))
                                 <a href="{{ route('admin.group.edit',$group->id) }}" class="btn btn-success btn-sm"><i class='fas fa-pencil-alt'></i></a>
                                 <a href="{{ route('admin.group.destroy',$group->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

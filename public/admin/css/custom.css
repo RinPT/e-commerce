@@ -4,3 +4,9 @@
     height: auto;
     padding-bottom: 5px;
 }
+
+.preview-img {
+    background: white;
+    padding: 5px;
+    box-shadow: 0 0 2px 0 #868686;
+}

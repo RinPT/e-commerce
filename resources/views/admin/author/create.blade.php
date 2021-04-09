@@ -27,7 +27,7 @@
                             <strong>Error!</strong> {{ Session::get('error') }}
                         </div>
                     @endif
-                    <form action="{{ route('admin.author.create') }}" class="form-horizontal form-bordered" method="post">
+                    <form action="{{ route('admin.author.create') }}" class="form-horizontal form-bordered" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
@@ -82,6 +82,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Photo</label>
+                            <div class="col-lg-6">
+                                <input type="file" name="photo" class="form-control" id="inputDefault" accept="image/*" required>
+                                <div class="text-center mt-3">
+                                    <img id="preview-img" class="preview-img" width="150">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Active?</label>
                             <div class="col-lg-6">
                                 <div class="switch switch-md switch-dark">
@@ -105,6 +114,20 @@
 @section('scripts')
     <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/select2/js/select2.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview-img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+        $("input[name=photo]").change(function() {
+            readURL(this);
+        });
+    </script>
 @endsection
 
 
