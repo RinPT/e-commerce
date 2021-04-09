@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,5 +34,9 @@ class ProductsController extends Controller
         ]);
 
         return back();
+    }
+
+    public function store() {
+        $this->belongsTo(Store::class);
     }
 }
