@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password',
         'photo',
         'status',
-        'user_group',
+        'group',
         'store',
         'last_logged_ipaddress'
     ];

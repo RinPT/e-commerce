@@ -22,7 +22,7 @@ class CreateAuthors extends Migration
             $table->text('password');
             $table->enum('gender',['male','female','other']);
             $table->string('photo')->nullable();
-            $table->json('group')->default("[]");
+            $table->json('group');
             $table->tinyinteger('status')->default(0);
             $table->timestamps();
         });

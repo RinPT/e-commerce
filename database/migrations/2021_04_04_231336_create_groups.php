@@ -17,7 +17,7 @@ class CreateGroups extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->json('permissions')->default('[]');
+            $table->json('permissions');
             $table->timestamps();
         });
 

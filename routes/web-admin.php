@@ -8,7 +8,7 @@ use \App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => "/admin"], function() {
+Route::group(['prefix' => "/_admin"], function() {
 
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');

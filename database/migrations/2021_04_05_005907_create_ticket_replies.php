@@ -19,7 +19,7 @@ class CreateTicketReplies extends Migration
             $table->foreignId('store_id')->constrained('store')->onDelete('cascade');
             $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
             $table->integer('rate');
-            $table->json('attachments')->default("[]");
+            $table->json('attachments');
             $table->timestamps();
         });
     }

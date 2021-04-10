@@ -21,7 +21,7 @@ class CreateTickets extends Migration
             $table->text('message');
             $table->enum('status',['open','answered','closed']);
             $table->enum('urgency',['low','medium','high','very high','critical']);
-            $table->json('attachments')->default("[]");
+            $table->json('attachments');
             $table->tinyInteger('store_unread')->default(1);
             $table->tinyInteger('author_unread')->default(1);
             $table->timestamps();
