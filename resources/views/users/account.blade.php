@@ -4,6 +4,7 @@
 	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
 
+
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
