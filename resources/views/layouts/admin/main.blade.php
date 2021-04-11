@@ -169,13 +169,13 @@
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="">
-                                                Add New Category
+                                            <a class="nav-link" href="{{ route('index.categories') }}">
+                                                All Categories
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="">
-                                                All Categories
+                                            <a class="nav-link" href="{{ route('create.categories') }}">
+                                                Add New Category
                                             </a>
                                         </li>
                                     </ul>
@@ -198,12 +198,12 @@
                                         </li>
                                         <li>
                                             <a class="nav-link" href="">
-                                                Add New Coupone
+                                                Add New Coupon
                                             </a>
                                         </li>
                                         <li>
                                             <a class="nav-link" href="">
-                                                Coupones
+                                                Coupons
                                             </a>
                                         </li>
                                         <li>

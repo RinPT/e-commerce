@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TicketController;
+use \App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\PermController as PermController;
 use App\Http\Controllers\Admin\GroupController as GroupController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
-use \App\Http\Controllers\Admin\AuthorController;
-use App\Http\Controllers\Admin\TicketController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 
 Route::group(['prefix' => "/_admin"], function() {
 
@@ -93,4 +94,12 @@ Route::group(['prefix' => "/_admin"], function() {
     
     //Products
     Route::get('/products/list', [ProductsController::class, 'index'])->name('admin.products.all_index');
+
+    //Categories
+    Route::get('/categories/list', [CategoriesController::class, 'index'])->name('index.categories'); //show all categories
+    Route::get('/categories/new', [CategoriesController::class, 'create'])->name('create.categories'); //show new category screen
+    Route::post('/categories/new/done', [CategoriesController::class, 'store'])->name('store.categories'); //store new changes
+    Route::delete('/categories/delete/{category_id}', [CategoriesController::class, 'destroy'])->name('delete.categories'); //delete a category
+    Route::get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])->name('edit.categories'); //edit a category
+    Route::post('/categories/edit/{category_id}/done', [CategoriesController::class, 'update'])->name('update.categories'); //edit a category
 });
