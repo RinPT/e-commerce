@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\PermController as PermController;
 use App\Http\Controllers\Admin\GroupController as GroupController;
+use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use \App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Route;
@@ -88,4 +89,8 @@ Route::group(['prefix' => "/_admin"], function() {
     Route::post('/user_group/add/member', [AdminController::class, 'add_user_to_group']) -> name('add.user_to_group'); //adds the a registered user to a group
     Route::post('/user_group/remove/member', [AdminController::class, 'remove_user_from_group']) -> name('remove.user_from_group'); //removes the a registered user from a group
 
+    //Seller Operations (orders, categories, products, discount, cargo, store management):
+    
+    //Products
+    Route::get('/products/list', [ProductsController::class, 'index'])->name('admin.products.all_index');
 });

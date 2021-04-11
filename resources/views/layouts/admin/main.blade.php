@@ -192,7 +192,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="">
+                                            <a class="nav-link" href="{{ route('admin.products.all_index') }}">
                                                 All Products
                                             </a>
                                         </li>
