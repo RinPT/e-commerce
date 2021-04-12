@@ -24,6 +24,13 @@ Route::post('/register', [RegisterController::class, 'store']);
 //Pages :
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 Route::get('/store', StoreController::class)->name('store');
 
+//Products:
+
+Route::get('/products', [ProductsController::class, 'index'])->name('products');
+Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
+
+Route::get('/chart', function() {
+    return view('chart');
+});

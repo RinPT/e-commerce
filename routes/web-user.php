@@ -22,7 +22,4 @@ Route::group(['prefix' => "/account"], function() {
 
 Route::get('/application_form', [SellerController::class, 'index'])->name('application.form');
 
-//Products:
 
-Route::get('/products', [ProductsController::class, 'index'])->name('products');
-Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
