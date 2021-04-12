@@ -9,5 +9,15 @@ class Countries extends Model
 {
     use HasFactory;
     public $table = 'countries';
-    protected $primaryKey = 'country_id';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'id',
+        'name',
+        'iso_code',
+        'status',
+        'created_at',
+        'updated_at',
+  
+    ];
 }

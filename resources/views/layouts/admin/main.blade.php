@@ -141,22 +141,22 @@
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="">
+                                            <a class="nav-link" href="{{ route('admin.orders') }}">
                                                 All Orders
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{ route('admin.order.show_pending') }}">
                                                 Pending Orders
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{ route('admin.order.create') }}">
                                                 Send Orders
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{ route('admin.order.show_canceled') }}">
                                                 Cancel Order Requests
                                             </a>
                                         </li>
@@ -248,8 +248,14 @@
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="">
-                                                Countries
+                                            <a class="nav-link" href="{{ route('admin.cargo') }}">
+                                                All Countries
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a class="nav-link" href="{{ route('admin.cargo.create') }}">
+                                                Add New Country
                                             </a>
                                         </li>
                                     </ul>
@@ -325,12 +331,12 @@
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="{{route('add.user_group_display')}}">
+                                            <a class="nav-link" href="{{route('admin.store.create')}}">
                                                 Add New Store
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{route('admin.stores')}}">
                                                 Stores
                                             </a>
                                         </li>

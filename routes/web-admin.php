@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\GroupController as GroupController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CargoController;
+use App\Http\Controllers\Admin\StoreController;
 
 Route::group(['prefix' => "/_admin"], function() {
 
@@ -41,12 +44,32 @@ Route::group(['prefix' => "/_admin"], function() {
     Route::post('/author/{id}/update/', [AuthorController::class, 'update'])->name('admin.author.update');
     Route::get('/author/{id}/delete/', [AuthorController::class, 'destroy'])->name('admin.author.destroy');
 
-    Route::get('/stores', [AdminHomeController::class, 'index'])->name('admin.stores');
-    Route::get('/store/create', [AdminHomeController::class, 'create'])->name('admin.store.create');
-    Route::post('/store/create', [AdminHomeController::class, 'store'])->name('admin.store.store');
-    Route::get('/store/{id}/update/', [AdminHomeController::class, 'edit'])->name('admin.store.edit');
-    Route::post('/store/{id}/update/', [AdminHomeController::class, 'update'])->name('admin.store.update');
-    Route::get('/store/{id}/delete/', [AdminHomeController::class, 'destroy'])->name('admin.store.delete');
+   Route::get('/stores', [StoreController::class, 'index'])->name('admin.stores');
+    Route::get('/store/create', [StoreController::class, 'create'])->name('admin.store.create');
+    Route::post('/store/create', [StoreController::class, 'store'])->name('admin.store.store');
+    Route::get('/store/{id}/update/', [StoreController::class, 'edit'])->name('admin.store.edit');
+    Route::post('/store/{id}/update/', [StoreController::class, 'update'])->name('admin.store.update');
+    Route::get('/store/{id}/delete/', [StoreController::class, 'destroy'])->name('admin.store.destroy');
+
+
+
+    Route::get('/order', [OrderController::class, 'index'])->name('admin.orders');
+    Route::get('/order/create', [OrderController::class, 'create'])->name('admin.order.create');
+    Route::post('/order/create', [OrderController::class, 'store'])->name('admin.order.store');
+    Route::get('/order/{id}/update/', [OrderController::class, 'edit'])->name('admin.order.edit');
+    Route::post('/order/{id}/update/', [OrderController::class, 'update'])->name('admin.order.update');
+    Route::get('/order/{id}/delete/', [OrderController::class, 'destroy'])->name('admin.order.destroy');
+    Route::get('/order/pending', [OrderController::class, 'show_pending'])->name('admin.order.show_pending');
+    Route::get('/order/canceled', [OrderController::class, 'show_canceled'])->name('admin.order.show_canceled');
+
+
+    Route::get('/cargo', [CargoController::class, 'index'])->name('admin.cargo');
+    Route::get('/cargo/create', [CargoController::class, 'create'])->name('admin.cargo.create');
+    Route::post('/cargo/create', [CargoController::class, 'store'])->name('admin.cargo.store');
+    Route::get('/cargo/{id}/update/', [CargoController::class, 'edit'])->name('admin.cargo.edit');
+    Route::post('/cargo/{id}/update/', [CargoController::class, 'update'])->name('admin.cargo.update');
+    Route::get('/cargo/{id}/delete/', [CargoController::class, 'destroy'])->name('admin.cargo.destroy');
+
 
 
     //Complain Operations :
