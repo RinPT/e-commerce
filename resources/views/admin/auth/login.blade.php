@@ -48,6 +48,18 @@
                 <h2 class="title text-uppercase font-weight-bold m-0"><i class="bx bx-user-circle mr-1 text-6 position-relative top-5"></i> Sign In</h2>
             </div>
             <div class="card-body">
+                @if(Session::has('success'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>Success</strong> {{ Session::get('success') }}
+                    </div>
+                @endif
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>Error!</strong> {{ Session::get('error') }}
+                    </div>
+                @endif
                 <form action="{{ route('admin.login.post') }}" method="post">
                     @csrf
                     <div class="form-group mb-3">

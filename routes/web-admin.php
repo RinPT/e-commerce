@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CargoController;
 use App\Http\Controllers\Admin\StoreController;
 
-Route::group(['prefix' => "/_admin"], function() {
+Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], function() {
 
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');
@@ -44,7 +44,7 @@ Route::group(['prefix' => "/_admin"], function() {
     Route::post('/author/{id}/update/', [AuthorController::class, 'update'])->name('admin.author.update');
     Route::get('/author/{id}/delete/', [AuthorController::class, 'destroy'])->name('admin.author.destroy');
 
-   Route::get('/stores', [StoreController::class, 'index'])->name('admin.stores');
+    Route::get('/stores', [StoreController::class, 'index'])->name('admin.stores');
     Route::get('/store/create', [StoreController::class, 'create'])->name('admin.store.create');
     Route::post('/store/create', [StoreController::class, 'store'])->name('admin.store.store');
     Route::get('/store/{id}/update/', [StoreController::class, 'edit'])->name('admin.store.edit');
@@ -114,7 +114,7 @@ Route::group(['prefix' => "/_admin"], function() {
     Route::post('/user_group/remove/member', [AdminController::class, 'remove_user_from_group']) -> name('remove.user_from_group'); //removes the a registered user from a group
 
     //Seller Operations (orders, categories, products, discount, cargo, store management):
-    
+
     //Products
     Route::get('/products/list', [ProductsController::class, 'index'])->name('admin.products.all_index');
 
