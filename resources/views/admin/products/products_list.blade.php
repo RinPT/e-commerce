@@ -38,15 +38,15 @@
             @if($products->count())
                 @foreach($products as $product)
                 <tr>
-                    <td>#{{ $product ->product_id}}</td>
-                    <td>#{{ $product ->store_id}}</td>
-                    <td>{{$product -> name}}</td>
-                    <td>{{$product -> Category}}</td>
-                    <td>{{ Str::limit($product -> message, 50, $end='...') }}</td>
-                    <td>{{$product -> price}}</td>
-                    <td>{{$product -> cargo_price}}</td>
-                    <td>{{$product -> created_at ->format('d.m.Y H:i')}}</td>
-                    <td>{{$product -> updated_at ->format('d.m.Y H:i')}}</td>
+                    <td>#{{ $product->product_id}}</td>
+                    <td>#{{ $product->store_id}}</td>
+                    <td>{{$product->name}}</td>
+                    <td>{{$product->Category}}</td>
+                    <td>{{ Str::limit($product->message, 50, $end='...') }}</td>
+                    <td>{{$product->price}}</td>
+                    <td>{{$product->cargo_price}}</td>
+                    <td>{{$product->created_at->format('d.m.Y H:i')}}</td>
+                    <td>{{$product->updated_at->format('d.m.Y H:i')}}</td>
                     <td>
                         <a class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                         <a class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
