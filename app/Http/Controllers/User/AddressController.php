@@ -26,7 +26,7 @@ class AddressController extends Controller
             'user_id' => auth()->user()->id,
     	]);
 
-    	return back()->with('newAddress', 'New Address Added!');
+    	return back()->with('address.add', 'New Address Added!');
     }
 
     public function update($address_id, Request $request) {

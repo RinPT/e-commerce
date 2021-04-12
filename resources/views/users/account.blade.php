@@ -4,7 +4,6 @@
 	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
 
-
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
@@ -139,12 +138,34 @@
                         <div class="tab-pane" id="address">
                             <p class="mb-2">The following addresses will be used on the checkout page by default.</p>
 
-                            @if(session('newAddress'))
-                                <p class="text-success">{{ session('newAddress') }}</p>
+                            @if(session('address.add'))
+                                <div class="col-md-6 mb-4">
+                                    <div class="alert alert-success alert-simple alert-inline">
+                                        <h4 class="alert-title">Success :</h4>
+                                        {{ session('address.add') }}
+                                        <button type="button" class="btn btn-link btn-close">
+                                            <i class="d-icon-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
                             @elseif(session('address.update'))
-                                <p class="text-primary">{{ session('address.update') }}</p>
+                                <div class="alert alert-light alert-primary alert-icon mb-4">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    {{ session('address.update') }}
+                                    <button type="button" class="btn btn-link btn-close">
+                                        <i class="d-icon-times"></i>
+                                    </button>
+                                </div>
+
                             @elseif(session('address.delete'))
-                                <p class="text-danger">{{ session('address.delete') }}</p>
+                                <div class="alert alert-light alert-danger alert-icon alert-inline mb-4">
+                                    <i class="fas fa-trash-alt"></i>
+                                    {{ session('address.delete') }}
+                                    <button type="button" class="btn btn-link btn-close">
+                                        <i class="d-icon-times"></i>
+                                    </button>
+                                </div>
                             @endif
 
                             <div class="row">
@@ -220,8 +241,10 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="row mt-4">
-                                        <div class="col-6 d-flex justify-content-center rounded p-2" style="background-color: rgba(202, 202, 202, 0.171)"><strong>There aren't any address!</strong></div>
+                                    <div class="col-md-6 mb-0 mt-2">
+                                        <div class="alert alert-primary alert-simple alert-inline">
+                                            There aren't any address in your account!
+                                        </div>
                                     </div>
                                 @endif
                             </div>
