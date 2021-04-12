@@ -193,7 +193,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <a href="checkout.html" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
+                                <a href="{{ route('checkout') }}" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
                             </div>
                         </div>
                     </aside>

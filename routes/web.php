@@ -33,4 +33,12 @@ Route::post('/products', [ProductsController::class, 'create'])->name('product.c
 
 Route::get('/chart', function() {
     return view('chart');
-});
+})->name('chart');
+
+Route::get('/checkout', function() {
+    return view('checkout');
+})->name('checkout');
+
+Route::get('/order', function() {
+    return view('order');
+})->name('order');
