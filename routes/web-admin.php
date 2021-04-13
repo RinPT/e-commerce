@@ -124,5 +124,5 @@ Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], functio
     Route::post('/categories/new/done', [CategoriesController::class, 'store'])->name('store.categories'); //store new changes
     Route::delete('/categories/delete/{category_id}', [CategoriesController::class, 'destroy'])->name('delete.categories'); //delete a category
     Route::get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])->name('edit.categories'); //edit a category
-    Route::post('/categories/edit/{category_id}/done', [CategoriesController::class, 'update'])->name('update.categories'); //edit a category
+    Route::patch('/categories/edit/{category_id}/done', [CategoriesController::class, 'update'])->name('update.categories'); //edit a category
 });

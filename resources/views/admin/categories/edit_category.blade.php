@@ -25,11 +25,12 @@
                 <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
             </div>
 
-            <h2 class="card-title">Add a New Category</h2>
-            <p class="card-subtitle">You can create a new category here.</p>
+            <h2 class="card-title">Edit a Category</h2>
+            <p class="card-subtitle">You can edit a category here.</p>
         </header>
         <div class="card-body">
-            <form action="{{ route('store.categories') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('update.categories', $category->id) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
                 @csrf
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -48,20 +49,21 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2">Name</label>
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="inputDefault" name="name">
+                        <input type="text" class="form-control" id="inputDefault" name="name" value="{{ $category->name }}">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
                     <div class="col-lg-6">
-                        <textarea type="text" class="form-control" rows="10" name="description"></textarea>
+                        <textarea type="text" class="form-control" rows="10" name="description" >{{ $category->description }}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2">Image</label>
                     <div class="col-lg-6">
+                        <img src="{{ $category->image }}" class="img-thumbnail">
                         <input type="file" name="image" class="form-control">
                     </div>
                 </div>
@@ -69,49 +71,49 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2">Meta Title</label>
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="inputDefault" name="meta_title">
+                        <input type="text" class="form-control" id="inputDefault" name="meta_title"  value="{{ $category->meta_title }}">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2">Meta Keywords</label>
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="inputDefault" name="meta_keywords">
+                        <input type="text" class="form-control" id="inputDefault" name="meta_keywords"  value="{{ $category->meta_keywords }}">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Meta Description</label>
                     <div class="col-lg-6">
-                        <textarea type="text" class="form-control" rows="10" name="meta_description"></textarea>
+                        <textarea type="text" class="form-control" rows="10" name="meta_description">{{ $category->meta_description }}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Parent ID</label>
                     <div class="col-lg-6">
-                        <input type="number" class="form-control" name="parent_id">
+                        <input type="number" class="form-control" name="parent_id"  value="{{ $category->parent_id }}">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Sort Order</label>
                     <div class="col-lg-6">
-                        <input type="number" class="form-control" name="sort_order">
+                        <input type="number" class="form-control" name="sort_order"  value="{{ $category->sort_order }}">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                     <div class="col-lg-6">
-                        <input type="number" class="form-control" name="status">
+                        <input type="number" class="form-control" name="status"  value="{{ $category->status }}">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>
                     <div class="col-lg-6 text-center">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Create</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i>Create</button>
                     </div>
                 </div>
             </form>
