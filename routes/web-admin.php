@@ -9,14 +9,19 @@ use App\Http\Controllers\Admin\GroupController as GroupController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CargoController;
 use App\Http\Controllers\Admin\StoreController;
+
 
 Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], function() {
 
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');
+
+    Route::get('/logout', [AdminLogoutController::class, 'store'])->name('admin.logout');
+
 
     Route::get('/pwreset', [AdminHomeController::class, 'index'])->name('admin.pwreset');
 
