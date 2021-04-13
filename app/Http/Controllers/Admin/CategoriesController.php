@@ -30,8 +30,9 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        $categories=Categories::get();
         return view('admin.categories.new_category',[
-    		//'categories'=> $categories,
+    		'categories'=> $categories,
     	]);
     }
 
@@ -89,10 +90,11 @@ class CategoriesController extends Controller
      */
     public function edit($category_id)
     {
-        $category = Categories::find($category_id);
-        
+        $edit_category = Categories::find($category_id);
+        $all_categories = Categories::get();
         return view('admin.categories.edit_category',[
-    		'category'=> $category
+    		'edit_category'=> $edit_category,
+            'all_categories'=> $all_categories
     	]);
     }
 
@@ -133,7 +135,7 @@ class CategoriesController extends Controller
             if(file_exists($path)) {
                 unlink($path);
             }
-            
+
             $category->update([
                 'name' => $request->name,
                 'description' => $request->description,
@@ -174,6 +176,11 @@ class CategoriesController extends Controller
     public function destroy($category_id)
     {
         $category = Categories::find($category_id);
+
+        $path = public_path() . $category->image;
+        if(file_exists($path)) {
+            unlink($path);
+        }
         $category->delete();
 
         return back();

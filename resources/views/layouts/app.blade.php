@@ -49,7 +49,7 @@
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
-                        <p class="welcome-msg">Welcome, do you want to sale something? <a class="text-primary" href="{{ route('application.form') }}">Click here</a></p>
+                        <p class="welcome-msg">Welcome, do you want to become a seller? <a class="text-primary" href="{{ route('application.form') }}">Click here</a></p>
                     </div>
                     <div class="header-right">
                         <div class="dropdown">

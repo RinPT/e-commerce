@@ -27,7 +27,7 @@
                     {{-- <th>Image</th> --}}
                     <th>Meta Title</th>
                     {{-- <th>Meta Keywords</th> --}}
-                    <th>Meta Description</th>
+                    {{-- <th>Meta Description</th> --}}
                     <th>Parent ID</th>
                     {{-- <th>Sort Order</th> --}}
                     <th>Status</th>
@@ -48,7 +48,7 @@
                     {{-- <td>{{$category -> meta_keywords}}</td> --}}
                     {{-- <td>{{ Str::limit($category -> meta_description, 50, $end='...') }}</td> --}}
                     <td>{{$category -> parent_id}}</td>
-                    <td>{{$category -> sort_order}}</td>
+                    {{-- <td>{{$category -> sort_order}}</td> --}}
                     <td>{{$category -> status}}</td>
                     <td>{{$category -> created_at ->format('d.m.Y H:i')}}</td>
                     <td>{{$category -> updated_at ->format('d.m.Y H:i')}}</td>

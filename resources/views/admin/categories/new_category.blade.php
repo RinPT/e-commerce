@@ -88,9 +88,14 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Parent ID</label>
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Parent Category</label>
                     <div class="col-lg-6">
-                        <input type="number" class="form-control" name="parent_id">
+                        <select name="parent_id" class="form-control">
+                            <option value="0">None</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->parent_id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
