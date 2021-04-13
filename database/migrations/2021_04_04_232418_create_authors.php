@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateAuthors extends Migration
@@ -26,6 +27,20 @@ class CreateAuthors extends Migration
             $table->tinyinteger('status')->default(0);
             $table->timestamps();
         });
+
+        DB::table('authors')->insert([
+            'name' => 'admin',
+            'surname' => 'admin',
+            'username' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
+            'gender' => 'male',
+            'photo' => '',
+            'group' => '[]',
+            'status' => 1,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 
     /**
