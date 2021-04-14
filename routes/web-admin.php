@@ -121,7 +121,12 @@ Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], functio
     //Seller Operations (orders, categories, products, discount, cargo, store management):
 
     //Products
-    Route::get('/products/list', [ProductsController::class, 'index'])->name('admin.products.all_index');
+    Route::get('/products/list', [ProductsController::class, 'index'])->name('index.products'); //shows all products
+    Route::get('/products/new', [ProductsController::class, 'create'])->name('create.products'); //show new category screen
+    Route::post('/products/new/done', [ProductsController::class, 'store'])->name('store.products'); //store new changes
+    Route::delete('/products/delete/{id}', [ProductsController::class, 'destroy'])->name('delete.products'); //delete a category
+    Route::get('/products/edit/{id}', [ProductsController::class, 'edit'])->name('edit.products'); //edit a category
+    Route::patch('/products/edit/{id}/done', [ProductsController::class, 'update'])->name('update.products'); //edit a category
 
     //Categories
     Route::get('/categories/list', [CategoriesController::class, 'index'])->name('index.categories'); //show all categories

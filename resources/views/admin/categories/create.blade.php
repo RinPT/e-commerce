@@ -102,14 +102,20 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Sort Order</label>
                     <div class="col-lg-6">
-                        <input type="number" class="form-control" name="sort_order">
+                        <select name="sort_order" class="form-control">
+                            <option value="0">By Name</option>
+                            <option value="1">By Price</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                     <div class="col-lg-6">
-                        <input type="number" class="form-control" name="status">
+                        <select name="status" class="form-control">
+                            <option value="0">Inactive</option>
+                            <option value="1">Active</option>
+                        </select>
                     </div>
                 </div>
 

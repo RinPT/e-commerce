@@ -187,15 +187,16 @@
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
-                                            <a class="nav-link" href="">
-                                                Add New Product
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" href="{{ route('admin.products.all_index') }}">
+                                            <a class="nav-link" href="{{ route('index.products') }}">
                                                 All Products
                                             </a>
                                         </li>
+                                        <li>
+                                            <a class="nav-link" href="{{ route('create.products') }}">
+                                                Add New Product
+                                            </a>
+                                        </li>
+
                                         <li>
                                             <a class="nav-link" href="">
                                                 Add New Coupon

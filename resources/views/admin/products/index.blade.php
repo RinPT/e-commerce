@@ -38,18 +38,27 @@
             @if($products->count())
                 @foreach($products as $product)
                 <tr>
-                    <td>#{{ $product->product_id}}</td>
+                    <td>#{{ $product->id}}</td>
                     <td>#{{ $product->store_id}}</td>
                     <td>{{$product->name}}</td>
-                    <td>{{$product->Category}}</td>
-                    <td>{{ Str::limit($product->message, 50, $end='...') }}</td>
+                    <td>#{{$product->category_id}}</td>
+                    <td>{{ Str::limit($product->description, 50, $end='...') }}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->cargo_price}}</td>
+                    <td>#{{$product->currency_id}}</td>
                     <td>{{$product->created_at->format('d.m.Y H:i')}}</td>
                     <td>{{$product->updated_at->format('d.m.Y H:i')}}</td>
                     <td>
-                        <a class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
+                        <form action="{{ route('edit.products', $product->id) }}" method="POST">
+                            @csrf
+                            {{ method_field('GET') }}
+                            <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px"><i class="fas fa-pencil-alt"></i></button>
+                        </form>
+                        <form action="{{ route('delete.products', $product->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px"><i class="fas fa-times"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

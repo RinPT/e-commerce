@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /public/images/categories
+/public/images/products
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
