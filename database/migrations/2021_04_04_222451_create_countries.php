@@ -20,6 +20,15 @@ class CreateCountries extends Migration
             $table->tinyInteger('status');
             $table->timestamps();
         });
+
+        DB::table('countries')->insert([
+            'id' => 1,
+            'name' => 'Country',
+            'iso_code' => '2',
+            'status' => 2,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 
     /**

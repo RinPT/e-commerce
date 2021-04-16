@@ -31,17 +31,17 @@ class LoginController extends Controller
             }
         }
 
-//        $store = Store::where([
-//            ['username' ,'=', $request->username]
-//        ])->first();
-//        if($store){
-//            if(Hash::check($request->password,$store->password)){
-//                session_start();
-//                $_SESSION['author'] = $store->id;
-//                $_SESSION['author_type'] = "store";
-//                return redirect()->route('admin.home');
-//            }
-//        }
+       $store = Store::where([
+            ['username' ,'=', $request->username]
+        ])->first();
+        if($store){
+            if(Hash::check($request->password,$store->password)){
+                //session_start();
+                $_SESSION['author'] = $store->id;
+                $_SESSION['author_type'] = "store";
+                return redirect()->route('admin.home');
+            }
+        }
 
         return back()->with('error','Author or store not found!');
     }

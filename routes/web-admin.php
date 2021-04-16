@@ -20,6 +20,7 @@ Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], functio
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');
 
+
     Route::get('/logout', [AdminLogoutController::class, 'store'])->name('admin.logout');
 
 

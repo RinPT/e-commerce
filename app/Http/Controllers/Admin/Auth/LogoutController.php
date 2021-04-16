@@ -9,8 +9,10 @@ class LogoutController extends Controller
 {
     public function store()
     {
+
         unset($_SESSION['author']);
         unset($_SESSION['store']);
+
         return redirect()->route('admin.login');
     }
 }
