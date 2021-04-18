@@ -12,10 +12,11 @@ use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CargoController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\StoreController;
 
 
-Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], function() {
+Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function() {
 
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');
@@ -75,6 +76,9 @@ Route::group(['prefix' => "/_admin", 'middleware' => ['authorisvalid']], functio
     Route::get('/cargo/{id}/update/', [CargoController::class, 'edit'])->name('admin.cargo.edit');
     Route::post('/cargo/{id}/update/', [CargoController::class, 'update'])->name('admin.cargo.update');
     Route::get('/cargo/{id}/delete/', [CargoController::class, 'destroy'])->name('admin.cargo.destroy');
+
+    //Admin Settings
+    Route::get('/currencies', [CurrencyController::class, 'index'])->name('admin.currency');
 
 
 
