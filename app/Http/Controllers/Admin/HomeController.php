@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -14,7 +19,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $countries = DB::table('countries')->select('id','name')->groupBy('name');
+        $user = User::get();
+        $store = Store::get();
+        $product = Product::get();
+        $order = Order::get();
+        return view('admin.home',[
+            'user' => $user,
+            'store' => $store,
+            'product' => $product,
+            'order' => $order,
+            'countries' => $countries,
+        ]);
     }
 
     /**
