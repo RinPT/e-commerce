@@ -42,6 +42,26 @@
                                 <input type="text" name="name" class="form-control" id="inputDefault"  required>
                             </div>
                         </div>
+                         <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Username</label>
+                            <div class="col-lg-6">
+                                <input type="text" name="username" class="form-control" id="inputDefault"  required >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Email</label>
+                            <div class="col-lg-6">
+                                <input type="text" name="email" class="form-control" id="inputDefault"  required >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Password</label>
+                            <div class="col-lg-6">
+                                <input type="text" name="password" class="form-control" id="inputDefault"  required >
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Logo</label>

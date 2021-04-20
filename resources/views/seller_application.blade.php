@@ -42,21 +42,22 @@
                 <div class="col mb-4">
                     <h3 style="font-family: sans-serif">Seller Application Form</h3>
                 </div>
-                <form>
+                <form action="{{ route('admin.store.application') }}" method="post" role="form">
+                    @csrf
                     <div class="form-row d-flex justify-content-center mb-3">
                         <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="name">Name - Surname</label>
-                            <input type="text" class="form-control" id="name" placeholder="Name Surname">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"placeholder="Name">
                         </div>
                         <div class="form-group col-md-5" style="margin-left: 15px">
                             <label for="phone">Phone</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="Phone">
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
                         </div>
                     </div>
                     <div class="form-row d-flex justify-content-center mb-3" >
                         <div class="form-group col-md-5" style="margin-right: 15px">
                             <label for="email">E-mail</label>
-                            <input type="email" class="form-control" id="email" placeholder="Email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
                         <div class="form-group col-md-5" style="margin-left: 15px">
                             <label for="category">Category of the Products</label>
@@ -80,11 +81,26 @@
                                 <option value="4">Yangaoov</option>
                             </select>
                         </div>
+
                         <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="tckn">TCKN / VKN</label>
-                            <input type="text" class="form-control" id="tckn">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                         </div>
+                       
                     </div>
+
+                    <div class="form-row d-flex justify-content-center mb-3">
+                        <div class="form-group col-md-5" style="margin-right: 15px">
+                            <label for="url">Url</label>
+                            <input type="text" class="form-control" id="url" name="url">
+                        </div>
+                        <div class="form-group col-md-5" style="margin-left: 15px">
+                            <label for="logo">Logo</label>
+                            <input type="text" class="form-control" id="logo" name="logo">
+                        </div>
+
+                    </div>
+
                     <div class="form-row d-flex justify-content-center mb-3">
                         <div class="form-group col-md-5" style="margin-right: 15px">
                             <label for="country">Country</label>
@@ -98,7 +114,7 @@
                         </div>
                         <div class="form-group col-md-5" style="margin-left: 15px">
                             <label for="city">City</label>
-                            <select class="form-select" name="city"disabled>
+                            <select class="form-select" name="city">
                                 <option disabled selected>Select City</option>
                                 <option value="1">Anonim Şirketi</option>
                                 <option value="2">Şahıs Şirketi</option>
@@ -110,15 +126,15 @@
                     <div class="form-row d-flex justify-content-center mb-3">
                         <div class="form-group col-md-5" style="margin-right: 15px">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address">
+                            <input type="text" class="form-control" id="address" name="address">
                         </div>
                         <div class="form-group col-md-5" style="margin-left: 15px">
                             <label for="tax_no">Tax Number</label>
-                            <input type="number" class="form-control" id="tax_no" placeholder="Tax No">
+                            <input type="number" class="form-control" id="tax_no" name="tax_no"placeholder="Tax No">
                         </div>
                     </div>
                     <div class="form-row d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary btn-block">Submit Form</button>
+                        <button type="submit" class="btn btn-primary btn-block">Submit Form</button>
                     </div>
                 </form>
             </div>

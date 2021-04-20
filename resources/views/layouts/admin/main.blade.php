@@ -360,6 +360,13 @@
 													Stores
 												</a>
 											</li>
+
+											<li>
+												<a class="nav-link" href="{{route('admin.store.requests')}}">
+													Store Application Requests
+												</a>
+
+											</li>
 										</ul>
 									</li>
 									<li class="nav-parent">

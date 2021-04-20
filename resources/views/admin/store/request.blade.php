@@ -14,8 +14,8 @@
                 <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
             </div>
 
-            <h2 class="card-title">Stores</h2>
-            <p class="card-subtitle">You can see all available stores below.</p>
+            <h2 class="card-title">Store Requests</h2>
+            <p class="card-subtitle">You can see all available store application requests below.</p>
         </header>
         <div class="card-body" style="overflow-x: auto;">
             @if(Session::has('success'))
@@ -35,9 +35,8 @@
                 <tr>
                     <th>Store ID</th>
                     <th>Store Name</th>
-                    <th>Username</th>
+                    <th>Username </th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Logo</th>
                     <th>Store URL </th>
                     <th>Tax No </th>
@@ -47,32 +46,31 @@
                     <th>Phone</th>
                     <th>Status</th>
                     <th>Creation Date</th>
-                    <th>Updation Date</th>
+                    <th>Update Date</th>
                     <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($store as $store)
+                    @foreach($store_requests as $store_request)
                         <tr>
-                            <td>{{ $store->id }}</td>
-                            <td>{{ $store->name }}</td>
-                            <td>{{ $store->username }}</td>
-                            <td>{{ $store->email }}</td>
-                            <td>{{ $store->password }}</td>
-                            <td>{{ $store->logo }}</td>
-                            <td>{{ $store->url }}</td>
-                            <td>{{ $store->tax_no }}</td>
-                            <td>{{ $store->country_id }}</td>
-                            <td>{{ $store->city }}</td>
-                            <td>{{ $store->address }}</td>
-                            <td>{{ $store->phone }}</td>
-                            <td>{{ $store->status }}</td>
+                            <td>{{ $store_request->id }}</td>
+                            <td>{{ $store_request->name }}</td>
+                            <td>{{ $store_request->username }}</td>
+                            <td>{{ $store_request->email }}</td>
+                            <td>{{ $store_request->logo }}</td>
+                            <td>{{ $store_request->url }}</td>
+                            <td>{{ $store_request->tax_no }}</td>
+                            <td>{{ $store_request->country_id }}</td>
+                            <td>{{ $store_request->city }}</td>
+                            <td>{{ $store_request->address }}</td>
+                            <td>{{ $store_request->phone }}</td>
+                            <td>{{ $store_request->status }}</td>
 
-                            <td>{{ is_null($store->created_at) ? "-" : Carbon\Carbon::parse($store->created_at)->format('d.m.Y H:i') }}</td>
-                            <td>{{ is_null($store->updated_at) ? "-" : Carbon\Carbon::parse($store->updated_at)->format('d.m.Y H:i') }}</td>
+                            <td>{{ is_null($store_request->created_at) ? "-" : Carbon\Carbon::parse($store_request->created_at)->format('d.m.Y H:i') }}</td>
+                            <td>{{ is_null($store_request->updated_at) ? "-" : Carbon\Carbon::parse($store_request->updated_at)->format('d.m.Y H:i') }}</td>
                             <td>
-                                <a href="{{ route('admin.store.edit',$store->id) }}" class="btn btn-success btn-sm"><i class='fas fa-pencil-alt'></i></a>
-                                <a href="{{ route('admin.store.destroy',$store->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
+                                <a href="{{ route('admin.store.add_request',$store_request->id) }}" class="btn btn-success btn-sm"><i class='fas fa-pencil-alt'></i></a>
+                                <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
                             </td>
                         </tr>
                     @endforeach

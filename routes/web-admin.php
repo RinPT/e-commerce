@@ -58,7 +58,11 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::post('/store/{id}/update/', [StoreController::class, 'update'])->name('admin.store.update');
     Route::get('/store/{id}/delete/', [StoreController::class, 'destroy'])->name('admin.store.destroy');
 
-
+    Route::post('/store/application', [StoreController::class, 'application'])->name('admin.store.application');
+    Route::get('/store/requests', [StoreController::class, 'store_requests'])->name('admin.store.requests');
+    Route::get('/store/requests/{id}/delete/', [StoreController::class, 'destroy_request'])->name('admin.store.destroy_request');
+    Route::get('/store/requests/{id}/add', [StoreController::class, 'add_request'])->name('admin.store.add_request');
+    Route::post('/store/requests/{id}/save', [StoreController::class, 'save_request'])->name('admin.store.save_request');
 
     Route::get('/order', [OrderController::class, 'index'])->name('admin.orders');
     Route::get('/order/create', [OrderController::class, 'create'])->name('admin.order.create');
