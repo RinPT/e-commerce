@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\UserController as UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Admin\AuthorController;
@@ -149,4 +149,10 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::delete('/categories/delete/{category_id}', [CategoriesController::class, 'destroy'])->name('delete.categories'); //delete a category
     Route::get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])->name('edit.categories'); //edit a category
     Route::patch('/categories/edit/{category_id}/done', [CategoriesController::class, 'update'])->name('update.categories'); //edit a category
+
+    //User
+    Route::get('/user', [UserController::class, 'index'])->name('admin.user.index'); //show all users
+    Route::get('/user/create', [UserController::class, 'create'])->name('admin.user.create'); //create a new user
+    Route::post('/user/create/done', [UserController::class, 'store'])->name('admin.user.store');
+    Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
 });

@@ -15,10 +15,10 @@
                     <p class="card-big-info-desc">You can add a new user filling below information.</p>
                 </div>
                 <div class="tab-pane active" id="register">
-                    <form action="{{ route('register') }}" method="POST" class="form">
+                    <form action="{{ route('admin.user.store') }}" method="POST" class="form">
                         @csrf
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: red;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>
+                            <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: #ff0000;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>
                             @error('name')
                             <p class="text-danger">There is an error</p>
                             @enderror

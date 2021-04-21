@@ -389,12 +389,12 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="{{route('add.user_group_display')}}">
+												<a class="nav-link" href="{{route('admin.user.create')}}">
 													Add New User
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{route('admin.user.index')}}">
 													Users
 												</a>
 											</li>

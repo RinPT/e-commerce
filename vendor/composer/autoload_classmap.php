@@ -58,6 +58,7 @@ return array(
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Product_Images' => $baseDir . '/app/Models/Product_Images.php',
     'App\\Models\\Store' => $baseDir . '/app/Models/Store.php',
+    'App\\Models\\Store_Requests' => $baseDir . '/app/Models/Store_Requests.php',
     'App\\Models\\Ticket_Department_Cfields' => $baseDir . '/app/Models/Ticket_Department_Cfields.php',
     'App\\Models\\Ticket_Departments' => $baseDir . '/app/Models/Ticket_Departments.php',
     'App\\Models\\Ticket_Logs' => $baseDir . '/app/Models/Ticket_Logs.php',

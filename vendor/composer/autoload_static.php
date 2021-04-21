@@ -560,6 +560,7 @@ class ComposerStaticInit9c08173a558a3c55f346b5dab8a0bdce
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Product_Images' => __DIR__ . '/../..' . '/app/Models/Product_Images.php',
         'App\\Models\\Store' => __DIR__ . '/../..' . '/app/Models/Store.php',
+        'App\\Models\\Store_Requests' => __DIR__ . '/../..' . '/app/Models/Store_Requests.php',
         'App\\Models\\Ticket_Department_Cfields' => __DIR__ . '/../..' . '/app/Models/Ticket_Department_Cfields.php',
         'App\\Models\\Ticket_Departments' => __DIR__ . '/../..' . '/app/Models/Ticket_Departments.php',
         'App\\Models\\Ticket_Logs' => __DIR__ . '/../..' . '/app/Models/Ticket_Logs.php',
