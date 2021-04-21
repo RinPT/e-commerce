@@ -64,9 +64,8 @@ class CurrencyController extends Controller
         return back()->with("status", "$request->name information has been updated!");
     }
 
-    public function destroy(Currencies $currency) {
-        dd('some');
-        $currency->delete();
+    public function destroy($currency_id) {
+        Currencies::where('id', '=', $currency_id)->delete();
         return back()->with("destroy", "Currency removed from the system!");
     }
 }

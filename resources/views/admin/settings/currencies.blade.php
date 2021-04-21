@@ -86,11 +86,7 @@
                                 <td>{{ $currency->updated_at->format('d/m/Y') }}</td>
                                 <td class="actions">
                                     <a href="#currencyEdit{{ $currency->id }}" class="modal-with-zoom-anim ws-normal btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></a>
-                                    <form action="{{ route('admin.currency.delete', $currency) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
-                                    </form>
+                                    <a href="{{ route('admin.currency.delete', $currency->id) }}" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></a>
 
                                     <!-- Modal Animation -->
 									<div id="currencyEdit{{ $currency->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
