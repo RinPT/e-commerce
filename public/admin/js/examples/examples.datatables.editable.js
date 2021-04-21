@@ -47,6 +47,11 @@ Theme Version: 	3.1.0
 					null,
 					null,
 					null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
 					{ "bSortable": false }
 				]
 			});
@@ -253,3 +258,4 @@ Theme Version: 	3.1.0
 	});
 
 }).apply(this, [jQuery]);
+

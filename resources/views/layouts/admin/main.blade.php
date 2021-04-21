@@ -146,9 +146,22 @@
 													SEO Settings
 												</a>
 											</li>
+										</ul>
+									</li>
+                                    <li class="nav-parent">
+										<a class="nav-link" href="#">
+											<i class='fas fa-dollar-sign'></i>
+											<span>Currencies</span>
+										</a>
+										<ul class="nav nav-children">
 											<li>
 												<a class="nav-link" href="{{ route('admin.currency') }}">
-													Currencies
+												   All Currencies
+												</a>
+											</li>
+											<li>
+												<a class="nav-link" href="{{ route('admin.currency.create') }}">
+													Add New Currency
 												</a>
 											</li>
 										</ul>

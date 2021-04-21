@@ -14,7 +14,7 @@
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>All Currencies</span></li>
+            <li><span>Add New Currencies</span></li>
             <li><span>Currencies</span></li>
             <li><span>Dashboard</span></li>
         </ol>
