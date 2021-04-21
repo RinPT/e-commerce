@@ -42,22 +42,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-item-id="1">
-                        <td>1</td>
-                        <td>Pound</td>
-                        <td>GBP</td>
-                        <td>£</td>
-                        <td>£</td>
-                        <td>10 amk</td>
-                        <td>Don't know</td>
-                        <td>21/04/2021</td>
-                        <td class="actions">
-                            <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
-                            <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                            <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
+                    @if ($currencies->count())
+                        @foreach ($currencies as $currency)
+                            <tr data-item-id="{{ $currency->id }}">
+                                <td>{{ $currency->id }}</td>
+                                <td>{{ $currency->name }}</td>
+                                <td>{{ $currency->code }}</td>
+                                <td>{{ $currency->prefix }}</td>
+                                <td>{{ $currency->suffix }}</td>
+                                <td>{{ $currency->rate }}</td>
+                                <td>{{ $currency->status }}</td>
+                                <td>{{ $currency->updated_at->format('d/m/Y') }}</td>
+                                <td class="actions">
+                                    <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
+                                    <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
+                                    <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

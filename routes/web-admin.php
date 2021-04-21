@@ -83,7 +83,9 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
 
     //Admin Settings
     Route::get('/currencies', [CurrencyController::class, 'index'])->name('admin.currency');
+
     Route::get('/add_currency', [CurrencyController::class, 'create'])->name('admin.currency.create');
+    Route::post('/add_currency', [CurrencyController::class, 'store']);
 
 
     //Complain Operations :

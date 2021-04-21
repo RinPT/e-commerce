@@ -2,10 +2,7 @@
 
 @section('styles')
 
-    <!-- Specific Page Vendor CSS -->
-    <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
-    <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
-    <link rel="stylesheet" href="/admin/vendor/datatables/media/css/dataTables.bootstrap4.css" />
+    <link rel="stylesheet" href="/admin/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css" />
 
 @endsection
 
@@ -14,7 +11,7 @@
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>Add New Currencies</span></li>
+            <li><span>Add New Currency</span></li>
             <li><span>Currencies</span></li>
             <li><span>Dashboard</span></li>
         </ol>
@@ -22,55 +19,84 @@
 @endsection
 
 @section('content')
-    <section class="card">
-        <header class="card-header">
-            <h2 class="card-title">Default</h2>
-        </header>
-        <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Prefix</th>
-                        <th>Suffix</th>
-                        <th>Rate</th>
-                        <th>Status</th>
-                        <th>Last Update</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-item-id="1">
-                        <td>1</td>
-                        <td>Pound</td>
-                        <td>GBP</td>
-                        <td>£</td>
-                        <td>£</td>
-                        <td>10 amk</td>
-                        <td>Don't know</td>
-                        <td>21/04/2021</td>
-                        <td class="actions">
-                            <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
-                            <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                            <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    @if(session('status'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success mb-0">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Notification!</strong> {{ session('status') }}.
+                </div>
+            </div>
         </div>
-    </section>
+    @endif
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern card-big-info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-2-5 col-xl-1-5">
+                            <i class="card-big-info-icon fas fa-money-bill-alt"></i>
+                            <h2 class="card-big-info-title">Add New Currency</h2>
+                            <p class="card-big-info-desc">Add here all details and necessary information.</p>
+                        </div>
+                        <div class="col-lg-3-5 col-xl-4-5">
+                            <form class="form-horizontal form-bordered" action="{{ route('admin.currency.create') }}" method="POST">
+                                @csrf
+                                <div class="form-group row @error('name') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="name" class="form-control" id="inputDefault" value="{{ old('name') }}">
+                                        @error('name') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row @error('code') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Code</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="code" class="form-control" id="inputDefault" value="{{ old('code') }}">
+                                        @error('code') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row @error('prefix') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Prefix</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="prefix" class="form-control" id="inputDefault" value="{{ old('prefix') }}">
+                                        @error('prefix') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row @error('suffix') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Suffix</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="suffix" class="form-control" id="inputDefault" value="{{ old('suffix') }}">
+                                        @error('suffix') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row @error('rate') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Rate</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="rate" class="form-control" id="inputDefault" value="{{ old('rate') }}">
+                                        @error('rate') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row @error('status') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="status" class="form-control" id="inputDefault" value="{{ old('status') }}">
+                                        @error('status') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Add +</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 @endsection
 
 @section('custom-scripts')
-    <!-- Specific Page Vendor -->
-    <script src="/admin/vendor/select2/js/select2.js"></script>
-    <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
-@endsection
-
-@section('end-scripts')
-    <script src="/admin/js/examples/examples.datatables.editable.js"></script>
+    <script src="/admin/vendor/autosize/autosize.js"></script>
+    <script src="/admin/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
 @endsection
