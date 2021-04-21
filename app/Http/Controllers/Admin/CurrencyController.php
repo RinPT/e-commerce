@@ -30,7 +30,7 @@ class CurrencyController extends Controller
             'status' => 'required|integer',
         ]);
 
-        $currency = Currencies::create([
+        Currencies::create([
             'name' => $request->name,
             'code' => $request->code,
             'prefix' => $request->prefix,
@@ -39,6 +39,34 @@ class CurrencyController extends Controller
             'status' => $request->status,
         ]);
 
-        return back()->with("status", "Currency added successfully");
+        return back()->with("status", "Currency added successfully.");
+    }
+
+    public function update(Request $request, $currency_id) {
+        $this->validate($request, [
+            'name' => 'required',
+            'code' => 'required',
+            'prefix'=> 'required',
+            'suffix' => 'required',
+            'rate' => 'required|numeric',
+            'status' => 'required|integer',
+        ]);
+
+        Currencies::find($currency_id)->update([
+            'name' => $request->name,
+            'code' => $request->code,
+            'prefix' => $request->prefix,
+            'suffix' => $request->suffix,
+            'rate' => $request->rate,
+            'status' => $request->status,
+        ]);
+
+        return back()->with("status", "$request->name information has been updated!");
+    }
+
+    public function destroy(Currencies $currency) {
+        dd('some');
+        $currency->delete();
+        return back()->with("destroy", "Currency removed from the system!");
     }
 }
