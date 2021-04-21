@@ -13,6 +13,10 @@ Theme Version: 	3.1.0
 	*/
 	(function() {
 		if( $('#flotBasic').get(0) ) {
+
+
+
+
 			var plot = $.plot('#flotBasic', flotBasicData, {
 				series: {
 					lines: {
@@ -41,9 +45,9 @@ Theme Version: 	3.1.0
 					backgroundColor: 'transparent'
 				},
 				yaxis: {
-					min: 0,
-					max: 200,
-					color: 'rgba(0,0,0,0.1)'
+					 min: 0,
+					 max: 50,
+                    color: 'rgba(0,0,0,0.1)'
 				},
 				xaxis: {
 					color: 'rgba(0,0,0,0.1)'
@@ -534,7 +538,7 @@ Theme Version: 	3.1.0
 	(function() {
 		if( $('#ChartistLineChartWithTooltips').get(0) ) {
 			new Chartist.Line('#ChartistLineChartWithTooltips', {
-				labels: ['1', '2', '3', '4', '5', '6'],
+				labels: ['1', '2', '3', '4', '5', '6','7','8','9','10','11','12'],
 				series: [{
 					name: 'Fibonacci sequence',
 					data: [1, 2, 3, 5, 8, 13]

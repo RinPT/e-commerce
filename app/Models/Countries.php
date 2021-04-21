@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\UserAddress;
+
 
 class Countries extends Model
 {
@@ -18,6 +20,10 @@ class Countries extends Model
         'status',
         'created_at',
         'updated_at',
-  
+
     ];
+
+    public function country() {
+        return $this->hasMany(UserAddress::class);
+    }
 }

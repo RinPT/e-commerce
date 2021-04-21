@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/admin/vendor/owl.carousel/assets/owl.carousel.css" />
     <link rel="stylesheet" href="/admin/vendor/owl.carousel/assets/owl.theme.default.css" />
 
+
 @endsection
 
 @section('breadcrumb')
@@ -27,6 +28,9 @@
 @endsection
 
 @section('content')
+
+
+
     <div class="row">
         <div class="col-3">
             <section class="card card-featured-left card-featured-primary mb-4">
@@ -39,10 +43,9 @@
                         </div>
                         <div class="widget-summary-col">
                             <div class="summary">
-                                <h4 class="title">Support Questions</h4>
+                                <h4 class="title">Total User</h4>
                                 <div class="info">
-                                    <strong class="amount">1281</strong>
-                                    <span class="text-primary">(14 unread)</span>
+                                    <strong class="amount">{{$user->count()}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -64,14 +67,13 @@
                         </div>
                         <div class="widget-summary-col">
                             <div class="summary">
-                                <h4 class="title">Support Questions</h4>
+                                <h4 class="title">Total Store</h4>
                                 <div class="info">
-                                    <strong class="amount">1281</strong>
-                                    <span class="text-primary">(14 unread)</span>
+                                    <strong class="amount">{{$store->count()}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase">(view all)</a>
+                                <a class="text-muted text-uppercase" href="{{route('admin.stores')}}">(view all)</a>
                             </div>
                         </div>
                     </div>
@@ -89,14 +91,13 @@
                         </div>
                         <div class="widget-summary-col">
                             <div class="summary">
-                                <h4 class="title">Support Questions</h4>
+                                <h4 class="title">Total Product</h4>
                                 <div class="info">
-                                    <strong class="amount">1281</strong>
-                                    <span class="text-primary">(14 unread)</span>
+                                    <strong class="amount">{{$product->count()}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase">(view all)</a>
+                                <a class="text-muted text-uppercase" href="{{ route('index.products') }}">(view all)</a>
                             </div>
                         </div>
                     </div>
@@ -114,14 +115,13 @@
                         </div>
                         <div class="widget-summary-col">
                             <div class="summary">
-                                <h4 class="title">Support Questions</h4>
+                                <h4 class="title">Total Order</h4>
                                 <div class="info">
-                                    <strong class="amount">1281</strong>
-                                    <span class="text-primary">(14 unread)</span>
+                                    <strong class="amount">{{$order->count()}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase">(view all)</a>
+                                <a class="text-muted text-uppercase" href="{{ route('admin.orders') }}">(view all)</a>
                             </div>
                         </div>
                     </div>
@@ -129,12 +129,15 @@
             </section>
         </div>
     </div>
+
+
+
     <div class="row">
         <div class="col-lg-6">
             <section class="card">
                 <header class="card-header">
-                    <h2 class="card-title">Basic Chart</h2>
-                    <p class="card-subtitle"></p>
+                    <h2 class="card-title">Monthly Registered Accounts</h2>
+                    <p class="card-subtitle">Monthly new users and new stores</p>
                 </header>
                 <div class="card-body">
 
@@ -144,52 +147,39 @@
 
                         var flotBasicData = [{
                             data: [
-                                [0, 170],
-                                [1, 169],
-                                [2, 173],
-                                [3, 188],
-                                [4, 147],
-                                [5, 113],
-                                [6, 128],
-                                [7, 169],
-                                [8, 173],
-                                [9, 128],
-                                [10, 128]
+                                [1, {{DB::table('users')->whereMonth('created_at', '1')->count()}}],
+                                [2, {{DB::table('users')->whereMonth('created_at', '2')->count()}}],
+                                [3, {{DB::table('users')->whereMonth('created_at', '3')->count()}}],
+                                [4, {{DB::table('users')->whereMonth('created_at', '4')->count()}}],
+                                [5, {{DB::table('users')->whereMonth('created_at', '5')->count()}}],
+                                [6, {{DB::table('users')->whereMonth('created_at', '6')->count()}}],
+                                [7, {{DB::table('users')->whereMonth('created_at', '7')->count()}}],
+                                [8, {{DB::table('users')->whereMonth('created_at', '8')->count()}}],
+                                [9, {{DB::table('users')->whereMonth('created_at', '9')->count()}}],
+                                [10, {{DB::table('users')->whereMonth('created_at', '10')->count()}}],
+                                [11, {{DB::table('users')->whereMonth('created_at', '11')->count()}}],
+                                [12, {{DB::table('users')->whereMonth('created_at', '12')->count()}}]
                             ],
-                            label: "Series 1",
-                            color: "#0088cc"
+
+                            label: "User",
+                            color: "#CCCCCC"
                         }, {
                             data: [
-                                [0, 115],
-                                [1, 124],
-                                [2, 114],
-                                [3, 121],
-                                [4, 115],
-                                [5, 83],
-                                [6, 102],
-                                [7, 148],
-                                [8, 147],
-                                [9, 103],
-                                [10, 113]
+                                [1, {{DB::table('store')->whereMonth('created_at', '1')->count()}}],
+                                [2, {{DB::table('store')->whereMonth('created_at', '2')->count()}}],
+                                [3, {{DB::table('store')->whereMonth('created_at', '3')->count()}}],
+                                [4, {{DB::table('store')->whereMonth('created_at', '4')->count()}}],
+                                [5, {{DB::table('store')->whereMonth('created_at', '5')->count()}}],
+                                [6, {{DB::table('store')->whereMonth('created_at', '6')->count()}}],
+                                [7, {{DB::table('store')->whereMonth('created_at', '7')->count()}}],
+                                [8, {{DB::table('store')->whereMonth('created_at', '8')->count()}}],
+                                [9, {{DB::table('store')->whereMonth('created_at', '9')->count()}}],
+                                [10, {{DB::table('store')->whereMonth('created_at', '10')->count()}}],
+                                [11, {{DB::table('store')->whereMonth('created_at', '11')->count()}}],
+                                [12, {{DB::table('store')->whereMonth('created_at', '12')->count()}}]
                             ],
-                            label: "Series 2",
+                            label: "Store",
                             color: "#2baab1"
-                        }, {
-                            data: [
-                                [0, 70],
-                                [1, 69],
-                                [2, 73],
-                                [3, 88],
-                                [4, 47],
-                                [5, 13],
-                                [6, 28],
-                                [7, 69],
-                                [8, 73],
-                                [9, 28],
-                                [10, 28]
-                            ],
-                            label: "Series 3",
-                            color: "#734ba9"
                         }];
 
                         // See: js/examples/examples.charts.js for more settings.
@@ -202,41 +192,90 @@
         <div class="col-lg-6">
             <section class="card">
                 <header class="card-header">
+                    <h2 class="card-title">Line Chart: With Tooltips</h2>
+                </header>
+                <div class="card-body">
+                    <div id="ChartistLineChartWithTooltips" class="ct-chart ct-perfect-fourth ct-golden-section">
 
-                    <h2 class="card-title">Pie Chart</h2>
-                    <p class="card-subtitle"></p>
+{{--                        <script type="text/javascript">--}}
+{{--                                new Chartist.Line('#ChartistLineChartWithTooltips', {--}}
+{{--                                    labels: ['1', '2', '3', '4', '5', '6','7','8','9','10','11','12'],--}}
+{{--                                    series: [{--}}
+{{--                                        name: 'Monthly orders',--}}
+{{--                                        data: [ {{--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '1')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '2')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '3')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '4')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '5')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '6')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '7')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '8')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '9')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '10')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '11')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '12')->count()--}}
+{{--                                        }}--}}
+{{--                                        ]--}}
+{{--                                    }]--}}
+{{--                                });--}}
+
+{{--                                var $chart = $('#ChartistLineChartWithTooltips');--}}
+
+{{--                                var $toolTip = $chart--}}
+{{--                                    .append('<div class="tooltip"></div>')--}}
+{{--                                    .find('.tooltip')--}}
+{{--                                    .hide();--}}
+
+{{--                                $chart.on('mouseenter', '.ct-point', function() {--}}
+{{--                                    var $point = $(this),--}}
+{{--                                        value = $point.attr('ct:value'),--}}
+{{--                                        seriesName = $point.parent().attr('ct:series-name');--}}
+{{--                                    $toolTip.html(seriesName + '<br>' + value).show();--}}
+{{--                                });--}}
+
+{{--                                $chart.on('mouseleave', '.ct-point', function() {--}}
+{{--                                    $toolTip.hide();--}}
+{{--                                });--}}
+
+{{--                                $chart.on('mousemove', function(event) {--}}
+{{--                                    $toolTip.css({--}}
+{{--                                        left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,--}}
+{{--                                        top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40--}}
+{{--                                    });--}}
+{{--                                });--}}
+{{--                        </script>--}}
+
+                    </div>
+
+
+
+                    <!-- See: js/examples/examples.charts.js for the example code. -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="card">
+                <header class="card-header">
+                    <h2 class="card-title">Order</h2>
+                    <p class="card-subtitle">A bar chart is a way of summarizing a set of categorical data.</p>
                 </header>
                 <div class="card-body">
 
-                    <!-- Flot: Pie -->
-                    <div class="chart chart-md" id="flotPie"></div>
+                    <!-- Morris: Bar -->
+                    <div class="chart chart-md" id="morrisBar"></div>
                     <script type="text/javascript">
 
-                        var flotPieData = [{
-                            label: "Series 1",
-                            data: [
-                                [1, 60]
-                            ],
-                            color: '#0088cc'
-                        }, {
-                            label: "Series 2",
-                            data: [
-                                [1, 10]
-                            ],
-                            color: '#2baab1'
-                        }, {
-                            label: "Series 3",
-                            data: [
-                                [1, 15]
-                            ],
-                            color: '#734ba9'
-                        }, {
-                            label: "Series 4",
-                            data: [
-                                [1, 15]
-                            ],
-                            color: '#E36159'
-                        }];
+                        {{--var morrisBarData = [{--}}
+
+                        {{--    @foreach($yearlyOrders as $yearlyOrder)--}}
+                        {{--    y: '{{$yearlyOrder}}',--}}
+                        {{--    a: {{DB::table('orders')->whereMonth('created_at', '$yearlyOrder')->count()}}--}}
+                        {{--},--}}
+                        {{--@endforeach];--}}
 
                         // See: js/examples/examples.charts.js for more settings.
 
@@ -252,10 +291,8 @@
 
     <!-- Specific Page Vendor -->
     <script src="/admin/vendor/jquery-appear/jquery.appear.js"></script>
-    <script src="/admin/vendor/jquery.easy-pie-chart/jquery.easypiechart.js"></script>
     <script src="/admin/vendor/flot/jquery.flot.js"></script>
     <script src="/admin/vendor/flot.tooltip/jquery.flot.tooltip.js"></script>
-    <script src="/admin/vendor/flot/jquery.flot.pie.js"></script>
     <script src="/admin/vendor/flot/jquery.flot.categories.js"></script>
     <script src="/admin/vendor/flot/jquery.flot.resize.js"></script>
     <script src="/admin/vendor/jquery-sparkline/jquery.sparkline.js"></script>
@@ -265,6 +302,8 @@
     <script src="/admin/vendor/snap.svg/snap.svg.js"></script>
     <script src="/admin/vendor/liquid-meter/liquid.meter.js"></script>
     <script src="/admin/vendor/chartist/chartist.js"></script>
+
+
 
     <!-- Examples -->
     <style>
@@ -415,14 +454,15 @@
     <script src="/admin/vendor/jquery-ui/jquery-ui.js"></script>
     <script src="/admin/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
     <script src="/admin/vendor/jquery-appear/jquery.appear.js"></script>
-    <script src="/admin/vendor/jquery.easy-pie-chart/jquery.easypiechart.js"></script>
     <script src="/admin/vendor/flot/jquery.flot.js"></script>
     <script src="/admin/vendor/flot.tooltip/jquery.flot.tooltip.js"></script>
-    <script src="/admin/vendor/flot/jquery.flot.pie.js"></script>
     <script src="/admin/vendor/flot/jquery.flot.categories.js"></script>
     <script src="/admin/vendor/flot/jquery.flot.resize.js"></script>
     <script src="/admin/vendor/jquery-sparkline/jquery.sparkline.js"></script>
     <script src="/admin/vendor/raphael/raphael.js"></script>
     <script src="/admin/vendor/morris/morris.js"></script>
     <script src="/admin/vendor/owl.carousel/owl.carousel.js"></script>
+    <script src="/admin/js/examples/examples.charts.js"></script>
+
+
 @endsection
