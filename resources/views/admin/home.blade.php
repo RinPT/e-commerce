@@ -197,54 +197,54 @@
                 <div class="card-body">
                     <div id="ChartistLineChartWithTooltips" class="ct-chart ct-perfect-fourth ct-golden-section">
 
-                        <script type="text/javascript">
-                                new Chartist.Line('#ChartistLineChartWithTooltips', {
-                                    labels: ['1', '2', '3', '4', '5', '6','7','8','9','10','11','12'],
-                                    series: [{
-                                        name: 'Monthly orders',
-                                        data: [ {{
-                                        DB::table('orders')->whereMonth('created_at', '1')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '2')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '3')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '4')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '5')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '6')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '7')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '8')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '9')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '10')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '11')->count(),
-                                        DB::table('orders')->whereMonth('created_at', '12')->count()
-                                        }}
-                                        ]
-                                    }]
-                                });
+{{--                        <script type="text/javascript">--}}
+{{--                                new Chartist.Line('#ChartistLineChartWithTooltips', {--}}
+{{--                                    labels: ['1', '2', '3', '4', '5', '6','7','8','9','10','11','12'],--}}
+{{--                                    series: [{--}}
+{{--                                        name: 'Monthly orders',--}}
+{{--                                        data: [ {{--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '1')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '2')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '3')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '4')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '5')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '6')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '7')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '8')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '9')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '10')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '11')->count(),--}}
+{{--                                        DB::table('orders')->whereMonth('created_at', '12')->count()--}}
+{{--                                        }}--}}
+{{--                                        ]--}}
+{{--                                    }]--}}
+{{--                                });--}}
 
-                                var $chart = $('#ChartistLineChartWithTooltips');
+{{--                                var $chart = $('#ChartistLineChartWithTooltips');--}}
 
-                                var $toolTip = $chart
-                                    .append('<div class="tooltip"></div>')
-                                    .find('.tooltip')
-                                    .hide();
+{{--                                var $toolTip = $chart--}}
+{{--                                    .append('<div class="tooltip"></div>')--}}
+{{--                                    .find('.tooltip')--}}
+{{--                                    .hide();--}}
 
-                                $chart.on('mouseenter', '.ct-point', function() {
-                                    var $point = $(this),
-                                        value = $point.attr('ct:value'),
-                                        seriesName = $point.parent().attr('ct:series-name');
-                                    $toolTip.html(seriesName + '<br>' + value).show();
-                                });
+{{--                                $chart.on('mouseenter', '.ct-point', function() {--}}
+{{--                                    var $point = $(this),--}}
+{{--                                        value = $point.attr('ct:value'),--}}
+{{--                                        seriesName = $point.parent().attr('ct:series-name');--}}
+{{--                                    $toolTip.html(seriesName + '<br>' + value).show();--}}
+{{--                                });--}}
 
-                                $chart.on('mouseleave', '.ct-point', function() {
-                                    $toolTip.hide();
-                                });
+{{--                                $chart.on('mouseleave', '.ct-point', function() {--}}
+{{--                                    $toolTip.hide();--}}
+{{--                                });--}}
 
-                                $chart.on('mousemove', function(event) {
-                                    $toolTip.css({
-                                        left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,
-                                        top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40
-                                    });
-                                });
-                        </script>
+{{--                                $chart.on('mousemove', function(event) {--}}
+{{--                                    $toolTip.css({--}}
+{{--                                        left: (event.offsetX || event.originalEvent.layerX) - $toolTip.width() / 2 - 10,--}}
+{{--                                        top: (event.offsetY || event.originalEvent.layerY) - $toolTip.height() - 40--}}
+{{--                                    });--}}
+{{--                                });--}}
+{{--                        </script>--}}
 
                     </div>
 
@@ -269,13 +269,13 @@
                     <div class="chart chart-md" id="morrisBar"></div>
                     <script type="text/javascript">
 
-                        var morrisBarData = [{
+                        {{--var morrisBarData = [{--}}
 
-                            @foreach($yearlyOrders as $yearlyOrder)
-                            y: '{{$yearlyOrder}}',
-                            a: {{DB::table('orders')->whereMonth('created_at', '$yearlyOrder')->count()}}
-                        },
-                        @endforeach];
+                        {{--    @foreach($yearlyOrders as $yearlyOrder)--}}
+                        {{--    y: '{{$yearlyOrder}}',--}}
+                        {{--    a: {{DB::table('orders')->whereMonth('created_at', '$yearlyOrder')->count()}}--}}
+                        {{--},--}}
+                        {{--@endforeach];--}}
 
                         // See: js/examples/examples.charts.js for more settings.
 

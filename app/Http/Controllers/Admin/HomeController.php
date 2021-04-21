@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $yearlyOrder = Order::selectRaw("DATE_FORMAT(YEAR, '%Y') AS year, COUNT(*) AS total") ->groupBy('year') ->get();
+//        $yearlyOrder = Order::selectRaw("DATE_FORMAT(YEAR, '%Y') AS year, COUNT(*) AS total") ->groupBy('year') ->get();
         $user = User::get();
         $store = Store::get();
         $product = Product::get();
@@ -30,7 +30,7 @@ class HomeController extends Controller
             'store' => $store,
             'product' => $product,
             'order' => $order,
-            'yearlyOrder' => $yearlyOrder
+//            'yearlyOrder' => $yearlyOrder
         ]);
     }
 
