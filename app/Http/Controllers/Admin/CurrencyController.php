@@ -65,7 +65,7 @@ class CurrencyController extends Controller
     }
 
     public function destroy($currency_id) {
-        Currencies::where('id', '=', $currency_id)->delete();
+        Currencies::find($currency_id)->delete();
         return back()->with("destroy", "Currency removed from the system!");
     }
 }

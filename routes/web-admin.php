@@ -83,12 +83,10 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
 
     //Admin Settings
     Route::get('/currencies', [CurrencyController::class, 'index'])->name('admin.currency');
-
-    Route::get('/add_currency', [CurrencyController::class, 'create'])->name('admin.currency.create');
-    Route::post('/add_currency', [CurrencyController::class, 'store']);
-
-    Route::post('/update_currency/{currency:name}', [CurrencyController::class, 'update'])->name('admin.currency.update');
-    Route::get('/delete_currency/{id}', [CurrencyController::class, 'destroy'])->name('admin.currency.delete');
+    Route::get('/create/currency', [CurrencyController::class, 'create'])->name('admin.currency.create');
+    Route::post('/create/currency', [CurrencyController::class, 'store']);
+    Route::post('/update/currency/{currency:name}', [CurrencyController::class, 'update'])->name('admin.currency.update');
+    Route::get('/delete/currency/{id}', [CurrencyController::class, 'destroy'])->name('admin.currency.delete');
 
 
     //Complain Operations :
