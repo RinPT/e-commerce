@@ -47,8 +47,7 @@ class UserController extends Controller
 
     public function destroy($user_id)
     {
-        $user = User::find($user_id);
-        $user->delete();
-        return back();
+        User::find($user_id)->delete();
+        return back()->with("destroy", "User removed from the system!");
     }
 }

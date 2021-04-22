@@ -7,6 +7,16 @@
 @endsection
 
 @section('content')
+    @if(session('destroy'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Deleted!</strong> {{ session('destroy') }}
+                </div>
+            </div>
+        </div>
+    @endif
     <section class="card">
         <header class="card-header">
             <h2 class="card-title">Currencies</h2>
@@ -38,9 +48,13 @@
                                 <td>{{$user->gender}}</td>
                                 <td>{{$user->group}}</td>
                                 <td>{{$user->status}}</td>
-                                <td class="actions">
+                                <td class="actions d-flex">
                                     <a href="#" class="modal-with-zoom-anim ws-normal btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></a>
+                                    <form action="{{ route('admin.user.delete', $user->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
