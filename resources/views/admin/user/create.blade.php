@@ -6,6 +6,17 @@
 @endsection
 
 @section('content')
+    @if(session('status'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Success!</strong> {{ session('status') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
     <section class="card card-modern card-big-info">
         <div class="card-body">
             <div class="row">

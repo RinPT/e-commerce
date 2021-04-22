@@ -33,15 +33,15 @@ class UserController extends Controller
             'password' =>'required|confirmed',
         ]);
 
-            User::create([
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
+        User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
 
-            ]);
-        return back();
+        return back()->with("status", "User ($request->name $request->surname) created successfully!");
     }
 
 
