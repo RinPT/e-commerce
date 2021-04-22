@@ -388,14 +388,14 @@
 											<span>User Management</span>
 										</a>
 										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="{{route('admin.user.create')}}">
-													Add New User
+                                            <li>
+												<a class="nav-link" href="{{route('admin.user.index')}}">
+													All Users
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{route('admin.user.index')}}">
-													Users
+												<a class="nav-link" href="{{route('admin.user.create')}}">
+													Add New User
 												</a>
 											</li>
 										</ul>

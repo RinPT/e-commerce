@@ -58,7 +58,7 @@
             <h2 class="card-title">Currencies</h2>
         </header>
         <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-default"">
+            <table class="table table-bordered table-striped mb-0" id="datatable-default">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -160,6 +160,7 @@
             </table>
         </div>
     </section>
+
 @endsection
 
 @section('custom-scripts')
