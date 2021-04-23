@@ -152,5 +152,6 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::get('/user', [UserController::class, 'index'])->name('admin.user.index'); //show all users
     Route::get('/user/create', [UserController::class, 'create'])->name('admin.user.create'); //create a new user
     Route::post('/user/create/done', [UserController::class, 'store'])->name('admin.user.store');
-    Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
+    Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
+    Route::post('/user/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
 });

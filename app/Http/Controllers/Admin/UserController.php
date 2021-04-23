@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,8 +13,10 @@ class UserController extends Controller
 
     public function index() {
         $user=User::get();
+        $groups = Group::get();
         return view('admin.user.index', [
-            'users' => $user
+            'users' => $user,
+            'groups' => $groups
         ]);
     }
 
@@ -28,8 +31,8 @@ class UserController extends Controller
         $this -> validate($request, [
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'username' => 'required|max:255',
-            'email'=> 'required|email|max:255',
+            'username' => 'required|max:255 | unique:users,surname',
+            'email'=> 'required|email|max:255 | unique:users,email',
             'password' =>'required|confirmed',
         ]);
 
@@ -42,6 +45,32 @@ class UserController extends Controller
         ]);
 
         return back()->with("status", "User ($request->name $request->surname) created successfully!");
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'username' => 'required|max:255 | unique:users,surname',
+            'email'=> 'required|email|max:255 | unique:users,email',
+        ]);
+
+        $user = User::find($id);
+
+
+        $user->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'username' => $request->username,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'group' => $request->group,
+            'status' => $request->status
+        ]);
+
+
+        return back()->with("updated", "User's information has been updated!");
     }
 
 
