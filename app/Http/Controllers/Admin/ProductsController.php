@@ -87,7 +87,7 @@ class ProductsController extends Controller
             // Upload image
             $image->move(public_path($folder), $imageName. '.' . $image->extension());
 
-            Product_Images::create([                
+            Product_Images::create([
                 'product_id' => $product->id,
                 'image' => $filePath,
             ]);
@@ -121,7 +121,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         // $this->validate($request, [
         //     'name' => 'max:32',
         //     'images' => 'image|mimes:jpeg,png,jpg,gif,svg',
