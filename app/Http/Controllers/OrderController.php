@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Currencies;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
     public function index() {
 
         $currencies = Currencies::get();
 
-        return view('cart', [
+        return view('order', [
             'currencies' => $currencies
         ]);
     }
