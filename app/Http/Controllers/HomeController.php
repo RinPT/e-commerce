@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Currencies;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index() {
-    	return view('home');
+
+        $currencies = Currencies::get();
+
+    	return view('home', [
+            'currencies'  => $currencies,
+        ]);
     }
 }

@@ -53,11 +53,13 @@
                     </div>
                     <div class="header-right">
                         <div class="dropdown">
-                            <a href="#currency">USD</a>
-                            <ul class="dropdown-box">
-                                <li><a href="#USD">USD</a></li>
-                                <li><a href="#EUR">EUR</a></li>
-                            </ul>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                @if ($currencies->count())
+                                    @foreach ($currencies as $currency)
+                                        <option>{{ $currency->code }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                         <!-- End DropDown Menu -->
                         <div class="dropdown ml-5">

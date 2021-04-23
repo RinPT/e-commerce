@@ -39,7 +39,7 @@ class CurrencyController extends Controller
             'status' => $request->status,
         ]);
 
-        return back()->with("status", "Currency added successfully.");
+        return back()->with("status", "Currency ($request->name) added to the system successfully.");
     }
 
     public function update(Request $request, $currency_id) {
