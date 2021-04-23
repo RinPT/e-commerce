@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
