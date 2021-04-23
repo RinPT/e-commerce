@@ -77,16 +77,20 @@
                         @foreach ($currencies as $currency)
                             <tr data-item-id="{{ $currency->id }}">
                                 <td>{{ $currency->id }}</td>
-                                <form>@csrf<td>{{ $currency->name }}</td><form>
+                                <td>{{ $currency->name }}</td>
                                 <td>{{ $currency->code }}</td>
                                 <td>{{ $currency->prefix }}</td>
                                 <td>{{ $currency->suffix }}</td>
                                 <td>{{ $currency->rate }}</td>
                                 <td>{{ $currency->status }}</td>
                                 <td>{{ $currency->updated_at->format('d/m/Y') }}</td>
-                                <td class="actions">
+                                <td class="actions d-flex">
                                     <a href="#currencyEdit{{ $currency->id }}" class="modal-with-zoom-anim ws-normal btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('admin.currency.delete', $currency->id) }}" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></a>
+                                    <form action="{{ route('admin.currency.delete', $currency->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
+                                    </form>
 
                                     <!-- Modal Animation -->
 									<div id="currencyEdit{{ $currency->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
@@ -97,7 +101,6 @@
 											<div class="card-body">
                                                 <form action="{{ route('admin.currency.update', $currency->id) }}" method="POST">
                                                     @csrf
-                                                    @method('PATCH')
                                                     <div class="modal-wrapper mb-0">
                                                         <div class="form-group row @error('name') has-danger @enderror">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>

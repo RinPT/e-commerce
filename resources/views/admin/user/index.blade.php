@@ -10,25 +10,6 @@
 @endsection
 
 @section('content')
-    @if(session('destroy'))
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Deleted!</strong> {{ session('destroy') }}
-                </div>
-            </div>
-        </div>
-    @elseif(session('updated'))
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Updated!</strong> {{ session('updated') }}
-                </div>
-            </div>
-        </div>
-    @endif
     <section class="card">
         <header class="card-header">
             <h2 class="card-title">Users</h2>
@@ -39,18 +20,18 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Surname</th>
-                        <th>Username</th>
-                        <th>E-mail</th>
-                        <th>Gender</th>
-                        <th>Group</th>
+                        <th>Code</th>
+                        <th>Prefix</th>
+                        <th>Suffix</th>
+                        <th>Rate</th>
                         <th>Status</th>
+                        <th>Last Update</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if($users->count())
-                        @foreach($users as $user)
+                    @if($currencies->count())
+                        @foreach($currencies as $currency)
                             <tr>
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>

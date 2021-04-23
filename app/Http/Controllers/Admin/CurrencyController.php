@@ -11,7 +11,7 @@ class CurrencyController extends Controller
     public function index() {
         $currencies = Currencies::get();
 
-        return view('admin.settings.currencies', [
+        return view('admin.settings.index', [
             'currencies' => $currencies,
         ]);
     }
