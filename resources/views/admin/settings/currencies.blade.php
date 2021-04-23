@@ -97,6 +97,7 @@
 											<div class="card-body">
                                                 <form action="{{ route('admin.currency.update', $currency->id) }}" method="POST">
                                                     @csrf
+                                                    @method('PATCH')
                                                     <div class="modal-wrapper mb-0">
                                                         <div class="form-group row @error('name') has-danger @enderror">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
