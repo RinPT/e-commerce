@@ -99,7 +99,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('custom-scripts')
     <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/select2/js/select2.js"></script>
 @endsection

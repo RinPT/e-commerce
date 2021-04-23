@@ -23,9 +23,7 @@ class Store extends Model
         'address',
         'phone',
         'status',
-        'created_at',
-        'updated_at',
 
-        
+
     ];
 }

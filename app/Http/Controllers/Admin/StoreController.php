@@ -20,7 +20,7 @@ class StoreController extends Controller
     public function index()
     {
         return view('admin.store.index')->with([
-            'store' => Store::all()
+            'stores' => Store::all()
         ]);
     }
 
@@ -42,38 +42,38 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $store = Store::create([
-                'id' => $request->id,
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'logo'=> $request->logo,
-                'url'=> $request->url,
-                'tax_no'=> $request->tax_no,
-                'country_id'=> $request->country_id,
-                'city'=> $request->city,
-                'address'=> $request->address,
-                'phone'=> $request->phone,
-                'status'=> $request->status,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
 
+        $this -> validate($request, [
+            'name' => 'required|max:255',
+            'username' => 'required|max:255 | unique:store,username',
+            'email'=> 'required|email|max:255 | unique:store,email',
+            'password' =>'required|confirmed',
+            'logo' => 'required',
+            'url' => 'required | unique:store,url',
+            'tax_no' => 'required | unique:store,tax_no',
+            'country_id' => 'required | numeric',
+            'city' => 'required',
+            'address' => 'required',
+            'phone' => 'required | unique:store,phone',
+            'status' => 'required',
 
-            ]);   
-      
-            return back()->with('success', 'New store added.');
+        ]);
 
-
-        } catch (\Exception $e) { // It's actually a QueryException but this works too
-            if ($e->getCode() == 23000) {
-
-                return back()->with('error', 'There is already an store for this name.');
-            }
-        }
-
-        return back();
+            Store::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'logo'=> $request->logo,
+            'url'=> $request->url,
+            'tax_no'=> $request->tax_no,
+            'country_id'=> $request->country_id,
+            'city'=> $request->city,
+            'address'=> $request->address,
+            'phone'=> $request->phone,
+            'status'=> $request->status,
+        ]);
+        return back()->with('success', 'New store added.');
     }
 
     /**
@@ -107,30 +107,41 @@ class StoreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            Store::findOrFail($id)->update([
-                'id' => $request->id,
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'logo'=> $request->logo,
-                'url'=> $request->url,
-                'tax_no'=> $request->tax_no,
-                'country_id'=> $request->country_id,
-                'city'=> $request->city,
-                'address'=> $request->address,
-                'phone'=> $request->phone,
-                'status'=> $request->status,
-                'updated_at' => Carbon::now(),
-            ]);
-            return back()->with('success', 'Information updated successfully');
-        } catch (\Exception $e) { // It's actually a QueryException but this works too
-            if ($e->getCode() == 23000) {
-                return back()->with('error', 'Error Updating Store');
-            }
-        }
-        return back();
+
+        $this -> validate($request, [
+            'id' => 'required | unique:store,id',
+            'name' => 'required|max:255',
+            'username' => 'required|max:255 | unique:store,username',
+            'email'=> 'required|email|max:255 | unique:store,email',
+            'password' =>'required|confirmed',
+            'logo' => 'required',
+            'url' => 'required | unique:store,url',
+            'tax_no' => 'required | unique:store,tax_no',
+            'country_id' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'phone' => 'required | unique:store,phone',
+            'status' => 'required',
+
+        ]);
+            $store = Store::find($id);
+
+            $store->update([
+            'id' => $request->id,
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'logo'=> $request->logo,
+            'url'=> $request->url,
+            'tax_no'=> $request->tax_no,
+            'country_id'=> $request->country_id,
+            'city'=> $request->city,
+            'address'=> $request->address,
+            'phone'=> $request->phone,
+            'status'=> $request->status,
+        ]);
+        return back()->with('success', 'Information updated successfully');
     }
 
     /**
@@ -177,12 +188,12 @@ class StoreController extends Controller
                 'updated_at' => Carbon::now(),
 
 
-            ]);   
-            
+            ]);
+
             return back()->with('success', 'New application added.');
 
 
-        } 
+        }
         catch (\Exception $e) { // It's actually a QueryException but this works too
         dd($e);
             if ($e->getCode() == 23000) {
@@ -229,7 +240,7 @@ class StoreController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
 
-            ]);   
+            ]);
 
             Store_Requests::findOrFail($id)->delete();
             return $this->store_requests()->with('success', 'New store added and the request is removed.');

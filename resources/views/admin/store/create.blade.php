@@ -29,12 +29,6 @@
                     @endif
                     <form action="{{ route('admin.store.store') }}" class="form-horizontal form-bordered mt-5" method="post">
                         @csrf
-                        <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store ID</label>
-                            <div class="col-lg-6">
-                                <input type="text" name="id" class="form-control" id="inputDefault"  required>
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Name</label>
@@ -52,21 +46,28 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Email</label>
                             <div class="col-lg-6">
-                                <input type="text" name="email" class="form-control" id="inputDefault"  required >
+                                <input type="email" name="email" class="form-control" id="inputDefault"  required >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Password</label>
                             <div class="col-lg-6">
-                                <input type="text" name="password" class="form-control" id="inputDefault"  required >
+                                <input type="password" name="password" class="form-control" id="inputDefault"  required >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Repeat Password</label>
+                            <div class="col-lg-6">
+                                <input type="password" name="password_confirmation" class="form-control" id="inputDefault"  required >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Logo</label>
                             <div class="col-lg-6">
-                                <input type="text" name="logo" class="form-control" id="inputDefault"  required>
+                                <input type="file" name="logo" class="form-control" id="inputDefault"  required>
                             </div>
                         </div>
 
@@ -115,18 +116,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
                             <div class="col-lg-6">
-                                <input type="text" name="status" class="form-control" id="inputDefault"  required>
+                                <select class="form-control mb-3" name="status">
+                                    <option selected>0</option>
+                                    <option>1</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="form-group row text-center">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>
-                            <div class="col-lg-6">
-                                <button type="submit" class="btn btn-dark">Add</button>
-                            </div>
-                        </div>
+                         <div class="form-group row d-flex justify-content-end">
+                             <button type="submit" class="btn btn-primary">Add +</button>
+                         </div>
                     </form>
                 </div>
             </div>
@@ -134,7 +135,7 @@
     </section>
 @endsection
 
-@section('scripts')
+@section('custom-scripts')
     <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/select2/js/select2.js"></script>
 @endsection
