@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Currencies;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -19,10 +20,12 @@ class AccountController extends Controller
 
         $user = User::findOrFail(auth()->user()->id);
         $addresses = UserAddress::latest()->paginate(20);
+        $currencies = Currencies::get();
 
         return view('users.account', [
             'user' => $user,
             'addresses' => $addresses,
+            'currencies' => $currencies
         ]);
     }
 

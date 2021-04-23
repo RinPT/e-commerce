@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currencies;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     public function index() {
-        return view('users.login');
+
+        $currencies = Currencies::get();
+
+        return view('users.login', [
+            'currencies' => $currencies
+        ]);
     }
 
     public function store(Request $request) {

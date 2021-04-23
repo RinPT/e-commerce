@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\Product;
+use App\Models\Currencies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,9 +13,11 @@ class ProductsController extends Controller
     public function index() {
 
         $products = Product::get();
+        $currencies = Currencies::get();
 
         return view('products', [
             'products' => $products,
+            'currencies' => $currencies
         ]);
     }
 

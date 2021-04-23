@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Controller;
+use App\Models\Currencies;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -14,7 +15,12 @@ class RegisterController extends Controller
     }
 
     public function index() {
-        return view('users.register');
+
+        $currencies = Currencies::get();
+
+        return view('users.register', [
+            'currencies' => $currencies
+        ]);
     }
 
     public function store(Request $request)
