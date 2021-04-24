@@ -93,7 +93,7 @@
                         <select name="parent_id" class="form-control">
                             <option value="0">None</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->parent_id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
