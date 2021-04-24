@@ -300,13 +300,13 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="{{route('add.user_group_display')}}">
-													Add a New Advertisement
+												<a class="nav-link" href="{{route('admin.advertisement.index')}}">
+													Advertisements
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{route('add.user_group_display')}}">
-													Category Advertisemets
+												<a class="nav-link" href="{{route('admin.advertisement.create')}}">
+													Add a new advertisement
 												</a>
 											</li>
 										</ul>

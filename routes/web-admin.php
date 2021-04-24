@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Admin\UserController as UserController;
+use \App\Http\Controllers\Admin\AdvertisementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Admin\AuthorController;
@@ -154,4 +155,12 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::post('/user/create/done', [UserController::class, 'store'])->name('admin.user.store');
     Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->name('admin.user.delete');
     Route::post('/user/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
+
+    //Advertisement
+    Route::get('/advertisement', [AdvertisementController::class, 'index'])->name('admin.advertisement.index');
+    Route::get('/advertisement/create', [AdvertisementController::class, 'create'])->name('admin.advertisement.create');
+    Route::post('/advertisement/create/done', [AdvertisementController::class, 'store'])->name('admin.advertisement.store');
+    Route::post('/advertisement/update/{id}', [AdvertisementController::class, 'update'])->name('admin.advertisement.update');
+    Route::get('/advertisement/delete/{id}', [AdvertisementController::class, 'destroy'])->name('admin.advertisement.delete');
+
 });
