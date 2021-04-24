@@ -218,7 +218,7 @@ class Util
     }
 
     /**
-     * Ensure a Config instance.
+     * Ensure a Configs instance.
      *
      * @param null|array|Config $config
      *

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateConfig extends Migration
@@ -19,6 +20,62 @@ class CreateConfig extends Migration
             $table->string('value');
             $table->timestamps();
         });
+        DB::table('config')->insert([
+            [
+                'key' => 'site_title',
+                'value' => 'E-commerce Demo',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'site_logo',
+                'value' => 'logo.jpg',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'default_product_logo',
+                'value' => 'default_product.jpg',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'product_count_per_click_main_page',
+                'value' => '15',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'product_count_per_click_category_page',
+                'value' => '20',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'email_confirmation_required',
+                'value' => '1',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'registration_rules',
+                'value' => '<h1>Registration rules</h1><p>Lorem ipsum....</p>',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'privacy_policy',
+                'value' => '<h1>Privacy policy</h1><p>Lorem ipsum....</p>',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'purchase_rules',
+                'value' => '<h1>Purchase rules</h1><p>Lorem ipsum....</p>',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]
+        ]);
     }
 
     /**

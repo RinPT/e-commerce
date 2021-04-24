@@ -80,7 +80,7 @@ class ConfigPaths
     /**
      * Find real config files in config directories.
      *
-     * @param string[] $names     Config file names
+     * @param string[] $names     Configs file names
      * @param string   $configDir Optionally use a specific config directory
      *
      * @return string[]
@@ -114,7 +114,7 @@ class ConfigPaths
     /**
      * Find real data files in config directories.
      *
-     * @param string[] $names   Config file names
+     * @param string[] $names   Configs file names
      * @param string   $dataDir Optionally use a specific config directory
      *
      * @return string[]

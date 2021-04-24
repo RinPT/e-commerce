@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CargoController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\StoreController;
+use App\Http\Controllers\Admin\GeneralSettingController;
 
 
 Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function() {
@@ -30,6 +31,9 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
 
     Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('admin.home');
+
+    Route::get('/general-settings', [GeneralSettingController::class, 'edit'])->name('admin.general-setting.edit');
+    Route::post('/general-settings', [GeneralSettingController::class, 'update'])->name('admin.general-setting.update');
 
     Route::get('/perms', [PermController::class, 'index'])->name('admin.perms.index');
     Route::get('/perm/create', [PermController::class, 'create'])->name('admin.perm.create');

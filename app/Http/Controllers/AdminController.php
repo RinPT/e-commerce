@@ -98,7 +98,7 @@ class AdminController extends Controller
 
     	]);
     }
-	
+
 
     public function delete_reply(Request $request, Ticket_Replies $ticket_replies)
     {

@@ -42,8 +42,6 @@
 
 		<!--(remove-empty-lines-end)-->
 
-
-
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="/admin/css/custom.css">
 
@@ -132,7 +130,7 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="">
+												<a class="nav-link" href="{{ route('admin.general-setting.edit') }}">
 												   General Settings
 												</a>
 											</li>
@@ -569,7 +567,7 @@
 		<script src="/admin/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
 
         <!-- Specific Page Vendor -->
-        @yield('custom-scripts')
+        @yield('scripts')
 
 
 		<!--(remove-empty-lines-end)-->

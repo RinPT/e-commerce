@@ -1,4 +1,4 @@
-// Config Variable
+// Configs Variable
 $config: ();
 
 // # Get value function
@@ -26,7 +26,7 @@ $config: ();
 // 	$changes: $value;
 
 // 	@for $i from length( $keys ) through 1 {
-// 		$changes: ( 
+// 		$changes: (
 // 			nth( $keys, $i ) : $changes
 // 		);
 // 	}
@@ -37,7 +37,7 @@ $config: ();
 // 	$changes: $value;
 
 // 	@for $i from length( $keys ) through 1 {
-// 		$changes: ( 
+// 		$changes: (
 // 			nth( $keys, $i ) : $changes
 // 		);
 // 	}

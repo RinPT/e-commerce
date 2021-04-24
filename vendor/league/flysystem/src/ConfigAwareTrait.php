@@ -23,7 +23,7 @@ trait ConfigAwareTrait
     }
 
     /**
-     * Get the Config.
+     * Get the Configs.
      *
      * @return Config config object
      */
@@ -33,7 +33,7 @@ trait ConfigAwareTrait
     }
 
     /**
-     * Convert a config array to a Config object with the correct fallback.
+     * Convert a config array to a Configs object with the correct fallback.
      *
      * @param array $config
      *

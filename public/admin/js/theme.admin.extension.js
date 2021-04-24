@@ -356,7 +356,7 @@ window.admin = {};
 
 }).apply(this, [jQuery]);
 
-// Data Tables - Config
+// Data Tables - Configs
 (function($) {
 
 	'use strict';
@@ -1729,7 +1729,7 @@ window.admin = {};
 
 }).apply(this, [jQuery]);
 
-// Notifications - Config
+// Notifications - Configs
 (function($) {
 
 	'use strict';
