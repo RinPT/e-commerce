@@ -23,6 +23,47 @@ class CreateCurrencies extends Migration
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
+
+
+        DB::table('currencies')->insert([
+            'name' => 'Turkish Lira',
+            'code' => 'TL',
+            'prefix' => '₺',
+            'suffix' =>'₺',
+            'rate' => 10,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('currencies')->insert([
+            'name' => 'US Dollars',
+            'code' => 'Dollars',
+            'prefix' => '$',
+            'suffix' =>'$',
+            'rate' => 8,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('currencies')->insert([
+            'name' => 'Euro',
+            'code' => 'Euro',
+            'prefix' => '€',
+            'suffix' =>'€',
+            'rate' => 9,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('currencies')->insert([
+            'name' => 'Sterling Pound',
+            'code' => 'GBP',
+            'prefix' => '£',
+            'suffix' =>'£',
+            'rate' => 12,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 
     /**

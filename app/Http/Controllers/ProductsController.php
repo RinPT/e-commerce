@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Models\Product;
 use App\Models\Currencies;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +15,14 @@ class ProductsController extends Controller
 
         $products = Product::get();
         $currencies = Currencies::get();
+        $categories = Categories::get();
+        $items = Categories::tree();
 
         return view('products', [
             'products' => $products,
-            'currencies' => $currencies
+            'currencies' => $currencies,
+            'categories'  => $categories,
+            'items' => $items,
         ]);
     }
 
