@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Currencies;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -17,9 +18,13 @@ class RegisterController extends Controller
     public function index() {
 
         $currencies = Currencies::get();
+        $categories = Categories::get();
+        $items = Categories::tree();
 
         return view('users.register', [
-            'currencies' => $currencies
+            'currencies' => $currencies,
+            'categories'  => $categories,
+            'items' => $items,
         ]);
     }
 

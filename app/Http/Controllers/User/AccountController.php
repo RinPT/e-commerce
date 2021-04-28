@@ -7,6 +7,7 @@ use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Currencies;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -21,11 +22,15 @@ class AccountController extends Controller
         $user = User::findOrFail(auth()->user()->id);
         $addresses = UserAddress::latest()->paginate(20);
         $currencies = Currencies::get();
+        $categories = Categories::get();
+        $items = Categories::tree();
 
         return view('users.account', [
             'user' => $user,
             'addresses' => $addresses,
-            'currencies' => $currencies
+            'currencies' => $currencies,
+            'categories'  => $categories,
+            'items' => $items,
         ]);
     }
 
