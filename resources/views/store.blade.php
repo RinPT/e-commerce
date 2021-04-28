@@ -35,30 +35,22 @@
                             <div class="sticky-sidebar">
                                 <div class="widget widget-collapsible">
                                     <h3 class="widget-title">All Categories</h3>
-                                    <ul class="widget-body filter-items search-ul">
-                                        <li><a href="#">Accessosries</a></li>
+                                    <ul class="widget-body filter-items search-ul" >
+                                    @foreach($items as $item)
                                         <li>
-                                            <a href="#">Bags</a>
+                                            <a href="#"><h6>{{ $item->name }}</h6></a>
+                                        </li>
+                                        @foreach($item['children'] as $child)
+                                        <li>
+                                            <a href="#">{{ $child->name }}</a>
                                             <ul style="display: block">
-                                                <li><a href="#">Backpacks & Fashion Bags</a></li>
-                                            </ul>
+                                                @foreach($child['children'] as $child2)
+                                                <li><a href="#">{{ $child2->name }}</a></li>
+                                                @endforeach
+                                            </ul>  
                                         </li>
-                                        <li>
-                                            <a href="#">Electronics</a>
-                                            <ul>
-                                                <li><a href="#">Computer</a></li>
-                                                <li><a href="#">Gaming & Accessosries</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">For Fitness</a></li>
-                                        <li><a href="#">Home & Kitchen</a></li>
-                                        <li><a href="#">Men's</a></li>
-                                        <li><a href="#">Shoes</a></li>
-                                        <li><a href="#">Sporting Goods</a></li>
-                                        <li><a href="#">Summer Season's</a></li>
-                                        <li><a href="#">Travel & Clothing</a></li>
-                                        <li><a href="#">Watches</a></li>
-                                        <li><a href="#">Women’s</a></li>
+                                        @endforeach
+                                    @endforeach
                                     </ul>
                                 </div>
                                 <div class="widget widget-collapsible">
@@ -103,6 +95,7 @@
                                         <li><a href="#">Rightcheck</a></li>
                                         <li><a href="#">SkillStar</a></li>
                                         <li><a href="#">SLS</a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -149,6 +142,7 @@
                                 </div>
                             </div>
                         </nav>
+
                         <div class="row cols-2 cols-sm-3 product-wrapper">
                             @if ($products->count())
                                 @foreach ($products as $product)
@@ -178,7 +172,7 @@
                                                     <a href="shop-grid-3col.html">Shoes</a>
                                                 </div>
                                                 <h3 class="product-name">
-                                                    <a href="{{ route('product', $product) }}">{{ $product->name }}</a>
+                                                    <a href="{{ route('products', $product) }}">{{ $product->name}}</a>
                                                 </h3>
                                                 <div class="product-price">
                                                     <span class="price">{{ $product->price }}₺</span>
@@ -195,6 +189,8 @@
                                     </div>
                                 @endforeach
                             @else
+
+                            <p> No products yet. </p>
 
                             @endif
                         </div>
