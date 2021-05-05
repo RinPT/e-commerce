@@ -21,9 +21,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products=Product::get();
+        $products = Product::get();
+        $currencies = Currencies::get();
+
     	return view('admin.products.index',[
     		'products'=> $products,
+            'currencies' => $currencies,
     	]);
     }
 

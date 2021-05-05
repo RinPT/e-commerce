@@ -51,7 +51,7 @@
                         <input type="text" class="form-control" id="inputDefault" name="name">
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store</label>
                     <div class="col-lg-6">
@@ -107,7 +107,7 @@
                     <div class="col-lg-6">
                         <select name="currency_id" class="form-control">
                             @foreach ($currencies as $currency)
-                                <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                <option value="{{ $currency->id }}">{{ $currency->code }}</option>
                             @endforeach
                         </select>
                     </div>

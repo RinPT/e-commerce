@@ -30,8 +30,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if($currencies->count())
-                        @foreach($currencies as $currency)
+                    @if($users->count())
+                        @foreach($users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
