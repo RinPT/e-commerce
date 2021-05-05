@@ -61,7 +61,7 @@ class CargoController extends Controller
             }
         }
 
-        return back();
+        return back()->with('created', 'Successfully created.');
     }
 
     /**
@@ -126,6 +126,6 @@ class CargoController extends Controller
     public function destroy($id)
     {
         Countries::findOrFail($id)->delete();
-        return back()->with('success', 'Order removed successfully.');
+        return back()->with('destroy', 'Order removed successfully.');
     }
 }

@@ -6,6 +6,25 @@
 @endsection
 
 @section('content')
+    @if(session('created'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Success!</strong> {{ session('created') }}
+                </div>
+            </div>
+        </div>
+    @elseif(session('error'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Error!</strong> {{ session('error') }}
+                </div>
+            </div>
+        </div>
+    @endif
     <section class="card card-modern card-big-info">
         <div class="card-body">
             <div class="row">
@@ -15,53 +34,51 @@
                     <p class="card-big-info-desc">You can add a new country by filling below information.</p>
                 </div>
                 <div class="col-lg-3-5 col-xl-4-5">
-                    @if(Session::has('success'))
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <strong>Success</strong> {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    @if(Session::has('error'))
-                        <div class="alert alert-danger">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <strong>Error!</strong> {{ Session::get('error') }}
-                        </div>
-                    @endif
-                    <form action="{{ route('admin.cargo.store') }}" class="form-horizontal form-bordered mt-5" method="post">
+                    <form action="{{ route('admin.cargo.store') }}" method="POST" class="form" enctype="multipart/form-data">
                         @csrf
+
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Country ID</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2">Country ID</label>
                             <div class="col-lg-6">
-                                <input type="text" name="id" class="form-control" id="inputDefault" required>
+                                <input type="text" class="form-control" id="inputDefault" name="id" @error('countryid')style="border-color: red;"@enderror placeholder="Country ID" value="{{ old('id') }}">
+                                @error('countryid')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Country Name</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2">Country Name</label>
                             <div class="col-lg-6">
-                                <input type="text" name="name" class="form-control" id="inputDefault" required>
+                                <input type="text" class="form-control" id="inputDefault" name="name" @error('name')style="border-color: red;"@enderror placeholder="Country Name" value="{{ old('name') }}">
+                                @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">ISO Code</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2">ISO Code</label>
                             <div class="col-lg-6">
-                                <input type="text" name="iso_code" class="form-control" id="inputDefault" required>
+                                <input type="text" class="form-control" id="inputDefault" name="iso_code" @error('isocode')style="border-color: red;"@enderror placeholder="ISO Code" value="{{ old('iso_code') }}">
+                                @error('isocode')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
                             <div class="col-lg-6">
-                                <input type="text" name="status" class="form-control" id="inputDefault" required>
+                                <select class="form-control mb-3" name="status">
+                                    <option selected>0</option>
+                                    <option>1</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="form-group row text-center">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>
-                            <div class="col-lg-6">
-                                <button type="submit" class="btn btn-dark">Add</button>
-                            </div>
+                        <div class="form-group row d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Add +</button>
                         </div>
                     </form>
                 </div>
