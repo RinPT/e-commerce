@@ -155,10 +155,10 @@
                                         <input class="quantity form-control" type="number" min="1" max="1000000">
                                         <button class="quantity-plus d-icon-plus"></button>
                                     </div>
-                                    <button
-                                        class="btn-product btn-cart text-normal ls-normal font-weight-semi-bold"><i
+                                    <a href="#"
+                                        class="btn-product btn-cart text-light ls-normal font-weight-semi-bold"><i
                                             class="d-icon-bag"></i>Add to
-                                        Cart</button>
+                                        Cart</a>
                                 </div>
                             </div>
 

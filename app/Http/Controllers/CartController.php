@@ -20,4 +20,8 @@ class CartController extends Controller
             'items' => $items,
         ]);
     }
+
+    public function store() {
+
+    }
 }

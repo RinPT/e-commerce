@@ -169,7 +169,7 @@
                                             </figure>
                                             <div class="product-details">
                                                 <div class="product-cat">
-                                                    <a href="#">{{ App\Models\Categories::where('id','=', 1)->first()->name }}</a>
+                                                    <a href="#">{{ App\Models\Categories::where('id','=', $product->category_id)->first()->name }}</a>
                                                 </div>
                                                 <h3 class="product-name">
                                                     <a href="{{ route('product.profile', $product) }}">{{ $product->name}}</a>
