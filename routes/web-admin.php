@@ -82,7 +82,6 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::get('/cargo', [CargoController::class, 'index'])->name('admin.cargo');
     Route::get('/cargo/create', [CargoController::class, 'create'])->name('admin.cargo.create');
     Route::post('/cargo/create', [CargoController::class, 'store'])->name('admin.cargo.store');
-    Route::get('/cargo/{id}/update/', [CargoController::class, 'edit'])->name('admin.cargo.edit');
     Route::post('/cargo/{id}/update/', [CargoController::class, 'update'])->name('admin.cargo.update');
     Route::get('/cargo/{id}/delete/', [CargoController::class, 'destroy'])->name('admin.cargo.destroy');
 
