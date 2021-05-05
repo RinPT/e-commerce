@@ -6,12 +6,12 @@
 @endsection
 
 @section('content')
-    @if(session('status'))
+    @if(session('created'))
         <div class="row">
             <div class="col">
                 <div class="alert alert-success mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Notification!</strong> {{ session('status') }}.
+                    <strong>Success!</strong> {{ session('created') }}.
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-lg-3 control-label text-lg-right pt-2">Name</label>
+                        <label class="col-lg-3 control-label text-lg-right pt-2">Repeat Password</label>
                         <div class="col-lg-6">
                             <input type="password" class="form-control" id="inputDefault" name="password_confirmation" placeholder="Password Again" >
                         </div>

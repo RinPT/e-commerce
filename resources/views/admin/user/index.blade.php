@@ -10,6 +10,44 @@
 @endsection
 
 @section('content')
+
+@if(session('success'))
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Success!</strong> {{ session('success') }}
+            </div>
+        </div>
+    </div>
+    @elseif(session('destroy'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Destroy!</strong> {{ session('destroy') }}
+                </div>
+            </div>
+        </div>
+    @elseif(session('emptyem'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Warning!</strong> {{ session('emptyem') }}
+                </div>
+            </div>
+        </div>
+    @elseif(session('emptyun'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Warning!</strong> {{ session('emptyun') }}
+                </div>
+            </div>
+        </div>
+    @endif
     <section class="card">
         <header class="card-header">
             <h2 class="card-title">Users</h2>
@@ -20,12 +58,12 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Code</th>
-                        <th>Prefix</th>
-                        <th>Suffix</th>
-                        <th>Rate</th>
+                        <th>Surname</th>
+                        <th>USername</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Group</th>
                         <th>Status</th>
-                        <th>Last Update</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -92,22 +130,12 @@
                                                         <div class="form-group row ">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2">Gender</label>
                                                             <div class="col-lg-6">
-                                                            <select class="form-control row" name="gender">
+                                                            <select class="form-control mb-3" name="gender">
                                                                 <option selected disabled>Select an option</option>
                                                                 <option>Male</option>
                                                                 <option>Female</option>
                                                                 <option>Other</option>
                                                             </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
-                                                            <div class="col-lg-6">
-                                                                <select class="form-control mb-3" name="status">
-                                                                    <option selected>0</option>
-                                                                    <option>1</option>
-                                                                </select>
                                                             </div>
                                                         </div>
 
@@ -123,6 +151,17 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
+                                                            <div class="col-lg-6">
+                                                                <select class="form-control mb-3" name="status">
+                                                                    <option selected>0</option>
+                                                                    <option>1</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
                                                         <hr/>
                                                     </div>
                                                     <div class="row">
