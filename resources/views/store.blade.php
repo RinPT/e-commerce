@@ -182,7 +182,7 @@
                                                         <span class="ratings" style="width:80%"></span>
                                                         <span class="tooltiptext tooltip-top"></span>
                                                     </div>
-                                                    <a href="product.html" class="rating-reviews">( 11 reviews )</a>
+                                                    <a href="product.html" class="rating-reviews">{{ App\Models\ProductComment::where('product_id','=', $product->id)->get()->count() }} reviews</a>
                                                 </div>
                                             </div>
                                         </div>
