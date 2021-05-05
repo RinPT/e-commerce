@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\StoreController;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductProfileController;
 
 include('web-user.php');
 include('web-admin.php');
@@ -27,10 +28,11 @@ Route::post('/register', [RegisterController::class, 'store']);
 //Pages :
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/store', StoreController::class)->name('store');
+Route::get('/store', [StoreController::class, 'index'])->name('store');
 
 //Products:
 
+Route::get('/product/{product:name}', ProductProfileController::class)->name('product.profile');
 Route::get('/products', [ProductsController::class, 'index'])->name('products');
 Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
 
