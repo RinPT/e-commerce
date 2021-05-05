@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function __invoke() {
+    public function index() {
 
         $currencies = Currencies::get();
         $products = Product::get();

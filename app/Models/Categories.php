@@ -22,11 +22,15 @@ class Categories extends Model
 
         return $this->hasMany('App\Models\Categories', 'parent_id', 'id');
 
-    }  
+    }
 
     public static function tree() {
 
         return static::with(implode('.', array_fill(0, 4, 'children')))->where('parent_id', '=', 0)->get();
 
+    }
+
+    public function products() {
+        $this->hasMany(Product::class);
     }
 }

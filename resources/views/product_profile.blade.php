@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+    <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/photoswipe.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/default-skin/default-skin.min.css">
+
+    	<!-- Main CSS File -->
+	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+@endsection
+
 @section('content')
     <main class="main mt-6 single-product">
         <div class="page-content mb-10 pb-6">
@@ -10,42 +18,42 @@
                             data-sticky-options="{'minWidth': 767}">
                             <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
                                 <figure class="product-image">
-                                    <img src="images/product/product-1-1-580x652.jpg"
-                                        data-zoom-image="images/product/product-1-1-800x900.jpg"
+                                    <img src="/images/product/product-1-1-580x652.jpg"
+                                        data-zoom-image="/images/product/product-1-1-800x900.jpg"
                                         alt="Women's Brown Leather Backpacks" width="800" height="900">
                                 </figure>
                                 <figure class="product-image">
-                                    <img src="images/product/product-1-2-580x652.jpg"
-                                        data-zoom-image="images/product/product-1-2-800x900.jpg"
+                                    <img src="/images/product/product-1-2-580x652.jpg"
+                                        data-zoom-image="/images/product/product-1-2-800x900.jpg"
                                         alt="Women's Brown Leather Backpacks" width="800" height="900">
                                 </figure>
                                 <figure class="product-image">
-                                    <img src="images/product/product-1-3-580x652.jpg"
-                                        data-zoom-image="images/product/product-1-3-800x900.jpg"
+                                    <img src="/images/product/product-1-3-580x652.jpg"
+                                        data-zoom-image="/images/product/product-1-3-800x900.jpg"
                                         alt="Women's Brown Leather Backpacks" width="800" height="900">
                                 </figure>
                                 <figure class="product-image">
-                                    <img src="images/product/product-1-4-580x652.jpg"
-                                        data-zoom-image="images/product/product-1-4-800x900.jpg"
+                                    <img src="/images/product/product-1-4-580x652.jpg"
+                                        data-zoom-image="/images/product/product-1-4-800x900.jpg"
                                         alt="Women's Brown Leather Backpacks" width="800" height="900">
                                 </figure>
                             </div>
                             <div class="product-thumbs-wrap">
                                 <div class="product-thumbs">
                                     <div class="product-thumb active">
-                                        <img src="images/product/product-1-1-109x122.jpg" alt="product thumbnail"
+                                        <img src="/images/product/product-1-1-109x122.jpg" alt="product thumbnail"
                                             width="109" height="122">
                                     </div>
                                     <div class="product-thumb">
-                                        <img src="images/product/product-1-2-109x122.jpg" alt="product thumbnail"
+                                        <img src="/images/product/product-1-2-109x122.jpg" alt="product thumbnail"
                                             width="109" height="122">
                                     </div>
                                     <div class="product-thumb">
-                                        <img src="images/product/product-1-3-109x122.jpg" alt="product thumbnail"
+                                        <img src="/images/product/product-1-3-109x122.jpg" alt="product thumbnail"
                                             width="109" height="122">
                                     </div>
                                     <div class="product-thumb">
-                                        <img src="images/product/product-1-4-109x122.jpg" alt="product thumbnail"
+                                        <img src="/images/product/product-1-4-109x122.jpg" alt="product thumbnail"
                                             width="109" height="122">
                                     </div>
                                 </div>
@@ -71,7 +79,7 @@
                                         <a href="#">
                                             <i class="d-icon-arrow-left"></i> Prev
                                             <span class="product-nav-popup">
-                                                <img src="images/product/product-thumb-prev.jpg"
+                                                <img src="/images/product/product-thumb-prev.jpg"
                                                     alt="product thumbnail" width="110" height="123">
                                                 <span class="product-name">Sed egtas Dnte Comfort</span>
                                             </span>
@@ -81,7 +89,7 @@
                                         <a href="#">
                                             Next <i class="d-icon-arrow-right"></i>
                                             <span class="product-nav-popup">
-                                                <img src="images/product/product-thumb-next.jpg"
+                                                <img src="/images/product/product-thumb-next.jpg"
                                                     alt="product thumbnail" width="110" height="123">
                                                 <span class="product-name">Sed egtas Dnte Comfort</span>
                                             </span>
@@ -235,7 +243,7 @@
                                     <h5 class="description-title font-weight-semi-bold ls-m mb-5">Video Description
                                     </h5>
                                     <figure class="p-relative d-inline-block mb-2">
-                                        <img src="images/product/product.jpg" width="559" height="370"
+                                        <img src="/images/product/product.jpg" width="559" height="370"
                                             alt="Product" />
                                         <a class="btn-play btn-iframe" href="video/memory-of-a-woman.mp4">
                                             <i class="d-icon-play-solid"></i>
@@ -282,7 +290,7 @@
                         </div>
                         <div class="tab-pane " id="product-tab-size-guide">
                             <figure class="size-image mt-4 mb-4">
-                                <img src="images/product/size_guide.png" alt="Size Guide Image" width="217"
+                                <img src="/images/product/size_guide.png" alt="Size Guide Image" width="217"
                                     height="398">
                             </figure>
                             <figure class="size-table mt-4 mb-4">
@@ -343,7 +351,7 @@
                                         <div class="comment">
                                             <figure class="comment-media">
                                                 <a href="#">
-                                                    <img src="images/blog/comments/1.jpg" alt="avatar">
+                                                    <img src="/images/blog/comments/1.jpg" alt="avatar">
                                                 </a>
                                             </figure>
                                             <div class="comment-body">
@@ -374,7 +382,7 @@
                                         <div class="comment">
                                             <figure class="comment-media">
                                                 <a href="#">
-                                                    <img src="images/blog/comments/2.jpg" alt="avatar">
+                                                    <img src="/images/blog/comments/2.jpg" alt="avatar">
                                                 </a>
                                             </figure>
 
@@ -491,7 +499,7 @@
                         <div class="product">
                             <figure class="product-media">
                                 <a href="product.html">
-                                    <img src="images/product/featured1.jpg" alt="product" width="280" height="315">
+                                    <img src="/images/product/featured1.jpg" alt="product" width="280" height="315">
                                 </a>
                                 <div class="product-label-group">
                                     <label class="product-label label-new">new</label>
@@ -531,7 +539,7 @@
                         <div class="product">
                             <figure class="product-media">
                                 <a href="product.html">
-                                    <img src="images/product/featured2.jpg" alt="product" width="280" height="315">
+                                    <img src="/images/product/featured2.jpg" alt="product" width="280" height="315">
                                 </a>
                                 <div class="product-label-group">
                                     <label class="product-label label-sale">27% off</label>
@@ -570,7 +578,7 @@
                         <div class="product">
                             <figure class="product-media">
                                 <a href="product.html">
-                                    <img src="images/product/featured3.jpg" alt="product" width="280" height="315">
+                                    <img src="/images/product/featured3.jpg" alt="product" width="280" height="315">
                                 </a>
                                 <div class="product-action-vertical">
                                     <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
@@ -606,7 +614,7 @@
                         <div class="product">
                             <figure class="product-media">
                                 <a href="product.html">
-                                    <img src="images/product/featured4.jpg" alt="product" width="280" height="315">
+                                    <img src="/images/product/featured4.jpg" alt="product" width="280" height="315">
                                 </a>
                                 <div class="product-action-vertical">
                                     <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
@@ -644,5 +652,11 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('javaScript')
+    <script src="/vendor/sticky/sticky.min.js"></script>
+    <script src="/vendor/photoswipe/photoswipe.min.js"></script>
+	<script src="/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
 @endsection
 

@@ -47,7 +47,7 @@
                                                 @foreach($child['children'] as $child2)
                                                 <li><a href="#">{{ $child2->name }}</a></li>
                                                 @endforeach
-                                            </ul>  
+                                            </ul>
                                         </li>
                                         @endforeach
                                     @endforeach
@@ -149,7 +149,7 @@
                                     <div class="product-wrap">
                                         <div class="product">
                                             <figure class="product-media">
-                                                <a href="product.html">
+                                                <a href="{{ route('product.profile', $product) }}">
                                                     <img src="images/shop/7.jpg" alt="product" width="280" height="315">
                                                 </a>
                                                 <div class="product-label-group">
@@ -169,10 +169,10 @@
                                             </figure>
                                             <div class="product-details">
                                                 <div class="product-cat">
-                                                    <a href="shop-grid-3col.html">Shoes</a>
+                                                    <a href="#">{{ App\Models\Categories::where('id','=', 1)->first()->name }}</a>
                                                 </div>
                                                 <h3 class="product-name">
-                                                    <a href="{{ route('products', $product) }}">{{ $product->name}}</a>
+                                                    <a href="{{ route('product.profile', $product) }}">{{ $product->name}}</a>
                                                 </h3>
                                                 <div class="product-price">
                                                     <span class="price">{{ $product->price }}₺</span>
