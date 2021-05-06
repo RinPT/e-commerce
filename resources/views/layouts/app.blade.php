@@ -141,7 +141,11 @@
                                     <span class="cart-name">Shopping Cart:</span>
                                     <span class="cart-price">$0.00</span>
                                 </div>
-                                <i class="d-icon-bag"><span class="cart-count">2</span></i>
+                                <i class="d-icon-bag">
+                                    @if($num = App\Models\Wishlist::where('user_id','=', auth()->user()->id)->get()->count())
+                                        <span class="cart-count">{{ $num }}</span>
+                                    @endif
+                                </i>
                             </a>
                             <div class="cart-overlay"></div>
                         </div>
@@ -220,12 +224,12 @@
                                                         <li><a href="shop-banner-sidebar.html">{{ $child2->name }}</a></li>
                                                         @foreach($child2['children'] as $child3)
                                                         <ul>
-                                                            <li style="text-indent: 20px;"><a href="shop-banner-sidebar.html">{{ $child3->name }}</a></li> 
+                                                            <li style="text-indent: 20px;"><a href="shop-banner-sidebar.html">{{ $child3->name }}</a></li>
                                                                 @foreach($child3['children'] as $child4)
                                                                 <ul>
-                                                                    <li style="text-indent: 40px;"><a href="shop-banner-sidebar.html">{{ $child4->name }}</a></li>                     
+                                                                    <li style="text-indent: 40px;"><a href="shop-banner-sidebar.html">{{ $child4->name }}</a></li>
                                                                 </ul>
-                                                                @endforeach                    
+                                                                @endforeach
                                                         </ul>
                                                         @endforeach
 
@@ -253,7 +257,7 @@
                                     </div>
                                 </li>
                             @endforeach
-                                            
+
 
 
 
