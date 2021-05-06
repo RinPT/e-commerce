@@ -141,8 +141,10 @@
                                     <span class="cart-name">Shopping Cart:</span>
                                 </div>
                                 <i class="d-icon-bag">
-                                    @if($num = App\Models\Wishlist::where('user_id','=', auth()->user()->id)->get()->count())
-                                        <span class="cart-count">{{ $num }}</span>
+                                    @if(Auth::check())
+                                        @if($num = App\Models\Wishlist::where('user_id','=', auth()->user()->id)->get()->count())
+                                            <span class="cart-count">{{ $num }}</span>
+                                        @endif
                                     @endif
                                 </i>
                             </a>
