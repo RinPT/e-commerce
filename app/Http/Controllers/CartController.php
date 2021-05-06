@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Currencies;
 use App\Models\Categories;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -21,7 +22,12 @@ class CartController extends Controller
         ]);
     }
 
-    public function store() {
+    public function store($product_id) {
+        Wishlist::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $product_id,
+        ]);
 
+        return back()->with('success', 'Item added to your cart!');
     }
 }

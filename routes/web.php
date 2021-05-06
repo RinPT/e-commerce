@@ -37,6 +37,7 @@ Route::get('/products', [ProductsController::class, 'index'])->name('products');
 Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/cart/{product_id}', [CartController::class, 'store'])->name('cart.add');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
