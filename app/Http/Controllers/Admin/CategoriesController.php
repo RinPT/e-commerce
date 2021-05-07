@@ -111,7 +111,7 @@ class CategoriesController extends Controller
             $request->image->move(public_path($folder), $imageName. '.' . $image->extension());
 
             $path = public_path() . $category->image;
-            #dd($path);
+            dd($path);
             if(file_exists($path)) {
                 unlink($path);
             }

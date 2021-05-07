@@ -1,5 +1,7 @@
 @extends('layouts.admin.main')
 
+@section('styles')
+
 @section('custom-styles')
 <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
 <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
@@ -9,16 +11,12 @@
 @section('content')
 <section class="card">
     <header class="card-header">
-        <div class="card-actions">
-            <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-            <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-        </div>
 
         <h2 class="card-title">All Categories</h2>
         <p class="card-subtitle">You can see all the categories below.</p>
     </header>
     <div class="card-body">
-        <table class="table table-bordered table-striped mb-0" id="datatable-custom">
+        <table class="table table-bordered table-striped mb-0" id="datatable-default">
             <thead>
                 <tr>
                     <th>Category ID</th>
@@ -52,16 +50,16 @@
                     <td>#{{$category -> status}}</td>
                     <td>{{$category -> created_at ->format('d.m.Y H:i')}}</td>
                     <td>{{$category -> updated_at ->format('d.m.Y H:i')}}</td>
-                    <td>
+                    <td class="actions d-flex">
                         <form action="{{ route('edit.categories', $category->id) }}" method="POST">
                             @csrf
                             {{ method_field('GET') }}
-                            <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px"><i class="fas fa-pencil-alt"></i></button>
+                            <button type="submit" class="modal-with-zoom-anim ws-normal btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></button>
                         </form>
                         <form action="{{ route('delete.categories', $category->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px"><i class="fas fa-times"></i></button>
+                            <button type="submit" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

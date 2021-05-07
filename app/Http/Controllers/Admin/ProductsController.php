@@ -59,7 +59,7 @@ class ProductsController extends Controller
             'store_id' => 'required|numeric',
             'description' => 'required',
             'category_id' => 'required|numeric',
-            'images' => 'required', //TODO: Make sure to verify each image
+            'images' => 'required', 
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'price' => 'required|numeric',
             'cargo_price' => 'required|numeric',
@@ -103,14 +103,21 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($category_id)
+    public function edit($product_id)
     {
-        // $edit_category = Categories::find($category_id);
-        // $all_categories = Categories::get();
-        // return view('admin.categories.edit_category',[
-    	// 	'edit_category'=> $edit_category,
-        //     'all_categories'=> $all_categories
-    	// ]);
+        $edit_product = Product::find($product_id);
+        $categories=Categories::get();
+        $stores=Store::get();
+        $currencies=Currencies::get();
+        $product_images=Product_Images::where('product_id', $product_id)->pluck('image')->toArray();
+
+        return view('admin.products.edit',[
+            'product'=> $edit_product,
+            'categories'=> $categories,
+            'stores'=> $stores,
+            'currencies'=> $currencies,
+            'product_images'=> $product_images,
+    	]);
     }
 
     /**
@@ -120,66 +127,63 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $product_id)
     {
+        $this->validate($request, [
+            'name' => 'max:32',
+            'store_id' => 'numeric',
+            'description' => 'required',
+            'category_id' => 'numeric',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'price' => 'numeric',
+            'cargo_price' => 'numeric',
+            'currency_id' => 'numeric',
+        ]);
 
-        // $this->validate($request, [
-        //     'name' => 'max:32',
-        //     'images' => 'image|mimes:jpeg,png,jpg,gif,svg',
-        //     'parent_id' => 'numeric',
-        //     'sort_order' => 'numeric',
-        //     'status' => 'numeric',
-        // ]);
+        $product = Product::find($product_id);
+        
+        
+        if($request->file('images')!=null)
+        {
+            $productImages = Product_Images::where('product_id', $product_id);
+            foreach($productImages->get() as $image){
+                $dir = public_path($image->image);
+                if(file_exists($dir)) {
+                    unlink($dir);
+                }
+            }
+            $productImages->delete();
 
-        // $category = Categories::find($id);
+            $counter=0;
+            foreach($request->file('images') as $image) {
+                $counter++;
+                // Make a image name based on user name and current timestamp
+                $imageName = Str::slug($request->input('name')).'_'.time().'_'.$counter;
+                // Define folder path
+                $folder = '/images/products/';
+                // Make a file path where image will be stored [ folder path + file name + file extension]
+                $filePath = $folder . $imageName. '.' . $image->extension();
+                // Upload image
+                $image->move(public_path($folder), $imageName. '.' . $image->extension());
 
-        // if($request->file('image')!=null)
-        // {
-        //     $image = $request->file('image');
-        //     // Make a image name based on user name and current timestamp
-        //     $imageName = Str::slug($request->input('name')).'_'.time();
-        //     // Define folder path
-        //     $folder = '/images/categories/';
-        //     // Make a file path where image will be stored [ folder path + file name + file extension]
-        //     $filePath = $folder . $imageName. '.' . $image->extension();
-        //     // Upload image
-        //     $request->image->move(public_path($folder), $imageName. '.' . $image->extension());
+                Product_Images::create([
+                    'product_id' => $product->id,
+                    'image' => $filePath,
+                ]);
+            }
+        }
 
-        //     $path = public_path() . $category->image;
-        //     #dd($path);
-        //     if(file_exists($path)) {
-        //         unlink($path);
-        //     }
+        $product->update([
+            'name' => $request->name,
+            'store_id' => $request->store_id,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'cargo_price' => $request->cargo_price,
+            'currency_id' => $request->currency_id,
+        ]);
 
-        //     $category->update([
-        //         'name' => $request->name,
-        //         'description' => $request->description,
-        //         'images' => $filePath,
-        //         'meta_title' => $request->meta_title,
-        //         'meta_keywords' => $request->meta_keywords,
-        //         'meta_description' => $request->meta_description,
-        //         'parent_id' => $request->parent_id,
-        //         'sort_order' => $request->sort_order,
-        //         'status' => $request->status,
-        //     ]);
-
-
-        // }
-
-        // else {
-        //     $category->update([
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        //     'meta_title' => $request->meta_title,
-        //     'meta_keywords' => $request->meta_keywords,
-        //     'meta_description' => $request->meta_description,
-        //     'parent_id' => $request->parent_id,
-        //     'sort_order' => $request->sort_order,
-        //     'status' => $request->status,
-        // ]);
-        //     }
-
-        // return back();
+        return back();
     }
 
     /**
@@ -188,16 +192,20 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($category_id)
+    public function destroy($product_id)
     {
-        // $category = Categories::find($category_id);
+        $product = Product::find($product_id);
 
-        // $path = public_path() . $category->image;
-        // if(file_exists($path)) {
-        //     unlink($path);
-        // }
-        // $category->delete();
+        $productImages = Product_Images::where('product_id', $product_id);
+            foreach($productImages->get() as $image){
+                $dir = public_path($image->image);
+                if(file_exists($dir)) {
+                    unlink($dir);
+                }
+            }
+        $productImages->delete();
+        $product->delete();
 
-        // return back();
+        return back();
     }
 }
