@@ -121,6 +121,28 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Attributes and Stocks</label>
+                    <div class="col-lg-6">
+                        <table class="table table-bordered table-striped mb-0" id="datatable-custom">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($attributes as $attribute)
+                                    <tr>
+                                        <td><input type="text" class="form-control" value="{{ $attribute['attribute'] }}" name="attribute[]"></td>
+                                        <td><input type="number" class="form-control" value="{{ $attribute['stock'] }}" name="stock[]"></td>
+                                        <input type="hidden" value="{{ $attribute['id'] }}" name="id[]">
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>

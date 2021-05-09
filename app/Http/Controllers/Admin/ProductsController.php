@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Product_Images;
 use App\Http\Controllers\Controller;
+use App\Models\Product_Attribute_Stock;
 
 class ProductsController extends Controller
 {
@@ -64,6 +65,8 @@ class ProductsController extends Controller
             'price' => 'required|numeric',
             'cargo_price' => 'required|numeric',
             'currency_id' => 'required|numeric',
+            'attribute' => 'nullable', //TODO: CUSTOM VALIDATION FOR ATTRIBUTE AND STOCK, THE ARRAYS HAVE TO BE SAME AMOUNT
+            'stock[]' => 'nullable|numeric',
         ]);
 
         $product = Product::create([
@@ -94,6 +97,19 @@ class ProductsController extends Controller
             ]);
         }
 
+        $attributes = $request->get('attribute');
+        $attributes = array_filter($attributes, 'strlen');
+        $stocks = $request->get('stock');
+        $stocks = array_filter($stocks, 'strlen');
+        
+        for ($i=0; $i<count($attributes); $i++){ //TODO: Add presets to make it easier for seller (color size combinations, red small, blue medium)
+            $attrstocks = Product_Attribute_Stock::create([
+                'product_id' => $product->id,
+                'attribute' => $attributes[$i],
+                'stock' => $stocks[$i],
+            ]);
+        }
+
         return back();
     }
 
@@ -110,6 +126,7 @@ class ProductsController extends Controller
         $stores=Store::get();
         $currencies=Currencies::get();
         $product_images=Product_Images::where('product_id', $product_id)->pluck('image')->toArray();
+        $attribute = Product_Attribute_Stock::where('product_id', $product_id)->get()->toArray();
 
         return view('admin.products.edit',[
             'product'=> $edit_product,
@@ -117,6 +134,7 @@ class ProductsController extends Controller
             'stores'=> $stores,
             'currencies'=> $currencies,
             'product_images'=> $product_images,
+            'attributes'=> $attribute,
     	]);
     }
 
@@ -183,6 +201,21 @@ class ProductsController extends Controller
             'currency_id' => $request->currency_id,
         ]);
 
+        $attributes = $request->get('attribute');
+        $attributes = array_filter($attributes, 'strlen');
+        $stocks = $request->get('stock');
+        $stocks = array_filter($stocks, 'strlen');
+        $id = $request->get('id');
+        $id = array_filter($id, 'strlen');
+        
+        for ($i=0; $i<count($id); $i++){
+            Product_Attribute_Stock::find($id[$i])->update([
+                'product_id' => $product->id,
+                'attribute' => $attributes[$i],
+                'stock' => $stocks[$i],
+            ]);
+        }
+
         return back();
     }
 
@@ -205,6 +238,8 @@ class ProductsController extends Controller
             }
         $productImages->delete();
         $product->delete();
+
+        Product_Attribute_Stock::where('product_id', $product_id)->delete();
 
         return back();
     }

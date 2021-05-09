@@ -20,11 +20,6 @@
 @section('content')
     <section class="card">
         <header class="card-header">
-            <div class="card-actions">
-                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-            </div>
-
             <h2 class="card-title">Add a New Product</h2>
             <p class="card-subtitle">You can create a new product here.</p>
         </header>
@@ -110,6 +105,54 @@
                                 <option value="{{ $currency->id }}">{{ $currency->code }}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Attributes and Stocks</label>
+                    <div class="col-lg-6">
+                        <table class="table table-bordered table-striped mb-0" id="datatable-custom">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
