@@ -20,6 +20,6 @@ Route::group(['prefix' => "/account"], function() {
 
 //Seller:
 
-Route::get('/application_form', [SellerController::class, 'index'])->name('application.form');
+Route::get('/application_form', SellerController::class)->name('application.form');
 
 
