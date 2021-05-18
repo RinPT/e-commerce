@@ -155,10 +155,17 @@
                                         <input class="quantity form-control" type="number" min="1" max="1000000">
                                         <button class="quantity-plus d-icon-plus"></button>
                                     </div>
-                                    <a href="{{ route('cart.add', $product->id) }}" class="btn-product text-light ls-normal font-weight-semi-bold">
-                                        <i class="d-icon-bag"></i>
-                                        Add to Cart
-                                    </a>
+                                    @auth
+                                        <a href="{{ route('cart.add', $product->id) }}" class="btn-product text-light ls-normal font-weight-semi-bold">
+                                            <i class="d-icon-bag"></i>
+                                            Add to Cart
+                                        </a>
+                                    @endauth
+                                    @guest
+                                        <button class="btn-product btn-cart text-normal ls-normal font-weight-semi-bold">
+                                            <i class="d-icon-bag"></i>Add to Cart
+                                        </button>
+                                    @endguest
                                 </div>
                             </div>
 
