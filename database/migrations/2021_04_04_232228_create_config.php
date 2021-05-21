@@ -29,13 +29,13 @@ class CreateConfig extends Migration
             ],
             [
                 'key' => 'site_logo',
-                'value' => 'logo.jpg',
+                'value' => 'logo.png',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'key' => 'default_product_logo',
-                'value' => 'default_product.jpg',
+                'value' => 'default_product.png',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -72,6 +72,48 @@ class CreateConfig extends Migration
             [
                 'key' => 'purchase_rules',
                 'value' => '<h1>Purchase rules</h1><p>Lorem ipsum....</p>',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'sender_email_title',
+                'value' => 'E-commerce Demo',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'smtp_server',
+                'value' => 'mail.domainname.com',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'smtp_port',
+                'value' => '587',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'smtp_username',
+                'value' => 'info@domainname.com',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'smtp_password',
+                'value' => '',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'meta_keywords',
+                'value' => '',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'meta_description',
+                'value' => '',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]

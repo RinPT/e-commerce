@@ -123,28 +123,11 @@
 											<span>Dashboard</span>
 										</a>
 									</li>
-									<li class="nav-parent">
-										<a class="nav-link" href="#">
+									<li>
+										<a class="nav-link" href="{{ route('admin.general-setting.edit') }}">
 											<i class='bx bxs-cog'></i>
-											<span>Settings</span>
+											<span>General Settings</span>
 										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="{{ route('admin.general-setting.edit') }}">
-												   General Settings
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													E-mail Settings
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													SEO Settings
-												</a>
-											</li>
-										</ul>
 									</li>
                                     <li class="nav-parent">
 										<a class="nav-link" href="#">

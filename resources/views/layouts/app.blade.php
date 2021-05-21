@@ -9,7 +9,7 @@
 	<title>Riode - Ultimate eCommerce</title>
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="/images/icons/favicon.png">
+	<link rel="icon" type="image/png" href="/photo/favicon.png">
 
 	<script>
 		WebFontConfig = {
@@ -105,7 +105,7 @@
                             <i class="d-icon-bars2"></i>
                         </a>
                         <a href="{{ route('home') }}" class="logo">
-                            <img src="images/logo.png" alt="logo" width="153" height="44" />
+                            <img src="/photo/logo.png" alt="logo" />
                         </a>
                         <!-- End Logo -->
 
@@ -282,7 +282,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                             <a href="demo1.html" class="logo-footer">
-                                <img src="images/logo-footer.png" alt="logo-footer" width="154" height="43" />
+                                <img src="/photo/logo-footer.png" alt="logo-footer" />
                             </a>
                             <!-- End FooterLogo -->
                         </div>

@@ -38,7 +38,8 @@
             @endif
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post" action="" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('admin.general-setting.update') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="tabs">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active">
@@ -47,49 +48,55 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#recent" data-toggle="tab">Contracts</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#email" data-toggle="tab">E-mail Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#seo" data-toggle="tab">SEO Settings</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div id="popular" class="tab-pane active">
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Title</label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="inputDefault" value="{{$site_title}}">
+                                            <input type="text" name="site_title" class="form-control" id="inputDefault" value="{{$site_title}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Logo</label>
                                         <div class="col-lg-6">
-                                            <input type="file" name="photo" class="form-control" id="inputDefault" accept="image/*">
+                                            <input type="file" name="site_logo" class="form-control" id="inputDefault" accept="image/*">
                                             <div class="text-center mt-3">
-                                                <img id="preview-img" class="preview-img" width="150" alt="{{$site_logo}}">
+                                                <img src="/photo/{{$site_logo}}" id="preview-img" class="preview-img" width="200" alt="{{$site_logo}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Default Product Photo</label>
                                         <div class="col-lg-6">
-                                            <input type="file" name="photo" class="form-control" id="inputDefault" accept="image/*">
+                                            <input type="file" name="default_product_logo" class="form-control" id="inputDefault" accept="image/*">
                                             <div class="text-center mt-3">
-                                                <img id="preview-img" class="preview-img" width="150" alt="{{$default_product_logo}}">
+                                                <img src="/photo/{{$default_product_logo}}" id="preview-img" class="preview-img" width="200" alt="{{$default_product_logo}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Product Count Per Click(Main Page)</label>
                                         <div class="col-lg-6">
-                                            <input type="number" class="form-control" id="inputDefault" min="1" value="{{$product_count_per_click_main_page}}">
+                                            <input type="number" name="product_count_per_click_main_page" class="form-control" id="inputDefault" min="1" value="{{$product_count_per_click_main_page}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Product Count Per Click(Category Page)</label>
                                         <div class="col-lg-6">
-                                            <input type="number" class="form-control" id="inputDefault" min="1" value="{{$product_count_per_click_category_page}}">
+                                            <input type="number" name="product_count_per_click_category_page" class="form-control" id="inputDefault" min="1" value="{{$product_count_per_click_category_page}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Email Confirmation Required ?</label>
                                         <div class="col-lg-6">
-                                            <input type="checkbox" class="" id="inputDefault" @if($email_confirmation_required) checked @endif>
+                                            <input type="checkbox" name="email_confirmation_required" class="" id="inputDefault" @if($email_confirmation_required) checked @endif>
                                         </div>
                                     </div>
                                 </div>
@@ -97,19 +104,65 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Registration Rules</label>
                                         <div class="col-lg-6">
-                                            <textarea type="text" class="form-control" id="inputDefault" rows="7">{{$registration_rules}}</textarea>
+                                            <textarea type="text" name="registration_rules" class="form-control" id="inputDefault" rows="7">{{$registration_rules}}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Privacy Policy</label>
                                         <div class="col-lg-6">
-                                            <textarea type="text" class="form-control" id="inputDefault" rows="7">{{$privacy_policy}}</textarea>
+                                            <textarea type="text" name="privacy_policy" class="form-control" id="inputDefault" rows="7">{{$privacy_policy}}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Purchase Rules</label>
                                         <div class="col-lg-6">
-                                            <textarea type="text" class="form-control" id="inputDefault" rows="7">{{$purchase_rules}}</textarea>
+                                            <textarea type="text" name="purchase_rules" class="form-control" id="inputDefault" rows="7">{{$purchase_rules}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="email" class="tab-pane">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Sender E-mail Title</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="sender_email_title" class="form-control" id="inputDefault" value="{{$sender_email_title}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">SMTP Server</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="smtp_server" class="form-control" id="inputDefault" value="{{$smtp_server}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">SMTP Port</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="smtp_port" class="form-control" id="inputDefault" value="{{$smtp_port}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">SMTP Username</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="smtp_username" class="form-control" id="inputDefault" value="{{$smtp_username}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">SMTP Password</label>
+                                        <div class="col-lg-6">
+                                            <input type="password" name="smtp_password" class="form-control" id="inputDefault" value="{{$smtp_password}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="seo" class="tab-pane">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Meta Keywords</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="meta_keywords" class="form-control" id="inputDefault" value="{{$meta_keywords}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Meta Description</label>
+                                        <div class="col-lg-6">
+                                            <textarea type="text" name="meta_description" class="form-control" id="inputDefault" rows="7">{{$meta_description}}</textarea>
                                         </div>
                                     </div>
                                 </div>
