@@ -74,8 +74,13 @@
                     @if ($currencies->count())
                         @foreach ($currencies as $currency)
                             <tr data-item-id="{{ $currency->id }}">
-                                <td>{{ $currency->id }}</td>
-                                <td>{{ $currency->name }}</td>
+                                <td>{{ $currency->id }} </td>
+                                <td>
+                                    {{ $currency->name }}
+                                    @if($currency->base)
+                                        <span class="badge badge-dark">Base</span>
+                                    @endif
+                                </td>
                                 <td>{{ $currency->code }}</td>
                                 <td>{{ $currency->rate }}</td>
                                 <td>
@@ -142,14 +147,18 @@
                                                         <div class="form-group row @error('base') has-danger @enderror">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Base</label>
                                                             <div class="col-lg-6">
-                                                                <input type="checkbox" name="base" id="inputDefault" @if($currency->base) checked @endif>
+                                                                <div class="switch switch-md switch-dark">
+                                                                    <input type="checkbox" name="base" data-plugin-ios-switch @if($currency->base) checked @endif/>
+                                                                </div>
                                                                 @error('base') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                             </div>
                                                         </div>
                                                         <div class="form-group row @error('status') has-danger @enderror">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                                                             <div class="col-lg-6">
-                                                                <input type="checkbox" name="status" id="inputDefault" @if($currency->status) checked @endif>
+                                                                <div class="switch switch-md switch-dark">
+                                                                    <input type="checkbox" name="status" data-plugin-ios-switch @if($currency->status) checked @endif/>
+                                                                </div>
                                                                 @error('status') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                             </div>
                                                         </div>
@@ -177,6 +186,7 @@
 @endsection
 
 @section('scripts')
+    <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>

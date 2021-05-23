@@ -73,19 +73,30 @@
                                 <div class="form-group row @error('rate') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Rate</label>
                                     <div class="col-lg-6">
-                                        <input type="text" name="rate" class="form-control" id="inputDefault" value="{{ old('rate') }}">
+                                        <input type="number" name="rate" class="form-control" id="inputDefault" step=".01" value="{{ old('rate') }}">
                                         @error('rate') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row @error('status') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                                     <div class="col-lg-6">
-                                        <input type="text" name="status" class="form-control" id="inputDefault" value="{{ old('status') }}">
+                                        <div class="switch switch-md switch-dark">
+                                            <input type="checkbox" name="status" data-plugin-ios-switch/>
+                                        </div>
                                         @error('status') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary">Add +</button>
+                                <div class="form-group row @error('base') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Is base currency ?</label>
+                                    <div class="col-lg-6">
+                                        <div class="switch switch-md switch-dark">
+                                            <input type="checkbox" name="base" data-plugin-ios-switch/>
+                                        </div>
+                                        @error('base') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-dark">Add</button>
                                 </div>
                             </form>
                         </div>
@@ -96,7 +107,8 @@
     </div>
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
+    <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/autosize/autosize.js"></script>
     <script src="/admin/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
 @endsection

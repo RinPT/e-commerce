@@ -32,7 +32,7 @@ class CreateCurrencies extends Migration
             'prefix' => '₺',
             'suffix' =>'₺',
             'rate' => 1,
-            'base' => '1',
+            'base' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
@@ -42,7 +42,7 @@ class CreateCurrencies extends Migration
             'code' => 'Dollars',
             'prefix' => '$',
             'suffix' =>'$',
-            'rate' => 8,
+            'rate' => 0.11,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
@@ -52,7 +52,7 @@ class CreateCurrencies extends Migration
             'code' => 'Euro',
             'prefix' => '€',
             'suffix' =>'€',
-            'rate' => 9,
+            'rate' => 0.09,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
@@ -62,7 +62,7 @@ class CreateCurrencies extends Migration
             'code' => 'GBP',
             'prefix' => '£',
             'suffix' =>'£',
-            'rate' => 12,
+            'rate' => 0.08,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
