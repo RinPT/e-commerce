@@ -21,6 +21,7 @@ class CreateCurrencies extends Migration
             $table->string('suffix');
             $table->decimal('rate',10);
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('base')->default(0);
             $table->timestamps();
         });
 
@@ -30,7 +31,8 @@ class CreateCurrencies extends Migration
             'code' => 'TL',
             'prefix' => '₺',
             'suffix' =>'₺',
-            'rate' => 10,
+            'rate' => 1,
+            'base' => '1',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);

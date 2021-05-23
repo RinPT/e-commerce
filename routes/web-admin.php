@@ -23,9 +23,7 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');
 
-
     Route::get('/logout', [AdminLogoutController::class, 'store'])->name('admin.logout');
-
 
     Route::get('/pwreset', [AdminHomeController::class, 'index'])->name('admin.pwreset');
 
@@ -34,6 +32,12 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
 
     Route::get('/general-settings', [GeneralSettingController::class, 'edit'])->name('admin.general-setting.edit');
     Route::post('/general-settings', [GeneralSettingController::class, 'update'])->name('admin.general-setting.update');
+
+    Route::get('/currencies', [CurrencyController::class, 'index'])->name('admin.currency');
+    Route::get('/currency/create', [CurrencyController::class, 'create'])->name('admin.currency.create');
+    Route::post('/currency/create', [CurrencyController::class, 'store']);
+    Route::post('/currency/{id}/update', [CurrencyController::class, 'update'])->name('admin.currency.update');
+    Route::delete('/currency/{id}/delete', [CurrencyController::class, 'destroy'])->name('admin.currency.delete');
 
     Route::get('/perms', [PermController::class, 'index'])->name('admin.perms.index');
     Route::get('/perm/create', [PermController::class, 'create'])->name('admin.perm.create');
@@ -78,20 +82,11 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::get('/order/pending', [OrderController::class, 'show_pending'])->name('admin.order.show_pending');
     Route::get('/order/canceled', [OrderController::class, 'show_canceled'])->name('admin.order.show_canceled');
 
-
     Route::get('/cargo', [CargoController::class, 'index'])->name('admin.cargo');
     Route::get('/cargo/create', [CargoController::class, 'create'])->name('admin.cargo.create');
     Route::post('/cargo/create', [CargoController::class, 'store'])->name('admin.cargo.store');
     Route::post('/cargo/{id}/update/', [CargoController::class, 'update'])->name('admin.cargo.update');
     Route::get('/cargo/{id}/delete/', [CargoController::class, 'destroy'])->name('admin.cargo.destroy');
-
-    //Admin Settings
-    Route::get('/currencies', [CurrencyController::class, 'index'])->name('admin.currency');
-    Route::get('/create/currency', [CurrencyController::class, 'create'])->name('admin.currency.create');
-    Route::post('/create/currency', [CurrencyController::class, 'store']);
-    Route::post('/update/currency/{id}', [CurrencyController::class, 'update'])->name('admin.currency.update');
-    Route::delete('/delete/currency/{id}', [CurrencyController::class, 'destroy'])->name('admin.currency.delete');
-
 
     //Complain Operations :
     //Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.admin');

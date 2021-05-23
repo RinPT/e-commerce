@@ -1,15 +1,10 @@
 @extends('layouts.admin.main')
 
 @section('styles')
-
-    <!-- Specific Page Vendor CSS -->
     <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
     <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/datatables/media/css/dataTables.bootstrap4.css" />
-    <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
-    <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/pnotify/pnotify.custom.css" />
-
 @endsection
 
 @section('breadcrumb')
@@ -55,21 +50,24 @@
     @endif
     <section class="card">
         <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+            </div>
             <h2 class="card-title">Currencies</h2>
+            <p class="card-subtitle">You can see all available currencies below.</p>
         </header>
         <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-default">
+            <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Code</th>
-                        <th>Prefix</th>
-                        <th>Suffix</th>
                         <th>Rate</th>
                         <th>Status</th>
                         <th>Last Update</th>
-                        <th>Action</th>
+                        <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,17 +77,21 @@
                                 <td>{{ $currency->id }}</td>
                                 <td>{{ $currency->name }}</td>
                                 <td>{{ $currency->code }}</td>
-                                <td>{{ $currency->prefix }}</td>
-                                <td>{{ $currency->suffix }}</td>
                                 <td>{{ $currency->rate }}</td>
-                                <td>{{ $currency->status }}</td>
-                                <td>{{ $currency->updated_at->format('d/m/Y') }}</td>
+                                <td>
+                                    @if($currency->status)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Inactive</span>
+                                    @endif
+                                </td>
+                                <td>{{ $currency->updated_at->format('d.m.Y H:i') }}</td>
                                 <td class="actions d-flex">
-                                    <a href="#currencyEdit{{ $currency->id }}" class="modal-with-zoom-anim ws-normal btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#currencyEdit{{ $currency->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
                                     <form action="{{ route('admin.currency.delete', $currency->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></button>
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                                     </form>
 
                                     <!-- Modal Animation -->
@@ -137,10 +139,17 @@
                                                                 @error('rate') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row @error('base') has-danger @enderror">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Base</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="checkbox" name="base" id="inputDefault" @if($currency->base) checked @endif>
+                                                                @error('base') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group row @error('status') has-danger @enderror">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" name="status" class="form-control" id="inputDefault" value="{{ $currency->status }}">
+                                                                <input type="checkbox" name="status" id="inputDefault" @if($currency->status) checked @endif>
                                                                 @error('status') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                             </div>
                                                         </div>
@@ -167,7 +176,7 @@
 
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
     <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
@@ -178,13 +187,47 @@
     <script src="/admin/vendor/datatables/extras/TableTools/JSZip-2.5.0/jszip.min.js"></script>
     <script src="/admin/vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
     <script src="/admin/vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
-    <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/pnotify/pnotify.custom.js"></script>
 @endsection
 
 @section('end-scripts')
-    <script src="/admin/js/examples/examples.datatables.default.js"></script>
-    <script src="/admin/js/examples/examples.datatables.row.with.details.js"></script>
-    <script src="/admin/js/examples/examples.datatables.tabletools.js"></script>
+    <script>
+        var $table = $('#datatable-tabletools');
+
+        var table = $table.dataTable({
+            sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+            buttons: [
+                {
+                    extend: 'print',
+                    text: 'Print'
+                },
+                {
+                    extend: 'excel',
+                    text: 'Excel'
+                },
+                {
+                    extend: 'pdf',
+                    text: 'PDF',
+                    customize : function(doc){
+                        var colCount = new Array();
+                        $('#datatable-tabletools').find('tbody tr:first-child td').each(function(){
+                            if($(this).attr('colspan')){
+                                for(var i=1;i<=$(this).attr('colspan');$i++){
+                                    colCount.push('*');
+                                }
+                            }else{ colCount.push('*'); }
+                        });
+                        doc.content[1].table.widths = colCount;
+                    }
+                }
+            ]
+        });
+
+        $('<div />').addClass('dt-buttons mb-2 pb-1 text-right').prependTo('#datatable-tabletools_wrapper');
+
+        $table.DataTable().buttons().container().prependTo( '#datatable-tabletools_wrapper .dt-buttons' );
+
+        $('#datatable-tabletools_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+    </script>
     <script src="/admin/js/examples/examples.modals.js"></script>
 @endsection

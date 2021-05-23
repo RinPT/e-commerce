@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class GeneralSettingController extends Controller
@@ -53,24 +54,94 @@ class GeneralSettingController extends Controller
         Config::where('key','site_title')->update([
             'value' => $request->site_title
         ]);
-//        Config::where('key','site_logo')->update([
-//            'value' => $request->site_logo
-//        ]);
-//        Config::where('key','default_product_logo')->update([
-//            'value' => $request->default_product_logo
-//        ]);
+
+        if ($request->hasFile('site_logo')) {
+            $file = $request->file('site_logo');
+            if ($file->isValid()) {
+                $oldPhoto = Config::where('key','site_logo')->value('value');
+                if(file_exists(public_path('photo/'.$oldPhoto))){
+                    unlink(public_path('photo/'.$oldPhoto));
+                }
+                $filename = strtotime(Carbon::now())."-logo.".$file->getClientOriginalExtension();
+                $file->storeAs('photo',$filename, 'public_html');
+                Config::where('key','site_logo')->update([
+                    'value' => $filename
+                ]);
+            }else{
+                return back()->with('error', 'An error occurred while uploading the file.');
+            }
+        }
+
+        if ($request->hasFile('default_product_logo')) {
+            $file = $request->file('default_product_logo');
+            if ($file->isValid()) {
+                $oldPhoto = Config::where('key','default_product_logo')->value('value');
+                if(file_exists(public_path('photo/'.$oldPhoto))){
+                    unlink(public_path('photo/'.$oldPhoto));
+                }
+                $filename = strtotime(Carbon::now())."-def-product-logo.".$file->getClientOriginalExtension();
+                $file->storeAs('photo',$filename, 'public_html');
+                Config::where('key','default_product_logo')->update([
+                    'value' => $filename
+                ]);
+            }else{
+                return back()->with('error', 'An error occurred while uploading the file.');
+            }
+        }
+
         Config::where('key','product_count_per_click_main_page')->update([
             'value' => $request->product_count_per_click_main_page
         ]);
         Config::where('key','product_count_per_click_category_page')->update([
             'value' => $request->product_count_per_click_category_page
         ]);
-        Config::where('key','email_confirmation_required')->update([
-            'value' => $request->email_confirmation_required
+
+        if($request->email_confirmation_required){
+            Config::where('key','email_confirmation_required')->update([
+                'value' => 1
+            ]);
+        }else{
+            Config::where('key','email_confirmation_required')->update([
+                'value' => 0
+            ]);
+        }
+
+        Config::where('key','registration_rules')->update([
+            'value' => $request->registration_rules
         ]);
-        Config::where('key','email_confirmation_required')->update([
-            'value' => $request->email_confirmation_required
+        Config::where('key','privacy_policy')->update([
+            'value' => $request->privacy_policy
         ]);
+        Config::where('key','purchase_rules')->update([
+            'value' => $request->purchase_rules
+        ]);
+        Config::where('key','sender_email_title')->update([
+            'value' => $request->sender_email_title
+        ]);
+        Config::where('key','smtp_server')->update([
+            'value' => $request->smtp_server
+        ]);
+        Config::where('key','smtp_port')->update([
+            'value' => $request->smtp_port
+        ]);
+        Config::where('key','smtp_username')->update([
+            'value' => $request->smtp_username
+        ]);
+        if($request->smtp_password){
+            Config::where('key','smtp_password')->update([
+                'value' => $request->smtp_password
+            ]);
+        }
+        if($request->meta_keywords){
+            Config::where('key','meta_keywords')->update([
+                'value' => $request->meta_keywords
+            ]);
+        }
+        if($request->meta_description){
+            Config::where('key','meta_description')->update([
+                'value' => $request->meta_description
+            ]);
+        }
         return back()->with('success', 'General settings updated successfully.');
     }
 }

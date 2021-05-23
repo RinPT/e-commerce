@@ -11,13 +11,13 @@ class CurrencyController extends Controller
     public function index() {
         $currencies = Currencies::get();
 
-        return view('admin.settings.index', [
+        return view('admin.currency.index', [
             'currencies' => $currencies,
         ]);
     }
 
     public function create() {
-        return view('admin.settings.add_currency');
+        return view('admin.currency.create');
     }
 
     public function store(Request $request) {
@@ -27,7 +27,7 @@ class CurrencyController extends Controller
             'prefix'=> 'required',
             'suffix' => 'required',
             'rate' => 'required|numeric',
-            'status' => 'required|integer',
+            'status' => 'string',
         ]);
 
         Currencies::create([
@@ -43,14 +43,7 @@ class CurrencyController extends Controller
     }
 
     public function update(Request $request, $currency_id) {
-        $this->validate($request, [
-            'name' => 'required',
-            'code' => 'required',
-            'prefix'=> 'required',
-            'suffix' => 'required',
-            'rate' => 'required|numeric',
-            'status' => 'required|integer',
-        ]);
+
 
         Currencies::find($currency_id)->update([
             'name' => $request->name,
@@ -58,7 +51,8 @@ class CurrencyController extends Controller
             'prefix' => $request->prefix,
             'suffix' => $request->suffix,
             'rate' => $request->rate,
-            'status' => $request->status,
+            'base' => 1,
+            'status' => 1,
         ]);
 
         return back()->with("status", "$request->name information has been updated!");
