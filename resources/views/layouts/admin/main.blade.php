@@ -129,7 +129,7 @@
 											<span>General Settings</span>
 										</a>
 									</li>
-                                    <li class="nav-parent">
+                                    <li class="nav-parent @if(str_contains(url()->current(),'currenc'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='fas fa-dollar-sign'></i>
 											<span>Currencies</span>
@@ -175,19 +175,19 @@
 											</li>
 										</ul>
 									</li>
-									<li class="nav-parent">
+									<li class="nav-parent @if(str_contains(url()->current(),'categor'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-category-alt'></i>
 											<span>Categories</span>
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="{{ route('index.categories') }}">
+												<a class="nav-link" href="{{ route('admin.categories') }}">
 													All Categories
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('create.categories') }}">
+												<a class="nav-link" href="{{ route('admin.category.create') }}">
 													Add New Category
 												</a>
 											</li>

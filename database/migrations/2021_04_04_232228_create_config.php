@@ -23,7 +23,7 @@ class CreateConfig extends Migration
         DB::table('config')->insert([
             [
                 'key' => 'site_title',
-                'value' => 'E-commerce Demo',
+                'value' => 'EcoShop E-Commerce',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -77,7 +77,7 @@ class CreateConfig extends Migration
             ],
             [
                 'key' => 'sender_email_title',
-                'value' => 'E-commerce Demo',
+                'value' => 'EcoShop E-Commerce',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

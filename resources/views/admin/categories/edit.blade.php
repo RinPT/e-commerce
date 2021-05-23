@@ -18,117 +18,128 @@
 @endsection
 
 @section('content')
-    <section class="card">
-        <header class="card-header">
-            <div class="card-actions">
-                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-            </div>
-
-            <h2 class="card-title">Edit a Category</h2>
-            <p class="card-subtitle">You can edit a category here.</p>
-        </header>
+    <section class="card card-modern card-big-info">
         <div class="card-body">
-            <form action="{{ route('update.categories', $edit_category->id) }}" method="post" enctype="multipart/form-data">
-                @method('patch')
-                @csrf
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>
-                                    {{ $error }}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2">Name</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control" id="inputDefault" name="name" value="{{ $edit_category->name }}">
-                    </div>
+            <div class="row">
+                <div class="col-lg-2-5 col-xl-1-5">
+                    <i class="card-big-info-icon bx bx-pencil"></i>
+                    <h2 class="card-big-info-title">Update Category</h2>
+                    <p class="card-big-info-desc">You can update category here.</p>
                 </div>
+                <div class="col-lg-3-5 col-xl-4-5">
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>Success</strong> {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    <form action="{{ route('admin.category.update', $edit_category->id) }}" method="post" enctype="multipart/form-data">
+                    @method('patch')
+                    @csrf
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2">Name</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="inputDefault" name="name" value="{{ $edit_category->name }}">
+                        </div>
+                    </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
-                    <div class="col-lg-6">
-                        <textarea type="text" class="form-control" rows="10" name="description" >{{ $edit_category->description }}</textarea>
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
+                        <div class="col-lg-6">
+                            <textarea type="text" class="form-control" rows="10" name="description" >{{ $edit_category->description }}</textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2">Image</label>
-                    <div class="col-lg-6">
-                        <img src="{{ $edit_category->image }}" class="img-thumbnail">
-                        <input type="file" name="image" class="form-control">
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2">Image</label>
+                        <div class="col-lg-6">
+                            <img src="{{ $edit_category->image }}" class="img-thumbnail mb-2">
+                            <input type="file" name="image" class="form-control">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2">Meta Title</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control" id="inputDefault" name="meta_title"  value="{{ $edit_category->meta_title }}">
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2">Meta Title</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="inputDefault" name="meta_title"  value="{{ $edit_category->meta_title }}">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2">Meta Keywords</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control" id="inputDefault" name="meta_keywords"  value="{{ $edit_category->meta_keywords }}">
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2">Meta Keywords</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="inputDefault" name="meta_keywords"  value="{{ $edit_category->meta_keywords }}">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Meta Description</label>
-                    <div class="col-lg-6">
-                        <textarea type="text" class="form-control" rows="10" name="meta_description">{{ $edit_category->meta_description }}</textarea>
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Meta Description</label>
+                        <div class="col-lg-6">
+                            <textarea type="text" class="form-control" rows="10" name="meta_description">{{ $edit_category->meta_description }}</textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Parent Category</label>
-                    <div class="col-lg-6">
-                        <select name="parent_id" class="form-control">
-                            <option value="0" {{ ($edit_category->parent_id == 0) ? 'selected':'' }}>None {{ ($edit_category->parent_id == 0) ? '(Current Option)':'' }}</option>
-                            @foreach ($all_categories as $category)
-                                @if($category->id != $edit_category->id)
-                                <option value="{{ $category->id }}" {{ ($category->id == $edit_category->parent_id) ? 'selected' : '' }}>{{ $category->name }} {{ ($category->id == $edit_category->parent_id) ? '(Current Option)' : '' }}</option>
-                                @endif
-                            @endforeach
-                        </select>
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Parent Category</label>
+                        <div class="col-lg-6">
+                            <select name="parent_id" class="form-control">
+                                <option value="0" {{ ($edit_category->parent_id == 0) ? 'selected':'' }}>None {{ ($edit_category->parent_id == 0) ? '(Current Option)':'' }}</option>
+                                @foreach ($all_categories as $category)
+                                    @if($category->id != $edit_category->id)
+                                    <option value="{{ $category->id }}" {{ ($category->id == $edit_category->parent_id) ? 'selected' : '' }}>{{ $category->name }} {{ ($category->id == $edit_category->parent_id) ? '(Current Option)' : '' }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Sort Order</label>
-                    <div class="col-lg-6">
-                        <input type="number" class="form-control" name="sort_order"  value="{{ $edit_category->sort_order }}">
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Sort Order</label>
+                        <div class="col-lg-6">
+                            <select name="sort_order" class="form-control">
+                                <option value="0" @if($edit_category->sort_order == 0) selected @endif>By Name</option>
+                                <option value="1" @if($edit_category->sort_order == 1) selected @endif>By Price</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
-                    <div class="col-lg-6">
-                        <input type="number" class="form-control" name="status"  value="{{ $edit_category->status }}">
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
+                        <div class="col-lg-6">
+                            <div class="switch switch-md switch-dark">
+                                <input type="checkbox" name="status" data-plugin-ios-switch @if($edit_category->status) checked @endif />
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>
-                    <div class="col-lg-6 text-center">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i>Edit</button>
+                    <div class="form-group row">
+                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>
+                        <div class="col-lg-6 text-center">
+                            <button type="submit" class="btn btn-dark"> Update</button>
+                        </div>
                     </div>
+                </form>
                 </div>
-            </form>
+            </div>
         </div>
     </section>
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
 <script src="/admin/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="/admin/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
 <script src="/admin/vendor/select2/js/select2.js"></script>

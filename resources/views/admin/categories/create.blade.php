@@ -18,25 +18,29 @@
 @endsection
 
 @section('content')
-    <section class="card">
-        <header class="card-header">
-            <div class="card-actions">
-                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-            </div>
-
-            <h2 class="card-title">Add a New Category</h2>
-            <p class="card-subtitle">You can create a new category here.</p>
-        </header>
+    <section class="card card-modern card-big-info">
         <div class="card-body">
-            <form action="{{ route('store.categories') }}" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-2-5 col-xl-1-5">
+                    <i class="card-big-info-icon bx bx-plus-circle"></i>
+                    <h2 class="card-big-info-title">Add a New Category</h2>
+                    <p class="card-big-info-desc">You can create a new category here.</p>
+                </div>
+                <div class="col-lg-3-5 col-xl-4-5">
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>Success</strong> {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    <form action="{{ route('admin.category.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <ul>
+                        <ul class="list-unstyled mb-0">
                             @foreach ($errors->all() as $error)
                                 <li>
                                     {{ $error }}
@@ -112,28 +116,26 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                     <div class="col-lg-6">
-                        <select name="status" class="form-control">
-                            <option value="0">Inactive</option>
-                            <option value="1">Active</option>
-                        </select>
+                        <div class="switch switch-md switch-dark">
+                            <input type="checkbox" name="status" data-plugin-ios-switch checked="checked"/>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault"></label>
                     <div class="col-lg-6 text-center">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Create</button>
+                        <button type="submit" class="btn btn-dark"> Add</button>
                     </div>
                 </div>
-
-
-
             </form>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
 <script src="/admin/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="/admin/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
 <script src="/admin/vendor/select2/js/select2.js"></script>

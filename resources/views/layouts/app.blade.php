@@ -2,11 +2,14 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>{{ $site_title }}</title>
 
-	<title>Riode - Ultimate eCommerce</title>
+    <meta name="keywords" content="{{ $meta_keywords }}" />
+    <meta name="description" content="{{ $meta_description }}">
+    <meta name="author" content="HSBCS">
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="/photo/favicon.png">
@@ -17,7 +20,7 @@
 		};
 		( function ( d ) {
 			var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
-			wf.src = 'js/webfont.js';
+			wf.src = '/js/webfont.js';
 			wf.async = true;
 			s.parentNode.insertBefore( wf, s );
 		} )( document );
@@ -52,14 +55,15 @@
                         <p class="welcome-msg">Welcome, do you want to become a seller? <a class="text-primary" href="{{ route('application.form') }}">Click here</a></p>
                     </div>
                     <div class="header-right">
+                        <!-- End DropDown Menu -->
                         <div class="dropdown">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                @if ($currencies->count())
-                                    @foreach ($currencies as $currency)
-                                        <option>{{ $currency->code }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
+                            <a href="#currency">USD</a>
+                            <ul class="dropdown-box">
+                                @foreach ($currencies as $currency)
+                                <li><a href="#USD">{{ $currency->code }}</a></li>
+                                @endforeach
+                                <li><a href="#EUR">EUR</a></li>
+                            </ul>
                         </div>
                         <!-- End DropDown Menu -->
                         <div class="dropdown ml-5">
@@ -105,7 +109,7 @@
                             <i class="d-icon-bars2"></i>
                         </a>
                         <a href="{{ route('home') }}" class="logo">
-                            <img src="/photo/logo.png" alt="logo" />
+                            <img src="/photo/{{ $site_logo }}" alt="logo" />
                         </a>
                         <!-- End Logo -->
 

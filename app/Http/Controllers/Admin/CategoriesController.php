@@ -14,7 +14,15 @@ class CategoriesController extends Controller
     //Display a listing of the resource.
     public function index()
     {
-        $categories=Categories::get();
+        $categories = Categories::get();
+        foreach ($categories as $key => $category) {
+            if($category->parent_id !== 0){
+                $info = Categories::where('id',$category->parent_id)->select('id','name')->get()[0];
+                $categories[$key]->parent = ["id" => $info->id , "name" => $info->name];
+            }else{
+                $categories[$key]->parent = ["id" => 0 , "name" => "None"];
+            }
+        }
     	return view('admin.categories.index',[
     		'categories'=> $categories,
     	]);
@@ -43,9 +51,8 @@ class CategoriesController extends Controller
             'meta_description' => 'required',
             'parent_id' => 'numeric',
             'sort_order' => 'numeric',
-            'status' => 'numeric',
         ]);
-        
+
         $image = $request->file('image');
         // Make a image name based on user name and current timestamp
         $imageName = Str::slug($request->input('name')).'_'.time();
@@ -56,7 +63,6 @@ class CategoriesController extends Controller
         // Upload image
         $request->image->move(public_path($folder), $imageName. '.' . $image->extension());
 
-        
         $categories = Categories::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -66,10 +72,10 @@ class CategoriesController extends Controller
             'meta_description' => $request->meta_description,
             'parent_id' => $request->parent_id,
             'sort_order' => $request->sort_order,
-            'status' => $request->status,
+            'status' => isset($request->status) ? 1:0,
         ]);
 
-        return back();
+        return back()->with('success','Category successfully created.');
     }
 
     // Show the form for editing the specified resource.
@@ -87,13 +93,12 @@ class CategoriesController extends Controller
     //Update the specified resource in storage.
     public function update(Request $request, $id)
     {
-        
+
         $this->validate($request, [
             'name' => 'max:32',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'parent_id' => 'numeric',
             'sort_order' => 'numeric',
-            'status' => 'numeric',
         ]);
 
         $category = Categories::find($id);
@@ -110,8 +115,8 @@ class CategoriesController extends Controller
             // Upload image
             $request->image->move(public_path($folder), $imageName. '.' . $image->extension());
 
-            $path = public_path() . $category->image;
-            dd($path);
+            $path = public_path()."/" . $category->image;
+
             if(file_exists($path)) {
                 unlink($path);
             }
@@ -125,7 +130,7 @@ class CategoriesController extends Controller
                 'meta_description' => $request->meta_description,
                 'parent_id' => $request->parent_id,
                 'sort_order' => $request->sort_order,
-                'status' => $request->status,
+                'status' => isset($request->status) ? 1:0,
             ]);
 
 
@@ -133,31 +138,35 @@ class CategoriesController extends Controller
 
         else {
             $category->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-            'parent_id' => $request->parent_id,
-            'sort_order' => $request->sort_order,
-            'status' => $request->status,
-        ]);
-            }
+                'name' => $request->name,
+                'description' => $request->description,
+                'meta_title' => $request->meta_title,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
+                'parent_id' => $request->parent_id,
+                'sort_order' => $request->sort_order,
+                'status' => isset($request->status) ? 1:0,
+            ]);
+        }
 
-        return back();
+        return back()->with('success','Category successfully updated.');
     }
 
     //Remove the specified resource from storage.
     public function destroy($category_id)
     {
+        $subcats = Categories::where('parent_id',$category_id)->count();
+        if($subcats){
+            return back()->with('error',"Category has $subcats sub categories.");
+        }
         $category = Categories::find($category_id);
 
-        $path = public_path() . $category->image;
+        $path = public_path() ."/". $category->image;
         if(file_exists($path)) {
             unlink($path);
         }
         $category->delete();
 
-        return back();
+        return back()->with('success',"Category successfully deleted.");
     }
 }
