@@ -244,12 +244,12 @@
 				                                </a>
 				                                <ul class="nav nav-children">
 				                                    <li>
-				                                        <a>
+				                                        <a href="{{ route('store.discount') }}">
 				                                            View Discounts
 				                                        </a>
 				                                    </li>
 				                                    <li>
-				                                        <a>
+				                                        <a href="{{ route('store.discount.create') }}">
 				                                            Create Discount
 				                                        </a>
 				                                    </li>
@@ -278,12 +278,12 @@
 				                                </a>
 				                                <ul class="nav nav-children">
 				                                    <li>
-				                                        <a>
+				                                        <a href="{{ route('category.discount') }}">
 				                                            View Discounts
 				                                        </a>
 				                                    </li>
 				                                    <li>
-				                                        <a>
+				                                        <a href="{{ route('category.discount.create') }}">
 				                                            Create Discount
 				                                        </a>
 				                                    </li>

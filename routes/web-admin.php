@@ -1,22 +1,24 @@
 <?php
-use App\Http\Controllers\Admin\UserController as UserController;
-use \App\Http\Controllers\Admin\AdvertisementController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CargoController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\StoreDiscountController;
+use \App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\GeneralSettingController;
+use App\Http\Controllers\Admin\ProductDiscountController;
+use App\Http\Controllers\Admin\CategoryDiscountController;
 use App\Http\Controllers\Admin\PermController as PermController;
+use App\Http\Controllers\Admin\UserController as UserController;
 use App\Http\Controllers\Admin\GroupController as GroupController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\CargoController;
-use App\Http\Controllers\Admin\CurrencyController;
-use App\Http\Controllers\Admin\StoreController;
-use App\Http\Controllers\Admin\GeneralSettingController;
-use App\Http\Controllers\Admin\ProductDiscountController;
 
 Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function() {
 
@@ -53,6 +55,12 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
      */
     Route::get('/product/discount', [ProductDiscountController::class, 'index'])->name('product.discount');
     Route::get('/product/discount/create', [ProductDiscountController::class, 'create'])->name('product.discount.create');
+
+    Route::get('/store/discount', [StoreDiscountController::class, 'index'])->name('store.discount');
+    Route::get('/store/discount/create', [StoreDiscountController::class, 'create'])->name('store.discount.create');
+
+    Route::get('/category/discount', [CategoryDiscountController::class, 'index'])->name('category.discount');
+    Route::get('/category/discount/create', [CategoryDiscountController::class, 'create'])->name('category.discount.create');
 
     /**
      * Orders
