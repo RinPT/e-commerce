@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\CargoController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\GeneralSettingController;
-
+use App\Http\Controllers\Admin\ProductDiscountController;
 
 Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function() {
 
@@ -47,6 +47,12 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::post('/currency/create', [CurrencyController::class, 'store']);
     Route::post('/currency/{id}/update', [CurrencyController::class, 'update'])->name('admin.currency.update');
     Route::delete('/currency/{id}/delete', [CurrencyController::class, 'destroy'])->name('admin.currency.delete');
+
+    /**
+     * Discounts
+     */
+    Route::get('/product/discount', [ProductDiscountController::class, 'index'])->name('product.discount');
+    Route::get('/product/discount/create', [ProductDiscountController::class, 'create'])->name('product.discount.create');
 
     /**
      * Orders

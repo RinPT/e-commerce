@@ -238,22 +238,58 @@
 											<span>Discount Management</span>
 										</a>
 										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="">
-													Store's Discounts
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="">
-													Category's Discounts
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="">
-													Product's Discounts
-												</a>
-											</li>
-										</ul>
+				                            <li class="nav-parent">
+				                                <a class="nav-link" href="#">
+				                                    Store Discount
+				                                </a>
+				                                <ul class="nav nav-children">
+				                                    <li>
+				                                        <a>
+				                                            View Discounts
+				                                        </a>
+				                                    </li>
+				                                    <li>
+				                                        <a>
+				                                            Create Discount
+				                                        </a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+                                            <li class="nav-parent">
+				                                <a class="nav-link" href="#">
+				                                    Product Discount
+				                                </a>
+				                                <ul class="nav nav-children">
+				                                    <li>
+				                                        <a href="{{ route('product.discount') }}">
+				                                            View Discounts
+				                                        </a>
+				                                    </li>
+				                                    <li>
+				                                        <a href="{{ route('product.discount.create') }}">
+				                                            Create Discount
+				                                        </a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+                                            <li class="nav-parent">
+				                                <a class="nav-link" href="#">
+				                                    Category Discount
+				                                </a>
+				                                <ul class="nav nav-children">
+				                                    <li>
+				                                        <a>
+				                                            View Discounts
+				                                        </a>
+				                                    </li>
+				                                    <li>
+				                                        <a>
+				                                            Create Discount
+				                                        </a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+				                        </ul>
 									</li>
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
