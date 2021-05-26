@@ -44,12 +44,12 @@
                             <p class="card-big-info-desc">Add here all details and necessary information.</p>
                         </div>
                         <div class="col-lg-3-5 col-xl-4-5">
-                            <form class="form-horizontal form-bordered" action="{{ route('admin.currency.create') }}" method="POST">
+                            <form class="form-horizontal form-bordered" action="{{ route('product.discount.create') }}" method="POST">
                                 @csrf
                                 <div class="form-group row @error('name') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Select Product</label>
                                     <div class="col-lg-6">
-                                        <select data-plugin-selectTwo class="form-control populate">
+                                        <select name="product_id" data-plugin-selectTwo class="form-control populate">
                                             <optgroup label="Products">
                                                 @if($products->count())
                                                     @foreach ($products as $product)
@@ -81,17 +81,12 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 control-label text-lg-right pt-2">Start/End Date</label>
                                     <div class="col-lg-6">
-                                        <div class="input-daterange input-group" data-plugin-datepicker>
-                                            <span class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-calendar-alt"></i>
-                                                </span>
-                                            </span>
-                                            <input type="text" class="form-control @error('start_date')is-invalid @enderror" name="start_date">
+                                        <div class="input-daterange input-group">
+                                            <input type="date" class="form-control @error('start_date')is-invalid @enderror" name="start_date">
                                             <span class="input-group-text border-left-0 border-right-0 rounded-0">
                                                 to
                                             </span>
-                                            <input type="text" class="form-control @error('end_date')is-invalid @enderror" name="end_date">
+                                            <input type="date" class="form-control @error('end_date')is-invalid @enderror" name="end_date">
                                         </div>
                                     </div>
                                 </div>
