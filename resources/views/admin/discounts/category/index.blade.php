@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/datatables/media/css/dataTables.bootstrap4.css" />
     <link rel="stylesheet" href="/admin/vendor/pnotify/pnotify.custom.css" />
+    <link rel="stylesheet" href="/admin/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
 @endsection
 
 @section('breadcrumb')
@@ -73,24 +74,75 @@
                 </thead>
                 <tbody>
                     @if ($discounts->count())
-                        @foreach ($discounts as $dicount)
+                        @foreach ($discounts as $discount)
                             <tr data-item-id="{{ $discount->id }}">
-                                <td>{{ $dicount->id }} </td>
-                                <td>{{ $dicount->product_id }}</td>
+                                <td>{{ $discount->id }} </td>
+                                <td>{{ $discount->product_id }}</td>
                                 <td>{{ $discount->store_discount }}</td>
                                 <td>{{ $discount->main_discount }}</td>
                                 <td>{{ $discount->description }}</td>
-                                <td>{{ $discount->start_date->format('d.m.Y H:i') }}</td>
-                                <td>{{ $discount->end_date->format('d.m.Y H:i') }}</td>
+                                <td>{{ date('d/m/Y', strtotime($discount->start_date)) }}</td>
+                                <td>{{ date('d/m/Y', strtotime($discount->end_date)) }}</td>
                                 <td class="actions d-flex">
                                     <a href="#currencyEdit{{ $discount->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
-                                    <form action="{{ route('admin.currency.delete', $discount->id) }}" method="POST">
+                                    <form action="{{ route('product.discount.destroy', $discount->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                                     </form>
 
                                     <!-- Modal Animation -->
+									<div id="currencyEdit{{ $discount->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Update Discount</h2>
+											</header>
+											<div class="card-body">
+                                                <form action="{{ route('product.discount.update', $discount->id) }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-wrapper mb-0">
+                                                        <div class="form-group row @error('store_discount') has-danger @enderror">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Discount</label>
+                                                            <div class="col-lg-6">
+                                                                <input name="store_discount" type="number" class="form-control" id="inputDefault" value="{{ $discount->store_discount }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row @error('main_discount') has-danger @enderror">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Main Discount</label>
+                                                            <div class="col-lg-6">
+                                                                <input name="main_discount" type="number" class="form-control" id="inputDefault" value="{{ $discount->main_discount }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row @error('description') has-danger @enderror">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="textareaAutosize">Description</label>
+                                                            <div class="col-lg-6">
+                                                                <textarea name="description" class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize>{{ $discount->description }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2">Start/End Date</label>
+                                                            <div class="col-lg-6">
+                                                                <div class="input-daterange input-group">
+                                                                    <input type="date" class="form-control @error('start_date')is-invalid @enderror" name="start_date" value="{{ $discount->start_date }}">
+                                                                    <span class="input-group-text border-left-0 border-right-0 rounded-0">
+                                                                        to
+                                                                    </span>
+                                                                    <input type="date" class="form-control @error('end_date')is-invalid @enderror" name="end_date" value="{{ $discount->end_date }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                    <div class="row">
+                                                        <div class="col-md-12 text-right">
+                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                            <button class="btn btn-default modal-dismiss">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+											</div>
+										</section>
+									</div>
                                 </td>
                             </tr>
                         @endforeach
@@ -115,6 +167,10 @@
     <script src="/admin/vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
     <script src="/admin/vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
     <script src="/admin/vendor/pnotify/pnotify.custom.js"></script>
+
+    <script src="/admin/vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+    <script src="/admin/vendor/fuelux/js/spinner.js"></script>
+    <script src="/admin/vendor/autosize/autosize.js"></script>
 @endsection
 
 @section('end-scripts')

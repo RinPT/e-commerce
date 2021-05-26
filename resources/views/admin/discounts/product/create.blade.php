@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-lg-2-5 col-xl-1-5">
                             <i class="card-big-info-icon fas fa-money-bill-alt"></i>
-                            <h2 class="card-big-info-title">Add New Discount</h2>
+                            <h2 class="card-big-info-title">Add New Product Discount</h2>
                             <p class="card-big-info-desc">Add here all details and necessary information.</p>
                         </div>
                         <div class="col-lg-3-5 col-xl-4-5">
