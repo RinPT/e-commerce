@@ -96,7 +96,9 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Email Confirmation Required ?</label>
                                         <div class="col-lg-6">
-                                            <input type="checkbox" name="email_confirmation_required" class="" id="inputDefault" @if($email_confirmation_required) checked @endif>
+                                            <div class="switch switch-md switch-dark">
+                                                <input type="checkbox" name="email_confirmation_required" data-plugin-ios-switch @if($email_confirmation_required) checked @endif/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,6 +184,7 @@
 @endsection
 
 @section('scripts')
+    <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
 @endsection
 

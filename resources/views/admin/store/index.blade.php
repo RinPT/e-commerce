@@ -34,25 +34,19 @@
             <h2 class="card-title">Stores</h2>
         </header>
         <div class="card-body" style="overflow-x: auto;">
-            <table class="table table-bordered table-striped mb-0" id="datatable-default">
+            <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
                 <thead>
                 <tr>
                     <th>Store ID</th>
                     <th>Store Name</th>
-                    <th>Username</th>
                     <th>Email</th>
-                    <th>Password</th>
-                    <th>Logo</th>
                     <th>Store URL </th>
                     <th>Tax No </th>
-                    <th>Country ID </th>
-                    <th>City </th>
-                    <th>Address </th>
-                    <th>Phone</th>
+                    <th>Country</th>
+                    <th>Product Count</th>
                     <th>Status</th>
-                    <th>Creation Date</th>
-                    <th>Update Date</th>
-                    <th>Action</th>
+                    <th>Registration Date</th>
+                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,19 +54,21 @@
                         <tr>
                             <td>{{ $store->id }}</td>
                             <td>{{ $store->name }}</td>
-                            <td>{{ $store->username }}</td>
                             <td>{{ $store->email }}</td>
-                            <td>{{ $store->password }}</td>
-                            <td>{{ $store->logo }}</td>
-                            <td>{{ $store->url }}</td>
+                            <td><a href="https://{{ $store->url }}" target="_blank" class="text-primary">{{ $store->url }}</a></td>
                             <td>{{ $store->tax_no }}</td>
-                            <td>{{ $store->country_id }}</td>
-                            <td>{{ $store->city }}</td>
-                            <td>{{ $store->address }}</td>
-                            <td>{{ $store->phone }}</td>
-                            <td>{{ $store->status }}</td>
-                            <td>{{ is_null($store->created_at) ? "-" : Carbon\Carbon::parse($store->created_at)->format('d.m.Y H:i') }}</td>
-                            <td>{{ is_null($store->updated_at) ? "-" : Carbon\Carbon::parse($store->updated_at)->format('d.m.Y H:i') }}</td>
+                            <td>{{ $store->country }}</td>
+                            <td>
+                                <span class="badge badge-md badge-warning">{{ $store->product_count }}</span>
+                            </td>
+                            <td>
+                                @if($store->status)
+                                    <span class="badge badge-success">Active</span>
+                                @else
+                                    <span class="badge badge-danger">Inactive</span>
+                                @endif
+                            </td>
+                            <td>{{ $store->created_at->format('d.m.Y H:i') }}</td>
                             <td class="actions">
                                 <a href="#storeEdit{{$store->id}}" class="mb-1 mt-1 mr-1 modal-with-zoom-anim ws-normal btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></a>
                                 <a href="{{ route('admin.store.destroy', $store->id) }}" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></a>
@@ -206,7 +202,7 @@
     </section>
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
     <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
@@ -260,9 +256,4 @@
 
         $('#datatable-tabletools_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
     </script>
-
-    <script src="/admin/js/examples/examples.datatables.default.js"></script>
-    <script src="/admin/js/examples/examples.datatables.row.with.details.js"></script>
-    <script src="/admin/js/examples/examples.datatables.tabletools.js"></script>
-    <script src="/admin/js/examples/examples.modals.js"></script>
 @endsection

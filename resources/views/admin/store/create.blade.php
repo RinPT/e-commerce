@@ -135,7 +135,7 @@
     </section>
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
     <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
     <script src="/admin/vendor/select2/js/select2.js"></script>
 @endsection

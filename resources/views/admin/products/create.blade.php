@@ -1,6 +1,6 @@
 @extends('layouts.admin.main')
 
-@section('custom-styles')
+@section('styles')
     <link rel="stylesheet" href="/admin/vendor/jquery-ui/jquery-ui.css" />
     <link rel="stylesheet" href="/admin/vendor/jquery-ui/jquery-ui.theme.css" />
     <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
@@ -24,7 +24,7 @@
             <p class="card-subtitle">You can create a new product here.</p>
         </header>
         <div class="card-body">
-            <form action="{{ route('store.products') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -107,7 +107,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Attributes and Stocks</label>
                     <div class="col-lg-6">
@@ -171,7 +171,7 @@
     </section>
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
 <script src="/admin/vendor/jquery-ui/jquery-ui.js"></script>
 <script src="/admin/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
 <script src="/admin/vendor/select2/js/select2.js"></script>

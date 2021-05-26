@@ -23,9 +23,9 @@ class CreateCountries extends Migration
 
         DB::table('countries')->insert([
             'id' => 1,
-            'name' => 'Country',
-            'iso_code' => '2',
-            'status' => 2,
+            'name' => 'Türkiye',
+            'iso_code' => 'TR',
+            'status' => '1',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);

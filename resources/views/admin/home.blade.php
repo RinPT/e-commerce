@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase" href="{{ route('index.products') }}">(view all)</a>
+                                <a class="text-muted text-uppercase" href="{{ route('admin.products') }}">(view all)</a>
                             </div>
                         </div>
                     </div>
