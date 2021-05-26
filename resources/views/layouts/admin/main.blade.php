@@ -200,12 +200,12 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="{{ route('index.products') }}">
+												<a class="nav-link" href="{{ route('admin.products') }}">
 													All Products
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('create.products') }}">
+												<a class="nav-link" href="{{ route('admin.product.create') }}">
 													Add New Product
 												</a>
 											</li>
@@ -374,7 +374,7 @@
 											</li>
 										</ul>
 									</li>
-									<li class="nav-parent">
+									<li class="nav-parent @if(str_contains(url()->current(),'store'))) nav-expanded @endif"">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-user-circle'></i>
 											<span>Store Management</span>

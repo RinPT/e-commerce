@@ -51,27 +51,6 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     Route::delete('/currency/{id}/delete', [CurrencyController::class, 'destroy'])->name('admin.currency.delete');
 
     /**
-     * Discounts
-     */
-    Route::get('/product/discount', [ProductDiscountController::class, 'index'])->name('product.discount');
-    Route::get('/product/discount/create', [ProductDiscountController::class, 'create'])->name('product.discount.create');
-    Route::post('/product/discount/create', [ProductDiscountController::class, 'store']);
-    Route::delete('/product/discount/{id}/delete', [ProductDiscountController::class, 'destroy'])->name('product.discount.destroy');
-    Route::post('/product/discount/{id}/update', [ProductDiscountController::class, 'update'])->name('product.discount.update');
-
-    Route::get('/store/discount', [StoreDiscountController::class, 'index'])->name('store.discount');
-    Route::get('/store/discount/create', [StoreDiscountController::class, 'create'])->name('store.discount.create');
-    Route::post('/store/discount/create', [StoreDiscountController::class, 'store']);
-    Route::delete('/store/discount/{id}/delete', [StoreDiscountController::class, 'destroy'])->name('store.discount.destroy');
-    Route::post('/store/discount/{id}/update', [StoreDiscountController::class, 'update'])->name('store.discount.update');
-
-    Route::get('/category/discount', [CategoryDiscountController::class, 'index'])->name('category.discount');
-    Route::get('/category/discount/create', [CategoryDiscountController::class, 'create'])->name('category.discount.create');
-    Route::post('/category/discount/create', [CategoryDiscountController::class, 'store']);
-    Route::delete('/category/discount/{id}/delete', [CategoryDiscountController::class, 'destroy'])->name('category.discount.destroy');
-    Route::post('/category/discount/{id}/update', [CategoryDiscountController::class, 'update'])->name('category.discount.update');
-
-    /**
      * Orders
      */
     Route::get('/order', [OrderController::class, 'index'])->name('admin.orders');
@@ -96,12 +75,33 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
     /**
      * Products
      */
-    Route::get('/products/list', [ProductsController::class, 'index'])->name('index.products'); //shows all products
-    Route::get('/products/new', [ProductsController::class, 'create'])->name('create.products'); //show new product screen
-    Route::post('/products/new/done', [ProductsController::class, 'store'])->name('store.products'); //store new changes
-    Route::delete('/products/delete/{product_id}', [ProductsController::class, 'destroy'])->name('delete.products'); //delete a product
-    Route::get('/products/edit/{product_id}', [ProductsController::class, 'edit'])->name('edit.products'); //edit a product
-    Route::patch('/products/edit/{product_id}/done', [ProductsController::class, 'update'])->name('update.products'); //update a product
+    Route::get('/products', [ProductsController::class, 'index'])->name('admin.products');
+    Route::get('/product/create', [ProductsController::class, 'create'])->name('admin.product.create');
+    Route::post('/product/create', [ProductsController::class, 'store'])->name('admin.product.store');
+    Route::get('/products/{product_id}/update', [ProductsController::class, 'edit'])->name('admin.product.edit');
+    Route::patch('/products/{product_id}/update', [ProductsController::class, 'update'])->name('admin.product.update');
+    Route::delete('/products/{product_id}/delete', [ProductsController::class, 'destroy'])->name('admin.product.destroy');
+
+    /**
+     * Discounts
+     */
+    Route::get('/product/discount', [ProductDiscountController::class, 'index'])->name('product.discount');
+    Route::get('/product/discount/create', [ProductDiscountController::class, 'create'])->name('product.discount.create');
+    Route::post('/product/discount/create', [ProductDiscountController::class, 'store']);
+    Route::delete('/product/discount/{id}/delete', [ProductDiscountController::class, 'destroy'])->name('product.discount.destroy');
+    Route::post('/product/discount/{id}/update', [ProductDiscountController::class, 'update'])->name('product.discount.update');
+
+    Route::get('/store/discount', [StoreDiscountController::class, 'index'])->name('store.discount');
+    Route::get('/store/discount/create', [StoreDiscountController::class, 'create'])->name('store.discount.create');
+    Route::post('/store/discount/create', [StoreDiscountController::class, 'store']);
+    Route::delete('/store/discount/{id}/delete', [StoreDiscountController::class, 'destroy'])->name('store.discount.destroy');
+    Route::post('/store/discount/{id}/update', [StoreDiscountController::class, 'update'])->name('store.discount.update');
+
+    Route::get('/category/discount', [CategoryDiscountController::class, 'index'])->name('category.discount');
+    Route::get('/category/discount/create', [CategoryDiscountController::class, 'create'])->name('category.discount.create');
+    Route::post('/category/discount/create', [CategoryDiscountController::class, 'store']);
+    Route::delete('/category/discount/{id}/delete', [CategoryDiscountController::class, 'destroy'])->name('category.discount.destroy');
+    Route::post('/category/discount/{id}/update', [CategoryDiscountController::class, 'update'])->name('category.discount.update');
 
     /**
      * Cargo

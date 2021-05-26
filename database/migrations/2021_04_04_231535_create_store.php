@@ -37,7 +37,7 @@ class CreateStore extends Migration
             'password' => \Illuminate\Support\Facades\Hash::make('store123'),
             'url' => 'www.store.com',
             'tax_no' => '123456',
-            'country_id' => 1,
+            'country_id' => 224,
             'city' => 'denizli',
             'address' =>'Altıntop, Lise Cd. No:2, 20010 Merkez',
             'phone' => '+90 534 572 25 15',

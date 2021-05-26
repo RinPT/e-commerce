@@ -66,22 +66,8 @@
                             </ul>
                         </div>
                         <!-- End DropDown Menu -->
-                        <div class="dropdown ml-5">
-                            <a href="#language">ENG</a>
-                            <ul class="dropdown-box">
-                                <li>
-                                    <a href="#USD">ENG</a>
-                                </li>
-                                <li>
-                                    <a href="#EUR">FRH</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- End DropDown Menu -->
                         <span class="divider"></span>
                         <a href="contact-us.html" class="contact d-lg-show"><i class="fas fa-map-marker-alt"></i>Contact</a>
-                        <a href="#" class="help d-lg-show"><i class="far fa-question-circle"></i> Need Help</a>
-
                         @guest
                             <a href="{{ route('login') }}"><i class="fas fa-user mr-1"></i>Log in</a>
                             <span class="delimiter mr-0">/</span>

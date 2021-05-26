@@ -15,6 +15,20 @@
                     <p class="card-big-info-desc">You can add a new store by filling below information.</p>
                 </div>
                 <div class="col-lg-3-5 col-xl-4-5">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <ul class="list-unstyled mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     @if(Session::has('success'))
                         <div class="alert alert-success">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -27,9 +41,8 @@
                             <strong>Error!</strong> {{ Session::get('error') }}
                         </div>
                     @endif
-                    <form action="{{ route('admin.store.store') }}" class="form-horizontal form-bordered mt-5" method="post">
+                    <form action="{{ route('admin.store.store') }}" class="form-horizontal form-bordered mt-5" method="post" enctype="multipart/form-data">
                         @csrf
-
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Name</label>
                             <div class="col-lg-6">
@@ -74,7 +87,7 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store URL</label>
                             <div class="col-lg-6">
-                                <input type="text" name="url" class="form-control" id="inputDefault"  required>
+                                <input type="url" name="url" class="form-control" id="inputDefault"  required>
                             </div>
                         </div>
 
@@ -87,23 +100,27 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Country ID</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Country</label>
                             <div class="col-lg-6">
-                                <input type="text" name="country_id" class="form-control" id="inputDefault"  required>
+                                <select class="form-control" name="country_id">
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">City</label>
                             <div class="col-lg-6">
-                                <input type="text" name="city" class="form-control" id="inputDefault"  required>
+                                <input type="text" name="city" class="form-control" id="inputDefault" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Address</label>
                             <div class="col-lg-6">
-                                <input type="text" name="address" class="form-control" id="inputDefault"  required>
+                                <textarea type="text" name="address" class="form-control" rows="7" id="inputDefault" required></textarea>
                             </div>
                         </div>
 
@@ -118,10 +135,9 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
                             <div class="col-lg-6">
-                                <select class="form-control mb-3" name="status">
-                                    <option selected>0</option>
-                                    <option>1</option>
-                                </select>
+                                <div class="switch switch-md switch-dark">
+                                    <input type="checkbox" name="status" data-plugin-ios-switch checked="checked"/>
+                                </div>
                             </div>
                         </div>
 

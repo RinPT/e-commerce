@@ -30,12 +30,13 @@ class StoreController extends Controller
 
     public function create()
     {
-        return view('admin.store.create');
+        return view('admin.store.create')->with([
+            'countries' => Countries::all()
+        ]);
     }
 
     public function store(Request $request)
     {
-
         $this -> validate($request, [
             'name' => 'required|max:255',
             'username' => 'required|max:255 | unique:store,username',
@@ -48,23 +49,31 @@ class StoreController extends Controller
             'city' => 'required',
             'address' => 'required',
             'phone' => 'required | unique:store,phone',
-            'status' => 'required',
-
         ]);
 
-            Store::create([
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            if ($file->isValid()) {
+                $filename = time().".".$file->getClientOriginalExtension();
+                $file->storeAs('photo/store',$filename, 'public_html');
+            }else{
+                return back()->with('error', 'An error occurred while uploading the file.');
+            }
+        }
+
+        Store::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'logo'=> $request->logo,
+            'logo'=> isset($filename) ? $filename : "",
             'url'=> $request->url,
             'tax_no'=> $request->tax_no,
             'country_id'=> $request->country_id,
             'city'=> $request->city,
             'address'=> $request->address,
             'phone'=> $request->phone,
-            'status'=> $request->status,
+            'status'=> isset($request->status)? 1:0,
         ]);
         return back()->with('success', 'New store added.');
     }
@@ -74,20 +83,18 @@ class StoreController extends Controller
         $store = Store::findOrFail($id);
         return view('admin.store.edit')->with([
             'id' => $id,
-            'store' => $store
+            'store' => $store,
+            'countries' => Countries::all()
         ]);
+
     }
 
     public function update(Request $request, $id)
     {
-
         $this -> validate($request, [
-            'id' => 'required | unique:store,id',
             'name' => 'required|max:255',
             'username' => 'required|max:255 | unique:store,username',
             'email'=> 'required|email|max:255 | unique:store,email',
-            'password' =>'required|confirmed',
-            'logo' => 'required',
             'url' => 'required | unique:store,url',
             'tax_no' => 'required | unique:store,tax_no',
             'country_id' => 'required',
@@ -97,23 +104,39 @@ class StoreController extends Controller
             'status' => 'required',
 
         ]);
-            $store = Store::find($id);
+        $store = Store::find($id);
 
-            $store->update([
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            if ($file->isValid()) {
+                $filename = time().".".$file->getClientOriginalExtension();
+                $file->storeAs('photo/store',$filename, 'public_html');
+            }else{
+                return back()->with('error', 'An error occurred while uploading the file.');
+            }
+        }
+
+        $store->update([
             'id' => $request->id,
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'logo'=> $request->logo,
+            'logo'=> isset($filename) ? $filename : "",
             'url'=> $request->url,
             'tax_no'=> $request->tax_no,
             'country_id'=> $request->country_id,
             'city'=> $request->city,
             'address'=> $request->address,
             'phone'=> $request->phone,
-            'status'=> $request->status,
+            'status'=> isset($request->status)? 1:0,
         ]);
+
+        if(!empty($request->password)){
+            $store->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
         return back()->with('success', 'Information updated successfully');
     }
 

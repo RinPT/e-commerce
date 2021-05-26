@@ -15,6 +15,20 @@
                     <p class="card-big-info-desc">You can update store by changing the information below.</p>
                 </div>
                 <div class="col-lg-3-5 col-xl-4-5">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <ul class="list-unstyled mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     @if(Session::has('success'))
                         <div class="alert alert-success">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -27,14 +41,8 @@
                             <strong>Error!</strong> {{ Session::get('error') }}
                         </div>
                     @endif
-                    <form action="{{ route('admin.store.update',$id) }}" class="form-horizontal form-bordered mt-5" method="post">
+                    <form action="{{ route('admin.store.update',$id) }}" class="form-horizontal form-bordered mt-5" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store ID</label>
-                            <div class="col-lg-6">
-                                <input type="text" name="id" class="form-control" id="inputDefault" value="{{ $store->id }}" required>
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Name</label>
@@ -46,28 +54,31 @@
                          <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Username</label>
                             <div class="col-lg-6">
-                                <input type="text" name="username" class="form-control" id="inputDefault" value="{{ $store->username }}" required >
+                                <input type="text" name="username" class="form-control" id="inputDefault" value="{{ $store->username }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Email</label>
                             <div class="col-lg-6">
-                                <input type="text" name="email" class="form-control" id="inputDefault" value="{{ $store->email }}" required >
+                                <input type="text" name="email" class="form-control" id="inputDefault" value="{{ $store->email }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Password</label>
                             <div class="col-lg-6">
-                                <input type="text" name="password" class="form-control" id="inputDefault" value="{{ $store->password }}" required >
+                                <input type="text" name="password" class="form-control" id="inputDefault" placeholder="Leave blank if you won't change password">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Logo</label>
                             <div class="col-lg-6">
-                                <input type="text" name="logo" class="form-control" id="inputDefault" value="{{ $store->logo }}" required>
+                                <input type="file" name="logo" class="form-control" id="inputDefault">
+                                @if(!empty($store->logo))
+                                    <img src="/photo/store/{{ $store->logo }}" width="200" class="thumbnail mt-2">
+                                @endif
                             </div>
                         </div>
 
@@ -87,9 +98,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Country ID</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Country</label>
                             <div class="col-lg-6">
-                                <input type="text" name="country_id" class="form-control" id="inputDefault" value="{{ $store->country_id }}" required>
+                                <select class="form-control" name="country_id">
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country->id }}" @if($store->country_id == $country->id) selected @endif>{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -103,7 +118,7 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Address</label>
                             <div class="col-lg-6">
-                                <input type="text" name="address" class="form-control" id="inputDefault" value="{{ $store->address }}" required>
+                                <textarea type="text" name="address" class="form-control" rows="7" id="inputDefault" required>{{ $store->address }}</textarea>
                             </div>
                         </div>
 
@@ -118,7 +133,9 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
                             <div class="col-lg-6">
-                                <input type="text" name="status" class="form-control" id="inputDefault" value="{{ $store->status }}" required>
+                                <div class="switch switch-md switch-dark">
+                                    <input type="checkbox" name="status" data-plugin-ios-switch @if($store->status) checked @endif/>
+                                </div>
                             </div>
                         </div>
 
