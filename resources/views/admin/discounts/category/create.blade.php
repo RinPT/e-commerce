@@ -15,7 +15,7 @@
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>Product Discount</span></li>
+            <li><span>Category Discount</span></li>
             <li><span>Discount Management</span></li>
             <li><span>Dashboard</span></li>
         </ol>
@@ -44,16 +44,16 @@
                             <p class="card-big-info-desc">Add here all details and necessary information.</p>
                         </div>
                         <div class="col-lg-3-5 col-xl-4-5">
-                            <form class="form-horizontal form-bordered" action="{{ route('product.discount.create') }}" method="POST">
+                            <form class="form-horizontal form-bordered" action="{{ route('category.discount.create') }}" method="POST">
                                 @csrf
                                 <div class="form-group row @error('name') has-danger @enderror">
-                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Select Product</label>
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Select Category</label>
                                     <div class="col-lg-6">
-                                        <select name="product_id" data-plugin-selectTwo class="form-control populate">
-                                            <optgroup label="Products">
-                                                @if($products->count())
-                                                    @foreach ($products as $product)
-                                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        <select name="category_id" data-plugin-selectTwo class="form-control populate">
+                                            <optgroup label="Categories">
+                                                @if($categories->count())
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                     @endforeach
                                                 @endif
                                             </optgroup>

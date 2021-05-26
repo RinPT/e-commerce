@@ -13,7 +13,7 @@
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>Product Discount</span></li>
+            <li><span>Category Discount</span></li>
             <li><span>Discount Management</span></li>
             <li><span>Dashboard</span></li>
         </ol>
@@ -63,7 +63,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Product ID</th>
+                        <th>Category ID</th>
                         <th>Store Discount</th>
                         <th>Main Discount</th>
                         <th>Description</th>
@@ -77,7 +77,7 @@
                         @foreach ($discounts as $discount)
                             <tr data-item-id="{{ $discount->id }}">
                                 <td>{{ $discount->id }} </td>
-                                <td>{{ $discount->product_id }}</td>
+                                <td>{{ $discount->category_id }}</td>
                                 <td>{{ $discount->store_discount }}</td>
                                 <td>{{ $discount->main_discount }}</td>
                                 <td>{{ $discount->description }}</td>
@@ -85,7 +85,7 @@
                                 <td>{{ date('d/m/Y', strtotime($discount->end_date)) }}</td>
                                 <td class="actions d-flex">
                                     <a href="#currencyEdit{{ $discount->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
-                                    <form action="{{ route('product.discount.destroy', $discount->id) }}" method="POST">
+                                    <form action="{{ route('category.discount.destroy', $discount->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
@@ -98,7 +98,7 @@
 												<h2 class="card-title">Update Discount</h2>
 											</header>
 											<div class="card-body">
-                                                <form action="{{ route('product.discount.update', $discount->id) }}" method="POST">
+                                                <form action="{{ route('category.discount.update', $discount->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-wrapper mb-0">
                                                         <div class="form-group row @error('store_discount') has-danger @enderror">

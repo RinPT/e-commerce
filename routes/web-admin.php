@@ -67,6 +67,9 @@ Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function
 
     Route::get('/category/discount', [CategoryDiscountController::class, 'index'])->name('category.discount');
     Route::get('/category/discount/create', [CategoryDiscountController::class, 'create'])->name('category.discount.create');
+    Route::post('/category/discount/create', [CategoryDiscountController::class, 'store']);
+    Route::delete('/category/discount/{id}/delete', [CategoryDiscountController::class, 'destroy'])->name('category.discount.destroy');
+    Route::post('/category/discount/{id}/update', [CategoryDiscountController::class, 'update'])->name('category.discount.update');
 
     /**
      * Orders
