@@ -10,15 +10,7 @@ class HomeController extends Controller
 {
     public function index() {
 
-        $currencies = Currencies::get();
-        $categories = Categories::get();
-        $items = Categories::tree();
 
-    	return view('home', [
-            'currencies'  => $currencies,
-            'categories'  => $categories,
-            'items' => $items,
-
-        ]);
+    	return view('home');
     }
 }

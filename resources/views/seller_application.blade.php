@@ -1,144 +1,180 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Seller Application Form</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+@section('stylesheet')
+    <!-- Main CSS File -->
+    <link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
 
-</head>
-<body class="bg-light">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273142;">
-            <a class="navbar-brand" style="margin-left: 2rem" href="#">Our Name/Logo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="border-left: solid; border-color: rgb(200, 200, 200); border-left-width: 1px; padding-left: 0.5rem;">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link disabled text-light" href="#"><b>Seller Application Form</b></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+@endsection
 
-    <main class="pt-5">
-        <div class="container rounded p-4" style="background-color: rgba(52, 157, 255, 0.808)">
-            <div class="row">
-                <div class="col-12 text-light">
-                    <b>All applications will be aproved by the admin! Please provide all necessary information about your company in the form belove.</b>
+@section('content')
+    <main class="main">
+        <div class="page-content mt-6 pb-2 mb-10">
+            <div class="container">
+                <div class="login-popup" style="max-width: 100%;">
+                    <div class="form-box">
+                        <div class="tab tab-nav-simple tab-nav-boxed form-tab">
+                            <ul class="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active border-no lh-1 ls-normal">Seller Application Form</a>
+                                    <p class="mt-2 text-black">All applications will be aproved by the admin! Please provide all necessary information about your company in the form below.</p>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="signin">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <ul class="list-unstyled mb-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li class="text-white">
+                                                        {{ $error }}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @if(Session::has('success'))
+                                        <div class="alert alert-success text-white">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <strong>Success</strong> {{ Session::get('success') }}
+                                        </div>
+                                    @endif
+                                    @if(Session::has('error'))
+                                        <div class="alert alert-danger text-white">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <strong>Error!</strong> {{ Session::get('error') }}
+                                        </div>
+                                    @endif
+                                    <form action="{{ route('application.form.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="name" class="font-weight-bold">Store Name</label>
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Store Name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name" class="font-weight-bold">E-mail Address</label>
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail Address" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name" class="font-weight-bold">Phone</label>
+                                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="country" class="font-weight-bold">Country</label>
+                                                    <select class="form-control" name="country" required>
+                                                        @foreach($countries as $c)
+                                                            <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="url" class="font-weight-bold">Category of the Products</label>
+                                                    <select class="form-control" name="category" required>
+                                                        @foreach($categories as $c)
+                                                            <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="username" class="font-weight-bold">Username</label>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tax" class="font-weight-bold">Tax No</label>
+                                                    <input type="text" class="form-control" id="tax" name="tax" placeholder="Tax No" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="logo" class="font-weight-bold">Logo</label>
+                                                    <input type="file" class="form-control" id="logo" name="logo" placeholder="logo">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="city" class="font-weight-bold">City</label>
+                                                    <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="url" class="font-weight-bold">Web URL</label>
+                                                    <input type="url" class="form-control" id="url" name="url" placeholder="Web URL">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="address" class="font-weight-bold">Address</label>
+                                                    <textarea type="text" class="form-control" id="address" name="address" style="min-height: 100px;" placeholder="Address" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Apply Now!</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane" id="register">
+                                    <form action="{{ route('register') }}" method="POST" class="form">
+                                        @csrf
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: red;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>
+                                            @error('name')
+                                            <p class="text-danger">There is an error</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="surname" @error('surname')style="border-color: red;"@enderror placeholder="Your Surname" value="{{ old('surname') }}"/>
+                                            @error('surname')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="text" class="form-control mb-0" name="username" @error('username')style="border-color: red;"@enderror placeholder="Your Username" value="{{ old('username') }}"/>
+                                            @error('username')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="email" class="form-control mb-0" name="email" @error('email')style="border-color: red;"@enderror placeholder="Your Email address" value="{{ old('email') }}"/>
+                                            @error('email')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="password" class="form-control mb-0" name="password" @error('password')style="border-color: red;"@enderror placeholder="Password"/>
+                                            @error('password')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="password" class="form-control mb-0" name="password_confirmation" placeholder="Password Again"/>
+                                        </div>
+                                        <div class="form-footer">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="register-agree" name="register-agree"/>
+                                                <label class="form-control-label" for="register-agree">I agree to the privacy policy</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Register</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="container rounded mt-5 p-2">
-            <div class="col-12 p-4" style="background-color: white">
-                <div class="col mb-4">
-                    <h3 style="font-family: sans-serif">Seller Application Form</h3>
-                </div>
-                <form action="{{ route('admin.store.application') }}" method="post" role="form">
-                    @csrf
-                    <div class="form-row d-flex justify-content-center mb-3">
-                        <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name"placeholder="Name">
-                        </div>
-                        <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="phone">Phone</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
-                        </div>
-                    </div>
-                    <div class="form-row d-flex justify-content-center mb-3" >
-                        <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="email">E-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                        </div>
-                        <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="category">Category of the Products</label>
-                            <select class="form-select" name="category">
-                                <option disabled selected>Choose Category</option>
-                                <option value="1">Electronics</option>
-                                <option value="2">Clothes</option>
-                                <option value="3">Fashion</option>
-                                <option value="4">Yangaoov</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row d-flex justify-content-center mb-3">
-                        <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="company_type">Company Type</label>
-                            <select class="form-select" name="category">
-                                <option disabled selected>Company Type</option>
-                                <option value="1">Anonim Şirketi</option>
-                                <option value="2">Şahıs Şirketi</option>
-                                <option value="3">Limited Şirketi</option>
-                                <option value="4">Yangaoov</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
-                        </div>
-                       
-                    </div>
-
-                    <div class="form-row d-flex justify-content-center mb-3">
-                        <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="url">Url</label>
-                            <input type="text" class="form-control" id="url" name="url">
-                        </div>
-                        <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="logo">Logo</label>
-                            <input type="text" class="form-control" id="logo" name="logo">
-                        </div>
-
-                    </div>
-
-                    <div class="form-row d-flex justify-content-center mb-3">
-                        <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="country">Country</label>
-                            <select class="form-select" name="country">
-                                <option disabled selected>Select Country</option>
-                                <option value="1">Cyprus</option>
-                                <option value="2">Turkey</option>
-                                <option value="3">United Kingdom</option>
-                                <option value="4">Greece</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="city">City</label>
-                            <select class="form-select" name="city">
-                                <option disabled selected>Select City</option>
-                                <option value="1">Anonim Şirketi</option>
-                                <option value="2">Şahıs Şirketi</option>
-                                <option value="3">Limited Şirketi</option>
-                                <option value="4">Yangaoov</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row d-flex justify-content-center mb-3">
-                        <div class="form-group col-md-5" style="margin-right: 15px">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address">
-                        </div>
-                        <div class="form-group col-md-5" style="margin-left: 15px">
-                            <label for="tax_no">Tax Number</label>
-                            <input type="number" class="form-control" id="tax_no" name="tax_no"placeholder="Tax No">
-                        </div>
-                    </div>
-                    <div class="form-row d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary btn-block">Submit Form</button>
-                    </div>
-                </form>
             </div>
         </div>
     </main>
-</body>
-</html>
+@endsection

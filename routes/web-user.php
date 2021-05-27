@@ -4,7 +4,6 @@ use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\User\AddressController;
-use App\Http\Controllers\UserAddressController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => "/account"], function() {
@@ -20,6 +19,7 @@ Route::group(['prefix' => "/account"], function() {
 
 //Seller:
 
-Route::get('/application_form', SellerController::class)->name('application.form');
+Route::get('/seller-application-form', [SellerController::class, 'index'])->name('application.form');
+Route::post('/seller-application-form', [SellerController::class, 'store'])->name('application.form.store');
 
 

@@ -20,9 +20,10 @@ class CreateStore extends Migration
             $table->string('email')->unique();
             $table->text('password');
             $table->text('logo')->nullable();
-            $table->text('url');
+            $table->text('url')->nullable();
             $table->string('tax_no')->unique();
             $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
+            $table->foreignId('product_cat_id')->constrained('categories')->onDelete('cascade');
             $table->string('city');
             $table->text('address');
             $table->string('phone');
@@ -38,6 +39,7 @@ class CreateStore extends Migration
             'url' => 'www.store.com',
             'tax_no' => '123456',
             'country_id' => 224,
+            'product_cat_id' => 5,
             'city' => 'denizli',
             'address' =>'Altıntop, Lise Cd. No:2, 20010 Merkez',
             'phone' => '+90 534 572 25 15',

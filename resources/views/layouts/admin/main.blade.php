@@ -5,10 +5,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
-		<title>@yield('title')</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+		<title>{{ $site_title }} - Admin</title>
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -56,8 +53,8 @@
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="../3.1.0" class="logo">
-						<img src="/admin/img/logo.png" width="75" height="35" alt="Porto Admin" />
+					<a href="{{ route('admin.home') }}" class="logo">
+						<img src="/photo/{{ $site_logo }}" width="150" alt="{{ $site_title }}" />
 					</a>
 					<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
 						<i class="fas fa-bars" aria-label="Toggle sidebar"></i>
@@ -118,7 +115,7 @@
 
 				                <ul class="nav nav-main">
 									<li>
-										<a class="nav-link" href="{{route('admin.home')}}">
+										<a class="nav-link" href="{{ route('admin.home') }}">
 											<i class="bx bx-home-alt" aria-hidden="true"></i>
 											<span>Dashboard</span>
 										</a>
@@ -377,7 +374,7 @@
 									<li class="nav-parent @if(str_contains(url()->current(),'store'))) nav-expanded @endif"">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-user-circle'></i>
-											<span>Store Management</span>
+											<span>Store Management @if($store_requests_count) <span class="badge badge-warning">{{ $store_requests_count }}</span>@endif</span>
 										</a>
 										<ul class="nav nav-children">
 											<li>
@@ -393,7 +390,7 @@
 
 											<li>
 												<a class="nav-link" href="{{route('admin.store.requests')}}">
-													Store Application Requests
+													Store Application Requests @if($store_requests_count) <span class="badge badge-warning">{{ $store_requests_count }}</span>@endif
 												</a>
 
 											</li>

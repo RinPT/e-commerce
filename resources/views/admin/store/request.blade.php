@@ -20,6 +20,20 @@
                     <p class="card-subtitle">You can see all available store application requests below.</p>
                 </header>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <ul class="list-unstyled mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-white">
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     @if(Session::has('success'))
                         <div class="alert alert-success">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -35,20 +49,14 @@
                     <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
                         <thead>
                         <tr>
-                            <th>Store ID</th>
+                            <th>ID</th>
                             <th>Store Name</th>
-                            <th>Username </th>
                             <th>Email</th>
-                            <th>Logo</th>
                             <th>Store URL </th>
                             <th>Tax No </th>
-                            <th>Country ID </th>
-                            <th>City </th>
-                            <th>Address </th>
-                            <th>Phone</th>
+                            <th>Country</th>
                             <th>Status</th>
-                            <th>Creation Date</th>
-                            <th>Update Date</th>
+                            <th>Submission Date</th>
                             <th>#</th>
                         </tr>
                         </thead>
@@ -57,22 +65,24 @@
                                 <tr>
                                     <td>{{ $store_request->id }}</td>
                                     <td>{{ $store_request->name }}</td>
-                                    <td>{{ $store_request->username }}</td>
                                     <td>{{ $store_request->email }}</td>
-                                    <td>{{ $store_request->logo }}</td>
-                                    <td>{{ $store_request->url }}</td>
+                                    <td>@if(empty($store_request->url)) - @else {{ $store_request->url }} @endif</td>
                                     <td>{{ $store_request->tax_no }}</td>
-                                    <td>{{ $store_request->country_id }}</td>
-                                    <td>{{ $store_request->city }}</td>
-                                    <td>{{ $store_request->address }}</td>
-                                    <td>{{ $store_request->phone }}</td>
-                                    <td>{{ $store_request->status }}</td>
-
-                                    <td>{{ is_null($store_request->created_at) ? "-" : Carbon\Carbon::parse($store_request->created_at)->format('d.m.Y H:i') }}</td>
-                                    <td>{{ is_null($store_request->updated_at) ? "-" : Carbon\Carbon::parse($store_request->updated_at)->format('d.m.Y H:i') }}</td>
+                                    <td>{{ $store_request->country }}</td>
                                     <td>
-                                        <a href="{{ route('admin.store.add_request',$store_request->id) }}" class="btn btn-success btn-sm"><i class='fas fa-pencil-alt'></i></a>
-                                        <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
+                                        @if($store_request->status == 'waiting')
+                                            <span class="badge badge-warning">Waiting</span>
+                                        @elseif($store_request->status == 'rejected')
+                                            <span class="badge badge-danger">Rejected</span>
+                                        @elseif($store_request->status == 'accepted')
+                                            <span class="badge badge-success">Accepted</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ is_null($store_request->created_at) ? "-" : Carbon\Carbon::parse($store_request->created_at)->format('d.m.Y H:i') }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.store.accept',$store_request->id) }}" class="btn btn-success btn-sm"><i class='fas fa-check'></i></a>
+                                        <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-dark btn-sm"><i class="fas fa-ban"></i></a>
+                                        <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -82,10 +92,10 @@
             </section>
         </div>
     </div>
-    
+
 @endsection
 
-@section('custom-scripts')
+@section('scripts')
     <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>

@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Active?</label>
                             <div class="col-lg-6">
                                 <div class="switch switch-md switch-dark">
                                     <input type="checkbox" name="status" data-plugin-ios-switch @if($store->status) checked @endif/>

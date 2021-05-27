@@ -59,7 +59,7 @@
                         <div class="dropdown">
                             <a href="#currency">USD</a>
                             <ul class="dropdown-box">
-                                @foreach ($currencies as $currency)
+                                @foreach ($header_currencies as $currency)
                                 <li><a href="#USD">{{ $currency->code }}</a></li>
                                 @endforeach
                                 <li><a href="#EUR">EUR</a></li>
@@ -202,7 +202,7 @@
                                     </div>
                                 </li>
 
-                            @foreach($items as $item)
+                            @foreach($header_items as $item)
                                 <li>
                                     <a href="{{ route('store') }}">{{ $item->name }}</a>
                                     <div class="megamenu">

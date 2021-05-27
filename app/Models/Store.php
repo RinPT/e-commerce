@@ -9,21 +9,5 @@ class Store extends Model
 {
     use HasFactory;
     protected $table = 'store';
-    protected $fillable = [
-        'id',
-        'name',
-        'username',
-        'email',
-        'password',
-        'logo',
-        'url',
-        'tax_no',
-        'country_id',
-        'city',
-        'address',
-        'phone',
-        'status',
-
-
-    ];
+    protected $guarded = [];
 }

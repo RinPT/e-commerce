@@ -18,15 +18,16 @@ class CreateStoreRequests extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->text('password')->nullable();
             $table->text('logo')->nullable();
-            $table->text('url');
+            $table->text('url')->nullable();
             $table->string('tax_no')->unique();
             $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
+            $table->foreignId('product_cat_id')->constrained('categories')->onDelete('cascade');
             $table->string('city');
             $table->text('address');
             $table->string('phone');
-            $table->tinyInteger('status')->default(0);
+            $table->text('notes')->default('');
+            $table->enum('status',['accepted','rejected','waiting']);
             $table->timestamps();
         });
     }

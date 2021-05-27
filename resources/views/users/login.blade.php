@@ -37,7 +37,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="signin">
-                                    <form action="{{ route('login') }}" method="POST">
+                                    <form action="{{ route('admin.store.application') }}" method="POST">
                                         @csrf
 
                                         @if(session('status'))

@@ -146,6 +146,56 @@ class StoreController extends Controller
         return back()->with('success', 'Store removed successfully.');
     }
 
+    public function requests_index()
+    {
+        $store_requests = Store_Requests::all();
+        foreach ($store_requests as $key => $store) {
+            $country = Countries::findOrFail($store->country_id);
+            $store_requests[$key]->country = $country->name;
+        }
+        return view('admin.store.request')->with([
+            'store_requests' => $store_requests
+        ]);
+    }
+
+    public function accept_request($id)
+    {
+        try {
+
+            $store = Store_Requests::find($id);
+            $password = $this->randomPassword();
+
+            Store::create([
+                'name' => $store->name,
+                'username' => $store->username,
+                'email' => $store->email,
+                'password'=> Hash::make($password),
+                'logo'=> $store->logo ?? "",
+                'url'=> $store->url,
+                'tax_no'=> $store->tax_no,
+                'country_id'=> $store->country_id,
+                'product_cat_id'=> $store->product_cat_id,
+                'city'=> $store->city,
+                'address'=> $store->address,
+                'phone'=> $store->phone,
+                'status'=> 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            Store_Requests::findOrFail($id)->delete();
+            // Mail will be send
+
+            return back()->with('success', 'New store added and store information email has been submitted.');
+        } catch (\Exception $e) {
+            if ($e->getCode() == 23000) {
+                return back()->with('error', 'There is already an store for this name.');
+            }
+        }
+
+        return back()->with('success', 'New store added and store information email has been submitted.');
+    }
+
     public function application(Request $request)
     {
         try {
@@ -210,48 +260,15 @@ class StoreController extends Controller
         ]);
     }
 
-    public function save_request(Request $request,$id)
-    {
-        try {
-            $store = Store::create([
-                'id' => $request->id,
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password'=> Hash::make($request->password),
-                'logo'=> $request->logo,
-                'url'=> $request->url,
-                'tax_no'=> $request->tax_no,
-                'country_id'=> $request->country_id,
-                'city'=> $request->city,
-                'address'=> $request->address,
-                'phone'=> $request->phone,
-                'status'=> $request->status,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-
-            ]);
-
-            Store_Requests::findOrFail($id)->delete();
-            return $this->store_requests()->with('success', 'New store added and the request is removed.');
-
-
-        } catch (\Exception $e) { // It's actually a QueryException but this works too
-            dd($e);
-            if ($e->getCode() == 23000) {
-
-                return back()->with('error', 'There is already an store for this name.');
-            }
+    function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array();
+        $alphaLength = strlen($alphabet) - 1;
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
         }
-
-        return back();
+        return implode($pass);
     }
 
-    public function store_requests()
-    {
-        return view('admin.store.request')->with([
-            'store_requests' => Store_Requests::all()
-        ]);
-
-    }
 }
