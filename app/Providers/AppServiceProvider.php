@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Categories;
 use App\Models\Config;
+use App\Models\Countries;
 use App\Models\Currencies;
 use App\Models\Store_Requests;
 use Illuminate\Support\Facades\Schema;

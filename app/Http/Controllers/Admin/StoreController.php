@@ -148,13 +148,17 @@ class StoreController extends Controller
 
     public function requests_index()
     {
+
+        $countries = Countries::get();
+
         $store_requests = Store_Requests::all();
         foreach ($store_requests as $key => $store) {
             $country = Countries::findOrFail($store->country_id);
             $store_requests[$key]->country = $country->name;
         }
         return view('admin.store.request')->with([
-            'store_requests' => $store_requests
+            'store_requests' => $store_requests,
+            'countries' => $countries,
         ]);
     }
 
@@ -258,6 +262,75 @@ class StoreController extends Controller
             'id' => $id,
             'store_request' => $store_request
         ]);
+    }
+
+    public function update_request(Request $request, $id) {
+
+        $store_request = Store_Requests::find($id);
+
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'country_id' => 'required | numeric',
+            'product_cat_id' => 'required | numeric',
+            'city' => 'required',
+            'address' => 'required',
+            'notes' => 'required',
+        ]);
+
+        $store_request->update([
+            'name' => $request->name,
+            'country_id' => $request->country_id,
+            'product_cat_id' => $request->product_cat_id,
+            'city'=> $request->city,
+            'address'=> $request->address,
+            'notes' => $request->notes,
+        ]);
+
+        if($request->email !== $store_request->email) {
+            $this->validate($request, [
+                'email' => 'required|max:255 | unique:store,email',
+                'email' => 'unique:store_requests,email',
+            ]);
+
+            $store_request->update([
+                'email' => $request->email,
+            ]);
+        }
+
+        if($request->username !== $store_request->username) {
+            $this->validate($request, [
+                'username' => 'required|max:255 | unique:store,username',
+                'username' => 'unique:store_requests,username',
+            ]);
+
+            $store_request->update([
+                'username' => $request->username,
+            ]);
+        }
+
+        if($request->tax_no !== $store_request->tax_no) {
+            $this->validate($request, [
+                'tax' => 'required|max:255 | unique:store,tax_no',
+                'tax' => 'unique:store_requests,tax_no',
+            ]);
+
+            $store_request->update([
+                'tax_no' => $request->tax,
+            ]);
+        }
+
+        if($request->phone !== $store_request->phone) {
+            $this->validate($request, [
+                'phone' => 'required|max:255 | unique:store,phone',
+                'phone' => 'unique:store_requests,phone',
+            ]);
+
+            $store_request->update([
+                'phone' => $request->phone,
+            ]);
+        }
+
+        return back()->with('updated', 'Store Request updated successfully!');
     }
 
     function randomPassword() {

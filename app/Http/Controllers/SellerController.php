@@ -24,13 +24,17 @@ class SellerController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'username' => 'required|max:255 | unique:store,username',
+            'username' => 'unique:store_requests,username',
             'email'=> 'required|email|max:255 | unique:store,email',
+            'email' => 'unique:store_requests,email',
             'tax' => 'required | unique:store,tax_no',
+            'tax' => 'unique:store_requests,tax_no',
             'country' => 'required | numeric',
             'category' => 'required | numeric',
             'city' => 'required',
             'address' => 'required',
             'phone' => 'required | unique:store,phone',
+            'phone' => 'unique:store_requests,phone',
         ]);
 
         if ($request->hasFile('logo')) {
