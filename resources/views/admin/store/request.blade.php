@@ -37,7 +37,7 @@
                     @if(Session::has('updated'))
                         <div class="alert alert-info">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <strong>Updated</strong> {{ Session::get('success') }}
+                            <strong>Updated</strong> {{ Session::get('updated') }}
                         </div>
                     @endif
                     @if(Session::has('error'))
