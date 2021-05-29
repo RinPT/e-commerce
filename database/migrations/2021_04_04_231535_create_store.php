@@ -32,7 +32,7 @@ class CreateStore extends Migration
         });
 
         DB::table('store')->insert([
-            'name' => 'store',
+            'name' => 'Store DEMO',
             'username' => 'store',
             'email' => 'store@store.com',
             'password' => \Illuminate\Support\Facades\Hash::make('store123'),

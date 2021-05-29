@@ -111,13 +111,13 @@
                         <!-- End Header Search -->
                     </div>
                     <div class="header-right">
-                        <a href="tel:#" class="icon-box icon-box-side">
+                        <a href="tel:{{ $site_tel }}" class="icon-box icon-box-side">
                             <div class="icon-box-icon mr-0 mr-lg-2">
                                 <i class="d-icon-phone"></i>
                             </div>
                             <div class="icon-box-content d-lg-show">
-                                <h4 class="icon-box-title">Call Us Now:</h4>
-                                <p>0(800) 123-456</p>
+                                <h4 class="icon-box-title">Call Center</h4>
+                                <p>{{ $site_tel }}</p>
                             </div>
                         </a>
                         <span class="divider"></span>
@@ -128,7 +128,7 @@
                         <div class="dropdown cart-dropdown type2 cart-offcanvas mr-0 mr-lg-2">
                             <a href="{{ route('cart') }}" class="label-block link">
                                 <div class="cart-label d-lg-show">
-                                    <span class="cart-name">Shopping Cart:</span>
+                                    <span class="cart-name"></span>
                                 </div>
                                 <i class="d-icon-bag">
                                     @if(Auth::check())
@@ -302,7 +302,7 @@
                                 <ul class="widget-body">
                                     <li>
                                         <label>Phone:</label>
-                                        <a href="tel:#">Toll Free (123) 456-7890</a>
+                                        <a href="tel:{{ $site_tel }}">{{ $site_tel }}</a>
                                     </li>
                                     <li>
                                         <label>Email:</label>

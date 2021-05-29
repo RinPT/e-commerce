@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Author;
+use App\Models\Group;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,12 @@ class LoginController extends Controller
             if(Hash::check($request->password,$author->password)){
                 $_SESSION['author'] = $author->id;
                 $_SESSION['author_type'] = "author";
+                $_SESSION['author_group_type'] = "";
+                $author->group = json_decode($author->group);
+                if(count($author->group)){
+                    $group = Group::find($author->group[0]);
+                    $_SESSION['author_group_type'] = $group->name;
+                }
                 return redirect()->route('admin.home');
             }
         }
@@ -36,9 +43,9 @@ class LoginController extends Controller
         ])->first();
         if($store){
             if(Hash::check($request->password,$store->password)){
-                //session_start();
                 $_SESSION['author'] = $store->id;
                 $_SESSION['author_type'] = "store";
+                $_SESSION['author_group_type'] = "store";
                 return redirect()->route('admin.home');
             }
         }

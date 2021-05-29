@@ -1,11 +1,11 @@
 <!doctype html>
 <html class="fixed">
 	<head>
-
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
 		<title>{{ $site_title }} - Admin</title>
+        <link rel="icon" type="image/png" href="/photo/favicon.png">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -69,11 +69,29 @@
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">
 							<figure class="profile-picture">
-								<img src="{{ asset('photo/author/default.png') }}" alt="Joseph Doe" class="rounded-circle" data-lock-picture="{{ asset('photo/author/default.png') }}" />
+                                @if($logged_author_type == "author")
+                                    @if(!empty($logged_author->photo))
+                                        <img src="{{ asset('photo/author/'.$logged_author->photo) }}" class="rounded-circle" data-lock-picture="{{ asset('photo/author/'.$logged_author->photo) }}" />
+                                    @else
+                                        <img src="{{ asset('photo/author/default.png') }}" class="rounded-circle" data-lock-picture="{{ asset('photo/author/default.png') }}" />
+                                    @endif
+                                @else
+                                    @if(!empty($logged_author->logo))
+                                        <img src="{{ asset('photo/store/'.$logged_author->logo) }}" class="rounded-circle" data-lock-picture="{{ asset('photo/store/'.$logged_author->logo) }}" />
+                                    @else
+                                        <img src="{{ asset('photo/author/default.png') }}" class="rounded-circle" data-lock-picture="{{ asset('photo/author/default.png') }}" />
+                                    @endif
+                                @endif
 							</figure>
-							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-								<span class="name">Berk ÇETİN</span>
-								<span class="role">Administrator</span>
+							<div class="profile-info">
+								<span class="name">
+                                    @if($logged_author_type == "author")
+                                        {{ $logged_author->name." ".$logged_author->surname }}
+                                    @else
+                                        {{ $logged_author->name."(".$logged_author->username.")" }}
+                                    @endif
+                                </span>
+								<span class="role text-capitalize">{{ $logged_author_gtype }}</span>
 							</div>
 
 							<i class="fa custom-caret"></i>
@@ -83,7 +101,11 @@
 							<ul class="list-unstyled mb-2">
 								<li class="divider"></li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
+                                    @if($logged_author_type == "author")
+                                        <a role="menuitem" tabindex="-1" href="{{ route('admin.author.edit',$logged_author->id) }}"><i class="bx bx-user-circle"></i> My Profile</a>
+                                    @else
+                                        <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
+                                    @endif
                                 </li>
 								<li>
 									<a role="menuitem" tabindex="-1" href="{{ route('admin.logout') }}"><i class="bx bx-power-off"></i> Logout</a>

@@ -29,14 +29,27 @@ class CreateAuthors extends Migration
         });
 
         DB::table('authors')->insert([
-            'name' => 'admin',
-            'surname' => 'admin',
+            'name' => 'Admin',
+            'surname' => 'DEMO',
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
             'gender' => 'male',
             'photo' => '',
-            'group' => '[]',
+            'group' => '[1]',
+            'status' => 1,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('authors')->insert([
+            'name' => 'Support',
+            'surname' => 'DEMO',
+            'username' => 'support',
+            'email' => 'support@support.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('support123'),
+            'gender' => 'male',
+            'photo' => '',
+            'group' => '[4]',
             'status' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()

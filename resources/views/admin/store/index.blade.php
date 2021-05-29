@@ -4,8 +4,6 @@
     <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
     <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/datatables/media/css/dataTables.bootstrap4.css" />
-    <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
-    <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/pnotify/pnotify.custom.css" />
 @endsection
 
@@ -77,7 +75,6 @@
     <script src="/admin/vendor/datatables/extras/TableTools/JSZip-2.5.0/jszip.min.js"></script>
     <script src="/admin/vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
     <script src="/admin/vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
-    <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/pnotify/pnotify.custom.js"></script>
 @endsection
 

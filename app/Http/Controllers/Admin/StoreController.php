@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\Countries;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\Ticket_Replies;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Store_Requests;
@@ -82,16 +84,31 @@ class StoreController extends Controller
     public function edit($id)
     {
         $store = Store::findOrFail($id);
+
+        $order_count = Order::where('store_id',$id)->count();
+        $product_count = Product::where('store_id',$id)->count();
+        $ticket_count = Ticket_Replies::where('store_id',$id)->count();
+        $order_income = Order::where('store_id',$id)->sum('total');
+
+        $orders = Order::where('store_id',$id)->get();
+
         return view('admin.store.edit')->with([
             'id' => $id,
             'store' => $store,
-            'countries' => Countries::all()
+            'countries' => Countries::all(),
+            'categories' => Categories::all(),
+            'order_count' => $order_count,
+            'product_count' => $product_count,
+            'ticket_count' => $ticket_count,
+            'order_income' => $order_income,
+            'orders' => $orders
         ]);
 
     }
 
     public function update(Request $request, $id)
     {
+
         $this -> validate($request, [
             'name' => 'required|max:255',
             'username' => 'required|max:255 | unique:store,username',
@@ -126,6 +143,7 @@ class StoreController extends Controller
             'url'=> $request->url,
             'tax_no'=> $request->tax_no,
             'country_id'=> $request->country_id,
+            'product_cat_id'=> $request->product_cat_id,
             'city'=> $request->city,
             'address'=> $request->address,
             'phone'=> $request->phone,

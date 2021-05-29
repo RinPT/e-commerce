@@ -64,6 +64,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Phone</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="site_tel" class="form-control" id="inputDefault" value="{{$site_tel}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Logo</label>
                                         <div class="col-lg-6">
                                             <input type="file" name="site_logo" class="form-control" id="inputDefault" accept="image/*">

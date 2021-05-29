@@ -102,10 +102,12 @@ class AuthorController extends Controller
             $file = $request->file('photo');
             if ($file->isValid()) {
                 $oldPhoto = Author::findOrFail($id)->photo;
-                if(file_exists(public_path('photo/author/'.$oldPhoto))){
-                    unlink(public_path('photo/author/'.$oldPhoto));
+                if(!empty($oldPhoto)){
+                    if(file_exists(public_path('photo/author/'.$oldPhoto))){
+                        unlink(public_path('photo/author/'.$oldPhoto));
+                    }
                 }
-                $filename = strtotime(Carbon::now()).".".$file->getClientOriginalExtension();
+                $filename = time().".".$file->getClientOriginalExtension();
                 $file->storeAs('photo/author',$filename, 'public_html');
                 Author::findOrFail($id)->update([
                     'photo' => $filename,

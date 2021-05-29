@@ -116,6 +116,12 @@ class CreateConfig extends Migration
                 'value' => '',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'site_tel',
+                'value' => '+90(212) 123 12 12',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             ]
         ]);
     }

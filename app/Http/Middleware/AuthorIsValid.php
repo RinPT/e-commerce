@@ -17,7 +17,6 @@ class AuthorIsValid
      */
     public function handle(Request $request, Closure $next)
     {
-        session_start();
         $route = Route::currentRouteName();
         if($route == 'admin.login' || $route == 'admin.login.post'){
             if(isset($_SESSION['author'])){
