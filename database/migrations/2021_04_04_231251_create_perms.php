@@ -21,7 +21,11 @@ class CreatePerms extends Migration
         });
         DB::table('perms')->insert([
             [
-                'name' => 'Manage Settings[Author]',
+                'name' => 'Manage General Settings[Author]',
+                'created_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'Manage Currencies[Author]',
                 'created_at' => \Carbon\Carbon::now()
             ],
             [

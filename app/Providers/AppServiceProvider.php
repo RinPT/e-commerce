@@ -7,6 +7,7 @@ use App\Models\Categories;
 use App\Models\Config;
 use App\Models\Countries;
 use App\Models\Currencies;
+use App\Models\Group;
 use App\Models\Store;
 use App\Models\Store_Requests;
 use Illuminate\Support\Facades\Schema;
@@ -72,6 +73,15 @@ class AppServiceProvider extends ServiceProvider
             if(isset($_SESSION['author'])){
                 if($_SESSION['author_type'] === "author"){
                     $logged_author = Author::find($_SESSION['author']);
+                    $logged_author->group = json_decode($logged_author->group);
+                    $allperms = [];
+                    foreach ($logged_author->group as $group) {
+                       $perms = json_decode(Group::find($group)->permissions);
+                        foreach ($perms as $perm) {
+                            $allperms[] = $perm;
+                       }
+                    }
+                    $logged_author->perms = $allperms;
                 }elseif($_SESSION['author_type'] === "store"){
                     $logged_author = Store::find($_SESSION['author']);
                 }

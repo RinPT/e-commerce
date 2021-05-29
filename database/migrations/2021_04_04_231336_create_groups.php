@@ -24,7 +24,7 @@ class CreateGroups extends Migration
         DB::table('groups')->insert([
             [
                 'name' => 'admin',
-                'permissions' => "[1,2,3,4,5,6,7,8,9,10,11,12,13]",
+                'permissions' => "[1,2,3,4,5,6,7,8,9,10,11,12,13,14]",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
 
-Route::group(['prefix' => "/admin", 'middleware' => ['authorisvalid']], function() {
+Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], function() {
 
     Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('admin.login.post');

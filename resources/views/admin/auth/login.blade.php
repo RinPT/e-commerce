@@ -5,10 +5,8 @@
 
     <!-- Basic -->
     <meta charset="UTF-8">
-
-    <meta name="keywords" content="HTML5 Admin Template" />
-    <meta name="description" content="Porto Admin - Responsive HTML5 Template">
-    <meta name="author" content="okler.net">
+    <title>{{ $site_title }} - Login</title>
+    <link rel="icon" type="image/png" href="/photo/favicon.png">
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -40,7 +38,7 @@
 <section class="body-sign">
     <div class="center-sign">
         <a class="logo float-left">
-            <img src="/admin/img/logo.png" height="54" alt="Porto Admin" />
+            <img src="/photo/{{ $site_logo }}" height="54" alt="Porto Admin" />
         </a>
 
         <div class="panel card-sign">

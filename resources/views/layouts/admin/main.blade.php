@@ -142,12 +142,15 @@
 											<span>Dashboard</span>
 										</a>
 									</li>
+                                    @if(in_array(1,$logged_author->perms))
 									<li>
 										<a class="nav-link" href="{{ route('admin.general-setting.edit') }}">
 											<i class='bx bxs-cog'></i>
 											<span>General Settings</span>
 										</a>
 									</li>
+                                    @endif
+                                    @if(in_array(2,$logged_author->perms))
                                     <li class="nav-parent @if(str_contains(url()->current(),'currenc'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='fas fa-dollar-sign'></i>
@@ -166,6 +169,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(3,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-backpack'></i>
@@ -194,6 +199,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(4,$logged_author->perms))
 									<li class="nav-parent @if(str_contains(url()->current(),'categor'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-category-alt'></i>
@@ -212,6 +219,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(5,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bx-grid-alt'></i>
@@ -251,6 +260,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(6,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-discount' ></i>
@@ -310,6 +321,8 @@
 				                            </li>
 				                        </ul>
 									</li>
+                                    @endif
+                                    @if(in_array(7,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-truck'></i>
@@ -329,6 +342,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(8,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bx-expand-alt' ></i>
@@ -347,6 +362,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(9,$logged_author->perms))
 									<li class="nav-parent @if(str_contains(url()->current(),'perm') || str_contains(url()->current(),'group')) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-key'></i>
@@ -375,6 +392,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(9,$logged_author->perms))
 									<li class="nav-parent @if(str_contains(url()->current(),'author'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='bx bx-user-circle' ></i>
@@ -393,6 +412,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(10,$logged_author->perms))
 									<li class="nav-parent @if(str_contains(url()->current(),'store'))) nav-expanded @endif"">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-user-circle'></i>
@@ -418,6 +439,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(11,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-user' ></i>
@@ -436,6 +459,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(12,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bx-support'></i>
@@ -484,6 +509,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(13,$logged_author->perms))
 									<li class="nav-parent ">
 										<a class="nav-link" href="#">
 											<i class='bx bx-money'></i>
@@ -512,6 +539,8 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
+                                    @if(in_array(14,$logged_author->perms))
 									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-book'></i>
@@ -530,6 +559,7 @@
 											</li>
 										</ul>
 									</li>
+                                    @endif
 								</ul>
 				            </nav>
 				        </div>
