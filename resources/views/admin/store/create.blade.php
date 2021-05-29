@@ -80,14 +80,14 @@
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store Logo</label>
                             <div class="col-lg-6">
-                                <input type="file" name="logo" class="form-control" id="inputDefault"  required>
+                                <input type="file" name="logo" class="form-control" id="inputDefault" >
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store URL</label>
                             <div class="col-lg-6">
-                                <input type="url" name="url" class="form-control" id="inputDefault"  required>
+                                <input type="url" name="url" class="form-control" id="inputDefault" >
                             </div>
                         </div>
 
@@ -96,6 +96,17 @@
                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Tax No</label>
                             <div class="col-lg-6">
                                 <input type="text" name="tax_no" class="form-control" id="inputDefault"  required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Category of the Products</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" name="product_cat_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

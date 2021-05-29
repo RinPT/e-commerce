@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Countries;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class StoreController extends Controller
     public function create()
     {
         return view('admin.store.create')->with([
-            'countries' => Countries::all()
+            'countries' => Countries::all(),
+            'categories' => Categories::all()
         ]);
     }
 
@@ -42,8 +44,6 @@ class StoreController extends Controller
             'username' => 'required|max:255 | unique:store,username',
             'email'=> 'required|email|max:255 | unique:store,email',
             'password' =>'required|confirmed',
-            'logo' => 'required',
-            'url' => 'required | unique:store,url',
             'tax_no' => 'required | unique:store,tax_no',
             'country_id' => 'required | numeric',
             'city' => 'required',
@@ -70,6 +70,7 @@ class StoreController extends Controller
             'url'=> $request->url,
             'tax_no'=> $request->tax_no,
             'country_id'=> $request->country_id,
+            'product_cat_id' => $request->product_cat_id,
             'city'=> $request->city,
             'address'=> $request->address,
             'phone'=> $request->phone,

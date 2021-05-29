@@ -41,7 +41,7 @@
                             <td>{{ $store->id }}</td>
                             <td>{{ $store->name }}</td>
                             <td>{{ $store->email }}</td>
-                            <td><a href="@if(!str_contains($store->url,'http'))https://@endif{{ $store->url }}" target="_blank" class="text-primary">{{ $store->url }}</a></td>
+                            <td><a href="@if(!str_contains($store->url,'http'))https://@endif{{ $store->url }}" target="_blank" class="text-primary">{{ empty($store->url) ? "-" : $store->url }}</a></td>
                             <td>{{ $store->tax_no }}</td>
                             <td>{{ $store->country }}</td>
                             <td>
