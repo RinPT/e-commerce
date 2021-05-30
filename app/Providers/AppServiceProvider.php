@@ -10,7 +10,9 @@ use App\Models\Currencies;
 use App\Models\Group;
 use App\Models\Store;
 use App\Models\Store_Requests;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +35,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(Schema::hasTable('currencies')){
+            $currencies = Currencies::get();
+
+            if(!isset($_COOKIE["currency"])) {
+                if(count($currencies)){
+                    setcookie("cookie_currency", $currencies[0]);
+                    View::share('cookie_currency', $currencies[0]);
+                }
+            }else{
+                View::share('cookie_currency', $_COOKIE["currency"]);
+            }
+
+            View::share('header_currencies', $currencies);
+        }
+
         session_start();
         if(Schema::hasTable('config')){
             $site_title = Config::where('key','site_title')->value('value');
@@ -56,11 +73,6 @@ class AppServiceProvider extends ServiceProvider
             View::share('site_instagram', $site_instagram);
             View::share('meta_keywords', $meta_keywords);
             View::share('meta_description', $meta_description);
-        }
-        if(Schema::hasTable('currencies')){
-            $currencies = Currencies::get();
-
-            View::share('header_currencies', $currencies);
         }
         if(Schema::hasTable('categories')){
             $categories = Categories::get();

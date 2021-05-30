@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Config;
 use App\Models\Currencies;
 use App\Models\Categories;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class LoginController extends Controller
         return view('users.login', [
             'currencies' => $currencies,
             'categories'  => $categories,
-            'items' => $items,
+            'items' => $items
         ]);
     }
 

@@ -57,12 +57,14 @@
                     <div class="header-right">
                         <!-- End DropDown Menu -->
                         <div class="dropdown">
-                            <a href="#currency">USD</a>
+                            <a href="#currency">{{ $cookie_currency->code }}</a>
                             <ul class="dropdown-box">
                                 @foreach ($header_currencies as $currency)
-                                <li><a href="#USD">{{ $currency->code }}</a></li>
+                                    @if($cookie_currency->code == $currency->code)
+                                        @continue
+                                    @endif
+                                    <li><a href="?currency={{ $currency->id }}">{{ $currency->code }}</a></li>
                                 @endforeach
-                                <li><a href="#EUR">EUR</a></li>
                             </ul>
                         </div>
                         <!-- End DropDown Menu -->

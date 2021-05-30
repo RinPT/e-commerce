@@ -189,7 +189,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="social" class="tab-pane active">
+                                <div id="social" class="tab-pane">
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Facebook</label>
                                         <div class="col-lg-6">

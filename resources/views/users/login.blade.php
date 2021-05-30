@@ -34,10 +34,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link active border-no lh-1 ls-normal" href="#signin">Login</a>
                                 </li>
-                                <li class="delimiter">or</li>
-                                <li class="nav-item">
-                                    <a class="nav-link border-no lh-1 ls-normal" href="#register">Register</a>
-                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="signin">
@@ -64,51 +60,6 @@
                                             <a href="#" class="lost-link">Lost your password?</a>
                                         </div>
                                         <button type="submit" class="btn btn-dark btn-block btn-rounded">Login</button>
-                                    </form>
-                                </div>
-                                <div class="tab-pane" id="register">
-                                    <form action="{{ route('register') }}" method="POST" class="form">
-                                        @csrf
-                                        <div class="form-group mb-3">
-                                            <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: red;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>
-                                            @error('name')
-                                                <p class="text-danger">There is an error</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="text" class="form-control mb-0" name="surname" @error('surname')style="border-color: red;"@enderror placeholder="Your Surname" value="{{ old('surname') }}"/>
-                                            @error('surname')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="text" class="form-control mb-0" name="username" @error('username')style="border-color: red;"@enderror placeholder="Your Username" value="{{ old('username') }}"/>
-                                            @error('username')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="email" class="form-control mb-0" name="email" @error('email')style="border-color: red;"@enderror placeholder="Your Email address" value="{{ old('email') }}"/>
-                                            @error('email')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="password" class="form-control mb-0" name="password" @error('password')style="border-color: red;"@enderror placeholder="Password"/>
-                                            @error('password')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input type="password" class="form-control mb-0" name="password_confirmation" placeholder="Password Again"/>
-                                        </div>
-                                        <div class="form-footer">
-                                            <div class="form-checkbox">
-                                                <input type="checkbox" class="custom-checkbox" id="register-agree" name="register-agree"/>
-                                                <label class="form-control-label" for="register-agree">I agree to the privacy policy</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Register</button>
                                     </form>
                                 </div>
                             </div>

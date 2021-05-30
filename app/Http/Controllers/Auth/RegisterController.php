@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Config;
 use App\Models\User;
 use App\Models\Currencies;
 use App\Models\Categories;
@@ -21,10 +22,13 @@ class RegisterController extends Controller
         $categories = Categories::get();
         $items = Categories::tree();
 
+        $reg_rules = Config::where('key','registration_rules')->value('value');
+
         return view('users.register', [
             'currencies' => $currencies,
             'categories'  => $categories,
             'items' => $items,
+            'reg_rules' => $reg_rules
         ]);
     }
 
