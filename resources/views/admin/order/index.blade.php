@@ -35,8 +35,7 @@
                 <tr>
                     <th>Order ID</th>
                     <th>Store Name</th>
-                    <th>User Name</th>
-                    <th>Username</th>
+                    <th>Full Name</th>
                     <th>Total</th>
                     <th>Order Status</th>
                     <th>Purchase Date</th>

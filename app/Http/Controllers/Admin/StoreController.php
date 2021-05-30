@@ -181,11 +181,12 @@ class StoreController extends Controller
         ]);
     }
 
-    public function reject_request($id) {
+    public function reject_request(Request $request, $id) {
         $store_request = Store_Requests::find($id);
 
         $store_request->update([
             'status' => 'rejected',
+            'notes' => $request->notes
         ]);
 
         return back()->with('rejected', 'This request rejected!');

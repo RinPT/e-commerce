@@ -81,15 +81,15 @@
                                     <td>{{ is_null($store_request->created_at) ? "-" : Carbon\Carbon::parse($store_request->created_at)->format('d.m.Y H:i') }}</td>
                                     <td>
                                         <a href="{{ route('admin.store.accept',$store_request->id) }}" class="btn btn-success btn-sm"><i class='fas fa-check'></i></a>
-                                        <a href="{{ route('admin.store.reject_request',$store_request->id) }}" class="btn btn-dark btn-sm"><i class="fas fa-ban"></i></a>
+                                        <a href="#reject_request{{ $store_request->id }}" class="modal-with-zoom-anim ws-normal btn btn-dark btn-sm"><i class="fas fa-ban"></i></a>
                                         <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                         <a href="#store_request{{ $store_request->id }}" class="modal-with-zoom-anim ws-normal btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
 
-                                        <!-- Modal Animation -->
+                                        <!-- Update Modal Animation -->
                                         <div id="store_request{{ $store_request->id }}" class="zoom-anim-dialog modal-block-lg modal-block-primary mfp-hide">
                                             <section class="card">
                                                 <header class="card-header">
-                                                    <h2 class="card-title">Update Currency</h2>
+                                                    <h2 class="card-title">Update Store Request</h2>
                                                 </header>
                                                 <div class="card-body">
                                                     <form action="{{ route('admin.store.update_request', $store_request->id) }}" method="POST">
@@ -220,6 +220,40 @@
                                                         <div class="row">
                                                             <div class="col-md-12 text-right">
                                                                 <button type="submit" class="btn btn-primary">Update</button>
+                                                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                        <!-- Ban Modal Animation -->
+                                        <div id="reject_request{{ $store_request->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+                                            <section class="card">
+                                                <header class="card-header">
+                                                    <h2 class="card-title">Ban Request</h2>
+                                                </header>
+                                                <div class="card-body">
+                                                    <form action="{{ route('admin.store.reject_request', $store_request->id) }}" method="POST">
+                                                        @csrf
+                                                        <div class="modal-wrapper mb-0">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group row @error('notes') has-danger @enderror">
+                                                                        <label class="col-lg-2 control-label text-lg-right pt-2" for="inputDefault">Notes:</label>
+                                                                        <div class="col-lg-10">
+                                                                            <textarea name="notes" class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize>{{ $store_request->notes }}</textarea>
+                                                                            @error('notes') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-right">
+                                                                <button type="submit" class="btn btn-dark">Ban</button>
                                                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                                                             </div>
                                                         </div>
