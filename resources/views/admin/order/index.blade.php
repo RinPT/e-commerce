@@ -34,24 +34,12 @@
                 <thead>
                 <tr>
                     <th>Order ID</th>
-                    <th>Store ID</th>
                     <th>Store Name</th>
-                    <th>Store Url</th>
-                    <th>User ID</th>
-                    <th>User Type</th>
                     <th>User Name</th>
-                    <th>User Surname</th>
                     <th>Username</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Comment</th>
                     <th>Total</th>
                     <th>Order Status</th>
-                    <th>Currency Code</th>
-                    <th>IP Address</th>
-                    <th>User Agent</th>
-                    <th>Creation Date</th>
-                    <th>Updation Date</th>
+                    <th>Purchase Date</th>
                     <th>#</th>
                 </tr>
                 </thead>
@@ -59,26 +47,11 @@
                     @foreach($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->store_id }}</td>
                             <td>{{ $order->store_name }}</td>
-                            <td>{{ $order->store_url }}</td>
-                            <td>{{ $order->user_id }}</td>
-                            <td>{{ $order->user_type }}</td>
-                            <td>{{ $order->name }}</td>
-                            <td>{{ $order->surname }}</td>
-                            <td>{{ $order->username }}</td>
-                            <td>{{ $order->email }}</td>
-                            <td>{{ $order->gender }}</td>
-                            <td>{{ $order->comment }}</td>
+                            <td>{{ $order->name }} {{ $order->surname }}</td>
                             <td>{{ $order->total }}</td>
                             <td>{{ $order->order_status }}</td>
-                            <td>{{ $order->currency_code }}</td>
-                            <td>{{ $order->ip_address }}</td>
-                            <td>{{ $order->user_agent}}</td>
-
-
                             <td>{{ is_null($order->created_at) ? "-" : Carbon\Carbon::parse($order->created_at)->format('d.m.Y H:i') }}</td>
-                            <td>{{ is_null($order->updated_at) ? "-" : Carbon\Carbon::parse($order->updated_at)->format('d.m.Y H:i') }}</td>
                             <td>
                                 <a href="{{ route('admin.order.edit',$order->id) }}" class="btn btn-success btn-sm"><i class='fas fa-pencil-alt'></i></a>
                                 <a href="{{ route('admin.order.destroy',$order->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>

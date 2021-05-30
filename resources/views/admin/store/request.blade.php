@@ -81,7 +81,7 @@
                                     <td>{{ is_null($store_request->created_at) ? "-" : Carbon\Carbon::parse($store_request->created_at)->format('d.m.Y H:i') }}</td>
                                     <td>
                                         <a href="{{ route('admin.store.accept',$store_request->id) }}" class="btn btn-success btn-sm"><i class='fas fa-check'></i></a>
-                                        <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-dark btn-sm"><i class="fas fa-ban"></i></a>
+                                        <a href="{{ route('admin.store.reject_request',$store_request->id) }}" class="btn btn-dark btn-sm"><i class="fas fa-ban"></i></a>
                                         <a href="{{ route('admin.store.destroy_request',$store_request->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                         <a href="#store_request{{ $store_request->id }}" class="modal-with-zoom-anim ws-normal btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
 

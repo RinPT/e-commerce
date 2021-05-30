@@ -167,7 +167,7 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::get('/store/requests/{id}/delete/', [StoreController::class, 'destroy_request'])->name('admin.store.destroy_request');
     Route::get('/store/requests/{id}/add', [StoreController::class, 'add_request'])->name('admin.store.add_request');
     Route::post('/store/request/{id}/update', [StoreController::class, 'update_request'])->name('admin.store.update_request');
-
+    Route::get('/store/request/{id}/reject', [StoreController::class, 'reject_request'])->name('admin.store.reject_request');
     Route::post('/store/application', [StoreController::class, 'application'])->name('admin.store.application');
 
     /**
