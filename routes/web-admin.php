@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ContractController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CargoController;
 use App\Http\Controllers\Admin\OrderController;
@@ -186,5 +188,12 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::get('/tickets/store', [TicketController::class, 'getStoreTickets']) -> name('admin.view_store_tickets');
     Route::get('/tickets/create', [TicketController::class, 'getCreateTicket']) -> name('admin.view_create_new_ticket');
 
-
 });
+
+
+/**
+ * Web Page
+ */
+Route::get('/privacy-policy', [ContractController::class, 'index_privacy']) -> name('privacy.index');
+Route::get('/purchase-rules', [ContractController::class, 'index_purchase']) -> name('purchase.index');
+Route::get('/registration-rules', [ContractController::class, 'index_registration']) -> name('registration.index');

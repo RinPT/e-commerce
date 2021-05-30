@@ -38,12 +38,22 @@ class AppServiceProvider extends ServiceProvider
             $site_title = Config::where('key','site_title')->value('value');
             $site_logo = Config::where('key','site_logo')->value('value');
             $site_tel = Config::where('key','site_tel')->value('value');
+            $site_email = Config::where('key','site_email')->value('value');
+            $site_address = Config::where('key','site_address')->value('value');
+            $site_facebook = Config::where('key','site_facebook')->value('value');
+            $site_twitter = Config::where('key','site_twitter')->value('value');
+            $site_instagram = Config::where('key','site_instagram')->value('value');
             $meta_keywords = Config::where('key','meta_keywords')->value('value');
             $meta_description = Config::where('key','meta_description')->value('value');
 
             View::share('site_title', $site_title);
             View::share('site_tel', $site_tel);
             View::share('site_logo', $site_logo);
+            View::share('site_email', $site_email);
+            View::share('site_address', $site_address);
+            View::share('site_facebook', $site_facebook);
+            View::share('site_twitter', $site_twitter);
+            View::share('site_instagram', $site_instagram);
             View::share('meta_keywords', $meta_keywords);
             View::share('meta_description', $meta_description);
         }
@@ -69,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Admin
          */
-        
+
         if(Schema::hasTable('authors')){
             if(isset($_SESSION['author'])){
                 if($_SESSION['author_type'] === "author"){
@@ -85,6 +95,12 @@ class AppServiceProvider extends ServiceProvider
                     $logged_author->perms = $allperms;
                 }elseif($_SESSION['author_type'] === "store"){
                     $logged_author = Store::find($_SESSION['author']);
+                    $allperms = [];
+                    $perms = json_decode(Group::find(3)->permissions);
+                    foreach ($perms as $perm) {
+                        $allperms[] = $perm;
+                    }
+                    $logged_author->perms = $allperms;
                 }
 
                 View::share('logged_author', $logged_author);

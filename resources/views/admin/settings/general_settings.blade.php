@@ -54,6 +54,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#seo" data-toggle="tab">SEO Settings</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#social" data-toggle="tab">Social Media</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div id="popular" class="tab-pane active">
@@ -67,6 +70,18 @@
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Phone</label>
                                         <div class="col-lg-6">
                                             <input type="text" name="site_tel" class="form-control" id="inputDefault" value="{{$site_tel}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Email</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="site_email" class="form-control" id="inputDefault" value="{{$site_email}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Site Address</label>
+                                        <div class="col-lg-6">
+                                            <textarea name="site_address" class="form-control" id="inputDefault">{{ $site_address }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -171,6 +186,26 @@
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Meta Description</label>
                                         <div class="col-lg-6">
                                             <textarea type="text" name="meta_description" class="form-control" id="inputDefault" rows="7">{{$meta_description}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="social" class="tab-pane active">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Facebook</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="site_facebook" class="form-control" id="inputDefault" value="{{$site_facebook}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Twitter</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="site_twitter" class="form-control" id="inputDefault" value="{{$site_twitter}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Instagram</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="site_instagram" class="form-control" id="inputDefault" value="{{$site_instagram}}">
                                         </div>
                                     </div>
                                 </div>

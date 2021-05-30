@@ -75,6 +75,18 @@ class CreatePerms extends Migration
             [
                 'name' => 'Manage Logs[Author]',
                 'created_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'View Products[Store]',
+                'created_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'View Orders[Store]',
+                'created_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'name' => 'View Tickets[Store]',
+                'created_at' => \Carbon\Carbon::now()
             ]
         ]);
     }

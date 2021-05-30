@@ -21,6 +21,10 @@
 
 @section('content')
     <main class="main">
+        <div class="page-header" style="background-image: url('/images/shop/page-header-back.jpg'); background-color: #3C63A4;">
+            <h3 class="page-subtitle">Hello There!</h3>
+            <h1 class="page-title">Are you ready to shop?</h1>
+        </div>
         <div class="page-content mt-6 pb-2 mb-10">
             <div class="container">
                 <div class="login-popup">

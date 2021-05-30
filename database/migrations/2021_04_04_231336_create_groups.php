@@ -36,13 +36,13 @@ class CreateGroups extends Migration
             ],
             [
                 'name' => 'store',
-                'permissions' => "[]",
+                'permissions' => "[15,16,17]",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'name' => 'technical support',
-                'permissions' => "[]",
+                'permissions' => "[11,12,14]",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

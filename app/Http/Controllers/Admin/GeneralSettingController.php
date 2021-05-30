@@ -14,7 +14,12 @@ class GeneralSettingController extends Controller
     {
         $site_title = Config::where('key','site_title')->value('value');
         $site_tel = Config::where('key','site_tel')->value('value');
+        $site_email = Config::where('key','site_email')->value('value');
+        $site_address = Config::where('key','site_address')->value('value');
         $site_logo = Config::where('key','site_logo')->value('value');
+        $site_facebook = Config::where('key','site_facebook')->value('value');
+        $site_twitter = Config::where('key','site_twitter')->value('value');
+        $site_instagram = Config::where('key','site_instagram')->value('value');
         $default_product_logo = Config::where('key','default_product_logo')->value('value');
         $product_count_per_click_main_page = Config::where('key','product_count_per_click_main_page')->value('value');
         $product_count_per_click_category_page = Config::where('key','product_count_per_click_category_page')->value('value');
@@ -33,6 +38,11 @@ class GeneralSettingController extends Controller
         return view('admin.settings.general_settings')->with([
             'site_title' => $site_title,
             'site_tel' => $site_tel,
+            'site_email' => $site_email,
+            'site_address' => $site_address,
+            'site_facebook' => $site_facebook,
+            'site_twitter' => $site_twitter,
+            'site_instagram' => $site_instagram,
             'site_logo' => $site_logo,
             'default_product_logo' => $default_product_logo,
             'product_count_per_click_main_page' => $product_count_per_click_main_page,
@@ -55,6 +65,15 @@ class GeneralSettingController extends Controller
     {
         Config::where('key','site_title')->update([
             'value' => $request->site_title
+        ]);
+        Config::where('key','site_tel')->update([
+            'value' => $request->site_tel
+        ]);
+        Config::where('key','site_email')->update([
+            'value' => $request->site_email
+        ]);
+        Config::where('key','site_address')->update([
+            'value' => $request->site_address
         ]);
 
         if ($request->hasFile('site_logo')) {
