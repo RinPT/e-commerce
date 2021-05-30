@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product_Images extends Model
 {
     use HasFactory;
     public $table = 'product_images';
+    protected $guarded = [];
 
-    protected $fillable = [
-        'product_id',
-        'image',
-    ];
 }

@@ -33,9 +33,10 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
 
 //Products:
 
-Route::get('/product/{product:name}', ProductProfileController::class)->name('product.profile');
+Route::get('/product/{product:name}', [ProductProfileController::class, 'index'])->name('product.profile');
 Route::get('/products', [ProductsController::class, 'index'])->name('products');
 Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
+Route::post('/products/{product_id}', [ProductProfileController::class, 'store'])->name('product.store');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/cart/{product_id}', [CartController::class, 'store'])->name('cart.add');

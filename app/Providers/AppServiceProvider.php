@@ -69,6 +69,7 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Admin
          */
+        
         if(Schema::hasTable('authors')){
             if(isset($_SESSION['author'])){
                 if($_SESSION['author_type'] === "author"){
