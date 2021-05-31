@@ -11,6 +11,7 @@ use App\Models\Group;
 use App\Models\Store;
 use App\Models\Store_Requests;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
@@ -38,15 +39,25 @@ class AppServiceProvider extends ServiceProvider
         if(Schema::hasTable('currencies')){
             $currencies = Currencies::get();
 
-            if(!isset($_COOKIE["currency"])) {
+            /**
+             * Set first
+             */
+            if(!isset($_COOKIE["cookie_currency"])) {
                 if(count($currencies)){
-                    setcookie("cookie_currency", $currencies[0]);
+                    setcookie("cookie_currency", $currencies[0],time() + (86400 * 30));
                     View::share('cookie_currency', $currencies[0]);
                 }
             }else{
-                View::share('cookie_currency', $_COOKIE["currency"]);
+                View::share('cookie_currency', json_decode($_COOKIE["cookie_currency"]));
             }
-
+            /**
+             * Change with request
+             */
+            if(!is_null(Request::input('currency'))){
+                $currency = Currencies::where('id',Request::input('currency'))->get();
+                setcookie("cookie_currency", $currency[0],time() + (86400 * 30));
+                View::share('cookie_currency', $currency[0]);
+            }
             View::share('header_currencies', $currencies);
         }
 

@@ -48,7 +48,7 @@
 
 <body>
 	<div class="page-wrapper">
-		<header class="header header-border">
+		<header class="header">
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
@@ -127,6 +127,79 @@
                         </a>
                         <span class="divider"></span>
                         <div class="dropdown cart-dropdown type2 cart-offcanvas mr-0 mr-lg-2">
+                            <a href="#" class="cart-toggle label-block link">
+                                <div class="cart-label d-lg-show">
+                                    <span class="cart-name">Shopping Cart:</span>
+                                    <span class="cart-price">$0.00</span>
+                                </div>
+                                <i class="d-icon-bag"><span class="cart-count">2</span></i>
+                            </a>
+                            <div class="cart-overlay"></div>
+                            <!-- End Cart Toggle -->
+                            <div class="dropdown-box">
+                                <div class="cart-header">
+                                    <h4 class="cart-title">Shopping Cart</h4>
+                                    <a href="#" class="btn btn-dark btn-link btn-icon-right btn-close">close<i
+                                            class="d-icon-arrow-right"></i><span class="sr-only">Cart</span></a>
+                                </div>
+                                <div class="products scrollable">
+                                    <div class="product product-cart">
+                                        <figure class="product-media">
+                                            <a href="product.html">
+                                                <img src="images/cart/product-1.jpg" alt="product" width="80"
+                                                     height="88" />
+                                            </a>
+                                            <button class="btn btn-link btn-close">
+                                                <i class="fas fa-times"></i><span class="sr-only">Close</span>
+                                            </button>
+                                        </figure>
+                                        <div class="product-detail">
+                                            <a href="product.html" class="product-name">Riode White Trends</a>
+                                            <div class="price-box">
+                                                <span class="product-quantity">1</span>
+                                                <span class="product-price">$21.00</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- End of Cart Product -->
+                                    <div class="product product-cart">
+                                        <figure class="product-media">
+                                            <a href="product.html">
+                                                <img src="images/cart/product-2.jpg" alt="product" width="80"
+                                                     height="88" />
+                                            </a>
+                                            <button class="btn btn-link btn-close">
+                                                <i class="fas fa-times"></i><span class="sr-only">Close</span>
+                                            </button>
+                                        </figure>
+                                        <div class="product-detail">
+                                            <a href="product.html" class="product-name">Dark Blue Women’s
+                                                Leomora Hat</a>
+                                            <div class="price-box">
+                                                <span class="product-quantity">1</span>
+                                                <span class="product-price">$118.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Cart Product -->
+                                </div>
+                                <!-- End of Products  -->
+                                <div class="cart-total">
+                                    <label>Subtotal:</label>
+                                    <span class="price">$139.00</span>
+                                </div>
+                                <!-- End of Cart Total -->
+                                <div class="cart-action">
+                                    <a href="cart.html" class="btn btn-dark btn-link">View Cart</a>
+                                    <a href="checkout.html" class="btn btn-dark"><span>Go To Checkout</span></a>
+                                </div>
+                                <!-- End of Cart Action -->
+                            </div>
+                            <!-- End Dropdown Box -->
+                        </div>
+                        <!--
+                        <div class="dropdown cart-dropdown type2 cart-offcanvas mr-0 mr-lg-2">
                             <a href="{{ route('cart') }}" class="label-block link">
                                 <div class="cart-label d-lg-show">
                                     <span class="cart-name"></span>
@@ -141,6 +214,7 @@
                             </a>
                             <div class="cart-overlay"></div>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>
@@ -150,115 +224,44 @@
                     <div class="header-left">
                         <nav class="main-nav">
                             <ul class="menu">
-                                <li>
-                                    <a href="{{ route('store') }}">Storun Linki</a>
-                                    <div class="megamenu">
-                                        <div class="row">
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-4">
-                                                <h4 class="menu-title">Variations 1</h4>
-                                                <ul>
-                                                    <li><a href="shop-banner-sidebar.html">Banner With Sidebar</a></li>
-                                                    <li><a href="shop-boxed-banner.html">Boxed Banner</a></li>
-                                                    <li><a href="shop-infinite-scroll.html">Infinite Ajaxscroll</a></li>
-                                                    <li><a href="shop-horizontal-filter.html">Horizontal Filter</a>
-                                                    </li>
-                                                    <li><a href="shop-navigation-filter.html">Navigation Filter<span
-                                                                class="tip tip-hot">Hot</span></a></li>
-
-                                                    <li><a href="shop-off-canvas.html">Off-Canvas Filter</a></li>
-                                                    <li><a href="shop-right-sidebar.html">Right Toggle Sidebar</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-4">
-                                                <h4 class="menu-title">Variations 2</h4>
-                                                <ul>
-
-                                                    <li><a href="shop-grid-3cols.html">3 Columns Mode<span
-                                                                class="tip tip-new">New</span></a></li>
-                                                    <li><a href="shop-grid-4cols.html">4 Columns Mode</a></li>
-                                                    <li><a href="shop-grid-5cols.html">5 Columns Mode</a></li>
-                                                    <li><a href="shop-grid-6cols.html">6 Columns Mode</a></li>
-                                                    <li><a href="shop-grid-7cols.html">7 Columns Mode</a></li>
-                                                    <li><a href="shop-grid-8cols.html">8 Columns Mode</a></li>
-                                                    <li><a href="shop-list.html">List Mode</a></li>
-                                                </ul>
-                                            </div>
-                                            <div
-                                                class="col-6 col-sm-4 col-md-3 col-lg-4 menu-banner menu-banner1 banner banner-fixed">
-                                                <figure>
-                                                    <img src="images/menu/banner-1.jpg" alt="Menu banner" width="221"
-                                                        height="330" />
-                                                </figure>
-                                                <div class="banner-content y-50">
-                                                    <h4 class="banner-subtitle font-weight-bold text-primary ls-m">Sale.
-                                                    </h4>
-                                                    <h3 class="banner-title font-weight-bold"><span
-                                                            class="text-uppercase">Up to</span>70% Off</h3>
-                                                    <a href="shop.html" class="btn btn-link btn-underline">shop now<i
-                                                            class="d-icon-arrow-right"></i></a>
-                                                </div>
-                                            </div>
-                                            <!-- End Megamenu -->
-                                        </div>
-                                    </div>
-                                </li>
-
                             @foreach($header_items as $item)
                                 <li>
                                     <a href="{{ route('store') }}">{{ $item->name }}</a>
                                     <div class="megamenu">
                                         <div class="row">
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-4">
-                                                @foreach($item['children'] as $child)
-                                                <h4 class="menu-title">{{ $child->name }}</h4>
-                                                    @foreach($child['children'] as $child2)
-                                                    <ul>
-                                                        <li><a href="shop-banner-sidebar.html">{{ $child2->name }}</a></li>
-                                                        @foreach($child2['children'] as $child3)
-                                                        <ul>
-                                                            <li style="text-indent: 20px;"><a href="shop-banner-sidebar.html">{{ $child3->name }}</a></li>
-                                                                @foreach($child3['children'] as $child4)
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    @foreach($item['children'] as $child)
+                                                        <div class="col-6 col-sm-4 col-md-3 col-lg-4">
+                                                            <h4 class="menu-title">{{ $child->name }}</h4>
+                                                            @foreach($child['children'] as $child2)
                                                                 <ul>
-                                                                    <li style="text-indent: 40px;"><a href="shop-banner-sidebar.html">{{ $child4->name }}</a></li>
+                                                                    <li><a href="shop-banner-sidebar.html">{{ $child2->name }}</a></li>
+                                                                    @foreach($child2['children'] as $child3)
+                                                                        <ul>
+                                                                            <li style="text-indent: 20px;"><a href="shop-banner-sidebar.html">{{ $child3->name }}</a></li>
+                                                                            @foreach($child3['children'] as $child4)
+                                                                                <ul>
+                                                                                    <li style="text-indent: 40px;"><a href="shop-banner-sidebar.html">{{ $child4->name }}</a></li>
+                                                                                </ul>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    @endforeach
                                                                 </ul>
-                                                                @endforeach
-                                                        </ul>
-                                                        @endforeach
-
-                                                    </ul>
+                                                            @endforeach
+                                                        </div>
                                                     @endforeach
-                                                @endforeach
-                                            </div>
-                                            <div
-                                                class="col-6 col-sm-4 col-md-3 col-lg-4 menu-banner menu-banner1 banner banner-fixed">
-                                                <figure>
-                                                    <img src="images/menu/banner-1.jpg" alt="Menu banner" width="221"
-                                                        height="330" />
-                                                </figure>
-                                                <div class="banner-content y-50">
-                                                    <h4 class="banner-subtitle font-weight-bold text-primary ls-m">Sale.
-                                                    </h4>
-                                                    <h3 class="banner-title font-weight-bold"><span
-                                                            class="text-uppercase">Up to</span>70% Off</h3>
-                                                    <a href="shop.html" class="btn btn-link btn-underline">shop now<i
-                                                            class="d-icon-arrow-right"></i></a>
                                                 </div>
                                             </div>
-                                            <!-- End Megamenu -->
                                         </div>
                                     </div>
                                 </li>
                             @endforeach
-
-
-
-
                             </ul>
                         </nav>
                     </div>
                     <div class="header-right">
-                        <a href="#"><i class="d-icon-card"></i>Special Offers</a>
-                        <a href="https://d-themes.com/buynow/riodehtml" target="_blank" class="ml-6">Buy Riode!</a>
+                        <a href="#"><i class="d-icon-layer"></i>Available Stores <i class="d-icon-layer pl-2"></i></a>
                     </div>
                 </div>
             </div>
@@ -551,7 +554,6 @@
 						<li><a href="element-icons.html">Icons</a></li>
 					</ul>
 				</li>
-				<li><a href="https://d-themes.com/buynow/riodehtml">Buy Riode!</a></li>
 			</ul>
 			<!-- End MobileMenu -->
 		</div>
