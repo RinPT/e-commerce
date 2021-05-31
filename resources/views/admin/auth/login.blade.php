@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2017. All Rights Reserved.</p>
+        <p class="text-center text-muted mt-3 mb-3">{{ $site_title }} © 2021. All Rights Reserved</p>
     </div>
 </section>
 <!-- end: page -->
