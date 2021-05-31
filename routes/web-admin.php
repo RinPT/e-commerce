@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ContractController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CargoController;
@@ -197,3 +198,5 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
 Route::get('/privacy-policy', [ContractController::class, 'index_privacy']) -> name('privacy.index');
 Route::get('/purchase-rules', [ContractController::class, 'index_purchase']) -> name('purchase.index');
 Route::get('/registration-rules', [ContractController::class, 'index_registration']) -> name('registration.index');
+
+Route::get('/category/{name}', [CategoryProductController::class, 'index'])->name('category.product.index');

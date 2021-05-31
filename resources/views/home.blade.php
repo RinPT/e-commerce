@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('plugin-styles')
+    <link rel="stylesheet" type="text/css" href="/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/nouislider/nouislider.min.css">
+@endsection
+
 @section('content')
     <style>
         .grid .banner, .grid .category, .grid .category>a, .grid figure, .grid .banner img, .grid .category img {
