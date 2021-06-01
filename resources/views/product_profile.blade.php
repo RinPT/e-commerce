@@ -18,15 +18,15 @@
                             data-sticky-options="{'minWidth': 767}">
                             <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
                                 <figure class="product-image">
-                                    <img src="{{ App\Models\Product_images::find($product->id)->image }}"
-                                        data-zoom-image="{{ App\Models\Product_images::find($product->id)->image }}"
+                                    <img src="/photo/product/{{ App\Models\Product_images::find($product->id)->image }}"
+                                        data-zoom-image="/photo/product/{{ App\Models\Product_images::find($product->id)->image }}"
                                         alt="Women's Brown Leather Backpacks" width="800" height="900">
                                 </figure>
                             </div>
                             <div class="product-thumbs-wrap">
                                 <div class="product-thumbs">
                                     <div class="product-thumb active">
-                                        <img src="{{ App\Models\Product_images::find($product->id)->image }}" alt="product thumbnail"
+                                        <img src="/photo/product/{{ App\Models\Product_images::find($product->id)->image }}" alt="product thumbnail"
                                             width="109" height="122">
                                     </div>
                                 </div>
@@ -113,9 +113,6 @@
                                     <a href="#" class="size-guide"><i class="d-icon-th-list"></i>Size Guide</a>
                                     <a href="#" class="product-variation-clean">Clean All</a>
                                 </div>
-                            </div>
-                            <div class="product-variation-price">
-                                <span>$239.00</span>
                             </div>
 
                             <hr class="product-divider">
@@ -283,6 +280,10 @@
                                                 name="name" placeholder="Name *" required />
                                         </div>
                                         <div class="col-md-6 mb-5">
+                                            <input type="text" class="form-control" id="reply-surname"
+                                                name="surname" placeholder="Surname *" required />
+                                        </div>
+                                        <div class="col-md-6 mb-5">
                                             <input type="email" class="form-control" id="reply-email"
                                                 name="email" placeholder="Email *" required />
                                         </div>
@@ -332,8 +333,8 @@
                     @foreach($randoms as $random)
                             <div class="product">
                                 <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="/photo/product/{{ $random->image }}" alt="product" width="280" height="315">
+                                    <a href="http://127.0.0.1:8000/product/{{ $random->name }}">
+                                        <img src="{{ asset('/photo/product/' . $random->image)}}" alt="product" width="280" height="315">
                                     </a>
                                     <div class="product-label-group">
                                         <label class="product-label label-new">new</label>

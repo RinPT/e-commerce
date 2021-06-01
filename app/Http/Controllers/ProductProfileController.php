@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Categories;
 use App\Models\Currencies;
@@ -22,18 +23,10 @@ class ProductProfileController extends Controller
         $comments = DB::table('product_comments')
         ->join('users', 'users.id', '=', 'product_comments.user_id')
         ->join('products', 'products.id', '=', 'product_comments.product_id')
-        ->select('users.photo', 'product_comments.comment', 'product_comments.product_rate', 'product_comments.created_at', 'product_comments.product_id')->get();
-
-
-        /*
-        $randoms = DB::table('products')
-        ->join('categories', 'categories.id', '=', 'products.category_id')
-        ->join('product_images', 'product_images.product_id', '=', 'products.id')
-        ->join('product_comments', 'products.id', '=', 'product_comments.product_id' )
-        ->where('products.id', '!=', $product->id)
-        ->select('products.id', 'product_images.image', 'products.name', 'products.price', 'products.category_id', 'product_comments.product_rate', 'product_comments.product_id')
+        ->select('users.photo', 'product_comments.comment', 'product_comments.product_rate', 'product_comments.created_at', 'product_comments.product_id')
         ->get();
-        */
+
+        
 
         $randoms = DB::table('products')
         ->where([
@@ -59,10 +52,8 @@ class ProductProfileController extends Controller
 
     public function store(Request $request, $product_id) {
 
-
-
         if (Auth::Check()) {
-            $this -> validate($request, [
+            $this->validate($request, [
                 'comment' => 'required'
             ]);
 
@@ -75,16 +66,17 @@ class ProductProfileController extends Controller
         }
 
         else{
-            $this -> validate($request, [
+            $this->validate($request, [
                 'comment' => 'required',
                 'name' => 'required',
-                'email' => 'required'
+                'email' => 'required|unique:users',
+                'surname' => 'required,'
             ]);
 
-            Users::create([
+            User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-
+                'surname' => $request->surname,
             ]);
 
             ProductComment::create([
