@@ -9,12 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ProductComment extends Model
 {
     use HasFactory;
-
-    protected $fillable= [
-        'comment',
-        'product_rate',
-        'cargo_rate',
-    ];
+    public $table = 'product_comments';
+    protected $guarded = [];
 
     public function product() {
         $this->belongsTo(Product::class);
