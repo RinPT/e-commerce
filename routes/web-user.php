@@ -17,9 +17,5 @@ Route::group(['prefix' => "/account"], function() {
     Route::delete('/address_delete/{address_id}', [AddressController::class, 'destroy'])->name('address.destroy');
 });
 
-//Seller:
-
-Route::get('/seller-application-form', [SellerController::class, 'index'])->name('application.form');
-Route::post('/seller-application-form', [SellerController::class, 'store'])->name('application.form.store');
 
 

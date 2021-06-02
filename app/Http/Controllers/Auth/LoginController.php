@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Config;
 use App\Models\Currencies;
 use App\Models\Categories;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -26,16 +29,28 @@ class LoginController extends Controller
     public function store(Request $request) {
 
     	$this->validate($request, [
-    		'email' => 'required|email',
+    		'email' => 'required',
     		'password' => 'required',
     	]);
 
-
-    	if(!auth()->attempt($request->only('email','password'), $request->remember)) {
-
-    		return back()->with('status','Invalid Login Details');
-    	}
-
-    	return redirect()->route('home');
+    	$user = User::where([
+    	    ['username' ,'=', $request->email],
+        ])->first();
+    	if($user){
+            if(Hash::check($request->password, $user->password)){
+                Auth::login($user,$remember = true);
+                return redirect()->route('home');
+            }
+        }
+        $user = User::where([
+            ['email' ,'=', $request->email],
+        ])->first();
+        if($user){
+            if(Hash::check($request->password, $user->password)){
+                Auth::login($user,$remember = true);
+                return redirect()->route('home');
+            }
+        }
+        return back()->with('status','Error! Invalid login details');
     }
 }

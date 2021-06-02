@@ -21,25 +21,20 @@
 
 @section('content')
     <main class="main">
+        <div class="page-header" style="background-image: url('/images/shop/page-header-back.jpg'); background-color: #3C63A4;">
+            <h1 class="page-title">Seller Application Form</h1>
+            <p class="text-white mt-3">All applications will be aproved by the admin! Please provide all necessary information about your company in the form below.</p>
+        </div>
         <div class="page-content mt-6 pb-2 mb-10">
             <div class="container">
                 <div class="login-popup" style="max-width: 100%;">
                     <div class="form-box">
                         <div class="tab tab-nav-simple tab-nav-boxed form-tab">
-                            <ul class="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active border-no lh-1 ls-normal">Seller Application Form</a>
-                                    <p class="mt-2 text-black">All applications will be aproved by the admin! Please provide all necessary information about your company in the form below.</p>
-                                </li>
-                            </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="signin">
                                     @if ($errors->any())
-                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                            <ul class="list-unstyled mb-0">
+                                        <div class="alert alert-danger mb-4">
+                                            <ul class="list mb-0 mt-0">
                                                 @foreach ($errors->all() as $error)
                                                     <li class="text-white">
                                                         {{ $error }}
@@ -49,14 +44,12 @@
                                         </div>
                                     @endif
                                     @if(Session::has('success'))
-                                        <div class="alert alert-success text-white">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <div class="alert alert-success text-white mb-4">
                                             <strong>Success</strong> {{ Session::get('success') }}
                                         </div>
                                     @endif
                                     @if(Session::has('error'))
-                                        <div class="alert alert-danger text-white">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <div class="alert alert-danger text-white mb-4">
                                             <strong>Error!</strong> {{ Session::get('error') }}
                                         </div>
                                     @endif

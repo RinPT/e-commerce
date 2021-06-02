@@ -37,7 +37,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="register">
-                                    <form action="{{ route('register') }}" method="POST" class="form">
+                                    <form action="{{ route('register') }}" method="post" class="form">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <input type="text" class="form-control mb-0" name="name" @error('name') style="border-color: red;" @enderror placeholder="Your Name" value="{{ old('name') }}"/>

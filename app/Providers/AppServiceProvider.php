@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        session_start();
         if(Schema::hasTable('currencies')){
             $currencies = Currencies::get();
 
@@ -61,7 +62,6 @@ class AppServiceProvider extends ServiceProvider
             View::share('header_currencies', $currencies);
         }
 
-        session_start();
         if(Schema::hasTable('config')){
             $site_title = Config::where('key','site_title')->value('value');
             $site_logo = Config::where('key','site_logo')->value('value');
@@ -92,17 +92,10 @@ class AppServiceProvider extends ServiceProvider
             View::share('header_categories', $categories);
             View::share('header_items', $items);
         }
-        if(Schema::hasTable('store_requests')){
-            $store_requests_count = Store_Requests::where('status','waiting')->count();
-
-            View::share('store_requests_count', $store_requests_count);
-        }
-
 
         /**
          * Admin
          */
-
         if(Schema::hasTable('authors')){
             if(isset($_SESSION['author'])){
                 if($_SESSION['author_type'] === "author"){
@@ -130,6 +123,11 @@ class AppServiceProvider extends ServiceProvider
                 View::share('logged_author_type', $_SESSION['author_type']);
                 View::share('logged_author_gtype', $_SESSION['author_group_type']);
             }
+        }
+        if(Schema::hasTable('store_requests')){
+            $store_requests_count = Store_Requests::where('status','waiting')->count();
+
+            View::share('store_requests_count', $store_requests_count);
         }
     }
 }

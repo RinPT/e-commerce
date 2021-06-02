@@ -37,18 +37,27 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="signin">
-                                    <form action="{{ route('admin.store.application') }}" method="POST">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger mb-3">
+                                            <ul class="list mb-0 mt-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li class="text-white">
+                                                        {{ $error }}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @if(session('status'))
+                                        <div class="alert alert-danger mb-3 text-white">{{ session('status') }}</div>
+                                    @endif
+                                    <form action="{{ route('login') }}" method="post">
                                         @csrf
-
-                                        @if(session('status'))
-                                            <p class="text-danger">{{ session('status') }}</p>
-                                        @endif
-
                                         <div class="form-group mb-3">
-                                            <input type="text" class="form-control" name="email" placeholder="Username or Email Address" value="{{ old('email') }}"/>
+                                            <input type="text" class="form-control" name="email" placeholder="Username or Email Address" value="{{ old('email') }}" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" placeholder="Password"/>
+                                            <input type="password" class="form-control" name="password" placeholder="Password" required/>
                                         </div>
                                         <div class="form-footer">
                                             <div class="form-checkbox">
