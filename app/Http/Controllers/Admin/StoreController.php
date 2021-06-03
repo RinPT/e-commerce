@@ -109,20 +109,66 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
 
+        $store = Store::find($id);
+
         $this -> validate($request, [
             'name' => 'required|max:255',
-            'username' => 'required|max:255 | unique:store,username',
-            'email'=> 'required|email|max:255 | unique:store,email',
-            'url' => 'required | unique:store,url',
-            'tax_no' => 'required | unique:store,tax_no',
             'country_id' => 'required',
             'city' => 'required',
             'address' => 'required',
-            'phone' => 'required | unique:store,phone',
             'status' => 'required',
 
         ]);
-        $store = Store::find($id);
+
+        if($store->username !== $request->username) {
+            $this->validate($request, [
+                'username' => 'required|max:255 | unique:store,username'
+            ]);
+
+            $store->update([
+                'username' => $request->username,
+            ]);
+        }
+
+        if($store->email !== $request->email) {
+            $this->validate($request, [
+                'email'=> 'required|email|max:255 | unique:store,email',
+            ]);
+
+            $store->update([
+                'email' => $request->email,
+            ]);
+        }
+
+        if($store->url !== $request->url) {
+            $this->validate($request, [
+                'url' => 'required | unique:store,url',
+            ]);
+
+            $store->update([
+                'url' => $request->url,
+            ]);
+        }
+
+        if($store->tax_no !== $request->tax_no) {
+            $this->validate($request, [
+                'tax_no' => 'required | unique:store,tax_no',
+            ]);
+
+            $store->update([
+                'tax_no' => $request->url,
+            ]);
+        }
+
+        if($store->phone !== $request->phone) {
+            $this->validate($request, [
+                'phone' => 'required | unique:store,phone',
+            ]);
+
+            $store->update([
+                'phone' => $request->phone,
+            ]);
+        }
 
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
@@ -137,16 +183,11 @@ class StoreController extends Controller
         $store->update([
             'id' => $request->id,
             'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
             'logo'=> isset($filename) ? $filename : "",
-            'url'=> $request->url,
-            'tax_no'=> $request->tax_no,
             'country_id'=> $request->country_id,
             'product_cat_id'=> $request->product_cat_id,
             'city'=> $request->city,
             'address'=> $request->address,
-            'phone'=> $request->phone,
             'status'=> isset($request->status)? 1:0,
         ]);
 
