@@ -19,8 +19,8 @@
         <div class="page-content mb-10 pb-10">
             <div class="container">
                 <div class="form-wrapper mt-5 mb-2">
-                    <form action="#" class="input-wrapper-inline" style="max-width: 100%;">
-                        <input type="email" class="form-control" name="vendor" id="vendor" placeholder="Search store..." required="">
+                    <form action="{{ route('stores.search') }}" method="get" class="input-wrapper-inline" style="max-width: 100%;">
+                        <input type="text" class="form-control" name="store" id="store" placeholder="Search store..." required="">
                         <button class="btn btn-dark pl-5 pr-5 pb-0 pt-0" type="submit">Search</button>
                     </form>
                 </div>
@@ -30,7 +30,7 @@
                         <div class="store">
                             <div class="store-header">
                                 <figure class="store-banner">
-                                    <img src="images/vendor/store/1.jpg" alt="Vendor" width="447" height="291" style="background-color: #8d9eaa;" />
+                                    <img src="/images/vendor/store/5.jpg" alt="Vendor" width="447" height="291" style="background-color: #8d9eaa;" />
                                 </figure>
                             </div>
                             <div class="store-content text-left">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="store-footer">
                                 <figure class="seller-avatar">
-                                    <img src="images/vendor/avatar/1.jpg" alt="Vendor avatar" width="64" height="64" />
+                                    <img src="/photo/store/{{ $store->logo }}" alt="Vendor avatar" width="64" height="64" />
                                 </figure>
                                 <a href="{{ route('store.products',['name' => 'store','id' => $store->id]) }}" class="btn btn-dark btn-link btn-underline">Visit Store<i class="d-icon-arrow-right"></i></a>
                             </div>
