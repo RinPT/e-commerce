@@ -189,5 +189,10 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::get('/tickets/store', [TicketController::class, 'getStoreTickets']) -> name('admin.view_store_tickets');
     Route::get('/tickets/create', [TicketController::class, 'getCreateTicket']) -> name('admin.view_create_new_ticket');
 
+    /**
+     * Slider Management
+     */
+
+
 });
 

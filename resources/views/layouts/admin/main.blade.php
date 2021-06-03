@@ -560,6 +560,24 @@
 										</ul>
 									</li>
                                     @endif
+                                    <li class="nav-parent">
+										<a class="nav-link" href="#">
+											<i class="fas fa-image"></i>
+											<span>Slider Management</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a class="nav-link" href="">
+													Edit Slider
+												</a>
+											</li>
+											<li>
+												<a class="nav-link" href="">
+													View Slider
+												</a>
+											</li>
+										</ul>
+									</li>
 								</ul>
 				            </nav>
 				        </div>
