@@ -18,12 +18,19 @@ class ProductProfileController extends Controller
         $currencies = Currencies::get();
         $categories = Categories::get();
         $items = Categories::tree();
-        $avgstar = ProductComment::avg('product_rate');
+        $avgstar = ProductComment::find($product->id);
+        if(is_null($avgstar)) {
+            $avgstar = 0;
+        }
+        else {
+            $avgstar = $avgstar->avg('product_rate');
+        }
+
 
         $comments = DB::table('product_comments')
         ->join('users', 'users.id', '=', 'product_comments.user_id')
         ->join('products', 'products.id', '=', 'product_comments.product_id')
-        ->select('users.photo', 'product_comments.comment', 'product_comments.product_rate', 'product_comments.created_at', 'product_comments.product_id')
+        ->select('users.photo', 'product_comments.comment', 'product_comments.product_rate', 'product_comments.created_at', 'product_comments.product_id', 'users.photo')
         ->get();
 
         

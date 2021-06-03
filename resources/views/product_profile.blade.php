@@ -43,31 +43,8 @@
                             <div class="product-navigation">
                                 <ul class="breadcrumb breadcrumb-lg">
                                     <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
-                                    <li><a href="#" class="active">Products</a></li>
+                                    <li><a href="{{ url()->previous() }}" class="active">Products</a></li>
                                     <li>Detail</li>
-                                </ul>
-
-                                <ul class="product-nav">
-                                    <li class="product-nav-prev">
-                                        <a href="#">
-                                            <i class="d-icon-arrow-left"></i> Prev
-                                            <span class="product-nav-popup">
-                                                <img src="/images/product/product-thumb-prev.jpg"
-                                                    alt="product thumbnail" width="110" height="123">
-                                                <span class="product-name">Sed egtas Dnte Comfort</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="product-nav-next">
-                                        <a href="#">
-                                            Next <i class="d-icon-arrow-right"></i>
-                                            <span class="product-nav-popup">
-                                                <img src="/images/product/product-thumb-next.jpg"
-                                                    alt="product thumbnail" width="110" height="123">
-                                                <span class="product-name">Sed egtas Dnte Comfort</span>
-                                            </span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
 
@@ -245,11 +222,12 @@
                             </div>
                             <!-- End Comments -->
                             <div class="reply">
+                                @auth
                                 <div class="title-wrapper text-left">
                                     <h3 class="title title-simple text-left text-normal">Add a Review</h3>
                                     <p>Your email address will not be published. Required fields are marked *</p>
                                 </div>
-
+                                
                                 <form action="{{ route('product.store', $product->id) }}" method="POST">
                                 @csrf
                                     <div class="rating-form">
@@ -272,33 +250,22 @@
                                         </select>
                                     </div>
                                     <textarea id="reply-message" name="comment" cols="30" rows="6" class="form-control mb-4"
-                                        placeholder="Comment *" required></textarea>
+                                        placeholder="Comment *" required>
+                                    </textarea>
+                                    
+                                    <button type="submit" class="btn btn-primary btn-rounded">Submit<i
+                                            class="d-icon-arrow-right"></i>
+                                    </button>
+                                    @endauth
+
                                     @guest
                                     <div class="row">
-                                        <div class="col-md-6 mb-5">
-                                            <input type="text" class="form-control" id="reply-name"
-                                                name="name" placeholder="Name *" required />
+                                        <div class="title title-simple text-left text-normal">
+                                            <p>Please <a href="http://127.0.0.1:8000/register" style="color: blue;text-decoration: underline;">register</a> to leave a comment. </p>
                                         </div>
-                                        <div class="col-md-6 mb-5">
-                                            <input type="text" class="form-control" id="reply-surname"
-                                                name="surname" placeholder="Surname *" required />
-                                        </div>
-                                        <div class="col-md-6 mb-5">
-                                            <input type="email" class="form-control" id="reply-email"
-                                                name="email" placeholder="Email *" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-checkbox mb-4">
-                                        <input type="checkbox" class="custom-checkbox" id="signin-remember"
-                                            name="signin-remember" required/>
-                                        <label class="form-control-label" for="signin-remember">
-                                            Save my name, email, and website in this browser for the next time I
-                                            comment.
-                                        </label>
                                     </div>
                                     @endguest
-                                    <button type="submit" class="btn btn-primary btn-rounded">Submit<i
-                                            class="d-icon-arrow-right"></i></button>
+
                                 </form>
                             </div>
                             <!-- End Reply -->
