@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\StoresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
@@ -67,3 +68,8 @@ Route::get('/category/{name}', [CategoryProductController::class, 'index'])->nam
 Route::get('/seller-application-form', [SellerController::class, 'index'])->name('application.form');
 Route::post('/seller-application-form', [SellerController::class, 'store'])->name('application.form.store');
 
+/**
+ * Store
+ */
+Route::get('/stores', [StoresController::class, 'index'])->name('stores.index');
+Route::get('/store/{name}', [StoresController::class, 'store_products_index'])->name('store.products');

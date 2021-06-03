@@ -30,9 +30,10 @@
                 <div class="login-popup">
                     <div class="form-box">
                         <div class="tab tab-nav-simple tab-nav-boxed form-tab">
-                            <ul class="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5" role="tablist">
+                            <ul class="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-2" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active border-no lh-1 ls-normal" href="#signin">Login</a>
+                                    <p class="mb-0 mt-2">Log in to your account now...</p>
                                 </li>
                             </ul>
                             <div class="tab-content">

@@ -160,10 +160,6 @@
                                     <option value="36">36</option>
                                 </select>
                             </div>
-                            <div class="toolbox-item toolbox-layout">
-                                <a href="shop-list.html" class="d-icon-mode-list btn-layout"></a>
-                                <a href="shop.html" class="d-icon-mode-grid btn-layout active"></a>
-                            </div>
                         </div>
                     </nav>
                     <div class="row cols-2 cols-sm-3 product-wrapper">

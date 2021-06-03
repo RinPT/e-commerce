@@ -81,6 +81,9 @@
                                                 <input type="checkbox" class="custom-checkbox" id="register-agree" name="register-agree"/>
                                                 <label class="form-control-label" for="register-agree">I read and agree to the <a href="{{ route('privacy.index') }}" target="_blank">privacy policy</a></label>
                                             </div>
+                                            @error('register-agree')
+                                            <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <button type="submit" class="btn btn-dark btn-block btn-rounded">Register</button>
                                     </form>
