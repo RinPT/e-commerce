@@ -72,4 +72,5 @@ Route::post('/seller-application-form', [SellerController::class, 'store'])->nam
  * Store
  */
 Route::get('/stores', [StoresController::class, 'index'])->name('stores.index');
+Route::get('/stores/search', [StoresController::class, 'search'])->name('stores.search');
 Route::get('/store/{name}-{id}', [StoresController::class, 'store_products_index'])->name('store.products');

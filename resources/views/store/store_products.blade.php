@@ -9,9 +9,9 @@
     <main class="main">
         <div class="page-header"
              style="background-image: url('/images/shop/page-header-back.jpg'); background-color: #3C63A4;">
-            <h1 class="page-title">Store Name</h1>
+            <h1 class="page-title">{{ $store->name }}</h1>
             <ul class="breadcrumb">
-                <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
+                <li><a href="{{ route('home') }}"><i class="d-icon-home"></i></a></li>
                 <li class="delimiter">/</li>
                 <li>Visit Store</li>
             </ul>
