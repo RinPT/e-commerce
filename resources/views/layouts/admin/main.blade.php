@@ -150,6 +150,12 @@
 										</a>
 									</li>
                                     @endif
+                                    <li>
+										<a class="nav-link" href="{{ route('slider') }}">
+											<i class="fas fa-image"></i>
+											<span>Slider Management</span>
+										</a>
+									</li>
                                     @if(in_array(2,$logged_author->perms))
                                     <li class="nav-parent @if(str_contains(url()->current(),'currenc'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
@@ -560,24 +566,6 @@
 										</ul>
 									</li>
                                     @endif
-                                    <li class="nav-parent">
-										<a class="nav-link" href="#">
-											<i class="fas fa-image"></i>
-											<span>Slider Management</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="">
-													Edit Slider
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="">
-													View Slider
-												</a>
-											</li>
-										</ul>
-									</li>
 								</ul>
 				            </nav>
 				        </div>

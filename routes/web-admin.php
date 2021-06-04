@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
+use App\Http\Controllers\Admin\SliderController;
 
 Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], function() {
 
@@ -192,7 +193,7 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     /**
      * Slider Management
      */
-
+    Route::get('/slider', [SliderController::class, 'index'])->name('slider');
 
 });
 
