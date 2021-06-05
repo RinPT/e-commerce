@@ -30,7 +30,7 @@ class CreateCurrencies extends Migration
             'name' => 'Turkish Lira',
             'code' => 'TL',
             'prefix' => '₺',
-            'suffix' =>'₺',
+            'suffix' =>'TL',
             'rate' => 1,
             'base' => 1,
             'created_at' => \Carbon\Carbon::now(),
@@ -41,7 +41,7 @@ class CreateCurrencies extends Migration
             'name' => 'US Dollars',
             'code' => 'Dollars',
             'prefix' => '$',
-            'suffix' =>'$',
+            'suffix' =>'USD',
             'rate' => 0.11,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()

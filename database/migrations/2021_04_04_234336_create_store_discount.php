@@ -15,9 +15,9 @@ class CreateStoreDiscount extends Migration
     {
         Schema::create('store_discount', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->constrained('store')->onDelete('cascade');
-            $table->integer('store_discount');
-            $table->integer('main_discount');
+            $table->foreignId('store_id')->unique()->constrained('store')->onDelete('cascade');
+            $table->integer('store_discount')->default(0);
+            $table->integer('main_discount')->default(0);
             $table->text('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');

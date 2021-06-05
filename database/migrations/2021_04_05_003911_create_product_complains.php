@@ -22,44 +22,6 @@ class CreateProductComplains extends Migration
             $table->timestamps();
         });
 
-        DB::table('products')->insert([
-            'store_id' => '1',
-            'name' => 'ürün1',
-            'category_id' => '1',
-            'description' => 'buldan bezi',
-            'price' => '25',
-            'cargo_price' => '5',
-            'currency_id' => '1',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
-
-        DB::table('product_images')->insert([
-            'product_id' => '1',
-            'image' => 'dersler.png',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
-
-        
-        DB::table('products')->insert([
-            'store_id' => '1',
-            'name' => 'ürün2',
-            'category_id' => '1',
-            'description' => 'kumaş',
-            'price' => '25',
-            'cargo_price' => '5',
-            'currency_id' => '1',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
-
-        DB::table('product_images')->insert([
-            'product_id' => '1',
-            'image' => 'dersler.png',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
     }
 
     /**
@@ -72,5 +34,5 @@ class CreateProductComplains extends Migration
         Schema::dropIfExists('product_complains');
     }
 
-    
+
 }

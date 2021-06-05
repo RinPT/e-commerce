@@ -15,9 +15,9 @@ class CreateCategoryDiscount extends Migration
     {
         Schema::create('category_discount', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->integer('store_discount');
-            $table->integer('main_discount');
+            $table->foreignId('category_id')->unique()->constrained('categories')->onDelete('cascade');
+            $table->integer('store_discount')->default(0);
+            $table->integer('main_discount')->default(0);
             $table->text('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');

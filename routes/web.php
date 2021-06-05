@@ -37,9 +37,9 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
 /**
  * Products
  */
-Route::get('/product/{product:name}', [ProductProfileController::class, 'index'])->name('product.profile');
-Route::get('/products', [ProductsController::class, 'index'])->name('products');
-Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
+Route::get('/product/{name}/{id}', [ProductProfileController::class, 'index'])->name('product.profile');
+//Route::get('/products', [ProductsController::class, 'index'])->name('products');
+//Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
 Route::post('/products/{product_id}', [ProductProfileController::class, 'store'])->name('product.store');
 
 /**
@@ -71,6 +71,11 @@ Route::post('/seller-application-form', [SellerController::class, 'store'])->nam
 /**
  * Store
  */
+$rand = rand(0,9999);
 Route::get('/stores', [StoresController::class, 'index'])->name('stores.index');
 Route::get('/stores/search', [StoresController::class, 'search'])->name('stores.search');
-Route::get('/store/{name}-{id}', [StoresController::class, 'store_products_index'])->name('store.products');
+Route::get('/store/{name}/{id}', [StoresController::class, 'store_products_index'])->name('store.products');
+
+//Route::get('/currency/{id}', function (){
+//
+//})->name('currency.change');

@@ -231,7 +231,7 @@
                         <ul class="menu">
                             @foreach($header_items as $item)
                                 <li>
-                                    <a href="{{ route('category.product.index',['name' => $item->name]) }}">{{ $item->name }}</a>
+                                    <a href="{{ route('category.product.index',['name' => strtolower($item->name)]) }}">{{ $item->name }}</a>
                                     <div class="megamenu">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -242,15 +242,15 @@
                                                             @foreach($child['children'] as $child2)
                                                                 <ul>
                                                                     <li class="">
-                                                                        <a href="{{ route('category.product.index',['name' => $child2->name]) }}">{{ $child2->name }}</a>
+                                                                        <a href="{{ route('category.product.index',['name' => strtolower($child2->name)]) }}">{{ $child2->name }}</a>
                                                                         @if(count($child2['children']))<ul>@endif
                                                                             @foreach($child2['children'] as $child3)
                                                                                 <li>
-                                                                                    <a href="{{ route('category.product.index',['name' => $child3->name]) }}">{{ $child3->name }}</a>
+                                                                                    <a href="{{ route('category.product.index',['name' => strtolower($child3->name)]) }}">{{ $child3->name }}</a>
                                                                                     @if(count($child3['children']))<ul>@endif
                                                                                         @foreach($child3['children'] as $child4)
                                                                                             <li>
-                                                                                                <a href="{{ route('category.product.index',['name' => $child4->name]) }}">{{ $child4->name }}</a>
+                                                                                                <a href="{{ route('category.product.index',['name' => strtolower($child4->name)]) }}">{{ $child4->name }}</a>
                                                                                             </li>
                                                                                         @endforeach
                                                                                         @if(count($child3['children']))</ul>@endif
