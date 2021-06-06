@@ -36,22 +36,13 @@
                         <header class="card-header">
                             <h2 class="card-title">{{ $slider->name }}</h2>
                         </header>
-                        <div class="card-body d-flex justify-content-center">
-                            <div class="zoom-gallery">
-                                <a class="float-left mb-1 mr-1" href="/photo/slider/{{ $slider->banner }}" title="Banner 1"><img class="img-thumbnail" src="/photo/slider/{{ $slider->banner }}" width="275"></a>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            @endforeach
-        @endif
-    </div>
-    <div class="row">
-        @if ($sliders->count())
-            @foreach ($sliders as $slider)
-                <div class="col-md-6">
-                    <section class="card mb-4">
                         <div class="card-body">
+                            <div class="row d-flex justify-content-center mb-3">
+                                <div class="zoom-gallery">
+                                    <a class="float-left mb-1 mr-1" href="/photo/slider/{{ $slider->banner }}" title="Banner 1"><img class="img-thumbnail" src="/photo/slider/{{ $slider->banner }}" width="275"></a>
+                                </div>
+                            </div>
+                            <hr/>
                             <form action="{{ route('slider.edit', $slider->id) }}" method="POST">
                                 @csrf
                                 <div class="form-group row">
