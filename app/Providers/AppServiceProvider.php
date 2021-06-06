@@ -37,6 +37,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         session_start();
+
+        View::share('QS', $_SERVER['QUERY_STRING'] ?? "");
+
         if(Schema::hasTable('currencies')){
             $currencies = Currencies::get();
 

@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Advertisement extends Model
 {
     use HasFactory;
-    protected $table='category_advertisements';
-    protected $fillable = [
-        'id',
-        'category_id',
-        'image',
-    ];
+    protected $table='advertisements';
+    protected $guarded = [];
 }

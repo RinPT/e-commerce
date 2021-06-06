@@ -102,7 +102,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="display: none">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Product Count Per Click(Main Page)</label>
                                         <div class="col-lg-6">
                                             <input type="number" name="product_count_per_click_main_page" class="form-control" id="inputDefault" min="1" value="{{$product_count_per_click_main_page}}">

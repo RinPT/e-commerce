@@ -64,7 +64,7 @@
                                 @if($cookie_currency->code == $currency->code)
                                     @continue
                                 @endif
-                                <li><a href="?currency={{ $currency->id }}">{{ $currency->code }}</a></li>
+                                <li><a href="@if(empty($QS))?currency=@else?{{ $QS }}&currency=@endif{{ $currency->id }}">{{ $currency->code }}</a></li>
                             @endforeach
                         </ul>
                     </div>

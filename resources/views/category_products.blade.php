@@ -50,84 +50,107 @@
                     <a class="sidebar-close" href="#"><i class="d-icon-times"></i></a>
                     <div class="sidebar-content">
                         <div class="sticky-sidebar" data-sticky-options="{'top': 10}">
-                            <div class="filter-actions mb-4">
-                                <a href="#"
-                                   class="sidebar-toggle-btn toggle-remain btn btn-outline btn-primary btn-icon-right btn-rounded">Filter<i
-                                        class="d-icon-arrow-left"></i></a>
-                                <a href="#" class="filter-clean">Clean All</a>
-                            </div>
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">All Categories</h3>
-                                <ul class="widget-body filter-items search-ul">
-                                    <li><a href="#">Accessosries</a></li>
-                                    <li>
-                                        <a href="#">Bags</a>
-                                        <ul style="display: block">
-                                            <li><a href="#">Backpacks & Fashion Bags</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Electronics</a>
-                                        <ul>
-                                            <li><a href="#">Computer</a></li>
-                                            <li><a href="#">Gaming & Accessosries</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">For Fitness</a></li>
-                                    <li><a href="#">Home & Kitchen</a></li>
-                                    <li><a href="#">Men's</a></li>
-                                    <li><a href="#">Shoes</a></li>
-                                    <li><a href="#">Sporting Goods</a></li>
-                                    <li><a href="#">Summer Season's</a></li>
-                                    <li><a href="#">Travel & Clothing</a></li>
-                                    <li><a href="#">Watches</a></li>
-                                    <li><a href="#">Women’s</a></li>
-                                </ul>
-                            </div>
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">Filter by Price</h3>
                                 <div class="widget-body mt-3">
                                     <form action="#">
                                         <div class="filter-price-slider"></div>
-
                                         <div class="filter-actions">
                                             <div class="filter-price-text mb-4">Price:
                                                 <span class="filter-price-range"></span>
                                             </div>
-                                            <button type="submit"
-                                                    class="btn btn-dark btn-filter btn-rounded">Filter</button>
+                                            <button type="submit" class="btn btn-dark btn-filter btn-rounded">Filter</button>
                                         </div>
                                     </form><!-- End Filter Price Form -->
                                 </div>
                             </div>
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title">Size</h3>
+                                <h3 class="widget-title">Rating</h3>
+
                                 <ul class="widget-body filter-items">
-                                    <li><a href="#">Extra Large</a></li>
-                                    <li><a href="#">Large</a></li>
-                                    <li><a href="#">Medium</a></li>
-                                    <li><a href="#">Small</a></li>
+                                    <form action="@if(!empty($QS))?{{ $QS }}@endif" method="get">
+                                        <div class="mb-2" style="border-bottom: 1px solid #eee;">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="rev1" name="review" value="1" @if(in_array(1,$rev_nums)) checked @endif>
+                                                <label class="form-control-label mb-2" for="rev1">
+                                                    <div class="ratings-container">
+                                                        <div class="ratings-full">
+                                                            <span class="ratings" style="width:20%"></span>
+                                                            <span class="tooltiptext tooltip-top">1</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2" style="border-bottom: 1px solid #eee;">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="rev2" name="review" value="2" @if(in_array(2,$rev_nums)) checked @endif>
+                                                <label class="form-control-label mb-2" for="rev2">
+                                                    <div class="ratings-container">
+                                                        <div class="ratings-full">
+                                                            <span class="ratings" style="width:40%"></span>
+                                                            <span class="tooltiptext tooltip-top">2</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2" style="border-bottom: 1px solid #eee;">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="rev3" name="review" value="3" @if(in_array(3,$rev_nums)) checked @endif>
+                                                <label class="form-control-label mb-2" for="rev3">
+                                                    <div class="ratings-container">
+                                                        <div class="ratings-full">
+                                                            <span class="ratings" style="width:60%"></span>
+                                                            <span class="tooltiptext tooltip-top">3</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2" style="border-bottom: 1px solid #eee;">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="rev4" name="review" value="4" @if(in_array(4,$rev_nums)) checked @endif>
+                                                <label class="form-control-label mb-2" for="rev4">
+                                                    <div class="ratings-container">
+                                                        <div class="ratings-full">
+                                                            <span class="ratings" style="width:80%"></span>
+                                                            <span class="tooltiptext tooltip-top">4</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <div class="form-checkbox">
+                                                <input type="checkbox" class="custom-checkbox" id="rev5" name="review" value="5" @if(in_array(5,$rev_nums)) checked @endif>
+                                                <label class="form-control-label mb-2" for="rev5">
+                                                    <div class="ratings-container">
+                                                        <div class="ratings-full">
+                                                            <span class="ratings" style="width:100%"></span>
+                                                            <span class="tooltiptext tooltip-top">5</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark btn-filter btn-rounded mt-2">FILTER</button>
+                                    </form>
                                 </ul>
                             </div>
+                            @if(count($category_advs))
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title">Color</h3>
-                                <ul class="widget-body filter-items">
-                                    <li><a href="#">Black</a></li>
-                                    <li><a href="#">Blue</a></li>
-                                    <li><a href="#">Green</a></li>
-                                    <li><a href="#">White</a></li>
-                                </ul>
+                                <div class="advertisements">
+                                    <h3 class="widget-title">Advertisements</h3>
+                                    <ul class="widget-body filter-items">
+                                        @foreach($category_advs as $adv)
+                                            <img src="/photo/advertisement/{{ $adv->image }}">
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">Brands</h3>
-                                <ul class="widget-body filter-items">
-                                    <li><a href="#">Cinderella</a></li>
-                                    <li><a href="#">Comedy</a></li>
-                                    <li><a href="#">Rightcheck</a></li>
-                                    <li><a href="#">SkillStar</a></li>
-                                    <li><a href="#">SLS</a></li>
-                                </ul>
-                            </div>
+                            @endif
+
                         </div>
                     </div>
                 </aside>
@@ -173,10 +196,14 @@
                                     </div>
                                     <div class="ratings-container">
                                         <div class="ratings-full">
-                                            <span class="ratings" style="width:40%"></span>
+                                            <span class="ratings"
+                                                  style="width:{{ $product->product_review }}%">
+                                            </span>
                                             <span class="tooltiptext tooltip-top"></span>
                                         </div>
-                                        <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->name)), 'id' => $product->id]) }}" class="rating-reviews">( 4 reviews )</a>
+                                        <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->name)), 'id' => $product->id]) }}" class="rating-reviews">
+                                            ( {{ $product->product_review_count }} reviews )
+                                        </a>
                                     </div>
                                 </div>
                             </div>
