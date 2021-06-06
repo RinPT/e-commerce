@@ -18,112 +18,102 @@
 @endsection
 
 @section('content')
-    @if(session('status'))
+    @if(session('updated'))
         <div class="row">
             <div class="col">
-                <div class="alert alert-success mb-0">
+                <div class="alert alert-info mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Notification!</strong> {{ session('status') }}.
+                    <strong>Notification!</strong> {{ session('updated') }}.
                 </div>
             </div>
         </div>
     @endif
     <div class="row">
-        <div class="col-md-6">
-            <section class="card mb-4">
-                <header class="card-header">
-                    <h2 class="card-title">Banner 1</h2>
-                </header>
-                <div class="card-body">
-                    <div class="zoom-gallery">
-                        <a class="float-left mb-1 mr-1" href="/photo/slider/banner_1.jpg" title="Banner 1"><img class="img-thumbnail" src="/photo/slider/banner_1.jpg" width="275"></a>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="col-md-6">
-            <section class="card mb-4">
-                <header class="card-header">
-                    <h2 class="card-title">Banner 2</h2>
-                </header>
-                <div class="card-body">
-                    <div class="col-md-6">
-                        <div class="zoom-gallery">
-                            <a class="float-left mb-1 mr-1" href="/photo/slider/banner_2.jpg" title="Banner 2"><img class="img-thumbnail" src="/photo/slider/banner_2.jpg" width="275"></a>
+        @if ($sliders->count())
+            @foreach ($sliders as $slider)
+                <div class="col-md-6">
+                    <section class="card mb-4">
+                        <header class="card-header">
+                            <h2 class="card-title">{{ $slider->name }}</h2>
+                        </header>
+                        <div class="card-body d-flex justify-content-center">
+                            <div class="zoom-gallery">
+                                <a class="float-left mb-1 mr-1" href="/photo/slider/{{ $slider->banner }}" title="Banner 1"><img class="img-thumbnail" src="/photo/slider/{{ $slider->banner }}" width="275"></a>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
-            </section>
-        </div>
+            @endforeach
+        @endif
     </div>
     <div class="row">
-        <div class="col">
-            <section class="card card-modern card-big-info">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-2-5 col-xl-1-5">
-                            <i class="card-big-info-icon fas fa-image"></i>
-                            <h2 class="card-big-info-title">Edit Banners</h2>
-                            <p class="card-big-info-desc">Provide all details and necessary information.</p>
-                        </div>
-                        <div class="col-lg-3-5 col-xl-4-5">
-                            <div class="form-group row">
-                                <label class="col-lg-3 control-label text-lg-right pt-2">Select Banner</label>
-                                <div class="col-lg-6">
-                                    <select class="form-control mb-3">
-                                        <option>Banner 1</option>
-                                        <option>Banner 2</option>
-                                    </select>
+        @if ($sliders->count())
+            @foreach ($sliders as $slider)
+                <div class="col-md-6">
+                    <section class="card mb-4">
+                        <div class="card-body">
+                            <form action="{{ route('slider.edit', $slider->id) }}" method="POST">
+                                @csrf
+                                <div class="form-group row">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputReadOnly">Banner Name</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" value="{{ $slider->name }}" id="inputReadOnly" class="form-control" readonly="readonly">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Header</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="inputDefault">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Header</label>
+                                    <div class="col-lg-6">
+                                        <input name="header" type="text" class="form-control" id="inputDefault" value="{{ $slider->header }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Title</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="inputDefault">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Text</label>
+                                    <div class="col-lg-6">
+                                        <input name="text" type="text" class="form-control" id="inputDefault" value="{{ $slider->text }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Button Name</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="inputDefault">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Button Name</label>
+                                    <div class="col-lg-6">
+                                        <input name="btn_text" type="text" class="form-control" id="inputDefault" value="{{ $slider->btn_text }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Button Link</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="inputDefault">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Button Link</label>
+                                    <div class="col-lg-6">
+                                        <input name="btn_link" type="text" class="form-control" id="inputDefault" value="{{ $slider->btn_link }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 control-label text-lg-right pt-2">Upload New Banner</label>
-                                <div class="col-lg-6">
-                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="input-append">
-                                            <div class="uneditable-input">
-                                                <i class="fas fa-file fileupload-exists"></i>
-                                                <span class="fileupload-preview"></span>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2">Upload New Banner</label>
+                                    <div class="col-lg-6">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="input-append">
+                                                <div class="uneditable-input">
+                                                    <i class="fas fa-file fileupload-exists"></i>
+                                                    <span class="fileupload-preview"></span>
+                                                </div>
+                                                <span class="btn btn-default btn-file">
+                                                    <span class="fileupload-exists">Change</span>
+                                                    <span class="fileupload-new">Select image</span>
+                                                    <input name="banner" type="file" />
+                                                </span>
+                                                <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                             </div>
-                                            <span class="btn btn-default btn-file">
-                                                <span class="fileupload-exists">Change</span>
-                                                <span class="fileupload-new">Select image</span>
-                                                <input type="file" />
-                                            </span>
-                                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-dark">Update</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
+                    </section>
                 </div>
-            </section>
-        </div>
+            @endforeach
+        @endif
     </div>
 @endsection
 
