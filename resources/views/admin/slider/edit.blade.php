@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <div class="row d-flex justify-content-center mb-3">
                                 <div class="zoom-gallery">
-                                    <a class="float-left mb-1 mr-1" href="/photo/slider/{{ $slider->banner }}" title="Banner 1"><img class="img-thumbnail" src="/photo/slider/{{ $slider->banner }}" width="275"></a>
+                                    <a class="float-left mb-1 mr-1" href="/photo/slider/{{ $slider->banner }}" title="{{ $slider->name }}"><img class="img-thumbnail" src="/photo/slider/{{ $slider->banner }}" width="275"></a>
                                 </div>
                             </div>
                             <hr/>
