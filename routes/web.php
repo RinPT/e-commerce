@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\WishListController;
@@ -38,9 +39,7 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
 /**
  * Products
  */
-Route::get('/product/{name}/{id}', [ProductProfileController::class, 'index'])->name('product.profile');
-//Route::get('/products', [ProductsController::class, 'index'])->name('products');
-//Route::post('/products', [ProductsController::class, 'create'])->name('product.create');
+Route::get('/product/{name}/{id}', [ProductController::class, 'index'])->name('product.profile');
 Route::post('/products/{product_id}', [ProductProfileController::class, 'store'])->name('product.store');
 
 /**
@@ -51,8 +50,6 @@ Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/order_summary', [OrderController::class, 'index'])->name('order.summary');
 Route::get('/checkout', [CartController::class, 'index'])->name('checkout');
-
-
 
 /**
  * Contracts
@@ -75,14 +72,10 @@ Route::post('/seller-application-form', [SellerController::class, 'store'])->nam
 /**
  * Store
  */
-$rand = rand(0,9999);
 Route::get('/stores', [StoresController::class, 'index'])->name('stores.index');
 Route::get('/stores/search', [StoresController::class, 'search'])->name('stores.search');
 Route::get('/store/{name}/{id}', [StoresController::class, 'store_products_index'])->name('store.products');
 
-//Route::get('/currency/{id}', function (){
-//
-//})->name('currency.change');
 
 /**
  * User Pages
@@ -91,6 +84,5 @@ Route::group(['middleware' => 'auth'],function (){
     Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist')->middleware('auth');
     Route::post('/wishlist/add', [WishListController::class, 'store'])->name('wishlist.add');
     Route::get('/wishlist/{$id}', [WishListController::class, 'destroy'])->name('wishlist.destory');
-    // route wihshlist/add
 });
 

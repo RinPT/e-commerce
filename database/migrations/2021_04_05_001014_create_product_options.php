@@ -16,7 +16,7 @@ class CreateProductOptions extends Migration
         Schema::create('product_options', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('value');
             $table->tinyInteger('is_stock_value');
             $table->timestamps();

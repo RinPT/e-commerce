@@ -91,6 +91,64 @@ class CreateProductImages extends Migration
                 'updated_at' => \Carbon\Carbon::now()
             ],
         ]);
+        DB::table('product_options')->insert([
+            [
+                'product_id' => 1,
+                'name' => 'color',
+                'value' => 'white',
+                'is_stock_value' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'color',
+                'value' => 'black',
+                'is_stock_value' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'color',
+                'value' => 'brown',
+                'is_stock_value' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'color',
+                'value' => 'red',
+                'is_stock_value' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'size',
+                'value' => 'small',
+                'is_stock_value' => 1,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'size',
+                'value' => 'medium',
+                'is_stock_value' => 1,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'size',
+                'value' => 'large',
+                'is_stock_value' => 1,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]
+        ]);
     }
 
     /**
