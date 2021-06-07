@@ -46,9 +46,11 @@ Route::post('/products/{product_id}', [ProductProfileController::class, 'store']
  * Cart
  */
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::get('/cart/{product_id}', [CartController::class, 'store'])->name('cart.add');
+Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/order_summary', [OrderController::class, 'index'])->name('order.summary');
+
+
 
 /**
  * Contracts

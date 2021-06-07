@@ -12,30 +12,34 @@ class CartController extends Controller
 {
     public function index() {
 
-        $currencies = Currencies::get();
-        $categories = Categories::get();
-        $items = Categories::tree();
-        $products_in_cart = Wishlist::where('user_id', '=', auth()->user()->id)->get();
-        $products = [];
-
-        foreach($products_in_cart as $product_in_cart) {
-            $products = Product::find($product_in_cart->product_id);
-        }
-
-        return view('cart', [
-            'currencies' => $currencies,
-            'categories'  => $categories,
-            'items' => $items,
-            'products' => $products,
-        ]);
+        return view('cart');
     }
 
-    public function store($product_id) {
-        Wishlist::create([
-            'user_id' => auth()->user()->id,
-            'product_id' => $product_id,
-        ]);
+    public function store() {
+        $count = 0;
+        if(isset($_COOKIE['cart_products'])){
+            $cart_products = json_decode($_COOKIE['cart_products']);
+            foreach ($cart_products as $key => $cart_product) {
+                if($cart_product->pid == $_POST['id']){
+                    $cart_products[$key]->count += 1;
+                }
+                $count += $cart_products[$key]->count;
+            }
+            setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
+        }else{
+            $cart_products = [];
+            $cart_products[] = [
+                'pid' => $_POST['id'],
+                'count' => 1
+            ];
+            $count = 1;
+            setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
+        }
 
-        return back()->with('success', 'Item added to your cart!');
+        return response()->json([
+            'status' => '1',
+            'message' => 'Successfully Added',
+            'count' => $count,
+        ]);
     }
 }

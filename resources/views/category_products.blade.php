@@ -3,30 +3,45 @@
 @section('stylesheet')
     <!-- Main CSS File -->
     <link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
-
-    <style>
-        /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        /* Firefox */
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-    </style>
 @endsection
 
 @section('plugin-styles')
     <link rel="stylesheet" type="text/css" href="/vendor/magnific-popup/magnific-popup.min.css">
     <link rel="stylesheet" type="text/css" href="/vendor/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="/vendor/nouislider/nouislider.min.css">
+
 @endsection
 
 @section('plugin-scripts')
     <script src="/vendor/nouislider/nouislider.min.js"></script>
+    <script>
+        $('.add-to-cart').click(function (){
+
+            // // Ajax request
+            // $.ajax({
+            //     method: "POST",
+            //     url: "some.php",
+            //     data: { name: "John", location: "Boston" }
+            // })
+            //     .done(function( msg ) {
+            //         alert( "Data Saved: " + msg );
+            //     });
+
+            $.ajax({
+                method: "POST",
+                url: "{{ route('cart.add') }}",
+                data : {
+                    id : $(this).data('id'),
+                    _token: "{{ csrf_token() }}"
+                }
+            }).done(function (data){
+                $('.cart-count').html(data.count)
+                console.log(data)
+            }).fail(function (msg){
+                console.log(msg)
+            })
+        })
+    </script>
 @endsection
 
 @section('content')
@@ -53,14 +68,24 @@
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">Filter by Price</h3>
                                 <div class="widget-body mt-3">
-                                    <form action="#">
-                                        <div class="filter-price-slider"></div>
-                                        <div class="filter-actions">
-                                            <div class="filter-price-text mb-4">Price:
-                                                <span class="filter-price-range"></span>
+                                    <form action="@if(!empty($QS))?{{ $QS }}@endif" method="get">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center">
+                                                    <label class="pr-2">Min</label>
+                                                    <input type="text" name="min" class="form-control pl-1 pr-1 mr-1" value="{{ $min_price }}">
+                                                    -
+                                                </div>
                                             </div>
-                                            <button type="submit" class="btn btn-dark btn-filter btn-rounded">Filter</button>
+                                            <div class="col-6 pl-0">
+                                                <div class="d-flex align-items-center">
+                                                    <label class="pr-2">Max</label>
+                                                    <input type="text" name="max" class="form-control mr-1 pl-1 pr-1" value="{{ $max_price }}">
+                                                    {{ $cookie_currency->code }}
+                                                </div>
+                                            </div>
                                         </div>
+                                        <button type="submit" class="btn btn-dark btn-filter btn-rounded mt-3">FILTER</button>
                                     </form><!-- End Filter Price Form -->
                                 </div>
                             </div>
@@ -140,14 +165,14 @@
                             </div>
                             @if(count($category_advs))
                             <div class="widget widget-collapsible">
-                                <div class="advertisements">
                                     <h3 class="widget-title">Advertisements</h3>
                                     <ul class="widget-body filter-items">
+                                        <div class="advertisements">
                                         @foreach($category_advs as $adv)
                                             <img src="/photo/advertisement/{{ $adv->image }}">
                                         @endforeach
+                                        </div>
                                     </ul>
-                                </div>
                             </div>
                             @endif
 
@@ -172,11 +197,8 @@
                                         @endif
                                     </div>
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                                           data-target="#addCartModal" title="Add to cart"><i
-                                                class="d-icon-bag"></i></a>
-                                        <a href="#" class="btn-product-icon btn-wishlist"
-                                           title="Add to wishlist"><i class="d-icon-heart"></i></a>
+                                        <a href="#" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}"><i class="d-icon-bag"></i></a>
+                                        <a href="#" class="btn-product-icon add-to-wishlist" title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                     </div>
                                     <div class="product-action">
                                         <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->name)), 'id' => $product->id]) }}" class="btn-product" title="View">View</a>

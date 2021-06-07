@@ -49,8 +49,11 @@ class CategoryProductController extends Controller
             )
             ->get();
 
-        $max_price = Product::where('category_id',$category->id)->max('price');
-        $min_price = Product::where('category_id',$category->id)->min('price');
+
+        $max_price = 0;
+        if(count($products)){
+            $min_price = $products[0]->price;
+        }
 
         if(Request::input('currency')){
             $cookie_curr = Currencies::where('id',Request::input('currency'))->first();
@@ -63,7 +66,22 @@ class CategoryProductController extends Controller
              * Currency
              */
             if($cookie_curr->id != $product->currency_id){
-                $products[$key]->price = number_format($products[$key]->price * $cookie_curr->rate / $product->cur_rate,2);
+                $products[$key]->price = number_format($products[$key]->price * $cookie_curr->rate / $product->cur_rate,2,".","");
+            }
+
+            if($products[$key]->price > $max_price){
+                $max_price = $products[$key]->price;
+            }
+            if($min_price > $products[$key]->price){
+                $min_price = $products[$key]->price;
+            }
+
+            if(isset($_GET['min']) && isset($_GET['max'])){
+                $min_price = $_GET['min'];
+                $max_price = $_GET['max'];
+                if($products[$key]->price < $_GET['min'] || $products[$key]->price > $_GET['max']){
+                    $del_prods[] = $key;
+                }
             }
 
             /**

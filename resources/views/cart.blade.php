@@ -24,58 +24,94 @@
 @section('content')
     <main class="main cart">
         <div class="page-content pt-7 pb-10">
+            <div class="step-by pr-4 pl-4">
+                <h3 class="title title-simple title-step active"><a href="cart.html">1. Shopping Cart</a></h3>
+                <h3 class="title title-simple title-step"><a href="checkout.html">2. Checkout</a></h3>
+                <h3 class="title title-simple title-step"><a href="order.html">3. Order Complete</a></h3>
+            </div>
             <div class="container mt-7 mb-2">
                 <div class="row">
                     <div class="col-lg-8 col-md-12 pr-lg-4">
                         <table class="shop-table cart-table">
                             <thead>
-                                <tr>
-                                    <th><span>Product</span></th>
-                                    <th></th>
-                                    <th><span>Price</span></th>
-                                    <th><span>quantity</span></th>
-                                    <th>Subtotal</th>
-                                </tr>
+                            <tr>
+                                <th><span>Product</span></th>
+                                <th></th>
+                                <th><span>Price</span></th>
+                                <th><span>quantity</span></th>
+                                <th>Subtotal</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @if ($products->count())
-                                    @foreach ($products as $product)
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <figure>
-                                                    <a href="product-simple.html">
-                                                        <img src="images/products/product18.jpg" width="100" height="100"
-                                                            alt="product">
-                                                    </a>
-                                                </figure>
-                                            </td>
-                                            <td class="product-name">
-                                                <div class="product-name-section">
-                                                    <a href="product-simple.html">Converse Training Shoes</a>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$129.99</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                <div class="input-group">
-                                                    <button class="quantity-minus d-icon-minus"></button>
-                                                    <input class="quantity form-control" type="number" min="1"
-                                                        max="1000000">
-                                                    <button class="quantity-plus d-icon-plus"></button>
-                                                </div>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="amount">$129.99</span>
-                                            </td>
-                                            <td class="product-close">
-                                                <a href="#" class="product-remove" title="Remove this product">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <figure>
+                                        <a href="product-simple.html">
+                                            <img src="images/products/product18.jpg" width="100" height="100"
+                                                 alt="product">
+                                        </a>
+                                    </figure>
+                                </td>
+                                <td class="product-name">
+                                    <div class="product-name-section">
+                                        <a href="product-simple.html">Converse Training Shoes</a>
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">$129.99</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="input-group">
+                                        <button class="quantity-minus d-icon-minus"></button>
+                                        <input class="quantity form-control" type="number" min="1"
+                                               max="1000000">
+                                        <button class="quantity-plus d-icon-plus"></button>
+                                    </div>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">$129.99</span>
+                                </td>
+                                <td class="product-close">
+                                    <a href="#" class="product-remove" title="Remove this product">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <figure>
+                                        <a href="product-simple.html">
+                                            <img src="images/products/product19.jpg" width="100" height="100"
+                                                 alt="product">
+                                        </a>
+                                    </figure>
+
+                                </td>
+                                <td class="product-name">
+                                    <div class="product-name-section">
+                                        <a href="product-simple.html">Women Beautiful Headgear</a>
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">$98.00</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="input-group">
+                                        <button class="quantity-minus d-icon-minus"></button>
+                                        <input class="quantity form-control" type="number" min="1"
+                                               max="1000000">
+                                        <button class="quantity-plus d-icon-plus"></button>
+                                    </div>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">$98.00</span>
+                                </td>
+                                <td class="product-close">
+                                    <a href="#" class="product-remove" title="Remove this product">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                         <div class="cart-actions mb-6 pt-4">
@@ -85,7 +121,7 @@
                         <div class="cart-coupon-box mb-8">
                             <h4 class="title coupon-title text-uppercase ls-m">Coupon Discount</h4>
                             <input type="text" name="coupon_code" class="input-text form-control text-grey ls-m mb-4"
-                                id="coupon_code" value="" placeholder="Enter coupon code here...">
+                                   id="coupon_code" value="" placeholder="Enter coupon code here...">
                             <button type="submit" class="btn btn-md btn-dark btn-rounded btn-outline">Apply Coupon</button>
                         </div>
                     </div>
@@ -162,7 +198,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <a href="{{ route('checkout') }}" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
+                                <a href="checkout.html" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
                             </div>
                         </div>
                     </aside>
@@ -170,4 +206,6 @@
             </div>
         </div>
     </main>
+    <!-- End Main -->
+
 @endsection

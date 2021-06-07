@@ -39,7 +39,7 @@ class CreateCurrencies extends Migration
 
         DB::table('currencies')->insert([
             'name' => 'US Dollars',
-            'code' => 'Dollars',
+            'code' => 'USD',
             'prefix' => '$',
             'suffix' =>'USD',
             'rate' => 0.11,
@@ -49,9 +49,9 @@ class CreateCurrencies extends Migration
 
         DB::table('currencies')->insert([
             'name' => 'Euro',
-            'code' => 'Euro',
+            'code' => 'EUR',
             'prefix' => '€',
-            'suffix' =>'€',
+            'suffix' =>'EUR',
             'rate' => 0.09,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
@@ -61,7 +61,7 @@ class CreateCurrencies extends Migration
             'name' => 'Sterling Pound',
             'code' => 'GBP',
             'prefix' => '£',
-            'suffix' =>'£',
+            'suffix' =>'GBP',
             'rate' => 0.08,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
