@@ -10,6 +10,8 @@ use App\Models\Currencies;
 use App\Models\Group;
 use App\Models\Store;
 use App\Models\Store_Requests;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
@@ -39,6 +41,20 @@ class AppServiceProvider extends ServiceProvider
         session_start();
 
         View::share('QS', $_SERVER['QUERY_STRING'] ?? "");
+
+        /**
+         * Cart
+         */
+        if(isset($_COOKIE['cart_products'])){
+            $cart_products = json_decode($_COOKIE['cart_products']);
+            $count = 0;
+            foreach ($cart_products as $p) {
+                $count += $p->count;
+            }
+            View::share('cart_product_count',$count);
+        }else{
+            View::share('cart_product_count',0);
+        }
 
         if(Schema::hasTable('currencies')){
             $currencies = Currencies::get();

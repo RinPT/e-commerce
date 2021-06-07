@@ -123,20 +123,14 @@
                         </div>
                     </a>
                     <span class="divider"></span>
-                    <a href="wishlist.html" class="wishlist">
-                        <i class="d-icon-heart"></i>
+                    <a href="{{ route('wishlist') }}" class="wishlist">
+                        <i class="d-icon-heart" style="font-size: 3rem"></i>
                     </a>
                     <span class="divider"></span>
                     <div class="dropdown cart-dropdown type2 cart-offcanvas mr-0 mr-lg-2">
                         <a href="{{ route('cart') }}" class="label-block link">
-                            <div class="cart-label d-lg-show">
-                                <span class="cart-name">Shopping Cart:</span>
-                                <span class="cart-price">$0.00</span>
-                            </div>
-                            <i class="d-icon-bag"><span class="cart-count">2</span></i>
+                            <i class="d-icon-bag" style="font-size: 3rem"><span class="cart-count">{{ $cart_product_count }}</span></i>
                         </a>
-                        <div class="cart-overlay"></div>
-                        <!-- End Cart Toggle -->
                     </div>
                 </div>
             </div>
@@ -328,6 +322,23 @@
         </div>
     </footer>
     <!-- End Footer -->
+    <div class="minipopup-area" style="left: initial;right: 0">
+        <div class="minipopup-box cart-prod-added" style="top: 0;left: -400px">
+            <p class="minipopup-title">Successfully Added</p>
+            <div class="action-group d-flex">
+                <a href="{{ route('cart') }}" class="btn btn-sm btn-outline btn-primary btn-rounded">View Cart</a>
+                <a href="{{ route('checkout') }}" class="btn btn-sm btn-primary btn-rounded">Check Out</a>
+            </div>
+        </div>
+    </div>
+    <div class="minipopup-area" style="left: initial;right: 0">
+        <div class="minipopup-box wishlist-added" style="top: 0;left: -400px">
+            <p class="minipopup-title">Successfully added to wishlist</p>
+            <div class="action-group text-center">
+                <a href="{{ route('wishlist') }}" class="btn btn-sm btn-outline btn-primary btn-rounded">View Wishlist</a>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Scroll Top -->
 <a id="scroll-top" href="#top" title="Top" role="button" class="scroll-top"><i class="d-icon-arrow-up"></i></a>

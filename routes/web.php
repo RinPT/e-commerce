@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StoresController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
@@ -49,6 +50,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/order_summary', [OrderController::class, 'index'])->name('order.summary');
+Route::get('/checkout', [CartController::class, 'index'])->name('checkout');
 
 
 
@@ -81,3 +83,14 @@ Route::get('/store/{name}/{id}', [StoresController::class, 'store_products_index
 //Route::get('/currency/{id}', function (){
 //
 //})->name('currency.change');
+
+/**
+ * User Pages
+ */
+Route::group(['middleware' => 'auth'],function (){
+    Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist')->middleware('auth');
+    Route::post('/wishlist/add', [WishListController::class, 'store'])->name('wishlist.add');
+    Route::get('/wishlist/{$id}', [WishListController::class, 'destroy'])->name('wishlist.destory');
+    // route wihshlist/add
+});
+

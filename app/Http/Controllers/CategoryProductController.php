@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Models\Categories;
 use App\Models\CategoryDiscount;
+use App\Models\Config;
 use App\Models\Currencies;
 use App\Models\Product;
 use App\Models\Product_Images;
@@ -16,9 +17,10 @@ class CategoryProductController extends Controller
 {
     public function index($name){
 
-        $category       = Categories::where('name',$name)->first();
-        $category_advs   = Advertisement::where('category_id',$category->id)->get();
-        $cat_discount   = CategoryDiscount::where('category_id',$category->id)->first();
+        $category           = Categories::where('name',$name)->first();
+        $category_advs      = Advertisement::where('category_id',$category->id)->get();
+        $cat_discount       = CategoryDiscount::where('category_id',$category->id)->first();
+        $per_page           = Config::where('key','product_count_per_click_category_page')->value('value');
 
         $rev_nums = [];
         $del_prods = [];
@@ -47,7 +49,7 @@ class CategoryProductController extends Controller
                 'store_discount.store_discount as sstore_discount',
                 'store_discount.main_discount as smain_discount',
             )
-            ->get();
+            ->paginate($per_page);
 
 
         $max_price = 0;
@@ -63,11 +65,24 @@ class CategoryProductController extends Controller
 
         foreach ($products as $key => $product) {
             /**
+             * Discount
+             */
+            $products[$key]->store_discount = $product->pstore_discount + $product->sstore_discount;
+            $products[$key]->main_discount = $product->pmain_discount + $product->smain_discount;
+
+            if(!is_null($cat_discount)){
+                $products[$key]->store_discount += $cat_discount->store_discount;
+                $products[$key]->main_discount += $cat_discount->main_discount;
+            }
+
+            /**
              * Currency
              */
             if($cookie_curr->id != $product->currency_id){
                 $products[$key]->price = number_format($products[$key]->price * $cookie_curr->rate / $product->cur_rate,2,".","");
             }
+            $products[$key]->price -= $products[$key]->price * ($product->store_discount + $product->main_discount)/100;
+            $products[$key]->price = number_format($products[$key]->price,2,".","");
 
             if($products[$key]->price > $max_price){
                 $max_price = $products[$key]->price;
@@ -92,17 +107,6 @@ class CategoryProductController extends Controller
                 $products[$key]->image = $image->image;
             }else{
                 $products[$key]->image = "";
-            }
-
-            /**
-             * Discount
-             */
-            $products[$key]->store_discount = $product->pstore_discount + $product->sstore_discount;
-            $products[$key]->main_discount = $product->pmain_discount + $product->smain_discount;
-
-            if(!is_null($cat_discount)){
-                $products[$key]->store_discount += $cat_discount->store_discount;
-                $products[$key]->main_discount += $cat_discount->main_discount;
             }
 
             /**

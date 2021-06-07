@@ -18,15 +18,35 @@ class CartController extends Controller
     public function store() {
         $count = 0;
         if(isset($_COOKIE['cart_products'])){
+            $new = "ürün var";
+            $new_product = false;
             $cart_products = json_decode($_COOKIE['cart_products']);
+
             foreach ($cart_products as $key => $cart_product) {
                 if($cart_product->pid == $_POST['id']){
                     $cart_products[$key]->count += 1;
+                    $new_product = false;
+                    break;
+                }else{
+                    $new_product = true;
                 }
-                $count += $cart_products[$key]->count;
+            }
+
+            foreach ($cart_products as $cart_product) {
+               $count += $cart_product->count;
+            }
+
+            if($new_product){
+                $cart_products[] = [
+                    'pid' => $_POST['id'],
+                    'count' => 1
+                ];
+                $count +=1;
+                $new = "varken yeni ürün";
             }
             setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
         }else{
+            $new = "yeni ürün";
             $cart_products = [];
             $cart_products[] = [
                 'pid' => $_POST['id'],
@@ -40,6 +60,7 @@ class CartController extends Controller
             'status' => '1',
             'message' => 'Successfully Added',
             'count' => $count,
+            'new' => $new
         ]);
     }
 }

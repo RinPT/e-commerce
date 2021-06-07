@@ -16,17 +16,6 @@
     <script src="/vendor/nouislider/nouislider.min.js"></script>
     <script>
         $('.add-to-cart').click(function (){
-
-            // // Ajax request
-            // $.ajax({
-            //     method: "POST",
-            //     url: "some.php",
-            //     data: { name: "John", location: "Boston" }
-            // })
-            //     .done(function( msg ) {
-            //         alert( "Data Saved: " + msg );
-            //     });
-
             $.ajax({
                 method: "POST",
                 url: "{{ route('cart.add') }}",
@@ -36,11 +25,34 @@
                 }
             }).done(function (data){
                 $('.cart-count').html(data.count)
-                console.log(data)
+                $('.cart-prod-added').addClass('show');
+                setTimeout(function (){
+                    $('.cart-prod-added').removeClass('show');
+                },'1500')
             }).fail(function (msg){
                 console.log(msg)
             })
         })
+
+        $('.add-to-wishlist').click(function (){
+            $.ajax({
+                method: "POST",
+                url: "{{ route('wishlist.add') }}",
+                data : {
+                    id : $(this).data('id'),
+                    _token: "{{ csrf_token() }}"
+                }
+            }).done(function (data){
+                $('.wishlist-added').addClass('show');
+                setTimeout(function (){
+                    $('.wishlist-added').removeClass('show');
+                },'1500')
+            }).fail(function (msg){
+                console.log(msg)
+            })
+        })
+
+
     </script>
 @endsection
 
@@ -73,14 +85,14 @@
                                             <div class="col-6">
                                                 <div class="d-flex align-items-center">
                                                     <label class="pr-2">Min</label>
-                                                    <input type="text" name="min" class="form-control pl-1 pr-1 mr-1" value="{{ $min_price }}">
+                                                    <input type="number" name="min" class="form-control pl-1 pr-1 mr-1" value="{{ $min_price }}" step="0.01">
                                                     -
                                                 </div>
                                             </div>
                                             <div class="col-6 pl-0">
                                                 <div class="d-flex align-items-center">
                                                     <label class="pr-2">Max</label>
-                                                    <input type="text" name="max" class="form-control mr-1 pl-1 pr-1" value="{{ $max_price }}">
+                                                    <input type="number" name="max" class="form-control mr-1 pl-1 pr-1" value="{{ $max_price }}" step="0.01">
                                                     {{ $cookie_currency->code }}
                                                 </div>
                                             </div>
@@ -90,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="widget widget-collapsible">
-                                <h3 class="widget-title">Rating</h3>
+                                <h3 class="widget-title">Filter by Rating</h3>
 
                                 <ul class="widget-body filter-items">
                                     <form action="@if(!empty($QS))?{{ $QS }}@endif" method="get">
@@ -198,7 +210,7 @@
                                     </div>
                                     <div class="product-action-vertical">
                                         <a href="#" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}"><i class="d-icon-bag"></i></a>
-                                        <a href="#" class="btn-product-icon add-to-wishlist" title="Add to wishlist"><i class="d-icon-heart"></i></a>
+                                        <a href="#" class="btn-product-icon add-to-wishlist" data-id="{{ $product->id }}" title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                     </div>
                                     <div class="product-action">
                                         <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->name)), 'id' => $product->id]) }}" class="btn-product" title="View">View</a>
@@ -233,21 +245,15 @@
                         @endforeach
                     </div>
                     <nav class="toolbox toolbox-pagination">
-                        <p class="show-info">Showing <span>12 of 56</span> Products</p>
+                        <p class="show-info">Showing <span>{{ $products->count() }} of {{ count($products) }}</span> Products</p>
                         <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1"
-                                   aria-disabled="true">
+                            <li class="page-item @if($products->onFirstPage()) disabled @endif">
+                                <a class="page-link page-link-prev" @if(!$products->onFirstPage()) href="{{ $products->previousPageUrl() }}" @endif aria-label="Previous" tabindex="-1" aria-disabled="true">
                                     <i class="d-icon-arrow-left"></i>Prev
                                 </a>
                             </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item page-item-dots"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item">
-                                <a class="page-link page-link-next" href="#" aria-label="Next">
+                            <li class="page-item @if(!$products->hasMorePages()) disabled @endif">
+                                <a class="page-link page-link-next" @if($products->hasMorePages()) href="{{ $products->nextPageUrl() }}" @endif aria-label="Next">
                                     Next<i class="d-icon-arrow-right"></i>
                                 </a>
                             </li>
