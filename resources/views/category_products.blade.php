@@ -84,7 +84,7 @@
                                             <div class="col-6">
                                                 <div class="d-flex align-items-center">
                                                     <label class="pr-2">Min</label>
-                                                    <input type="number" name="min" class="form-control pl-1 pr-1 mr-1" value="{{ $min_price }}" step="0.01">
+                                                    <input type="number" name="min" min="0" class="form-control pl-1 pr-1 mr-1" value="{{ $min_price }}" step="0.01">
                                                     -
                                                 </div>
                                             </div>
