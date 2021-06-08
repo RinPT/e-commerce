@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <hr/>
-                            <form action="{{ route('slider.update', $slider->id) }}" method="POST">
+                            <form action="{{ route('slider.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputReadOnly">Banner Name</label>

@@ -40,7 +40,7 @@
                             <p class="card-big-info-desc">Add here all details and necessary information.</p>
                         </div>
                         <div class="col-lg-3-5 col-xl-4-5">
-                            <form class="form-horizontal form-bordered" action="{{ route('slider.store') }}" method="POST">
+                            <form class="form-horizontal form-bordered" action="{{ route('slider.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row @error('name') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Banner Name</label>
