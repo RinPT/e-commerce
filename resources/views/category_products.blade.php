@@ -31,7 +31,7 @@
                     $('.cart-prod-added').removeClass('show');
                 },'1500')
             }).fail(function (msg){
-                alert("An error occured.")
+                console.log("An error occured.")
             })
         })
 
@@ -49,7 +49,7 @@
                     $('.wishlist-added').removeClass('show');
                 },'1500')
             }).fail(function (msg){
-                alert("An error occured.")
+                console.log("An error occured.")
             })
         })
     </script>

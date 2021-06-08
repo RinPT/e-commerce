@@ -130,7 +130,6 @@
 				            <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
 				        </div>
 				    </div>
-
 				    <div class="nano">
 				        <div class="nano-content">
 				            <nav id="menu" class="nav-main" role="navigation">
@@ -150,24 +149,6 @@
 										</a>
 									</li>
                                     @endif
-                                    <li class="nav-parent">
-										<a class="nav-link" href="#">
-											<i class="fas fa-image"></i>
-											<span>Slider Management</span>
-										</a>
-                                        <ul class="nav nav-children">
-                                            <li>
-                                                <a class="nav-link" href="{{ route('slider') }}">
-                                                    Edit Slider
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="nav-link" href="{{ route('slider.create') }}">
-                                                    Create Slider
-                                                </a>
-                                            </li>
-                                        </ul>
-									</li>
                                     @if(in_array(2,$logged_author->perms))
                                     <li class="nav-parent @if(str_contains(url()->current(),'currency'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
@@ -573,6 +554,84 @@
 											<li>
 												<a class="nav-link" href="">
 													Ticket Logs
+												</a>
+											</li>
+										</ul>
+									</li>
+                                    @endif
+                                    @if (in_array(18, $logged_author->perms))
+                                    <li class="nav-parent">
+										<a class="nav-link" href="#">
+											<i class="fas fa-image"></i>
+											<span>Slider Management</span>
+										</a>
+                                        <ul class="nav nav-children">
+                                            <li>
+                                                <a class="nav-link" href="#">
+                                                    Edit Slider
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link" href="#">
+                                                    Create Slider
+                                                </a>
+                                            </li>
+                                        </ul>
+									</li>
+                                    @endif
+                                    @if(in_array(17,$logged_author->perms))
+									<li>
+										<a class="nav-link" href="#">
+											<i class='bx bx-support'></i>
+											<span>Tickets</span>
+										</a>
+									</li>
+                                    @endif
+                                    @if (in_array(15, $logged_author->perms))
+                                    <li class="nav-parent">
+										<a class="nav-link" href="#">
+											<i class='bx bx-grid-alt'></i>
+											<span>Products</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a class="nav-link" href="#">
+													All Products
+												</a>
+											</li>
+											<li>
+												<a class="nav-link" href="#">
+													Add New Product
+												</a>
+											</li>
+										</ul>
+									</li>
+                                    @endif
+                                    @if(in_array(16,$logged_author->perms))
+									<li class="nav-parent">
+										<a class="nav-link" href="#">
+											<i class='bx bxs-backpack'></i>
+											<span>Orders</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a class="nav-link" href="#">
+													All Orders
+												</a>
+											</li>
+											<li>
+												<a class="nav-link" href="#">
+													Pending Orders
+												</a>
+											</li>
+											<li>
+												<a class="nav-link" href="#">
+													Send Orders
+												</a>
+											</li>
+											<li>
+												<a class="nav-link" href="#">
+													Cancel Order Requests
 												</a>
 											</li>
 										</ul>

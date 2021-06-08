@@ -87,7 +87,11 @@ class CreatePerms extends Migration
             [
                 'name' => 'View Tickets[Store]',
                 'created_at' => \Carbon\Carbon::now()
-            ]
+            ],
+            [
+                'name' => 'Manage Sliders[Author]',
+                'created_at' => \Carbon\Carbon::now()
+            ],
         ]);
     }
 
