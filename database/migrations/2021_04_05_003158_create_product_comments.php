@@ -22,6 +22,36 @@ class CreateProductComments extends Migration
             $table->enum('cargo_rate',[1,2,3,4,5]);
             $table->timestamps();
         });
+
+        DB::table('product_comments')->insert([
+            [
+                'product_id' => 1,
+                'user_id' => 1,
+                'comment' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                'product_rate' => 4,
+                'cargo_rate' => 1,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'user_id' => 1,
+                'comment' => 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+                'product_rate' => 3,
+                'cargo_rate' => 5,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'user_id' => 1,
+                'comment' => 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged..',
+                'product_rate' => 3,
+                'cargo_rate' => 2,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]
+        ]);
     }
 
     /**

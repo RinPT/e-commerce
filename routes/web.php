@@ -41,6 +41,7 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
  */
 Route::get('/product/{name}/{id}', [ProductController::class, 'index'])->name('product.profile');
 Route::post('/products/{product_id}', [ProductProfileController::class, 'store'])->name('product.store');
+Route::post('/product/add/review/{product_id}',[ProductController::class, 'store_review'])->name('product.review.add');
 
 /**
  * Cart
