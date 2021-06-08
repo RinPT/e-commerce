@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StoresController;
 use App\Http\Controllers\WishListController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -34,13 +34,12 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
  * Pages
  */
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/store', [StoreController::class, 'index'])->name('store');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 /**
  * Products
  */
 Route::get('/product/{name}/{id}', [ProductController::class, 'index'])->name('product.profile');
-Route::post('/products/{product_id}', [ProductProfileController::class, 'store'])->name('product.store');
 Route::post('/product/add/review/{product_id}',[ProductController::class, 'store_review'])->name('product.review.add');
 
 /**

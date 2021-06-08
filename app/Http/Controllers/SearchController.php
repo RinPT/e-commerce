@@ -3,47 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
 use App\Models\CategoryDiscount;
 use App\Models\Config;
-use App\Models\Countries;
 use App\Models\Currencies;
 use App\Models\Product;
 use App\Models\Product_Images;
 use App\Models\ProductComment;
 use App\Models\ProductStock;
-use App\Models\Store;
-use Illuminate\Http\Request as TRequest;
 use Illuminate\Support\Facades\Request;
 
-
-class StoresController extends Controller
+class SearchController extends Controller
 {
     public function index(){
-        $stores = Store::all();
-        foreach ($stores as $key => $store) {
-            $stores[$key]->country = Countries::where('id',$store->country_id)->value('name');
-            $stores[$key]->category = Categories::where('id',$store->product_cat_id)->first();
+        $query = request()->get('q');
+        if(is_null($query)){
+            return redirect()->route('home');
         }
-        return view('store/stores',[
-            'stores' => $stores
-        ]);
-    }
-
-    public function search(TRequest $request){
-        $stores = Store::where('name','like',"%".$request->store."%")->get();
-        foreach ($stores as $key => $store) {
-            $stores[$key]->country = Countries::where('id',$store->country_id)->value('name');
-            $stores[$key]->category = Categories::where('id',$store->product_cat_id)->first();
-        }
-        return view('store/stores',[
-            'stores' => $stores
-        ]);
-    }
-
-    public function store_products_index($name,$id){
-
-        $store      = Store::find($id);
         $per_page   = Config::where('key','product_count_per_click_category_page')->value('value');
 
         $rev_nums   = [];
@@ -58,7 +33,7 @@ class StoresController extends Controller
             }
         }
 
-        $products = Product::where('products.store_id',$id)
+        $products = Product::where('products.name','like',"%$query%")
             ->join('store','store.id','=','products.store_id')
             ->join('currencies','currencies.id','=','products.currency_id')
             ->leftjoin('product_discount','product_discount.product_id','=','products.id')
@@ -167,8 +142,7 @@ class StoresController extends Controller
         $def_logo = Config::where('key','default_product_logo')->first();
 
 
-        return view('store/store_products',[
-            'store' => $store,
+        return view('search',[
             'products' => $products,
             'max_price' => $max_price,
             'min_price' => $min_price,
@@ -176,6 +150,4 @@ class StoresController extends Controller
             'def_logo' => $def_logo
         ]);
     }
-
-
 }

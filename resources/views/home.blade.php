@@ -78,68 +78,61 @@
                                     <div class="banner banner-3 banner-fixed banner-radius content-middle appear-animate"
                                          data-animation-options="{'name': 'fadeInLeftShorter', 'duration': '1s', 'delay': '.2s'}">
                                         <figure>
-                                            <img src="images/demos/demo1/banners/banner1.jpg" alt="banner" width="380"
-                                                 height="207" style="background-color: #836648;" />
+                                            <img src="/images/demos/demo1/banners/banner3.jpg" alt="banner" width="380" height="207" style="background-color: #836648;" />
                                         </figure>
                                         <div class="banner-content">
-                                            <h3 class="banner-title text-white mb-1">For Men's</h3>
-                                            <h5 class="banner-subtitle text-uppercase font-weight-normal text-white">
-                                                Starting at $29
-                                            </h5>
+                                            <h3 class="banner-title text-white mb-1">For {{ $header_items[0]->name }}'s</h3>
                                             <hr class="banner-divider">
-                                            <a href="shop.html" class="btn btn-white btn-link btn-underline">Shop Now<i
-                                                    class="d-icon-arrow-right"></i></a>
+                                            <a href="{{ route('category.product.index',['name' => strtolower($header_items[0]->name)]) }}" class="btn btn-white btn-link btn-underline">
+                                                Shop Now<i class="d-icon-arrow-right"></i>
+                                            </a>
                                         </div>
-                                    </div>                                </div>
+                                    </div>
+                                </div>
                                 <div class="grid-item col-md-6 col-sm-6" style="height: 265px;">
                                     <div class="banner banner-3 banner-fixed banner-radius content-middle appear-animate"
                                          data-animation-options="{'name': 'fadeInRightShorter', 'duration': '1s', 'delay': '.2s'}">
                                         <figure>
-                                            <img src="images/demos/demo1/banners/banner3.jpg" alt="banner" width="380"
-                                                 height="207" style="background-color: #97928b;" />
+                                            <img src="images/demos/demo1/banners/banner2.jpg" alt="banner" width="380" height="207" style="background-color: #97928b;" />
                                         </figure>
                                         <div class="banner-content">
-                                            <h3 class="banner-title text-white mb-1">Fashions</h3>
-                                            <h5 class="banner-subtitle text-uppercase font-weight-normal text-white">30% Off
-                                            </h5>
+                                            <h3 class="banner-title text-white mb-1">For {{ $header_items[4]->name }}'s</h3>
                                             <hr class="banner-divider">
-                                            <a href="shop.html" class="btn btn-white btn-link btn-underline">Shop Now<i
+                                            <a href="{{ route('category.product.index',['name' => strtolower($header_items[4]->name)]) }}" class="btn btn-white btn-link btn-underline">Shop Now<i
                                                     class="d-icon-arrow-right"></i></a>
                                         </div>
-                                    </div>                                </div>
+                                    </div>
+                                </div>
                                 <div class="grid-item col-md-6 col-sm-6" style="height: 265px;">
                                     <div class="banner banner-3 banner-fixed banner-radius content-middle appear-animate"
                                          data-animation-options="{'name': 'fadeInLeftShorter', 'duration': '1s', 'delay': '.2s'}">
                                         <figure>
-                                            <img src="images/demos/demo1/banners/banner1.jpg" alt="banner" width="380"
+                                            <img src="images/demos/demo1/banners/banner2.jpg" alt="banner" width="380"
                                                  height="207" style="background-color: #836648;" />
                                         </figure>
                                         <div class="banner-content">
-                                            <h3 class="banner-title text-white mb-1">For Men's</h3>
-                                            <h5 class="banner-subtitle text-uppercase font-weight-normal text-white">
-                                                Starting at $29
-                                            </h5>
+                                            <h3 class="banner-title text-white mb-1">For {{ $header_items[3]->name }}'s</h3>
                                             <hr class="banner-divider">
-                                            <a href="shop.html" class="btn btn-white btn-link btn-underline">Shop Now<i
+                                            <a href="{{ route('category.product.index',['name' => strtolower($header_items[3]->name)]) }}" class="btn btn-white btn-link btn-underline">Shop Now<i
                                                     class="d-icon-arrow-right"></i></a>
                                         </div>
-                                    </div>                                </div>
+                                    </div>
+                                </div>
                                 <div class="grid-item col-md-6 col-sm-6" style="height: 265px;">
                                     <div class="banner banner-3 banner-fixed banner-radius content-middle appear-animate"
                                          data-animation-options="{'name': 'fadeInRightShorter', 'duration': '1s', 'delay': '.2s'}">
                                         <figure>
-                                            <img src="images/demos/demo1/banners/banner3.jpg" alt="banner" width="380"
+                                            <img src="images/demos/demo1/banners/banner1.jpg" alt="banner" width="380"
                                                  height="207" style="background-color: #97928b;" />
                                         </figure>
                                         <div class="banner-content">
-                                            <h3 class="banner-title text-white mb-1">Fashions</h3>
-                                            <h5 class="banner-subtitle text-uppercase font-weight-normal text-white">30% Off
-                                            </h5>
+                                            <h3 class="banner-title text-white mb-1">For {{ $header_items[1]->name }}'s</h3>
                                             <hr class="banner-divider">
-                                            <a href="shop.html" class="btn btn-white btn-link btn-underline">Shop Now<i
+                                            <a href="{{ route('category.product.index',['name' => strtolower($header_items[1]->name)]) }}" class="btn btn-white btn-link btn-underline">Shop Now<i
                                                     class="d-icon-arrow-right"></i></a>
                                         </div>
-                                    </div>                                </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
