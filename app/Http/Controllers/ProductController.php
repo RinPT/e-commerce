@@ -8,6 +8,7 @@ use App\Models\CategoryDiscount;
 use App\Models\Currencies;
 use App\Models\Product;
 use App\Models\Product_Images;
+use App\Models\ProductAttribute;
 use App\Models\ProductComment;
 use App\Models\ProductOption;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ProductController extends Controller
 {
     public function index($name,$id){
 
-        $product = Product::find($id)
+        $product = Product::where('products.id',$id)
             ->join('store','store.id','=','products.store_id')
             ->join('currencies','currencies.id','=','products.currency_id')
             ->leftjoin('product_discount','product_discount.product_id','=','products.id')
@@ -32,6 +33,7 @@ class ProductController extends Controller
                 'store_discount.main_discount as smain_discount',
             )
             ->first();
+
         $category = Categories::find($product->category_id);
         $cat_discount = CategoryDiscount::where('category_id',$product->category_id)->first();
 
@@ -64,12 +66,7 @@ class ProductController extends Controller
         /**
          * Image
          */
-        $image = Product_Images::where('product_id',$product->id)->first();
-        if(!is_null($image)){
-            $product->image = $image->image;
-        }else{
-            $product->image = "";
-        }
+        $images = Product_Images::where('product_id',$product->id)->get();
 
         /**
          * Rate
@@ -87,12 +84,26 @@ class ProductController extends Controller
         /**
          * Options
          */
-        ProductOption::where('product_id',$product->id)
+        $options = ProductOption::select('name')->groupBy('name')->where('product_id',$product->id)
             ->get();
+        foreach ($options as $key => $option) {
+            $options[$key]->options =  ProductOption::where([
+                ['product_id','=',$product->id],
+                ['name','=',$option->name]
+            ])->get();
+        }
+
+        /**
+         * Attributes
+         */
+        $attributes = ProductAttribute::where('product_id',$product->id)->get();
 
         return view('product',[
             'product' => $product,
-            'category' => $category
+            'category' => $category,
+            'options'  => $options,
+            'images' => $images,
+            'attributes' => $attributes
         ]);
     }
 }

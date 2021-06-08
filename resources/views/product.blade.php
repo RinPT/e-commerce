@@ -5,6 +5,20 @@
     <link rel="stylesheet" type="text/css" href="/vendor/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/photoswipe.min.css">
     <link rel="stylesheet" type="text/css" href="/vendor/photoswipe/default-skin/default-skin.min.css">
+    <style>
+        .add-to-cart{
+            border: 0;
+            flex: 1;
+            min-width: 13rem;
+            font-size: 1.4rem;
+            border-radius: .3rem;
+            background-color: #26c;
+            color: #fff;
+            cursor: pointer;
+            max-width: 20.7rem;
+            height: 4.5rem;
+        }
+    </style>
 @endsection
 
 @section('plugin-scripts')
@@ -19,6 +33,56 @@
     <script src="/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
 @endsection
 
+@section('javaScript')
+    <script>
+        $('.quantity-plus').click(function (){
+            $('.variation-price').html($('.variation-price').data('prefix')+""+($('.variation-price').data('price')*$('.quantity').val()).toFixed(2)+" "+$('.variation-price').data('suffix'))
+        })
+        $('.quantity-minus').click(function (){
+            $('.variation-price').html($('.variation-price').data('prefix')+""+($('.variation-price').data('price')*$('.quantity').val()).toFixed(2)+" "+$('.variation-price').data('suffix'))
+        })
+    </script>
+    <script>
+        $('.add-to-cart').click(function (){
+            $.ajax({
+                method: "POST",
+                url: "{{ route('cart.add') }}",
+                data : {
+                    id : $(this).data('id'),
+                    _token: "{{ csrf_token() }}",
+                    count: $('.quantity').val()
+                }
+            }).done(function (data){
+                $('.cart-count').html(data.count)
+                $('.cart-prod-added').addClass('show');
+                setTimeout(function (){
+                    $('.cart-prod-added').removeClass('show');
+                },'1500')
+            }).fail(function (msg){
+                alert("An error occured.")
+            })
+        })
+
+        $('.add-to-wishlist').click(function (){
+            $.ajax({
+                method: "POST",
+                url: "{{ route('wishlist.add') }}",
+                data : {
+                    id : $(this).data('id'),
+                    _token: "{{ csrf_token() }}"
+                }
+            }).done(function (data){
+                $('.wishlist-added').addClass('show');
+                setTimeout(function (){
+                    $('.wishlist-added').removeClass('show');
+                },'1500')
+            }).fail(function (msg){
+                alert('An error occured.')
+            })
+        })
+    </script>
+@endsection
+
 @section('content')
 <main class="main mt-6 single-product">
     <div class="page-content mb-10 pb-6">
@@ -28,51 +92,33 @@
                     <div class="product-gallery pg-vertical sticky-sidebar"
                          data-sticky-options="{'minWidth': 767}">
                         <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
+                            @foreach($images as $image)
                             <figure class="product-image">
-                                <img src="/images/product/product-1-1-580x652.jpg"
-                                     data-zoom-image="/images/product/product-1-1-800x900.jpg"
-                                     alt="Women's Brown Leather Backpacks" width="800" height="900">
+                                <img src="/photo/product/{{ $image->image }}"
+                                     data-zoom-image="/photo/product/{{ $image->image }}"
+                                     alt="{{ $product->name }}" width="800" height="900">
                             </figure>
-                            <figure class="product-image">
-                                <img src="/images/product/product-1-2-580x652.jpg"
-                                     data-zoom-image="/images/product/product-1-2-800x900.jpg"
-                                     alt="Women's Brown Leather Backpacks" width="800" height="900">
-                            </figure>
-                            <figure class="product-image">
-                                <img src="/images/product/product-1-3-580x652.jpg"
-                                     data-zoom-image="/images/product/product-1-3-800x900.jpg"
-                                     alt="Women's Brown Leather Backpacks" width="800" height="900">
-                            </figure>
-                            <figure class="product-image">
-                                <img src="/images/product/product-1-4-580x652.jpg"
-                                     data-zoom-image="/images/product/product-1-4-800x900.jpg"
-                                     alt="Women's Brown Leather Backpacks" width="800" height="900">
-                            </figure>
+                            @endforeach
                         </div>
                         <div class="product-thumbs-wrap">
                             <div class="product-thumbs">
-                                <div class="product-thumb active">
-                                    <img src="/images/product/product-1-1-109x122.jpg" alt="product thumbnail"
+                                @foreach($images as $image)
+                                <div class="product-thumb @if($loop->first) active @endif">
+                                    <img src="/photo/product/{{ $image->image }}" alt="product thumbnail"
                                          width="109" height="122">
                                 </div>
-                                <div class="product-thumb">
-                                    <img src="/images/product/product-1-2-109x122.jpg" alt="product thumbnail"
-                                         width="109" height="122">
-                                </div>
-                                <div class="product-thumb">
-                                    <img src="/images/product/product-1-3-109x122.jpg" alt="product thumbnail"
-                                         width="109" height="122">
-                                </div>
-                                <div class="product-thumb">
-                                    <img src="/images/product/product-1-4-109x122.jpg" alt="product thumbnail"
-                                         width="109" height="122">
-                                </div>
+                                @endforeach
                             </div>
                             <button class="thumb-up disabled"><i class="fas fa-chevron-left"></i></button>
                             <button class="thumb-down disabled"><i class="fas fa-chevron-right"></i></button>
                         </div>
                         <div class="product-label-group">
-                            <label class="product-label label-new">new</label>
+                            @if($product->store_discount)
+                                <label class="product-label label-sale">{{ $product->store_discount }}% Store Off</label>
+                            @endif
+                            @if($product->main_discount)
+                                <label class="product-label label-stock">{{ $product->main_discount }}% Shop off</label>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -95,71 +141,36 @@
                         <p class="product-short-desc">
                             {{ $product->description }}
                         </p>
-                        <div class="product-form product-variations product-color">
-                            <label>Color:</label>
+                        @foreach($options as $o)
+                        <div class="product-form product-variations">
+                            <label>{{ $o->name }}:</label>
                             <div class="select-box">
-                                <select name="color" class="form-control">
-                                    <option value="" selected="selected">Choose an Option</option>
-                                    <option value="white">White</option>
-                                    <option value="black">Black</option>
-                                    <option value="brown">Brown</option>
-                                    <option value="red">Red</option>
-                                    <option value="green">Green</option>
-                                    <option value="yellow">Yellow</option>
+                                <select name="options[]" class="form-control">
+                                    @foreach($o->options as $op)
+                                    <option value="{{ $op->value }}">{{ $op->value }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="product-form product-variations product-size">
-                            <label>Size:</label>
-                            <div class="product-form-group">
-                                <div class="select-box">
-                                    <select name="size" class="form-control">
-                                        <option value="" selected="selected">Choose an Option</option>
-                                        <option value="s">Small</option>
-                                        <option value="m">Medium</option>
-                                        <option value="l">Large</option>
-                                        <option value="xl">Extra Large</option>
-                                    </select>
-                                </div>
-                                <a href="#" class="size-guide"><i class="d-icon-th-list"></i>Size Guide</a>
-                                <a href="#" class="product-variation-clean">Clean All</a>
-                            </div>
+                        @endforeach
+                        <div class="variation-price fa-2x font-weight-bold" data-price="{{ $product->price }}" data-prefix="{{ $cookie_currency->prefix }}" data-suffix="{{ $cookie_currency->suffix }}">
+                            {{ $cookie_currency->prefix }}{{ $product->price }} {{ $cookie_currency->suffix }}
                         </div>
-                        <div class="product-variation-price">
-                            <span>$239.00</span>
-                        </div>
-
                         <hr class="product-divider">
 
                         <div class="product-form product-qty">
-                            <div class="product-form-group">
+                            <div class="product-form-group align-items-center">
                                 <div class="input-group mr-2">
                                     <button class="quantity-minus d-icon-minus"></button>
                                     <input class="quantity form-control" type="number" min="1" max="1000000">
                                     <button class="quantity-plus d-icon-plus"></button>
                                 </div>
-                                <button
-                                    class="btn-product btn-cart text-normal ls-normal font-weight-semi-bold"><i
-                                        class="d-icon-bag"></i>Add to
-                                    Cart</button>
+                                <button class="btn-product add-to-cart text-normal ls-normal font-weight-semi-bold" data-id="{{ $product->id }}"><i class="d-icon-bag mr-2"></i>Add to Cart</button>
+                                <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="mr-6 add-to-wishlist" data-id="{{ $product->id }}"><i class="d-icon-heart mr-2"></i>Add to Wishlist</a>
                             </div>
                         </div>
 
                         <hr class="product-divider mb-3">
-
-                        <div class="product-footer">
-                            <div class="social-links mr-4">
-                                <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
-                                <a href="#" class="social-link social-twitter fab fa-twitter"></a>
-                                <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
-                            </div>
-                            <span class="divider d-lg-show"></span>
-                            <a href="#" class="btn-product btn-wishlist mr-6"><i class="d-icon-heart"></i>Add to
-                                wishlist</a>
-                            <a href="#" class="btn-product btn-compare"><i class="d-icon-compare"></i>Add
-                                to
-                                compare</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -167,13 +178,7 @@
             <div class="tab tab-nav-simple product-tabs">
                 <ul class="nav nav-tabs justify-content-center" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#product-tab-description">Description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#product-tab-additional">Additional information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#product-tab-size-guide">Size Guide</a>
+                        <a class="nav-link active" href="#product-tab-description">Attributes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#product-tab-reviews">Reviews (2)</a>
@@ -182,150 +187,21 @@
                 <div class="tab-content">
                     <div class="tab-pane active in" id="product-tab-description">
                         <div class="row mt-6">
-                            <div class="col-md-6">
-                                <h5 class="description-title mb-4 font-weight-semi-bold ls-m">Features</h5>
-                                <p class="mb-2">
-                                    Praesent id enim sit amet.Tdio vulputate eleifend in in tortor.
-                                    ellus massa. siti iMassa ristique sit amet condim vel, facilisis
-                                    quimequistiqutiqu amet condim Dilisis Facilisis quis sapien. Praesent id
-                                    enim sit amet.
-                                </p>
-                                <ul class="mb-8">
-                                    <li>Praesent id enim sit amet.Tdio vulputate</li>
-                                    <li>Eleifend in in tortor. ellus massa.Dristique sitii</li>
-                                    <li>Massa ristique sit amet condim vel</li>
-                                    <li>Dilisis Facilisis quis sapien. Praesent id enim sit amet</li>
-                                </ul>
-                                <h5 class="description-title mb-3 font-weight-semi-bold ls-m">Specifications
-                                </h5>
+                            <div class="col-md-12">
                                 <table class="table">
                                     <tbody>
+                                    @forelse($attributes as $attr)
                                     <tr>
-                                        <th class="font-weight-semi-bold text-dark pl-0">Material</th>
-                                        <td class="pl-4">Praesent id enim sit amet.Tdio</td>
+                                        <th class="font-weight-semi-bold text-dark pl-0 text-capitalize">{{ $attr->name }}</th>
+                                        <td class="pl-4">{{ $attr->value }}</td>
                                     </tr>
-                                    <tr>
-                                        <th class="font-weight-semi-bold text-dark pl-0">Claimed Size</th>
-                                        <td class="pl-4">Praesent id enim sit</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="font-weight-semi-bold text-dark pl-0">Recommended Use
-                                        </th>
-                                        <td class="pl-4">Praesent id enim sit amet.Tdio vulputate eleifend
-                                            in in tortor. ellus massa. siti</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="font-weight-semi-bold text-dark border-no pl-0">
-                                            Manufacturer</th>
-                                        <td class="border-no pl-4">Praesent id enim</td>
-                                    </tr>
+                                    @empty
+                                        <div class="text-center">There is no attribute of this product.</div>
+                                    @endforelse
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-6 pl-md-6 pt-4 pt-md-0">
-                                <h5 class="description-title font-weight-semi-bold ls-m mb-5">Video Description
-                                </h5>
-                                <figure class="p-relative d-inline-block mb-2">
-                                    <img src="/images/product/product.jpg" width="559" height="370"
-                                         alt="Product" />
-                                    <a class="btn-play btn-iframe" href="video/memory-of-a-woman.mp4">
-                                        <i class="d-icon-play-solid"></i>
-                                    </a>
-                                </figure>
-                                <div class="icon-box-wrap d-flex flex-wrap">
-                                    <div class="icon-box icon-box-side icon-border pt-2 pb-2 mb-4 mr-10">
-                                        <div class="icon-box-icon">
-                                            <i class="d-icon-lock"></i>
-                                        </div>
-                                        <div class="icon-box-content">
-                                            <h4 class="icon-box-title lh-1 pt-1 ls-s text-normal">2 year
-                                                warranty</h4>
-                                            <p>Guarantee with no doubt</p>
-                                        </div>
-                                    </div>
-                                    <div class="divider d-xl-show mr-10"></div>
-                                    <div class="icon-box icon-box-side icon-border pt-2 pb-2 mb-4">
-                                        <div class="icon-box-icon">
-                                            <i class="d-icon-truck"></i>
-                                        </div>
-                                        <div class="icon-box-content">
-                                            <h4 class="icon-box-title lh-1 pt-1 ls-s text-normal">Free shipping
-                                            </h4>
-                                            <p>On orders over $50.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="product-tab-additional">
-                        <ul class="list-none">
-                            <li><label>Brands:</label>
-                                <p>SkillStar, SLS</p>
-                            </li>
-                            <li><label>Color:</label>
-                                <p>Blue, Brown</p>
-                            </li>
-                            <li><label>Size:</label>
-                                <p>Large, Medium, Small</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane " id="product-tab-size-guide">
-                        <figure class="size-image mt-4 mb-4">
-                            <img src="/images/product/size_guide.png" alt="Size Guide Image" width="217"
-                                 height="398">
-                        </figure>
-                        <figure class="size-table mt-4 mb-4">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>SIZE</th>
-                                    <th>CHEST(IN.)</th>
-                                    <th>WEIST(IN.)</th>
-                                    <th>HIPS(IN.)</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th>XS</th>
-                                    <td>34-36</td>
-                                    <td>27-29</td>
-                                    <td>34.5-36.5</td>
-                                </tr>
-                                <tr>
-                                    <th>S</th>
-                                    <td>36-38</td>
-                                    <td>29-31</td>
-                                    <td>36.5-38.5</td>
-                                </tr>
-                                <tr>
-                                    <th>M</th>
-                                    <td>38-40</td>
-                                    <td>31-33</td>
-                                    <td>38.5-40.5</td>
-                                </tr>
-                                <tr>
-                                    <th>L</th>
-                                    <td>40-42</td>
-                                    <td>33-36</td>
-                                    <td>40.5-43.5</td>
-                                </tr>
-                                <tr>
-                                    <th>XL</th>
-                                    <td>42-45</td>
-                                    <td>36-40</td>
-                                    <td>43.5-47.5</td>
-                                </tr>
-                                <tr>
-                                    <th>XXL</th>
-                                    <td>45-48</td>
-                                    <td>40-44</td>
-                                    <td>47.5-51.5</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </figure>
                     </div>
                     <div class="tab-pane " id="product-tab-reviews">
                         <div class="comments mb-8 pt-2 pb-2 border-no">

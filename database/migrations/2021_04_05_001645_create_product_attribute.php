@@ -20,6 +20,37 @@ class CreateProductAttribute extends Migration
             $table->text('value');
             $table->timestamps();
         });
+
+        DB::table('product_attribute')->insert([
+            [
+                'product_id' => 1,
+                'name' => 'material',
+                'value' => 'Praesent id enim sit amet.Tdio',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'rope type',
+                'value' => 'Praesent id enim sit amet.',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'claimed size',
+                'value' => 'Praesent id enim sit',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'recommended use',
+                'value' => 'Praesent id enim sit amet.Tdio vulputate eleifend in in tortor. ellus massa. siti',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+        ]);
     }
 
     /**

@@ -79,7 +79,7 @@
                     @auth
                         <a href="{{ route('account') }}"><i class="fas fa-user mr-1"></i>{{ auth()->user()->username }}</a>
                         <span class="delimiter mr-0">/</span>
-                        <form action="{{ route('logout') }}" method="POST" class="nav-link ml-1 mb-1" >
+                        <form action="{{ route('logout') }}" method="POST" class="nav-link mb-1" >
                             @csrf
                             <button style="font-size: 11px" type="submit" class="btn btn-link">Logout</button>
                         </form>

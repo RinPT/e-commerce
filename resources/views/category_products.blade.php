@@ -21,7 +21,8 @@
                 url: "{{ route('cart.add') }}",
                 data : {
                     id : $(this).data('id'),
-                    _token: "{{ csrf_token() }}"
+                    _token: "{{ csrf_token() }}",
+                    count: 1
                 }
             }).done(function (data){
                 $('.cart-count').html(data.count)
@@ -30,7 +31,7 @@
                     $('.cart-prod-added').removeClass('show');
                 },'1500')
             }).fail(function (msg){
-                console.log(msg)
+                alert("An error occured.")
             })
         })
 
@@ -48,11 +49,9 @@
                     $('.wishlist-added').removeClass('show');
                 },'1500')
             }).fail(function (msg){
-                console.log(msg)
+                alert("An error occured.")
             })
         })
-
-
     </script>
 @endsection
 
@@ -63,7 +62,7 @@
         <h1 class="page-title">{{ $category->name }}</h1>
         <p class="font-italic text-white">{{ $category->description }}</p>
         <ul class="breadcrumb">
-            <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
+            <li><a href="{{ route('home') }}"><i class="d-icon-home"></i></a></li>
             <li class="delimiter">/</li>
             <li>{{ $category->name }}</li>
         </ul>
@@ -187,7 +186,6 @@
                                     </ul>
                             </div>
                             @endif
-
                         </div>
                     </div>
                 </aside>
@@ -209,8 +207,8 @@
                                         @endif
                                     </div>
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}"><i class="d-icon-bag"></i></a>
-                                        <a href="#" class="btn-product-icon add-to-wishlist" data-id="{{ $product->id }}" title="Add to wishlist"><i class="d-icon-heart"></i></a>
+                                        <a href="javascript:void(0)" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}"><i class="d-icon-bag"></i></a>
+                                        <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="btn-product-icon add-to-wishlist" data-id="{{ $product->id }}" title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                     </div>
                                     <div class="product-action">
                                         <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->name)), 'id' => $product->id]) }}" class="btn-product" title="View">View</a>

@@ -24,7 +24,7 @@ class CartController extends Controller
 
             foreach ($cart_products as $key => $cart_product) {
                 if($cart_product->pid == $_POST['id']){
-                    $cart_products[$key]->count += 1;
+                    $cart_products[$key]->count += $_POST['count'];
                     $new_product = false;
                     break;
                 }else{
@@ -39,9 +39,9 @@ class CartController extends Controller
             if($new_product){
                 $cart_products[] = [
                     'pid' => $_POST['id'],
-                    'count' => 1
+                    'count' => $_POST['count']
                 ];
-                $count +=1;
+                $count +=$_POST['count'];
                 $new = "varken yeni ürün";
             }
             setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
@@ -50,9 +50,9 @@ class CartController extends Controller
             $cart_products = [];
             $cart_products[] = [
                 'pid' => $_POST['id'],
-                'count' => 1
+                'count' => $_POST['count']
             ];
-            $count = 1;
+            $count = $_POST['count'];
             setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
         }
 

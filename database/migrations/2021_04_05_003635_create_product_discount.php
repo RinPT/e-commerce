@@ -35,27 +35,7 @@ class CreateProductDiscount extends Migration
             'updated_at' => \Carbon\Carbon::now()
         ]);
 
-        DB::table('store_discount')->insert([
-            'store_id' => '1',
-            'store_discount' => '3',
-            'main_discount' => '3',
-            'description' => 'New Year Discount',
-            'start_date' => \Carbon\Carbon::today(),
-            'end_date' => \Carbon\Carbon::create('2021','06','31'),
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
 
-        DB::table('category_discount')->insert([
-            'category_id' => '1',
-            'store_discount' => '2',
-            'main_discount' => '2',
-            'description' => 'New Year Discount',
-            'start_date' => \Carbon\Carbon::today(),
-            'end_date' => \Carbon\Carbon::create('2021','06','31'),
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
     }
 
     /**

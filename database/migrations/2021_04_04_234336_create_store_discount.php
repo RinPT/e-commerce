@@ -23,6 +23,17 @@ class CreateStoreDiscount extends Migration
             $table->dateTime('end_date');
             $table->timestamps();
         });
+
+        DB::table('store_discount')->insert([
+            'store_id' => '1',
+            'store_discount' => '3',
+            'main_discount' => '3',
+            'description' => 'New Year Discount',
+            'start_date' => \Carbon\Carbon::today(),
+            'end_date' => \Carbon\Carbon::create('2021','06','31'),
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 
     /**
