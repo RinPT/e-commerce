@@ -150,14 +150,26 @@
 										</a>
 									</li>
                                     @endif
-                                    <li>
-										<a class="nav-link" href="{{ route('slider') }}">
+                                    <li class="nav-parent">
+										<a class="nav-link" href="#">
 											<i class="fas fa-image"></i>
 											<span>Slider Management</span>
 										</a>
+                                        <ul class="nav nav-children">
+                                            <li>
+                                                <a class="nav-link" href="{{ route('slider') }}">
+                                                    Edit Slider
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link" href="{{ route('slider.create') }}">
+                                                    Create Slider
+                                                </a>
+                                            </li>
+                                        </ul>
 									</li>
                                     @if(in_array(2,$logged_author->perms))
-                                    <li class="nav-parent @if(str_contains(url()->current(),'currenc'))) nav-expanded @endif">
+                                    <li class="nav-parent @if(str_contains(url()->current(),'currency'))) nav-expanded @endif">
 										<a class="nav-link" href="#">
 											<i class='fas fa-dollar-sign'></i>
 											<span>Currencies</span>

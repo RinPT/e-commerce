@@ -40,55 +40,36 @@
                                     'autoplay': false,
                                     'animateOut': 'fadeOutLeft'
                                 }">
-                                    <div
-                                        class="intro-slide intro-slide1 banner banner-radius banner-fixed overlay-dark">
-                                        <figure>
-                                            <img src="images/demos/demo4/slides/1.jpg" width="580" height="510"
-                                                 alt="banner" style="background-color: #232024;" />
-                                        </figure>
-                                        <div class="banner-content y-50">
-                                            <h4 class="banner-subtitle font-weight-bold text-primary ls-1 slide-animate"
-                                                data-animation-options="{
-                                                'name': 'fadeInRightShorter',
-                                                'duration': '1s'
-                                            }">New Arrivals</h4>
-                                            <h3 class="banner-title text-white ls-s font-weight-bold slide-animate"
-                                                data-animation-options="{
-                                                'name': 'fadeInUpShorter',
-                                                'delay': '.5s',
-                                                'duration': '1s'
-                                            }">Biometric<br>Fingerprints<br>Padlock</h3>
-                                            <a href="demo4-shop.html" class="btn btn-link btn-underline btn-white slide-animate"
-                                               data-animation-options="{
-                                                'name': 'fadeInUpShorter',
-                                                'delay': '1s',
-                                                'duration': '1s'
-                                            }">Shop now<i class="d-icon-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="intro-slide intro-slide1 banner banner-fixed banner-radius overlay-dark">
-                                        <figure>
-                                            <img src="images/demos/demo4/slides/2.jpg" width="580" height="510"
-                                                 alt="banner" style="background-color: #efefef;" />
-                                        </figure>
-                                        <div class="banner-content y-50">
-                                            <div class="slide-animate" data-animation-options="{
-                                                'name': 'fadeInRightShorter'
-                                            }">
-                                                <h4
-                                                    class="banner-subtitle  font-weight-bold text-primary text-uppercase ls-1">
-                                                    New Collection
-                                                </h4>
-                                                <h3 class="banner-title font-weight-bold mb-6 slide-animate"
+                                    @if ($sliders->count())
+                                        @foreach ($sliders as $slider)
+                                            <div class="intro-slide intro-slide1 banner banner-radius banner-fixed overlay-dark">
+                                                <figure>
+                                                    <img src="/photo/slider/{{ $slider->banner }}" width="580" height="510"
+                                                        alt="banner" style="background-color: #232024;" />
+                                                </figure>
+                                                <div class="banner-content y-50">
+                                                    <h4 class="banner-subtitle font-weight-bold text-primary ls-1 slide-animate"
+                                                        data-animation-options="{
+                                                        'name': 'fadeInRightShorter',
+                                                        'duration': '1s'
+                                                    }">{{ $slider->header }}</h4>
+                                                    <h3 class="banner-title text-white ls-s font-weight-bold slide-animate"
+                                                        data-animation-options="{
+                                                        'name': 'fadeInUpShorter',
+                                                        'delay': '.5s',
+                                                        'duration': '1s'
+                                                    }">{{ $slider->text }}</h3>
+                                                    <a href="{{ $slider->btn_link }}" class="btn btn-link btn-underline btn-white slide-animate"
                                                     data-animation-options="{
-                                                    'name': 'fadeInRightShorter'
-                                                }">Fashionable<br>partner</h3>
-                                                <a class="btn btn-link btn-underline btn-dark" href="demo4-shop.html">Shop now<i
-                                                        class="d-icon-arrow-right"></i></a>
+                                                        'name': 'fadeInUpShorter',
+                                                        'delay': '1s',
+                                                        'duration': '1s'
+                                                    }">{{ $slider->btn_text }}<i class="d-icon-arrow-right"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        @endforeach
+
+                                    @endif
                                 </div>
                         </div>
                         <div class="grid-item col-md-6">

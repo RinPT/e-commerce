@@ -194,8 +194,10 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     /**
      * Slider Management
      */
-    Route::get('/slider', [SliderController::class, 'index'])->name('slider');
-    Route::post('/slider/update/{id}', [SliderController::class, 'update'])->name('slider.edit');
-
+    Route::get('/slider/edit', [SliderController::class, 'index'])->name('slider');
+    Route::post('/slider/edit/{id}', [SliderController::class, 'update'])->name('slider.update');
+    Route::get('/slider/create', [SliderController::class, 'create'])->name('slider.create');
+    Route::post('/slider/create/done', [SliderController::class, 'store'])->name('slider.store');
+    Route::delete('/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
 });
 

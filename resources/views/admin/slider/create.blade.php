@@ -7,11 +7,11 @@
 @endsection
 
 @section('breadcrumb')
-    <h2>Edit Slider</h2>
+    <h2>Create Slider</h2>
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>Edit Slider</span></li>
+            <li><span>Create Slider</span></li>
             <li><span>Slider Management</span></li>
             <li><span>Dashboard</span></li>
         </ol>
@@ -19,71 +19,62 @@
 @endsection
 
 @section('content')
-    @if(session('updated'))
+    @if(session('created'))
         <div class="row">
             <div class="col">
-                <div class="alert alert-info mb-0">
+                <div class="alert alert-success mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Notification!</strong> {{ session('updated') }}.
-                </div>
-            </div>
-        </div>
-    @endif
-    @if(session('deleted'))
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-danger mb-0">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Notification!</strong> {{ session('deleted') }}.
+                    <strong>Created!</strong> {{ session('created') }}.
                 </div>
             </div>
         </div>
     @endif
     <div class="row">
-        @if ($sliders->count())
-            @foreach ($sliders as $slider)
-                <div class="col-md-6">
-                    <section class="card mb-4">
-                        <header class="card-header">
-                            <h2 class="card-title">{{ $slider->name }}</h2>
-                        </header>
-                        <div class="card-body">
-                            <div class="row d-flex justify-content-center mb-3">
-                                <div class="zoom-gallery">
-                                    <a class="float-left mb-1 mr-1" href="/photo/slider/{{ $slider->banner }}" title="{{ $slider->name }}"><img class="img-thumbnail" src="/photo/slider/{{ $slider->banner }}" width="275"></a>
-                                </div>
-                            </div>
-                            <hr/>
-                            <form action="{{ route('slider.update', $slider->id) }}" method="POST">
+        <div class="col">
+            <section class="card card-modern card-big-info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-2-5 col-xl-1-5">
+                            <i class="card-big-info-icon fas fa-image"></i>
+                            <h2 class="card-big-info-title">Add New Slider</h2>
+                            <p class="card-big-info-desc">Add here all details and necessary information.</p>
+                        </div>
+                        <div class="col-lg-3-5 col-xl-4-5">
+                            <form class="form-horizontal form-bordered" action="{{ route('slider.store') }}" method="POST">
                                 @csrf
-                                <div class="form-group row">
-                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputReadOnly">Banner Name</label>
+                                <div class="form-group row @error('name') has-danger @enderror">
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Banner Name</label>
                                     <div class="col-lg-6">
-                                        <input type="text" value="{{ $slider->name }}" id="inputReadOnly" class="form-control" readonly="readonly">
+                                        <input name="name" type="text" class="form-control" id="inputDefault" value="{{ old('name') }}">
+                                        @error('name') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row @error('header') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Header</label>
                                     <div class="col-lg-6">
-                                        <input name="header" type="text" class="form-control" id="inputDefault" value="{{ $slider->header }}">
+                                        <input name="header" type="text" class="form-control" id="inputDefault" value="{{ old('header') }}">
+                                        @error('header') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row @error('text') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Text</label>
                                     <div class="col-lg-6">
-                                        <input name="text" type="text" class="form-control" id="inputDefault" value="{{ $slider->text }}">
+                                        <input name="text" type="text" class="form-control" id="inputDefault" value="{{ old('text') }}">
+                                        @error('text') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row @error('btn_text') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Button Name</label>
                                     <div class="col-lg-6">
-                                        <input name="btn_text" type="text" class="form-control" id="inputDefault" value="{{ $slider->btn_text }}">
+                                        <input name="btn_text" type="text" class="form-control" id="inputDefault" value="{{ old('btn_text') }}">
+                                        @error('btn_text') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row @error('btn_link') has-danger @enderror">
                                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Button Link</label>
                                     <div class="col-lg-6">
-                                        <input name="btn_link" type="text" class="form-control" id="inputDefault" value="{{ $slider->btn_link }}">
+                                        <input name="btn_link" type="text" class="form-control" id="inputDefault" value="{{ old('btn_link') }}">
+                                        @error('btn_link') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -105,27 +96,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-lg-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-dark mx-1">Update</button>
-                                    </div>
+                                <div class="form-group row d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-dark">Add</button>
                                 </div>
                             </form>
-                            <form class="row d-flex justify-content-end" action="{{ route('slider.delete', $slider->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger mx-4 my-1">Delete</button>
-                            </form>
                         </div>
-                    </section>
+                    </div>
                 </div>
-            @endforeach
-        @endif
+            </section>
+        </div>
     </div>
 @endsection
 
 @section('scripts')
-    <script src="/admin/vendor/pnotify/pnotify.custom.js"></script>
-    <script src="/admin/js/examples/examples.lightbox.js"></script>
+    <script src="/admin/vendor/ios7-switch/ios7-switch.js"></script>
+    <script src="/admin/vendor/autosize/autosize.js"></script>
     <script src="/admin/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
 @endsection
