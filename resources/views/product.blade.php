@@ -98,27 +98,41 @@
                     <div class="product-gallery pg-vertical sticky-sidebar"
                          data-sticky-options="{'minWidth': 767}">
                         <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
-                            @foreach($images as $image)
+                            @forelse($images as $image)
                             <figure class="product-image">
                                 <img src="/photo/product/{{ $image->image }}"
                                      data-zoom-image="/photo/product/{{ $image->image }}"
                                      alt="{{ $product->name }}" width="800" height="900">
                             </figure>
-                            @endforeach
+                            @empty
+                                <figure class="product-image">
+                                    <img src="/photo/{{ $def_logo->value }}"
+                                         data-zoom-image="/photo/{{ $def_logo->value }}"
+                                         alt="{{ $def_logo->value }}" width="800" height="900">
+                                </figure>
+                            @endforelse
                         </div>
                         <div class="product-thumbs-wrap">
                             <div class="product-thumbs">
-                                @foreach($images as $image)
-                                <div class="product-thumb @if($loop->first) active @endif">
-                                    <img src="/photo/product/{{ $image->image }}" alt="product thumbnail"
-                                         width="109" height="122">
-                                </div>
-                                @endforeach
+                                @forelse($images as $image)
+                                    <div class="product-thumb @if($loop->first) active @endif">
+                                        <img src="/photo/product/{{ $image->image }}" alt="product thumbnail" width="109" height="122">
+                                    </div>
+                                @empty
+                                    <div class="product-thumb active">
+                                        <img src="/photo/{{ $def_logo->value }}" alt="product thumbnail" width="109" height="122">
+                                    </div>
+                                @endforelse
                             </div>
                             <button class="thumb-up disabled"><i class="fas fa-chevron-left"></i></button>
                             <button class="thumb-down disabled"><i class="fas fa-chevron-right"></i></button>
                         </div>
                         <div class="product-label-group">
+                            @if($product->total_stock_count)
+                                <label class="product-label " style="color: #ffffff;background: #41d02f;">In Stock</label>
+                            @else
+                                <label class="product-label " style="color: #ffffff;background: #e41f00;">Out of Stock</label>
+                            @endif
                             @if($product->store_discount)
                                 <label class="product-label label-sale">{{ $product->store_discount }}% Store Off</label>
                             @endif
@@ -156,9 +170,9 @@
                         <div class="product-form product-variations">
                             <label>{{ $o->name }}:</label>
                             <div class="select-box">
-                                <select name="options[]" class="form-control">
+                                <select name="options[]" class="form-control text-capitalize">
                                     @foreach($o->options as $op)
-                                    <option value="{{ $op->value }}">{{ $op->value }}</option>
+                                    <option value="{{ $op->value }}" @if(!in_array($op->value,$in_stocks) && $op->is_stock_value) disabled @endif>{{ $op->value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -176,7 +190,7 @@
                                     <input class="quantity form-control" type="number" min="1" max="1000000">
                                     <button class="quantity-plus d-icon-plus"></button>
                                 </div>
-                                <button class="btn-product add-to-cart text-normal ls-normal font-weight-semi-bold" data-id="{{ $product->id }}"><i class="d-icon-bag mr-2"></i>Add to Cart</button>
+                                <button class="btn-product add-to-cart text-normal ls-normal font-weight-semi-bold" data-id="{{ $product->id }}" @if(!$product->total_stock_count) disabled style="opacity: 0.5;" @endif><i class="d-icon-bag mr-2"></i>Add to Cart</button>
                                 <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="mr-6 add-to-wishlist" data-id="{{ $product->id }}"><i class="d-icon-heart mr-2"></i>Add to Wishlist</a>
                             </div>
                         </div>
@@ -192,7 +206,7 @@
                         <a class="nav-link active" href="#product-tab-description">Attributes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#product-tab-reviews">Reviews (2)</a>
+                        <a class="nav-link" href="#product-tab-reviews">Reviews ({{ count($reviews) }})</a>
                     </li>
                 </ul>
                 <div class="tab-content">

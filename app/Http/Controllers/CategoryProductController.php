@@ -11,6 +11,7 @@ use App\Models\Currencies;
 use App\Models\Product;
 use App\Models\Product_Images;
 use App\Models\ProductComment;
+use App\Models\ProductStock;
 use Illuminate\Support\Facades\Request;
 
 class CategoryProductController extends Controller
@@ -53,6 +54,7 @@ class CategoryProductController extends Controller
 
 
         $max_price = 0;
+        $min_price = 0;
         if(count($products)){
             $min_price = $products[0]->price;
         }
@@ -127,11 +129,19 @@ class CategoryProductController extends Controller
             }else{
                 $products[$key]->product_review = $rate * 20;
             }
+
+            /**
+             * Stock
+             */
+            $total_stock_count = ProductStock::where('product_id',$product->id)->sum('stock');
+            $products[$key]->total_stock_count = $total_stock_count;
         }
 
         foreach ($del_prods as $del_prod) {
             unset($products[$del_prod]);
         }
+
+        $def_logo = Config::where('key','default_product_logo')->first();
 
         return view('category_products',[
             'category' => $category,
@@ -139,7 +149,8 @@ class CategoryProductController extends Controller
             'category_advs' => $category_advs,
             'max_price' => $max_price,
             'min_price' => $min_price,
-            'rev_nums' => $rev_nums
+            'rev_nums' => $rev_nums,
+            'def_logo' => $def_logo
         ]);
     }
 }

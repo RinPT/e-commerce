@@ -196,9 +196,18 @@
                             <div class="product">
                                 <figure class="product-media">
                                     <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->name)), 'id' => $product->id]) }}">
+                                        @if(empty($product->image))
+                                            <img src="/photo/{{ $def_logo->value }}" alt="product" width="280" height="315">
+                                        @else
                                         <img src="/photo/product/{{ $product->image }}" alt="product" width="280" height="315">
+                                        @endif
                                     </a>
                                     <div class="product-label-group">
+                                        @if($product->total_stock_count)
+                                            <label class="product-label " style="color: #ffffff;background: #41d02f;">In Stock</label>
+                                        @else
+                                            <label class="product-label " style="color: #ffffff;background: #e41f00;">Out of Stock</label>
+                                        @endif
                                         @if($product->store_discount)
                                             <label class="product-label label-sale">{{ $product->store_discount }}% Store Off</label>
                                         @endif
@@ -207,7 +216,9 @@
                                         @endif
                                     </div>
                                     <div class="product-action-vertical">
+                                        @if($product->total_stock_count)
                                         <a href="javascript:void(0)" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}"><i class="d-icon-bag"></i></a>
+                                        @endif
                                         <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="btn-product-icon add-to-wishlist" data-id="{{ $product->id }}" title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                     </div>
                                     <div class="product-action">

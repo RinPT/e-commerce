@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wishlist extends Model
+class ProductStock extends Model
 {
     use HasFactory;
-
-    public $table = "user_wishlist";
+    protected $table = 'product_stock';
     protected $guarded = [];
-
 }

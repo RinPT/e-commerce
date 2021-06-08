@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\CategoryDiscount;
+use App\Models\Config;
 use App\Models\Currencies;
 use App\Models\Product;
 use App\Models\Product_Images;
 use App\Models\ProductAttribute;
 use App\Models\ProductComment;
 use App\Models\ProductOption;
+use App\Models\ProductStock;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +39,8 @@ class ProductController extends Controller
             )
             ->first();
 
-        $category = Categories::find($product->category_id);
-        $cat_discount = CategoryDiscount::where('category_id',$product->category_id)->first();
+        $category       = Categories::find($product->category_id);
+        $cat_discount   = CategoryDiscount::where('category_id',$product->category_id)->first();
 
         if(\Illuminate\Support\Facades\Request::input('currency')){
             $cookie_curr = Currencies::where('id',Request::input('currency'))->first();
@@ -114,7 +116,7 @@ class ProductController extends Controller
          */
         $rel_products = Product::where([
             ['category_id','=',$category->id],
-            ['products.id','!=',$product->id]
+            ['products.id','!=',$id]
         ])
             ->join('store','store.id','=','products.store_id')
             ->join('currencies','currencies.id','=','products.currency_id')
@@ -155,7 +157,7 @@ class ProductController extends Controller
             /**
              * Image
              */
-            $image = Product_Images::where('product_id',$product->id)->first();
+            $image = Product_Images::where('product_id',$id)->first();
             if(!is_null($image)){
                 $rel_products[$key]->image = $image->image;
             }else{
@@ -165,8 +167,8 @@ class ProductController extends Controller
             /**
              * Rate
              */
-            $rev_count  = ProductComment::where('product_id',$product->id)->count();
-            $rate       = ProductComment::where('product_id',$product->id)->avg('product_rate');
+            $rev_count  = ProductComment::where('product_id',$id)->count();
+            $rate       = ProductComment::where('product_id',$id)->avg('product_rate');
             $rel_products[$key]->product_review_count = $rev_count;
 
             if(is_null($rate)){
@@ -176,6 +178,23 @@ class ProductController extends Controller
             }
         }
 
+        $def_logo = Config::where('key','default_product_logo')->first();
+
+        /**
+         * Stock
+         */
+        $total_stock_count = ProductStock::where('product_id',$id)->sum('stock');
+        $product->total_stock_count = $total_stock_count;
+
+        $in_stock = ProductStock::where([
+            ['product_id','=',$id],
+            ['stock','>','0']
+        ])->get();
+        $in_stocks = [];
+        foreach ($in_stock as $i) {
+            $in_stocks[] = $i->name;
+        }
+
         return view('product',[
             'product' => $product,
             'rel_products' => $rel_products,
@@ -183,7 +202,9 @@ class ProductController extends Controller
             'options'  => $options,
             'images' => $images,
             'attributes' => $attributes,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'def_logo' => $def_logo,
+            'in_stocks' => $in_stocks
         ]);
     }
 

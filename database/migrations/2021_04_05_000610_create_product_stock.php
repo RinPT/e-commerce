@@ -20,6 +20,37 @@ class CreateProductStock extends Migration
             $table->integer('stock');
             $table->timestamps();
         });
+
+        DB::table('product_stock')->insert([
+            [
+                'product_id' => 1,
+                'name' => 'small',
+                'stock' => 250,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'medium',
+                'stock' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 1,
+                'name' => 'large',
+                'stock' => 230,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 2,
+                'name' => 'main',
+                'stock' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]
+        ]);
     }
 
     /**
