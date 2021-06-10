@@ -18,15 +18,19 @@ class CartController extends Controller
     public function store() {
         $count = 0;
         if(isset($_COOKIE['cart_products'])){
-            $new = "ürün var";
             $new_product = false;
             $cart_products = json_decode($_COOKIE['cart_products']);
+            $optss = (array)json_decode($_POST['optss']);
 
             foreach ($cart_products as $key => $cart_product) {
-                if($cart_product->pid == $_POST['id']){
-                    $cart_products[$key]->count += $_POST['count'];
-                    $new_product = false;
-                    break;
+                if($cart_product->pid === $_POST['id']){
+                    if($cart_product->options == (object)$optss){
+                        $cart_products[$key]->count += $_POST['count'];
+                        $new_product = false;
+                        break;
+                    }else{
+                        $new_product = true;
+                    }
                 }else{
                     $new_product = true;
                 }
@@ -39,18 +43,18 @@ class CartController extends Controller
             if($new_product){
                 $cart_products[] = [
                     'pid' => $_POST['id'],
-                    'count' => $_POST['count']
+                    'count' => $_POST['count'],
+                    'options' => $optss
                 ];
                 $count +=$_POST['count'];
-                $new = "varken yeni ürün";
             }
             setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
         }else{
-            $new = "yeni ürün";
             $cart_products = [];
             $cart_products[] = [
                 'pid' => $_POST['id'],
-                'count' => $_POST['count']
+                'count' => $_POST['count'],
+                'options' => (array)json_decode($_POST['optss'])
             ];
             $count = $_POST['count'];
             setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
@@ -60,7 +64,6 @@ class CartController extends Controller
             'status' => '1',
             'message' => 'Successfully Added',
             'count' => $count,
-            'new' => $new
         ]);
     }
 }

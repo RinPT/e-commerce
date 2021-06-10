@@ -50,15 +50,21 @@
     </script>
     <script>
         $('.add-to-cart').click(function (){
+            var p_options = {};
+            $('.select-options').each(function (i,v){
+                p_options[$(this).data('name')] = $(this).children("option:selected").val()
+            })
             $.ajax({
                 method: "POST",
                 url: "{{ route('cart.add') }}",
                 data : {
                     id : $(this).data('id'),
                     _token: "{{ csrf_token() }}",
-                    count: $('.quantity').val()
+                    count: $('.quantity').val(),
+                    optss : JSON.stringify(p_options)
                 }
             }).done(function (data){
+                console.log(data)
                 $('.cart-count').html(data.count)
                 $('.cart-prod-added').addClass('show');
                 setTimeout(function (){
@@ -66,6 +72,7 @@
                 },'1500')
             }).fail(function (msg){
                 console.log("An error occured.")
+                console.log(msg)
             })
         })
 
@@ -170,7 +177,7 @@
                         <div class="product-form product-variations">
                             <label>{{ $o->name }}:</label>
                             <div class="select-box">
-                                <select name="options[]" class="form-control text-capitalize">
+                                <select name="options[]" class="form-control text-capitalize select-options" data-name="{{ $o->name }}">
                                     @foreach($o->options as $op)
                                     <option value="{{ $op->value }}" @if(!in_array($op->value,$in_stocks) && $op->is_stock_value) disabled @endif>{{ $op->value }}</option>
                                     @endforeach

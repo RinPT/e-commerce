@@ -83,7 +83,6 @@ Route::get('/store/{name}/{id}', [StoresController::class, 'store_products_index
 Route::group(['middleware' => 'auth'],function (){
     Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist')->middleware('auth');
     Route::post('/wishlist/add', [WishListController::class, 'store'])->name('wishlist.add');
-    Route::get('/wishlist/{$id}', [WishListController::class, 'destroy'])->name('wishlist.destory');
     Route::get('/wishlist/{id}/delete', [WishListController::class, 'destroy'])->name('wishlist.destroy');
 });
 
