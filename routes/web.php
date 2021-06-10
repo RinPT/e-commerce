@@ -47,6 +47,7 @@ Route::post('/product/add/review/{product_id}',[ProductController::class, 'store
  */
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
+Route::post('/cart/delete', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/order_summary', [OrderController::class, 'index'])->name('order.summary');
 Route::get('/checkout', [CartController::class, 'index'])->name('checkout');

@@ -20,6 +20,19 @@
     </style>
 @endsection
 
+@section('javaScript')
+    <script>
+        function calc_single(){
+            $('.quantity-plus').click(function (){
+                $('.amount-single-total').html($('.amount-single-total').data('prefix')+""+($('.amount-single-total').data('price')*$('.quantity').val()).toFixed(2)+" "+$('.amount-single-total').data('suffix'))
+            })
+            $('.quantity-minus').click(function (){
+                $('.amount-single-total').html($('.amount-single-total').data('prefix')+""+($('.amount-single-total').data('price')*$('.quantity').val()).toFixed(2)+" "+$('.amount-single-total').data('suffix'))
+            })
+        }
+        calc_single()
+    </script>
+@endsection
 
 @section('content')
     <main class="main cart">
@@ -43,75 +56,55 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @forelse($cart_products as $key => $product)
                             <tr>
                                 <td class="product-thumbnail">
                                     <figure>
-                                        <a href="product-simple.html">
-                                            <img src="images/products/product18.jpg" width="100" height="100"
-                                                 alt="product">
-                                        </a>
-                                    </figure>
-                                </td>
-                                <td class="product-name">
-                                    <div class="product-name-section">
-                                        <a href="product-simple.html">Converse Training Shoes</a>
-                                    </div>
-                                </td>
-                                <td class="product-subtotal">
-                                    <span class="amount">$129.99</span>
-                                </td>
-                                <td class="product-quantity">
-                                    <div class="input-group">
-                                        <button class="quantity-minus d-icon-minus"></button>
-                                        <input class="quantity form-control" type="number" min="1"
-                                               max="1000000">
-                                        <button class="quantity-plus d-icon-plus"></button>
-                                    </div>
-                                </td>
-                                <td class="product-price">
-                                    <span class="amount">$129.99</span>
-                                </td>
-                                <td class="product-close">
-                                    <a href="#" class="product-remove" title="Remove this product">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <figure>
-                                        <a href="product-simple.html">
-                                            <img src="images/products/product19.jpg" width="100" height="100"
-                                                 alt="product">
-                                        </a>
-                                    </figure>
+                                        <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->product->name)), 'id' => $product->product->id]) }}">
+                                            @if(isset($product->product->images[0]->image))
+                                                @if(empty($product->product->images[0]->image))
+                                                    <img src="/photo/{{ $def_logo }}" width="100" height="100" alt="product">
+                                                @else
+                                                    <img src="/photo/product/{{ $product->product->images[0]->image }}" width="100" height="100" alt="product">
+                                                @endif
+                                            @else
+                                                <img src="/photo/{{ $def_logo }}" width="100" height="100" alt="product">
+                                            @endif
 
+                                        </a>
+                                    </figure>
                                 </td>
                                 <td class="product-name">
                                     <div class="product-name-section">
-                                        <a href="product-simple.html">Women Beautiful Headgear</a>
+                                        <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->product->name)), 'id' => $product->product->id]) }}">{{ $product->product->name }}</a>
                                     </div>
                                 </td>
                                 <td class="product-subtotal">
-                                    <span class="amount">$98.00</span>
+                                    <span class="amount">{{ $cookie_currency->prefix }}{{ $product->product->price }} {{ $cookie_currency->suffix }}</span>
                                 </td>
                                 <td class="product-quantity">
                                     <div class="input-group">
                                         <button class="quantity-minus d-icon-minus"></button>
-                                        <input class="quantity form-control" type="number" min="1"
-                                               max="1000000">
+                                        <input class="quantity form-control" type="number" min="1" max="{{ $product->product->total_stock_count }}" value="{{ $product->count }}">
                                         <button class="quantity-plus d-icon-plus"></button>
                                     </div>
                                 </td>
                                 <td class="product-price">
-                                    <span class="amount">$98.00</span>
+                                    <span class="amount amount-single-total" data-prefix="{{ $cookie_currency->prefix }}" data-suffix="{{ $cookie_currency->suffix }}" data-price="{{ $product->product->price }}">
+                                        {{ $cookie_currency->prefix }}{{ number_format($product->product->price * $product->count,2,".","") }} {{ $cookie_currency->suffix }}
+                                    </span>
                                 </td>
                                 <td class="product-close">
-                                    <a href="#" class="product-remove" title="Remove this product">
+                                    <a href="javascript:void(0)" class="product-remove" data-key="{{ $key }}" title="Remove this product">
                                         <i class="fas fa-times"></i>
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">There is no product in shopping cart.</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                         <div class="cart-actions mb-6 pt-4">

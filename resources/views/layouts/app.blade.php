@@ -44,7 +44,11 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" type="text/css" href="/css/user/demo1.min.css">
     <link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
-
+    <style>
+        .cart-prod-added.show,.wishlist-added.show {
+            left: -400px;
+        }
+    </style>
 </head>
 
 <body>
@@ -287,8 +291,8 @@
         </div>
     </footer>
     <!-- End Footer -->
-    <div class="minipopup-area" style="left: initial;right: 0">
-        <div class="minipopup-box cart-prod-added" style="top: 0;left: -400px">
+    <div class="minipopup-area" style="left: initial;right: 0;">
+        <div class="minipopup-box cart-prod-added">
             <p class="minipopup-title">Successfully Added</p>
             <div class="action-group d-flex">
                 <a href="{{ route('cart') }}" class="btn btn-sm btn-outline btn-primary btn-rounded">View Cart</a>
@@ -297,10 +301,10 @@
         </div>
     </div>
     <div class="minipopup-area" style="left: initial;right: 0">
-        <div class="minipopup-box wishlist-added" style="top: 0;left: -400px">
+        <div class="minipopup-box wishlist-added">
             <p class="minipopup-title">Successfully added to wishlist</p>
             <div class="action-group text-center">
-                <a href="{{ route('wishlist') }}" class="btn btn-sm btn-outline btn-primary btn-rounded">View Wishlist</a>
+                <a href="{{ route('wishlist') }}" class="btn btn-sm btn-primary btn-rounded">View Wishlist</a>
             </div>
         </div>
     </div>

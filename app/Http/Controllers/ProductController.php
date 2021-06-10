@@ -21,6 +21,7 @@ class ProductController extends Controller
 {
     public function index($name,$id){
 
+        $def_logo = Config::where('key','default_product_logo')->first();
 
         $product = Product::where('products.id',$id)
             ->join('store','store.id','=','products.store_id')
@@ -112,6 +113,21 @@ class ProductController extends Controller
             ->get();
 
         /**
+         * Stock
+         */
+        $total_stock_count = ProductStock::where('product_id',$id)->sum('stock');
+        $product->total_stock_count = $total_stock_count;
+
+        $in_stock = ProductStock::where([
+            ['product_id','=',$id],
+            ['stock','>','0']
+        ])->get();
+        $in_stocks = [];
+        foreach ($in_stock as $i) {
+            $in_stocks[] = $i->name;
+        }
+
+        /**
          * Related Products
          */
         $rel_products = Product::where([
@@ -133,12 +149,13 @@ class ProductController extends Controller
                 'store_discount.main_discount as smain_discount',
             )
             ->get();
-        foreach ($rel_products as $key => $product) {
+
+        foreach ($rel_products as $key => $pp) {
             /**
              * Discount
              */
-            $rel_products[$key]->store_discount = $product->pstore_discount + $product->sstore_discount;
-            $rel_products[$key]->main_discount = $product->pmain_discount + $product->smain_discount;
+            $rel_products[$key]->store_discount = $pp->pstore_discount + $pp->sstore_discount;
+            $rel_products[$key]->main_discount = $pp->pmain_discount + $pp->smain_discount;
 
             if(!is_null($cat_discount)){
                 $rel_products[$key]->store_discount += $cat_discount->store_discount;
@@ -148,16 +165,16 @@ class ProductController extends Controller
             /**
              * Currency
              */
-            if($cookie_curr->id != $product->currency_id){
-                $rel_products[$key]->price = number_format($rel_products[$key]->price * $cookie_curr->rate / $product->cur_rate,2,".","");
+            if($cookie_curr->id != $pp->currency_id){
+                $rel_products[$key]->price = number_format($rel_products[$key]->price * $cookie_curr->rate / $pp->cur_rate,2,".","");
             }
-            $rel_products[$key]->price -= $rel_products[$key]->price * ($product->store_discount + $product->main_discount)/100;
+            $rel_products[$key]->price -= $rel_products[$key]->price * ($pp->store_discount + $pp->main_discount)/100;
             $rel_products[$key]->price = number_format($rel_products[$key]->price,2,".","");
 
             /**
              * Image
              */
-            $image = Product_Images::where('product_id',$id)->first();
+            $image = Product_Images::where('product_id',$pp->id)->first();
             if(!is_null($image)){
                 $rel_products[$key]->image = $image->image;
             }else{
@@ -167,8 +184,8 @@ class ProductController extends Controller
             /**
              * Rate
              */
-            $rev_count  = ProductComment::where('product_id',$id)->count();
-            $rate       = ProductComment::where('product_id',$id)->avg('product_rate');
+            $rev_count  = ProductComment::where('product_id',$pp->id)->count();
+            $rate       = ProductComment::where('product_id',$pp->id)->avg('product_rate');
             $rel_products[$key]->product_review_count = $rev_count;
 
             if(is_null($rate)){
@@ -176,23 +193,12 @@ class ProductController extends Controller
             }else{
                 $rel_products[$key]->product_review = $rate * 20;
             }
-        }
 
-        $def_logo = Config::where('key','default_product_logo')->first();
-
-        /**
-         * Stock
-         */
-        $total_stock_count = ProductStock::where('product_id',$id)->sum('stock');
-        $product->total_stock_count = $total_stock_count;
-
-        $in_stock = ProductStock::where([
-            ['product_id','=',$id],
-            ['stock','>','0']
-        ])->get();
-        $in_stocks = [];
-        foreach ($in_stock as $i) {
-            $in_stocks[] = $i->name;
+            /**
+             * Stock
+             */
+            $total_stock_count = ProductStock::where('product_id',$pp->id)->sum('stock');
+            $rel_products[$key]->total_stock_count = $total_stock_count;
         }
 
         return view('product',[

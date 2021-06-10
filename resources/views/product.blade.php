@@ -194,7 +194,7 @@
                             <div class="product-form-group align-items-center">
                                 <div class="input-group mr-2">
                                     <button class="quantity-minus d-icon-minus"></button>
-                                    <input class="quantity form-control" type="number" min="1" max="1000000">
+                                    <input class="quantity form-control" type="number" min="1" max="{{ $product->total_stock_count }}">
                                     <button class="quantity-plus d-icon-plus"></button>
                                 </div>
                                 <button class="btn-product add-to-cart text-normal ls-normal font-weight-semi-bold" data-id="{{ $product->id }}" @if(!$product->total_stock_count) disabled style="opacity: 0.5;" @endif><i class="d-icon-bag mr-2"></i>Add to Cart</button>
@@ -360,6 +360,11 @@
                                     <img src="/photo/product/{{ $product->image }}" alt="product" width="280" height="315">
                                 </a>
                                 <div class="product-label-group">
+                                    @if($product->total_stock_count)
+                                        <label class="product-label " style="color: #ffffff;background: #41d02f;">In Stock</label>
+                                    @else
+                                        <label class="product-label " style="color: #ffffff;background: #e41f00;">Out of Stock</label>
+                                    @endif
                                     @if($product->store_discount)
                                         <label class="product-label label-sale">{{ $product->store_discount }}% Store Off</label>
                                     @endif
