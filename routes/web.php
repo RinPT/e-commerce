@@ -16,6 +16,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductProfileController;
 
 include('web-user.php');
@@ -29,6 +30,14 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+/**
+ * Reset Password
+ */
+Route::get('/forgot-password', [PasswordResetController::class, 'index'])->name('forgot.password');
+Route::post('/forgot-password/done', [PasswordResetController::class, 'generate_token']);
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'reset_password'])->name('password.reset');
+Route::get('/reset-password/done', [PasswordResetController::class, 'password_store'])->name('password.reset.done');
 
 /**
  * Pages
