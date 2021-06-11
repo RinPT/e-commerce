@@ -18,6 +18,19 @@
             max-width: 20.7rem;
             height: 4.5rem;
         }
+
+        .ar-button{
+            border: 0;
+            flex: 1;
+            min-width: 13rem;
+            font-size: 1.4rem;
+            border-radius: .3rem;
+            background-color: #d26e4b;
+            color: #fff;
+            cursor: pointer;
+            max-width: 20.7rem;
+            height: 4.5rem;
+        }
     </style>
 @endsection
 
@@ -107,7 +120,7 @@
                         <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
                             @forelse($images as $image)
                             <figure class="product-image">
-                                <img src="/photo/product/{{ $image->image }}"
+                                <img src="{{ $image->image }}"
                                      data-zoom-image="/photo/product/{{ $image->image }}"
                                      alt="{{ $product->name }}" width="800" height="900">
                             </figure>
@@ -198,6 +211,13 @@
                                     <button class="quantity-plus d-icon-plus"></button>
                                 </div>
                                 <button class="btn-product add-to-cart text-normal ls-normal font-weight-semi-bold" data-id="{{ $product->id }}" @if(!$product->total_stock_count) disabled style="opacity: 0.5;" @endif><i class="d-icon-bag mr-2"></i>Add to Cart</button>
+                                @if( !empty($product->ar))
+                                <div>
+                                    <a rel="ar" href="{{ $product->ar }}">
+                                        <button class=" ar-button text-normal ls-normal font-weight-semi-bold"><i class="d-icon-mobile mr-2"></i>AR View</button>
+                                    </a>
+                                </div>
+                                @endif
                                 <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="mr-6 add-to-wishlist" data-id="{{ $product->id }}"><i class="d-icon-heart mr-2"></i>Add to Wishlist</a>
                             </div>
                         </div>

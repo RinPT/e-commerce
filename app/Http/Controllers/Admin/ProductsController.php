@@ -65,10 +65,32 @@ class ProductsController extends Controller
             'price' => 'required|numeric',
             'cargo_price' => 'required|numeric',
             'currency_id' => 'required|numeric',
+            'ar' => 'nullable',
             'attribute' => 'nullable', //TODO: CUSTOM VALIDATION FOR ATTRIBUTE AND STOCK, THE ARRAYS HAVE TO BE SAME AMOUNT
             'stock[]' => 'nullable|numeric',
         ]);
 
+        if($request->file('ar')!=null){
+            $arName = Str::slug($request->input('name')).'_'.time().'_';
+            // Define folder path
+            $folder = '/AR/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $arName. '.usdz';
+            // Upload image
+            $request->file('ar')->move(public_path($folder), $arName. '.usdz');
+
+            $product = Product::create([
+                'name' => $request->name,
+                'store_id' => $request->store_id,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'price' => $request->price,
+                'ar' => $filePath,
+                'cargo_price' => $request->cargo_price,
+                'currency_id' => $request->currency_id,
+            ]);
+        }
+        else {
         $product = Product::create([
             'name' => $request->name,
             'store_id' => $request->store_id,
@@ -77,7 +99,9 @@ class ProductsController extends Controller
             'price' => $request->price,
             'cargo_price' => $request->cargo_price,
             'currency_id' => $request->currency_id,
-        ]);
+        ]);    
+        }
+
 
         $counter=0;
         foreach($request->file('images') as $image) {
@@ -189,6 +213,28 @@ class ProductsController extends Controller
                     'image' => $filePath,
                 ]);
             }
+        }
+
+        if($request->file('ar')!=null){
+            if(!empty($product->ar)){
+                $dir = public_path($product->ar);
+                if(file_exists($dir)) {
+                    unlink($dir);
+                }  
+            }
+
+
+            $arName = Str::slug($request->input('name')).'_'.time().'_';
+            // Define folder path
+            $folder = '/AR/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $arName. '.usdz';
+            // Upload image
+            $request->file('ar')->move(public_path($folder), $arName. '.usdz');
+
+            $product->update([
+                'ar' => $filePath
+            ]);
         }
 
         $product->update([

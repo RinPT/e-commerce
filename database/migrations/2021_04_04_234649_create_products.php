@@ -22,6 +22,7 @@ class CreateProducts extends Migration
             $table->decimal('price','50');
             $table->decimal('cargo_price','50');
             $table->foreignId('currency_id')->constrained()->onDelete('cascade');
+            $table->string('ar')->nullable();
             $table->timestamps();
         });
 
@@ -45,6 +46,19 @@ class CreateProducts extends Migration
             'price' => '140',
             'cargo_price' => '5',
             'currency_id' => '2',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('products')->insert([
+            'store_id' => '3',
+            'name' => '[AR] Chair',
+            'category_id' => '4',
+            'description' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
+            'price' => '110',
+            'cargo_price' => '20',
+            'currency_id' => '2',
+            'ar' => '/AR/chair.usdz',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);

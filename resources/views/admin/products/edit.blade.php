@@ -29,7 +29,7 @@
             <p class="card-subtitle">You can edit a product here.</p>
         </header>
         <div class="card-body">
-            <form action="{{ route('update.products', $product->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.update', $product->id) }}" method="post" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
                 @if ($errors->any())
@@ -97,6 +97,18 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">AR File</label>
+                    <div class="col-lg-6">
+                        <div class='row'>
+                            @if(!empty($product->ar))
+                                <label>{{ basename($product->ar) }}</label>
+                            @endif
+                        </div>
+                        <input type="file" name="ar" multiple class="form-control" accept=".usdz">
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Price</label>
                     <div class="col-lg-6">
                         <input type="number" class="form-control" name="price" value="{{ $product->price }}">
@@ -139,6 +151,26 @@
                                         <input type="hidden" value="{{ $attribute['id'] }}" name="id[]">
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                    <input type="hidden" name="id[]">
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                    <input type="hidden" name="id[]">
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                    <input type="hidden" name="id[]">
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="number" class="form-control" name="stock[]"></td>
+                                    <input type="hidden" name="id[]">
+                                </tr>
                             </tbody>
                         </table>
                     </div>

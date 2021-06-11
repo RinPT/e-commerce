@@ -84,6 +84,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">AR File</label>
+                    <div class="col-lg-6">
+                        <input type="file" name="ar" multiple class="form-control" accept=".usdz">
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Price</label>
                     <div class="col-lg-6">
                         <input type="number" class="form-control" name="price">
