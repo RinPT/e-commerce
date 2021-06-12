@@ -35,9 +35,9 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
  * Reset Password
  */
 Route::get('/forgot-password', [PasswordResetController::class, 'index'])->name('forgot.password');
-Route::post('/forgot-password/done', [PasswordResetController::class, 'generate_token']);
+Route::post('/forgot-password/done', [PasswordResetController::class, 'generate_token'])->name('forgot.password.done');
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'reset_password'])->name('password.reset');
-Route::get('/reset-password/done', [PasswordResetController::class, 'password_store'])->name('password.reset.done');
+Route::post('/reset-password/done', [PasswordResetController::class, 'password_store'])->name('password.reset.done');
 
 /**
  * Pages

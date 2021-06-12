@@ -49,7 +49,8 @@ class RegisterController extends Controller
     	'username' => $request->username,
     	'email' => $request->email,
     	'password' => Hash::make($request-> password),
-        'last_logged_ipaddress' => "127.0.0.1"
+        'last_logged_ipaddress' => "127.0.0.1",
+        'group' => '[2]'
     	]);
 
     	auth()->attempt($request->only('email','password'));

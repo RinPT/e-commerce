@@ -51,12 +51,18 @@
                                     @if(session('status'))
                                         <div class="alert alert-danger mb-3 text-white">{{ session('status') }}</div>
                                     @endif
-                                    <form action="{{ route('forgot.password') }}" method="post">
+                                    @if(session('success'))
+                                        <div class="alert alert-success mb-3 text-white">{{ session('success') }}</div>
+                                    @endif
+                                    @if(session('error'))
+                                        <div class="alert alert-danger mb-3 text-white">{{ session('error') }}</div>
+                                    @endif
+                                    <form action="{{ route('forgot.password.done') }}" method="post">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <input type="text" class="form-control" name="email" placeholder="Your Email Address" value="{{ old('email') }}" required/>
                                         </div>
-                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Login</button>
+                                        <button type="submit" class="btn btn-dark btn-block btn-rounded">Reset</button>
                                     </form>
                                 </div>
                             </div>

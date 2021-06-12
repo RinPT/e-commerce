@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'plesk.hosting.me'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME', 'info@darf.xyz'),
-            'password' => env('MAIL_PASSWORD', 'p1v4J@m5'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'port' => env('MAIL_PORT', 465),
+            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+            'username' => env('MAIL_USERNAME', 'cemalcemali574@gmail.com'),
+            'password' => env('MAIL_PASSWORD', 'ttg123456'),
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@darf.xyz'),
+        'address' => env('MAIL_FROM_ADDRESS', 'cemalcemali574@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 

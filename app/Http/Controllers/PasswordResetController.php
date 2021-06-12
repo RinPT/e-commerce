@@ -23,9 +23,7 @@ class PasswordResetController extends Controller
             $request->only('email')
         );
 
-        return $status === Password::RESET_LINK_SENT
-                        ? back()->with('success', 'We sent you an email. Please also check your spam box.')
-                        : back()->with('error', 'Something went wrong! Please try again.');
+        return $status === Password::RESET_LINK_SENT ? back()->with('success', 'We sent you an email. Please also check your spam box.') : back()->with('error', 'Something went wrong! Please try again.');
     }
 
     public function reset_password($token) {

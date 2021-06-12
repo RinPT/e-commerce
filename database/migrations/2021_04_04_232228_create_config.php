@@ -83,25 +83,25 @@ class CreateConfig extends Migration
             ],
             [
                 'key' => 'smtp_server',
-                'value' => 'mail.domainname.com',
+                'value' => 'smtp.gmail.com',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'key' => 'smtp_port',
-                'value' => '587',
+                'value' => '465',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'key' => 'smtp_username',
-                'value' => 'info@domainname.com',
+                'value' => 'cemalcemali574@gmail.com',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'key' => 'smtp_password',
-                'value' => '',
+                'value' => 'ttg123456',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
