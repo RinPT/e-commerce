@@ -14,7 +14,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/photo/favicon.png">
 
-    <script>
+    <script type="text/javascript">
         WebFontConfig = {
             google: { families: [ 'Poppins:400,500,600,700' ] }
         };
@@ -24,6 +24,10 @@
             wf.async = true;
             s.parentNode.insertBefore( wf, s );
         } )( document );
+        let currency = {
+            prefix: "{{$cookie_currency->prefix}}",
+            suffix: "{{$cookie_currency->suffix}}",
+        }
     </script>
 
     @yield('bootstrap')
@@ -49,6 +53,7 @@
             left: -400px;
         }
     </style>
+    @yield('custom-css')
 </head>
 
 <body>

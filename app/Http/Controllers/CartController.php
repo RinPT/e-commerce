@@ -8,9 +8,11 @@ use App\Models\Currencies;
 use App\Models\Categories;
 use App\Models\Product;
 use App\Models\Product_Images;
+use App\Models\ProductCoupon;
 use App\Models\ProductStock;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as TRequest;
 
 class CartController extends Controller
 {
@@ -20,6 +22,17 @@ class CartController extends Controller
             $cart_products = json_decode($_COOKIE['cart_products']);
         }else{
             $cart_products = [];
+        }
+
+        if(isset($_COOKIE['used_coupones'])){
+            $used_coupones = json_decode($_COOKIE['used_coupones']);
+            $coupones = [];
+            foreach ($used_coupones as $id) {
+                $coupones[] = ProductCoupon::find($id);
+            }
+            $used_coupones = $coupones;
+        }else{
+            $used_coupones = [];
         }
 
         $def_logo = Config::where('key','default_product_logo')->value('value');
@@ -86,6 +99,7 @@ class CartController extends Controller
 
         return view('cart',[
             'cart_products' => $cart_products,
+            'used_coupones' => $used_coupones,
             'def_logo' => $def_logo
         ]);
     }
@@ -140,6 +154,48 @@ class CartController extends Controller
             'message' => 'Successfully Added',
             'count' => $count,
         ]);
+    }
+
+    public function update(){
+        $cart_products = json_decode($_COOKIE['cart_products']);
+        $cart_products[$_POST['id']]->count = $_POST['count'];
+        setcookie('cart_products',json_encode($cart_products),time() + 86400 * 30,'/');
+
+        return response()->json([
+            'status' => 1,
+            'message' => 'Updated successfully'
+        ]);
+    }
+
+    public function apply_coupon(TRequest $request){
+
+        $coupon = ProductCoupon::where('code',$request->coupon_code)->first();
+        if($coupon){
+            if(isset($_COOKIE['used_coupones'])){
+                $used_coupones = json_decode($_COOKIE['used_coupones']);
+                $used_coupones[] = $coupon->id;
+                setcookie('used_coupones',json_encode($used_coupones),time() + 86400 * 30,'/');
+            }else{
+                $used_coupones = [$coupon->id];
+                setcookie('used_coupones',json_encode($used_coupones),time() + 86400 * 30,'/');
+            }
+
+            return back()->with('success','Coupone code used successfully');
+        }else{
+            return back()->with('error','No coupons for this code');
+        }
+    }
+
+    function delete_coupon($id){
+        $used_coupones = json_decode($_COOKIE['used_coupones']);
+        foreach ($used_coupones as $key => $used_coupone) {
+            if($used_coupone == $id){
+                unset($used_coupones[$key]);
+                break;
+            }
+        }
+        setcookie('used_coupones',json_encode(array_values($used_coupones)),time() + 86400 * 30,'/');
+        return back()->with('success','Coupone code removed successfully');
     }
 
     public function destroy(){

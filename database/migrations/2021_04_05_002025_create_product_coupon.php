@@ -22,6 +22,17 @@ class CreateProductCoupon extends Migration
             $table->dateTime('end_date');
             $table->timestamps();
         });
+        DB::table('product_coupon')->insert([
+            [
+                'product_id' => 1,
+                'code' => 'DISC10',
+                'rate' => 10,
+                'price' => 0,
+                'end_date' => \Carbon\Carbon::create('2021','07','14'),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]
+        ]);
     }
 
     /**

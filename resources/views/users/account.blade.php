@@ -22,19 +22,17 @@
 @section('content')
 
     <main class="main account">
+        <div class="page-header pl-4 pr-4" style="background-image: url(images/page-header/about-us.jpg)">
+            <h1 class="page-title font-weight-bold lh-1 text-white text-capitalize">Welcome {{ auth()->user()->name }} {{ auth()->user()->surname }}!</h1>
+            <p class="page-desc text-white mb-0">From your account dashboard you can view your recent orders,<br> manage your shipping and billing addresses,
+                and edit your password and account details.</p>
+        </div>
         <div class="page-content mt-4 mb-10 pb-6">
             <div class="container">
-                <h2 class="title title-center mb-10">My Account</h2>
                 <div class="tab tab-vertical gutter-lg">
                     <ul class="nav nav-tabs mb-4 col-lg-3 col-md-4" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#orders">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#downloads">Add Product</a>
+                            <a class="nav-link active" href="#orders">Orders</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#address">Address</a>
@@ -44,22 +42,7 @@
                         </li>
                     </ul>
                     <div class="tab-content col-lg-9 col-md-8">
-                        <div class="tab-pane active" id="dashboard">
-                            <p class="mb-8">
-                                From your account dashboard you can view your recent orders, manage your shipping and billing
-                                    addresses,<br>and edit your password and account details.
-                            </p>
-                            <div class="row">
-                                <div class="col-9 d-flex justify-content-between">
-                                    <form action="{{ route('account.delete') }}" method="POST" class="form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-primary btn-rounded"><span class="d-flex align-items-center">Delete Account<i class="fas fa-trash-alt ml-2"></i></span></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="orders">
+                        <div class="tab-pane active" id="orders">
                             <table class="order-table">
                                 <thead>
                                     <tr>
@@ -115,25 +98,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="tab-pane" id="downloads">
-                            <p class="mb-4 text-body">Fill all necessary fields to create a product!</p>
-                            <form action="{{ route('product.create') }}" method="POST" class="form">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="text" class="form-control" @error('product_name') style="border-color: red" @enderror name="product_name" id="product_name" placeholder="Product Name" value="">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <textarea class="form-control" @error('product_description') style="border-color: red" @enderror name="product_description" id="product_description" rows="3" placeholder="Product Description">{{ old('product_description') }}</textarea>
-                                </div>
-                                <div class="form-group mt-3 d-flex">
-                                    <input type="number" class="form-control" @error('price') style="border-color: red" @enderror name="price" id="price" placeholder="Price">
-                                    <input type="number" class="form-control" @error('cargo_price') style="border-color: red" @enderror name="cargo_price" id="cargo_price" placeholder="Cargo Price">
-                                </div>
-
-                                <button type="submit" class="btn btn-link">Add Product</button>
-
-                            </form>
                         </div>
                         <div class="tab-pane" id="address">
                             <p class="mb-2">The following addresses will be used on the checkout page by default.</p>

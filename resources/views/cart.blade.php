@@ -1,49 +1,43 @@
 @extends('layouts.app')
 
-@section('stylesheet')
-
-    <!-- Main CSS File -->
-    <link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
-
+@section('custom-css')
     <style>
-        /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-        }
-
-        /* Firefox */
-        input[type=number] {
-        -moz-appearance: textfield;
+        .remove-coupon{
+            background: #000000;
+            color: white !important;
+            padding: 0;
+            border-radius: 18px;
+            height: 18px;
+            width: 18px;
+            display: inline-block;
+            text-align: center;
+            line-height: 19px;
+            font-size: 10px;
+            cursor: pointer;
         }
     </style>
-@endsection
-
-@section('javaScript')
-    <script>
-        function calc_single(){
-            $('.quantity-plus').click(function (){
-                $('.amount-single-total').html($('.amount-single-total').data('prefix')+""+($('.amount-single-total').data('price')*$('.quantity').val()).toFixed(2)+" "+$('.amount-single-total').data('suffix'))
-            })
-            $('.quantity-minus').click(function (){
-                $('.amount-single-total').html($('.amount-single-total').data('prefix')+""+($('.amount-single-total').data('price')*$('.quantity').val()).toFixed(2)+" "+$('.amount-single-total').data('suffix'))
-            })
-        }
-        calc_single()
-    </script>
 @endsection
 
 @section('content')
     <main class="main cart">
         <div class="page-content pt-7 pb-10">
             <div class="step-by pr-4 pl-4">
-                <h3 class="title title-simple title-step active"><a href="cart.html">1. Shopping Cart</a></h3>
-                <h3 class="title title-simple title-step"><a href="checkout.html">2. Checkout</a></h3>
+                <h3 class="title title-simple title-step active"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
+                <h3 class="title title-simple title-step"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
                 <h3 class="title title-simple title-step"><a href="order.html">3. Order Complete</a></h3>
             </div>
             <div class="container mt-7 mb-2">
                 <div class="row">
+                    @if(Session::has('success'))
+                        <div class="alert alert-success text-white mb-4">
+                            <strong>Success</strong> {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    @if(Session::has('error'))
+                        <div class="alert alert-danger text-white mb-4">
+                            <strong>Error!</strong> {{ Session::get('error') }}
+                        </div>
+                    @endif
                     <div class="col-lg-8 col-md-12 pr-lg-4">
                         <table class="shop-table cart-table">
                             <thead>
@@ -56,6 +50,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php ($pids = [])
                             @forelse($cart_products as $key => $product)
                             <tr>
                                 <td class="product-thumbnail">
@@ -76,21 +71,39 @@
                                 </td>
                                 <td class="product-name">
                                     <div class="product-name-section">
-                                        <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->product->name)), 'id' => $product->product->id]) }}">{{ $product->product->name }}</a>
+                                        <a href="{{ route('product.profile',['name' => strtolower(str_replace(' ','-',$product->product->name)), 'id' => $product->product->id]) }}">
+                                            {{ $product->product->name }}
+                                        </a>
                                     </div>
+                                    <span style="font-size: 12px;font-weight: 300;"><i class="fa fa-angle-double-right"></i> Options</span>
+                                    @foreach($product->options as $name => $val)
+                                    <div class="text-capitalize ml-2" style="font-size: 11px;font-weight: 300;">
+                                        <span>{{ $name }} :</span>
+                                        <span>{{ $val }}</span>
+                                    </div>
+                                    @endforeach
                                 </td>
                                 <td class="product-subtotal">
-                                    <span class="amount">{{ $cookie_currency->prefix }}{{ $product->product->price }} {{ $cookie_currency->suffix }}</span>
+                                    <div class="amount">{{ $cookie_currency->prefix }}{{ $product->product->price }} {{ $cookie_currency->suffix }}</div>
+                                    @if(!in_array($product->product->id,$pids))
+                                    <div class="amount-cargo" style="font-size: 11px" data-price="{{ $product->product->cargo_price }}">
+                                        Cargo: {{ $cookie_currency->prefix }}{{ $product->product->cargo_price }} {{ $cookie_currency->suffix }}
+                                    </div>
+                                    @endif
                                 </td>
                                 <td class="product-quantity">
                                     <div class="input-group">
                                         <button class="quantity-minus d-icon-minus"></button>
-                                        <input class="quantity form-control" type="number" min="1" max="{{ $product->product->total_stock_count }}" value="{{ $product->count }}">
+                                        <input class="quantity form-control" type="number" min="1" max="{{ $product->product->total_stock_count }}" value="{{ $product->count }}" data-val="{{ $product->count }}">
                                         <button class="quantity-plus d-icon-plus"></button>
                                     </div>
                                 </td>
                                 <td class="product-price">
-                                    <span class="amount amount-single-total" data-prefix="{{ $cookie_currency->prefix }}" data-suffix="{{ $cookie_currency->suffix }}" data-price="{{ $product->product->price }}">
+                                    <span class="amount amount-single-total"
+                                          data-price="{{ $product->product->price }}"
+                                          data-id="{{ $key }}"
+                                          data-total="{{ number_format($product->product->price * $product->count,2,".","") }}"
+                                    >
                                         {{ $cookie_currency->prefix }}{{ number_format($product->product->price * $product->count,2,".","") }} {{ $cookie_currency->suffix }}
                                     </span>
                                 </td>
@@ -100,6 +113,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @php ($pids[] = $product->product->id)
                             @empty
                                 <tr>
                                     <td colspan="5">There is no product in shopping cart.</td>
@@ -108,78 +122,50 @@
                             </tbody>
                         </table>
                         <div class="cart-actions mb-6 pt-4">
-                            <a href="shop.html" class="btn btn-dark btn-md btn-rounded btn-icon-left mr-4 mb-4"><i class="d-icon-arrow-left"></i>Continue Shopping</a>
-                            <button type="submit" class="btn btn-outline btn-dark btn-md btn-rounded btn-disabled">Update Cart</button>
-                        </div>
-                        <div class="cart-coupon-box mb-8">
-                            <h4 class="title coupon-title text-uppercase ls-m">Coupon Discount</h4>
-                            <input type="text" name="coupon_code" class="input-text form-control text-grey ls-m mb-4"
-                                   id="coupon_code" value="" placeholder="Enter coupon code here...">
-                            <button type="submit" class="btn btn-md btn-dark btn-rounded btn-outline">Apply Coupon</button>
+                            <a href="{{ route('home') }}" class="btn btn-dark btn-md btn-rounded btn-icon-left mr-4 mb-4"><i class="d-icon-arrow-left"></i>Continue Shopping</a>
                         </div>
                     </div>
                     <aside class="col-lg-4 sticky-sidebar-wrapper">
                         <div class="sticky-sidebar" data-sticky-options="{'bottom': 20}">
                             <div class="summary mb-4">
                                 <h3 class="summary-title text-left">Cart Totals</h3>
-                                <table class="shipping">
-                                    <tr class="summary-subtotal">
-                                        <td>
-                                            <h4 class="summary-subtitle">Subtotal</h4>
-                                        </td>
-                                        <td>
-                                            <p class="summary-subtotal-price">$426.99</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="sumnary-shipping shipping-row-last">
-                                        <td colspan="2">
-                                            <h4 class="summary-subtitle">Calculate Shipping</h4>
-                                            <ul>
-                                                <li>
-                                                    <div class="custom-radio">
-                                                        <input type="radio" id="flat_rate" name="shipping" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="flat_rate">Flat rate</label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="custom-radio">
-                                                        <input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
-                                                        <label class="custom-control-label" for="free-shipping">Free
-                                                            shipping</label>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="custom-radio">
-                                                        <input type="radio" id="local_pickup" name="shipping" class="custom-control-input">
-                                                        <label class="custom-control-label" for="local_pickup">Local pickup</label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="shipping-address">
-                                    <label>Shipping to <strong>CA.</strong></label>
-                                    <div class="select-box">
-                                        <select name="country" class="form-control">
-                                            <option value="us" selected>United States (US)</option>
-                                            <option value="uk"> United Kingdom</option>
-                                            <option value="fr">France</option>
-                                            <option value="aus">Austria</option>
-                                        </select>
+                                <div style="border-bottom: 1px solid #e1e1e1;">
+                                    <div class="d-flex mt-4">
+                                        <span>Product Total</span>
+                                        <span class="ml-auto font-weight-bold product-total"></span>
                                     </div>
-                                    <div class="select-box">
-                                        <select name="country" class="form-control">
-                                            <option value="us" selected>California</option>
-                                            <option value="uk">Alaska</option>
-                                            <option value="fr">Delaware</option>
-                                            <option value="aus">Hawaii</option>
-                                        </select>
+                                    <div class="d-flex">
+                                        <span>Cargo Total</span>
+                                        <span class="ml-auto font-weight-bold cargo-total"></span>
                                     </div>
-                                    <input type="text" class="form-control" name="code" placeholder="Town / City" />
-                                    <input type="text" class="form-control" name="code" placeholder="ZIP" />
-                                    <a href="#" class="btn btn-md btn-dark btn-rounded btn-outline">Update totals</a>
+                                    <div class="mb-4">
+                                        @foreach($used_coupones as $c)
+                                            <div class="d-flex">
+                                                <span>
+                                                    <a class="remove-coupon" href="{{ route('coupon.delete',['code' => $c->id]) }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                    Coupon #{{ $c->code }}
+                                                </span>
+                                                <span class="ml-auto font-weight-bold">
+                                                    @if($c->rate > 0)
+                                                        {{ $c->rate."%" }}
+                                                    @else
+                                                        {{ $cookie_currency->prefix }} {{ $c->price }} {{ $cookie_currency->suffix }}
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="cart-coupon-box mb-8 mt-2">
+                                    <h4 class="title coupon-title text-uppercase ls-m mb-0">Coupon Discount</h4>
+                                    <form action="{{ route('coupon.apply') }}" method="post">
+                                        @csrf
+                                        <input type="text" name="coupon_code" class="input-text form-control text-grey ls-m mb-4"
+                                               id="coupon_code" value="" placeholder="Enter coupon code here...">
+                                        <button type="submit" class="btn btn-md btn-dark btn-rounded btn-outline">Apply Coupon</button>
+                                    </form>
                                 </div>
                                 <table class="total">
                                     <tr class="summary-subtotal">
@@ -187,11 +173,11 @@
                                             <h4 class="summary-subtitle">Total</h4>
                                         </td>
                                         <td>
-                                            <p class="summary-total-price ls-s">$426.99</p>
+                                            <p class="summary-total-price ls-s"></p>
                                         </td>
                                     </tr>
                                 </table>
-                                <a href="checkout.html" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
+                                <a href="{{ route('checkout') }}" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
                             </div>
                         </div>
                     </aside>
@@ -201,4 +187,79 @@
     </main>
     <!-- End Main -->
 
+@endsection
+
+@section('javaScript')
+    <script>
+        $('.quantity').keyup(function (){
+            if($(this).val() == "" || $(this).val() == 0){
+                $(this).val(1)
+            }
+            var last        = Number($(this).attr('data-val'))
+            var cart        = Number($('.cart-count').html())
+            var single      = $(this).parent().parent().next().find('.amount-single-total')
+            var quantity    = Number($(this).val())
+            single.attr('data-total',(single.data('price') * quantity).toFixed(2))
+            single.html(currency.prefix+""+(single.data('price') * quantity).toFixed(2)+" "+currency.suffix)
+            $(this).attr('data-val',quantity)
+            $('.cart-count').html(cart + quantity - last)
+            UpdateSingleProduct(single.data('id'),quantity)
+            CalcTotal()
+        })
+        function CalcProductTotal(){
+            $('.quantity-plus').click(function (){
+                var single = $(this).parent().parent().next().find('.amount-single-total')
+                var quantity = $(this).prev().val()
+                single.attr('data-total',(single.data('price') * quantity).toFixed(2))
+                single.html(currency.prefix+""+(single.data('price') * quantity).toFixed(2)+" "+currency.suffix)
+                $('.cart-count').html(Number($('.cart-count').html())+1)
+                UpdateSingleProduct(single.data('id'),quantity)
+                CalcTotal()
+            })
+            $('.quantity-minus').click(function (){
+                var single = $(this).parent().parent().next().find('.amount-single-total')
+                var quantity = $(this).next().val()
+                single.attr('data-total',(single.data('price') * quantity).toFixed(2))
+                single.html(currency.prefix+""+(single.data('price') * quantity).toFixed(2)+" "+currency.suffix)
+                $('.cart-count').html(Number($('.cart-count').html())-1)
+                UpdateSingleProduct(single.data('id'),quantity)
+                CalcTotal()
+            })
+        }
+
+        function UpdateSingleProduct(id,count){
+            $.ajax({
+                method: "POST",
+                url: "{{ route('cart.update') }}",
+                data : {
+                    id : id,
+                    _token: "{{ csrf_token() }}",
+                    count: count
+                }
+            }).done(function (data){
+
+            }).fail(function (msg){
+                console.log("An error occured.")
+            })
+        }
+        function CalcTotal(){
+            var total = 0
+            $('.amount-single-total').each(function (){
+                total += Number($(this).attr('data-total'))
+            })
+            $('.product-total').html(currency.prefix+""+total.toFixed(2)+" "+currency.suffix)
+        }
+
+        function CalcCargoTotal(){
+            var total = 0
+            $('.amount-cargo').each(function (){
+                total += Number($(this).data('price'))
+            })
+            $('.cargo-total').html(currency.prefix+""+total.toFixed(2)+" "+currency.suffix)
+        }
+        CalcProductTotal()
+        CalcCargoTotal()
+        CalcTotal()
+
+    </script>
 @endsection

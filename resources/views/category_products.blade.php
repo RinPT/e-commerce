@@ -31,7 +31,7 @@
                     $('.cart-prod-added').removeClass('show');
                 },'1500')
             }).fail(function (msg){
-                console.log("An error occured.")
+                console.log(msg)
             })
         })
 
