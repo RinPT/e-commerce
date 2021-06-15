@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Product_Images;
 use App\Models\ProductCoupon;
 use App\Models\ProductStock;
+use App\Models\UserAddress;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request as TRequest;
@@ -80,9 +81,11 @@ class CartController extends Controller
              */
             if($cookie_curr->id != $cart_product->product->currency_id){
                 $cart_product->product->price = number_format($cart_product->product->price * $cookie_curr->rate / $cart_product->product->cur_rate,2,".","");
+                $cart_product->product->cargo_price = number_format($cart_product->product->cargo_price * $cookie_curr->rate / $cart_product->product->cur_rate,2,".","");
             }
             $cart_product->product->price -= $cart_product->product->price * ($cart_product->product->store_discount + $cart_product->product->main_discount)/100;
             $cart_product->product->price = number_format($cart_product->product->price,2,".","");
+
 
             /**
              * Image
@@ -173,6 +176,9 @@ class CartController extends Controller
         if($coupon){
             if(isset($_COOKIE['used_coupones'])){
                 $used_coupones = json_decode($_COOKIE['used_coupones']);
+                if(in_array($coupon->id,$used_coupones)){
+                    return back()->with('error','Coupon code has already been used');
+                }
                 $used_coupones[] = $coupon->id;
                 setcookie('used_coupones',json_encode($used_coupones),time() + 86400 * 30,'/');
             }else{

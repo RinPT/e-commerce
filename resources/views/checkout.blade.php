@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('stylesheet')
+@section('custom-css')
 
     	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
@@ -17,8 +17,15 @@
         input[type=number] {
         -moz-appearance: textfield;
         }
+        .delivery-address,.billing-address {
+            border: 2px solid #dee2e6!important;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .delivery-address.active,.billing-address.active {
+            border: 2px solid #2466cc!important;
+        }
     </style>
-
 @endsection
 
 
@@ -28,132 +35,83 @@
             <div class="step-by pr-4 pl-4">
                 <h3 class="title title-simple title-step"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
                 <h3 class="title title-simple title-step active"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
-                <h3 class="title title-simple title-step"><a href="{{ route('order.summary') }}">3. Order Complete</a></h3>
+                <h3 class="title title-simple title-step"><a href="order.html">3. Order Complete</a></h3>
             </div>
             <div class="container mt-7">
-                <div class="card accordion">
-                    @guest
-                        <div class="alert alert-light alert-primary alert-icon mb-4 card-header">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span class="text-body">Returning customer?</span>
-                            <a href="#alert-body1" class="text-primary collapse">Click here to login</a>
-                        </div>
-                    @endguest
-                    <div class="alert-body collapsed" id="alert-body1">
-                        <p>If you have shopped with us before, please enter your details below.
-                            If you are a new customer, please proceed to the Billing section.</p>
-                        <div class="row cols-md-2">
-                            <form class="mb-4 mb-md-0">
-                                <label for="username">Username Or Email *</label>
-                                <input type="text" class="input-text form-control mb-0" name="username" id="username" autocomplete="username">
-                            </form>
-                            <form class="mb-4 mb-md-0">
-                                <label for="password">Password *</label>
-                                <input class="input-text form-control mb-0" type="password" name="password" id="password" autocomplete="current-password">
-                            </form>
-                        </div>
-                        <div class="checkbox d-flex align-items-center justify-content-between">
-                            <div class="form-checkbox pt-0 mb-0">
-                                <input type="checkbox" class="custom-checkbox" id="signin-remember"
-                                    name="signin-remember" />
-                                <label class="form-control-label" for="signin-remember">Remember
-                                    Me</label>
-                            </div>
-                            <a href="#" class="lost-link">Lost your password?</a>
-                        </div>
-                        <div class="link-group">
-                            <a href="#" class="btn btn-dark btn-rounded mb-4">Login</a>
-                            <span class="d-inline-block text-body font-weight-semi-bold">or Login With</span>
-                            <div class="social-links mb-4">
-                                <a href="#" class="social-link social-google fab fa-google"></a>
-                                <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
-                                <a href="#" class="social-link social-twitter fab fa-twitter"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card accordion">
-                    <div class="alert alert-light alert-primary alert-icon mb-4 card-header">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span class="text-body">Have a coupon?</span>
-                        <a href="#alert-body2" class="text-primary">Click here to enter your code</a>
-                    </div>
-                    <div class="alert-body mb-4 collapsed" id="alert-body2">
-                        <p>If you have a coupon code, please apply it below.</p>
-                        <div class="check-coupon-box d-flex">
-                            <input type="text" name="coupon_code" class="input-text form-control text-grey ls-m mr-4"
-                                id="coupon_code" value="" placeholder="Coupon code">
-                            <button type="submit" class="btn btn-dark btn-rounded btn-outline">Apply Coupon</button>
-                        </div>
-                    </div>
-                </div>
                 <form action="#" class="form">
                     <div class="row">
                         <div class="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
-                            <h3 class="title title-simple text-left text-uppercase">Billing Details</h3>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <label>First Name *</label>
-                                    <input type="text" class="form-control" name="first-name" required="" />
+                            @if(count($addresses))
+                                <input type="hidden" name="delivery_id" value="{{ $addresses[0]->id }}">
+                                <input type="hidden" name="billing_id" value="{{ $addresses[0]->id }}">
+                                <div class="row">
+                                    <h2 class="title title-simple text-uppercase text-left">Delivery Address</h2>
+                                    @foreach ($addresses as $key => $address)
+                                        <div class="col-sm-4">
+                                            <div class="card card-address delivery-address @if($key == 0) active @endif" data-id="{{ $address->id }}">
+                                                <div class="card-body border p-4 rounded mb-0 p-0">
+                                                    <h6 class="mb-1">{{ $address->address_type }} <span class="text-capitalize">({{ $address->user_type }})</span></h6>
+                                                    <hr/>
+                                                    <p class="mb-0 fs-12">
+                                                        <strong>{{ $address->name }} {{ $address->surname }}</strong><br>
+                                                        {{ $address->address }}<br>
+                                                        {{ $address->city }}<br>
+                                                        {{ $address->postcode }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <div class="col-xs-6">
-                                    <label>Last Name *</label>
-                                    <input type="text" class="form-control" name="last-name" required="" />
+                                <div class="row mt-4">
+                                    <h2 class="title title-simple text-uppercase text-left">Billing Address</h2>
+                                    @foreach ($addresses as $key => $address)
+                                        <div class="col-sm-4 mb-4">
+                                            <div class="card card-address billing-address @if($key == 0) active @endif" data-id="{{ $address->id }}">
+                                                <div class="card-body border p-4 rounded mb-0 p-0">
+                                                    <h6 class="mb-1">{{ $address->address_type }} <span class="text-capitalize">({{ $address->user_type }})</span></h6>
+                                                    <hr/>
+                                                    <p class="mb-0 fs-12">
+                                                        <strong>{{ $address->name }} {{ $address->surname }}</strong><br>
+                                                        {{ $address->address }}<br>
+                                                        {{ $address->city }}<br>
+                                                        {{ $address->postcode }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div>
-                            <label>Company Name (Optional)</label>
-                            <input type="text" class="form-control" name="company-name" required="" />
-                            <label>Country / Region *</label>
-                            <div class="select-box">
-                                    <select name="country" class="form-control">
-                                        <option value="us" selected>United States (US)</option>
-                                        <option value="uk"> United Kingdom</option>
-                                        <option value="fr">France</option>
-                                        <option value="aus">Austria</option>
-                                    </select>
+                            @endif
+                                <div class="payment accordion radio-type" style="border-bottom: 0;">
+                                    <h2 class="title title-simple text-uppercase text-left">Payment Methods</h2>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <a href="#collapse1" class="collapse text-body text-normal ls-m">Check payments
+                                            </a>
+                                        </div>
+                                        <div id="collapse1" class="expanded" style="display: block;">
+                                            <div class="card-body ls-m">
+                                                Please send a check to Store Name, Store Street,
+                                                Store Town, Store State / County, Store Postcode.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <a href="#collapse2" class="expand text-body text-normal ls-m">Cash on delivery</a>
+                                        </div>
+                                        <div id="collapse2" class="collapsed">
+                                            <div class="card-body ls-m">
+                                                Pay with cash upon delivery.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            <label>Street Address *</label>
-                            <input type="text" class="form-control" name="address1" required=""
-                                placeholder="House number and street name" />
-                            <input type="text" class="form-control" name="address2" required=""
-                                placeholder="Apartment, suite, unit, etc. (optional)" />
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <label>Town / City *</label>
-                                    <input type="text" class="form-control" name="city" required="" />
-                                </div>
-                                <div class="col-xs-6">
-                                    <label>State *</label>
-                                    <input type="text" class="form-control" name="state" required="" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <label>ZIP *</label>
-                                    <input type="text" class="form-control" name="zip" required="" />
-                                </div>
-                                <div class="col-xs-6">
-                                    <label>Phone *</label>
-                                    <input type="text" class="form-control" name="phone" required="" />
-                                </div>
-                            </div>
-                            <label>Email Address *</label>
-                            <input type="text" class="form-control" name="email-address" required="" />
-                            <div class="form-checkbox mb-0">
-                                <input type="checkbox" class="custom-checkbox" id="create-account"
-                                    name="create-account">
-                                <label class="form-control-label ls-s" for="create-account">Create an account?</label>
-                            </div>
-                            <div class="form-checkbox mb-6">
-                                <input type="checkbox" class="custom-checkbox" id="different-address"
-                                    name="different-address">
-                                <label class="form-control-label ls-s" for="different-address">Ship to a different
-                                    address?</label>
-                            </div>
                             <h2 class="title title-simple text-uppercase text-left">Additional Information</h2>
                             <label>Order Notes (Optional)</label>
                             <textarea class="form-control pb-2 pt-2 mb-0" cols="30" rows="5"
-                                placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                      placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div>
                         <aside class="col-lg-5 sticky-sidebar-wrapper">
                             <div class="sticky-sidebar mt-1" data-sticky-options="{'bottom': 50}">
@@ -161,103 +119,82 @@
                                     <h3 class="title title-simple text-left text-uppercase">Your Order</h3>
                                     <table class="order-table">
                                         <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th></th>
-                                            </tr>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th></th>
+                                        </tr>
                                         </thead>
                                         <tbody>
+                                        @php ($pids = [])
+                                        @forelse($cart_products as $key => $product)
+                                        <tr>
+                                            <td class="product-name pb-0">{{ $product->product->name }} <span class="product-quantity">×&nbsp;{{ $product->count }}</span></td>
+                                            <td class="product-total text-body pb-0" data-price="{{ number_format($product->product->price * $product->count,2,".","") }}">
+                                                {{ $cookie_currency->prefix }}{{ number_format($product->product->price * $product->count,2,".","") }} {{ $cookie_currency->suffix }}
+                                            </td>
+                                        </tr>
+                                        @if(!in_array($product->product->id,$pids))
                                             <tr>
-                                                <td class="product-name">Fashionable Overnight Bag <span
-                                                        class="product-quantity">×&nbsp;1</span></td>
-                                                <td class="product-total text-body">$110.00</td>
+                                                <td class="cargo-name pb-0" style="color: #666;">Cargo</td>
+                                                <td class="product-total text-body pb-0" data-cargo-price="{{ $product->product->cargo_price }}">
+                                                    {{ $cookie_currency->prefix }}{{ $product->product->cargo_price }} {{ $cookie_currency->suffix }}                                                </td>
                                             </tr>
+                                        @endif
+                                        @php ($pids[] = $product->product->id)
+                                        @empty
                                             <tr>
-                                                <td class="product-name">Mackintosh Poket backpack <span
-                                                        class="product-quantity">×&nbsp;1</span></td>
-                                                <td class="product-total text-body">$180.00</td>
-                                            </tr>
-                                            <tr class="summary-subtotal">
-                                                <td>
-                                                    <h4 class="summary-subtitle">Subtotal</h4>
-                                                </td>
-                                                <td class="summary-subtotal-price pb-0 pt-0">$290.00
+                                                <td class="product-name" colspan="2">
+                                                    There is no product
                                                 </td>
                                             </tr>
-                                            <tr class="sumnary-shipping shipping-row-last">
-                                                <td colspan="2">
-                                                    <h4 class="summary-subtitle">Calculate Shipping</h4>
-                                                    <ul>
-                                                        <li>
-                                                            <div class="custom-radio">
-                                                                <input type="radio" id="flat_rate"
-                                                                    name="shipping" class="custom-control-input" checked>
-                                                                <label class="custom-control-label"
-                                                                    for="flat_rate">Flat rate</label>
-                                                            </div>
-                                                        </li>
-
-                                                        <li>
-                                                            <div class="custom-radio">
-                                                                <input type="radio" id="free-shipping"
-                                                                    name="shipping" class="custom-control-input">
-                                                                <label class="custom-control-label"
-                                                                    for="free-shipping">Free
-                                                                    shipping</label>
-                                                            </div>
-                                                        </li>
-
-                                                        <li>
-                                                            <div class="custom-radio">
-                                                                <input type="radio" id="local_pickup"
-                                                                    name="shipping" class="custom-control-input">
-                                                                <label class="custom-control-label"
-                                                                    for="local_pickup">Local pickup</label>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="summary-total">
-                                                <td class="pb-0">
-                                                    <h4 class="summary-subtitle">Total</h4>
-                                                </td>
-                                                <td class=" pt-0 pb-0">
-                                                    <p class="summary-total-price ls-s text-primary">$290.00</p>
-                                                </td>
-                                            </tr>
+                                        @endforelse
                                         </tbody>
                                     </table>
-                                    <div class="payment accordion radio-type">
-                                        <h4 class="summary-subtitle ls-m pb-3">Payment Methods</h4>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#collapse1" class="collapse text-body text-normal ls-m">Check payments
-                                                </a>
-                                            </div>
-                                            <div id="collapse1" class="expanded" style="display: block;">
-                                                <div class="card-body ls-m">
-                                                    Please send a check to Store Name, Store Street,
-                                                    Store Town, Store State / County, Store Postcode.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <a href="#collapse2" class="expand text-body text-normal ls-m">Cash on delivery</a>
-                                            </div>
-                                            <div id="collapse2" class="collapsed">
-                                                <div class="card-body ls-m">
-                                                    Pay with cash upon delivery.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @if(count($used_coupones))
+                                    <table class="order-table mt-2">
+                                        <thead>
+                                        <tr>
+                                            <th>Coupon</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @forelse($used_coupones as $c)
+                                            <tr>
+                                                <td class="coupon-name" style="color: #666;">Coupon #{{ $c->code }}</td>
+                                                <td class="product-total text-body" @if($c->rate > 0) data-d-rate="{{ $c->rate }}" @else data-d-price="{{ $c->price }}" @endif>-
+                                                    @if($c->rate > 0)
+                                                        {{ $c->rate."%" }}
+                                                    @else
+                                                        {{ $cookie_currency->prefix }} {{ $c->price }} {{ $cookie_currency->suffix }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td class="product-name" colspan="2">
+                                                    There is no product
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                        </tbody>
+                                    </table>
+                                    @endif
+                                    <table>
+                                        <tr class="summary-total">
+                                            <td class="pb-0">
+                                                <h4 class="summary-subtitle">Total</h4>
+                                            </td>
+                                            <td class=" pt-0 pb-0">
+                                                <p class="summary-total-price ls-s text-primary">$290.00</p>
+                                            </td>
+                                        </tr>
+                                    </table>
                                     <div class="form-checkbox mt-4 mb-5">
                                         <input type="checkbox" class="custom-checkbox" id="terms-condition"
-                                            name="terms-condition" />
+                                               name="terms-condition" required />
                                         <label class="form-control-label" for="terms-condition">
-                                            I have read and agree to the website <a href="#">terms and conditions </a>*
+                                            I have read and agree to the website <a href="{{ route('purchase.index') }}" target="_blank">terms and conditions </a>*
                                         </label>
                                     </div>
                                     <button type="submit" class="btn btn-dark btn-rounded btn-order">Place Order</button>
@@ -273,7 +210,41 @@
 
 
 @section('javaScript')
-
     <script src="/vendor/sticky/sticky.min.js"></script>
+    <script>
+        $('.delivery-address').click(function (){
+            $('.delivery-address').each(function (){
+                $(this).removeClass('active')
+            })
+            $('input[name=delivery_id]').val($(this).data('id'))
+            $(this).addClass('active')
+        })
 
+        $('.billing-address').click(function (){
+            $('.billing-address').each(function (){
+                $(this).removeClass('active')
+            })
+            $('input[name=billing_id]').val($(this).data('id'))
+            $(this).addClass('active')
+        })
+
+
+        function CalcTotal(){
+            var total = 0
+            $('[data-price]').each(function (){
+                total += Number($(this).data('price'))
+            })
+            $('[data-d-rate]').each(function (){
+                total -= Number(total * $(this).data('d-rate') / 100)
+            })
+            $('[data-d-price]').each(function (){
+                total -= Number($(this).data('d-price'))
+            })
+            $('[data-cargo-price]').each(function (){
+                total += Number($(this).data('cargo-price'))
+            })
+            $('.summary-total-price').html(currency.prefix+""+Number(total).toFixed(2)+" "+currency.suffix)
+        }
+        CalcTotal()
+    </script>
 @endsection

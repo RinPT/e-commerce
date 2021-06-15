@@ -147,7 +147,7 @@
                                                     </a>
                                                     Coupon #{{ $c->code }}
                                                 </span>
-                                                <span class="ml-auto font-weight-bold">
+                                                <span class="ml-auto cp-code font-weight-bold" @if($c->rate > 0) data-rate="{{ $c->rate }}" @else data-price="{{ $c->price }}" @endif>-
                                                     @if($c->rate > 0)
                                                         {{ $c->rate."%" }}
                                                     @else
@@ -248,6 +248,7 @@
                 total += Number($(this).attr('data-total'))
             })
             $('.product-total').html(currency.prefix+""+total.toFixed(2)+" "+currency.suffix)
+            $('.product-total').attr('data-price',total.toFixed(2))
         }
 
         function CalcCargoTotal(){
@@ -256,10 +257,25 @@
                 total += Number($(this).data('price'))
             })
             $('.cargo-total').html(currency.prefix+""+total.toFixed(2)+" "+currency.suffix)
+            $('.cargo-total').attr('data-price',total.toFixed(2))
+        }
+        function CalcGeneralTotal(){
+            var prod    = Number($('.product-total').attr('data-price'))
+
+            $('.cp-code').each(function (){
+                if(typeof $(this).data('rate') !== 'undefined'){
+                    prod -= prod * $(this).data('rate') / 100
+                }else{
+                    prod -= $(this).data('price')
+                }
+            })
+            var cargo   = Number($('.cargo-total').attr('data-price'))
+
+            $('.summary-total-price').html(currency.prefix+""+(prod+cargo).toFixed(2)+" "+currency.suffix)
         }
         CalcProductTotal()
         CalcCargoTotal()
         CalcTotal()
-
+        CalcGeneralTotal()
     </script>
 @endsection

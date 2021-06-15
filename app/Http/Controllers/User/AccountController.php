@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Countries;
 use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -25,12 +26,15 @@ class AccountController extends Controller
         $categories = Categories::get();
         $items = Categories::tree();
 
+        $countries = Countries::all();
+
         return view('users.account', [
             'user' => $user,
             'addresses' => $addresses,
             'currencies' => $currencies,
             'categories'  => $categories,
             'items' => $items,
+            'countries' => $countries
         ]);
     }
 

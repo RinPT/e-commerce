@@ -61,9 +61,8 @@ Route::post('/cart/delete', [CartController::class, 'destroy'])->name('cart.dest
 Route::post('/cart/coupon', [CartController::class, 'apply_coupon'])->name('coupon.apply');
 Route::get('/cart/coupon/{code}/delete', [CartController::class, 'delete_coupon'])->name('coupon.delete');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
 Route::get('/order_summary', [OrderController::class, 'index'])->name('order.summary');
-Route::get('/checkout', [CartController::class, 'index'])->name('checkout');
 
 /**
  * Contracts
@@ -95,7 +94,7 @@ Route::get('/store/{name}/{id}', [StoresController::class, 'store_products_index
  * User Pages
  */
 Route::group(['middleware' => 'auth'],function (){
-    Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist')->middleware('auth');
+    Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist');
     Route::post('/wishlist/add', [WishListController::class, 'store'])->name('wishlist.add');
     Route::get('/wishlist/{id}/delete', [WishListController::class, 'destroy'])->name('wishlist.destroy');
 });

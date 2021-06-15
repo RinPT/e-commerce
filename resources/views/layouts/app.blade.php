@@ -52,6 +52,12 @@
         .cart-prod-added.show,.wishlist-added.show {
             left: -400px;
         }
+        .fs-11 {
+            font-size: 11px !important;
+        }
+        .fs-12 {
+            font-size: 12px !important;
+        }
     </style>
     @yield('custom-css')
 </head>

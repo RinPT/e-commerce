@@ -13,18 +13,16 @@ class CreateProductCoupon extends Migration
      */
     public function up()
     {
-        Schema::create('product_coupon', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->string('code')->unique();
             $table->integer('rate');
             $table->decimal('price',10);
             $table->dateTime('end_date');
             $table->timestamps();
         });
-        DB::table('product_coupon')->insert([
+        DB::table('coupons')->insert([
             [
-                'product_id' => 1,
                 'code' => 'DISC10',
                 'rate' => 10,
                 'price' => 0,

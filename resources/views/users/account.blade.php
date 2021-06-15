@@ -1,20 +1,23 @@
 @extends('layouts.app')
 
-@section('stylesheet')
-	<!-- Main CSS File -->
-	<link rel="stylesheet" type="text/css" href="/css/user/style.min.css">
+@section('bootstrap')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+@endsection
+
+@section('custom-css')
     <style>
-        /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+        .modal-backdrop.show {
+            z-index: 9999;
         }
-
-        /* Firefox */
-        input[type=number] {
-        -moz-appearance: textfield;
+        .modal-open .modal{
+            z-index: 99999;
+        }
+        input:focus,select:focus,textarea:focus{
+            box-shadow: 0 0 !important;
         }
     </style>
 @endsection
@@ -32,17 +35,17 @@
                 <div class="tab tab-vertical gutter-lg">
                     <ul class="nav nav-tabs mb-4 col-lg-3 col-md-4" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#orders">Orders</a>
+                            <a class="nav-link @if(!(session('address.add') || session('address.update') || session('address.delete'))) active @endif" href="#orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#address">Address</a>
+                            <a class="nav-link @if(session('address.add') || session('address.update') || session('address.delete')) active @endif" href="#address">Address</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#account">Account details</a>
                         </li>
                     </ul>
                     <div class="tab-content col-lg-9 col-md-8">
-                        <div class="tab-pane active" id="orders">
+                        <div class="tab-pane @if(!(session('address.add') || session('address.update') || session('address.delete'))) active in @endif" id="orders">
                             <table class="order-table">
                                 <thead>
                                     <tr>
@@ -99,25 +102,23 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane" id="address">
+                        <div class="tab-pane @if(session('address.add') || session('address.update') || session('address.delete')) active in @endif" id="address">
                             <p class="mb-2">The following addresses will be used on the checkout page by default.</p>
 
                             @if(session('address.add'))
-                                <div class="col-md-6 mb-4">
-                                    <div class="alert alert-success alert-simple alert-inline">
-                                        <h4 class="alert-title">Success :</h4>
-                                        {{ session('address.add') }}
-                                        <button type="button" class="btn btn-link btn-close">
-                                            <i class="d-icon-times"></i>
-                                        </button>
-                                    </div>
+                                <div class="alert alert-success alert-simple alert-inline">
+                                    <h4 class="alert-title">Success :</h4>
+                                    {{ session('address.add') }}
+                                    <button type="button" class="btn btn-close">
+                                        <i class="d-icon-times"></i>
+                                    </button>
                                 </div>
 
                             @elseif(session('address.update'))
                                 <div class="alert alert-light alert-primary alert-icon mb-4">
                                     <i class="fas fa-exclamation-circle"></i>
                                     {{ session('address.update') }}
-                                    <button type="button" class="btn btn-link btn-close">
+                                    <button type="button" class="btn btn-close">
                                         <i class="d-icon-times"></i>
                                     </button>
                                 </div>
@@ -126,19 +127,102 @@
                                 <div class="alert alert-light alert-danger alert-icon alert-inline mb-4">
                                     <i class="fas fa-trash-alt"></i>
                                     {{ session('address.delete') }}
-                                    <button type="button" class="btn btn-link btn-close">
+                                    <button type="button" class="btn btn-close">
                                         <i class="d-icon-times"></i>
                                     </button>
                                 </div>
                             @endif
+
+
+                            <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#exampleModal">
+                                Add New Address
+                            </button>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add New Address</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row p-4">
+                                                <form action="{{ route('address.add') }}" method="POST" class="form add-form">
+                                                    @csrf
+                                                    <div class="row institutional-inputs" style="display: none">
+                                                        <div class="col-md-6">
+                                                            <label>Company</label>
+                                                            <input type="text" class="form-control" name="company">
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label>Tax No</label>
+                                                            <input type="text" class="form-control" name="tax_no">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label>Name</label>
+                                                            <input type="text" class="form-control" name="name">
+
+                                                            <label>Surname</label>
+                                                            <input type="text" class="form-control" name="surname">
+
+                                                            <label>City</label>
+                                                            <input type="text" class="form-control" name="city">
+
+                                                            <label>Phone</label>
+                                                            <input type="tel" class="form-control" name="telephone">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="user_type">User Type</label>
+                                                                <select class="form-control" name="user_type" required>
+                                                                    <option value="individual">Individual</option>
+                                                                    <option value="institutional">Institutional</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="country">Country</label>
+                                                                <select class="form-control" name="country" required>
+                                                                    @foreach($countries as $c)
+                                                                        <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+
+                                                            <label>Address Type</label>
+                                                            <input type="text" class="form-control" name="address_type" placeholder="Example: Home, Work, etc.">
+
+                                                            <label>Postcode</label>
+                                                            <input type="number" class="form-control" name="postcode">
+                                                        </div>
+                                                    </div>
+
+                                                    <label>Address</label>
+                                                    <textarea class="form-control" name="address" rows="2" placeholder="Street, Apartment No and Other Information"></textarea>
+
+
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="submit" class="btn btn-dark">Add New Address</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 @if ($addresses->count())
                                     @foreach ($addresses as $address)
                                         <div class="col-sm-4 mb-4">
                                             <div class="card card-address">
-                                                <div class="card-body border border-secondary rounded">
-                                                    <h5 class="mb-1">{{ $address->address_type }}</h5>
+                                                <div class="card-body border p-4 rounded">
+                                                    <h5 class="mb-1">{{ $address->address_type }} <span class="text-capitalize">({{ $address->user_type }})</span></h5>
                                                     <hr/>
                                                     <p><strong>{{ $address->name }} {{ $address->surname }}</strong><br>
                                                         {{ $address->address }}<br>
@@ -162,37 +246,69 @@
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
+                                                                        </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <form action="{{ route('address.update', $address->id) }}" method="POST" class="form">
+                                                                        <form action="{{ route('address.update', $address->id) }}" method="POST" class="form update-form">
                                                                             @csrf
-                                                                            <label>Name</label>
-                                                                            <input type="text" class="form-control" name="name" value="{{ $address->name }}">
 
-                                                                            <label>Surname</label>
-                                                                            <input type="text" class="form-control" name="surname" value="{{ $address->surname }}">
+                                                                            <div class="row institutional-inputs" @if($address->user_type == 'individual') style="display: none" @endif>
+                                                                                <div class="col-md-6">
+                                                                                    <label>Company</label>
+                                                                                    <input type="text" class="form-control" name="company" value="{{ $address->company }}">
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label>Tax No</label>
+                                                                                    <input type="text" class="form-control" name="tax_no" value="{{ $address->tax_no }}">
+                                                                                </div>
+                                                                            </div>
 
-                                                                            <label>Country</label>
-                                                                            <input type="text" class="form-control" name="counrty_id" placeholder="Country" disabled value="{{ $address->country_id }}">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <label>Name</label>
+                                                                                    <input type="text" class="form-control" name="name" value="{{ $address->name }}">
 
-                                                                            <label>City</label>
-                                                                            <input type="text" class="form-control" name="city" value="{{ $address->city }}">
+                                                                                    <label>Surname</label>
+                                                                                    <input type="text" class="form-control" name="surname" value="{{ $address->surname }}">
+
+                                                                                    <label>City</label>
+                                                                                    <input type="text" class="form-control" name="city" value="{{ $address->city }}">
+
+                                                                                    <label>Phone</label>
+                                                                                    <input type="tel" class="form-control" name="telephone" value="{{ $address->telephone }}">
+                                                                                </div>
+
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for="user_type">User Type</label>
+                                                                                        <select class="form-control" name="user_type" required>
+                                                                                            <option value="individual" @if($address->user_type == 'individual') selected @endif>Individual</option>
+                                                                                            <option value="institutional" @if($address->user_type == 'institutional') selected @endif>Institutional</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="country">Country</label>
+                                                                                        <select class="form-control" name="country" required>
+                                                                                            @foreach($countries as $c)
+                                                                                                <option value="{{ $c->id }}" @if($address->country_id == $c->id) selected @endif>{{ $c->name }}</option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <label>Address Type</label>
+                                                                                    <input type="text" class="form-control" name="address_type" placeholder="Example: Home, Work, etc." value="{{ $address->address_type }}">
+
+                                                                                    <label>Postcode</label>
+                                                                                    <input type="number" class="form-control" name="postcode" value="{{ $address->postcode }}">
+                                                                                </div>
+                                                                            </div>
 
                                                                             <label>Address</label>
-                                                                            <textarea class="form-control" name="address" rows="2" style="resize: none" placeholder="Street, Apartment No and Other Information">{{ $address->address }}</textarea>
+                                                                            <textarea class="form-control" name="address" rows="2" placeholder="Street, Apartment No and Other Information" >{{ $address->address }}</textarea>
 
-                                                                            <label>Address Type</label>
-                                                                            <input type="text" class="form-control" name="address_type" placeholder="Example: Home, Work, etc." value="{{ $address->address_type }}">
-
-                                                                            <label>Postcde</label>
-                                                                            <input type="number" class="form-control" name="postcode" value="{{ $address->postcode }}">
-
-                                                                            <label>Phone</label>
-                                                                            <input type="tel" class="form-control" name="telephone" value="{{ $address->telephone }}">
-
-                                                                            <div class="d-flex justify-content-end">
-                                                                                <button type="button" class="btn btn-link text-danger mr-1" data-dismiss="modal">Close</button>
-                                                                                <button type="submit" class="btn btn-link text-primary ml-1">Save changes</button>
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <button type="submit" class="btn btn-dark">Save changes</button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
@@ -211,41 +327,6 @@
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-                            <div class="row">
-                                <form action="{{ route('address.add') }}" method="POST" class="form">
-                                    @csrf
-                                    <fieldset>
-                                        <legend>Add New Address</legend>
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" name="name">
-
-                                        <label>Surname</label>
-                                        <input type="text" class="form-control" name="surname">
-
-                                        <label>Country</label>
-                                        <input type="text" class="form-control" name="counrty_id" placeholder="Country" disabled>
-
-                                        <label>City</label>
-                                        <input type="text" class="form-control" name="city">
-
-                                        <label>Address</label>
-                                        <textarea class="form-control" name="address" rows="2" style="resize: none" placeholder="Street, Apartment No and Other Information"></textarea>
-
-                                        <label>Address Type</label>
-                                        <input type="text" class="form-control" name="address_type" placeholder="Example: Home, Work, etc.">
-
-                                        <label>Postcde</label>
-                                        <input type="number" class="form-control" name="postcode">
-
-                                        <label>Phone</label>
-                                        <input type="tel" class="form-control" name="telephone">
-
-                                        <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-link text-primary">Add New Addres</button>
-                                        </div>
-                                    </fieldset>
-                                </form>
                             </div>
                         </div>
                         <div class="tab-pane" id="account">
@@ -305,4 +386,32 @@
         </div>
     </main>
 
+@endsection
+
+@section('javaScript')
+    <script>
+        $('.add-form select[name=user_type]').change(function (){
+            if($(this).val() === 'institutional'){
+                $('.add-form .institutional-inputs').css('display','')
+                $('.add-form input[name=company]').attr('required','required')
+                $('.add-form input[name=tax_no]').attr('required','required')
+            }else{
+                $('.add-form .institutional-inputs').css('display','none')
+                $('.add-form input[name=company]').removeAttr('required')
+                $('.add-form input[name=tax_no]').removeAttr('required')
+            }
+        })
+
+        $('.update-form select[name=user_type]').change(function (){
+            if($(this).val() === 'institutional'){
+                $('.update-form .institutional-inputs').css('display','')
+                $('.update-form input[name=company]').attr('required','required')
+                $('.update-form input[name=tax_no]').attr('required','required')
+            }else{
+                $('.update-form .institutional-inputs').css('display','none')
+                $('.update-form input[name=company]').removeAttr('required')
+                $('.update-form input[name=tax_no]').removeAttr('required')
+            }
+        })
+    </script>
 @endsection
