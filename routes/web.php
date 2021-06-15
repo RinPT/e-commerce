@@ -21,6 +21,7 @@ use App\Http\Controllers\ProductProfileController;
 
 include('web-user.php');
 include('web-admin.php');
+include('web-store.php');
 
 /**
  * Authorization

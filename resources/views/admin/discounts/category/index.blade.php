@@ -55,8 +55,8 @@
                 <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
                 <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
             </div>
-            <h2 class="card-title">Currencies</h2>
-            <p class="card-subtitle">You can see all available currencies below.</p>
+            <h2 class="card-title">Discounts</h2>
+            <p class="card-subtitle">You can see all available discounts below.</p>
         </header>
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
@@ -123,11 +123,11 @@
                                                             <label class="col-lg-3 control-label text-lg-right pt-2">Start/End Date</label>
                                                             <div class="col-lg-6">
                                                                 <div class="input-daterange input-group">
-                                                                    <input type="date" class="form-control @error('start_date')is-invalid @enderror" name="start_date" value="{{ $discount->start_date }}">
+                                                                    <input type="date" class="form-control @error('start_date')is-invalid @enderror" name="start_date" value="{{ date('Y-m-d', strtotime($discount->start_date)) }}">
                                                                     <span class="input-group-text border-left-0 border-right-0 rounded-0">
                                                                         to
                                                                     </span>
-                                                                    <input type="date" class="form-control @error('end_date')is-invalid @enderror" name="end_date" value="{{ $discount->end_date }}">
+                                                                    <input type="date" class="form-control @error('end_date')is-invalid @enderror" name="end_date" value="{{  date('Y-m-d', strtotime($discount->end_date))  }}">
                                                                 </div>
                                                             </div>
                                                         </div>
