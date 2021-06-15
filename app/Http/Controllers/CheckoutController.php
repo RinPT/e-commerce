@@ -103,4 +103,12 @@ class CheckoutController extends Controller
             'used_coupones' => $used_coupones,
         ]);
     }
+
+    public function secure_index(Request $request){
+        return view('secure',[
+            'delivery_id' => $request->delivery_id,
+            'billing_id' => $request->billing_id,
+            'ptype' => $request->ptype
+        ]);
+    }
 }

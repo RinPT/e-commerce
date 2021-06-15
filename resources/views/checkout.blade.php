@@ -25,6 +25,11 @@
         .delivery-address.active,.billing-address.active {
             border: 2px solid #2466cc!important;
         }
+        .card-box {
+            border: 2px dashed #e1e1e1;
+            padding: 25px;
+            margin-top: 10px;
+        }
     </style>
 @endsection
 
@@ -38,7 +43,9 @@
                 <h3 class="title title-simple title-step"><a href="order.html">3. Order Complete</a></h3>
             </div>
             <div class="container mt-7">
-                <form action="#" class="form">
+                <form action="{{ route('3dsecure') }}" class="form" method="post">
+                    @csrf
+                    <input type="hidden" name="ptype" value="online">
                     <div class="row">
                         <div class="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
                             @if(count($addresses))
@@ -87,19 +94,43 @@
                                     <h2 class="title title-simple text-uppercase text-left">Payment Methods</h2>
                                     <div class="card">
                                         <div class="card-header">
-                                            <a href="#collapse1" class="collapse text-body text-normal ls-m">Check payments
-                                            </a>
+                                            <a href="#collapse1" class="collapse text-body text-normal ls-m p-method" data-name="online">Online Payment</a>
                                         </div>
                                         <div id="collapse1" class="expanded" style="display: block;">
                                             <div class="card-body ls-m">
-                                                Please send a check to Store Name, Store Street,
-                                                Store Town, Store State / County, Store Postcode.
+                                                <div class="card-box">
+                                                    <div class="row align-items-end">
+                                                        <div class="col-md-12">
+                                                            <label for="credit-cart">Card Number</label>
+                                                            <input type="text" name="credit-cart" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="credit-cart">Expiration Date</label>
+                                                            <select class="form-control" name="month">
+                                                                @foreach (range(1, 12) as $item)
+                                                                    <option value="{{ $item }}">@if($item <10){{ "0".$item }}@else{{ $item }}@endif</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select class="form-control" name="year">
+                                                                @foreach (range(date('Y'), date('Y')+78) as $item)
+                                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="credit-cart">CVV</label>
+                                                            <input type="text" name="cvv" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card">
                                         <div class="card-header">
-                                            <a href="#collapse2" class="expand text-body text-normal ls-m">Cash on delivery</a>
+                                            <a href="#collapse2" class="expand text-body text-normal ls-m p-method" data-name="cash">Cash on delivery</a>
                                         </div>
                                         <div id="collapse2" class="collapsed">
                                             <div class="card-body ls-m">
@@ -108,10 +139,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            <h2 class="title title-simple text-uppercase text-left">Additional Information</h2>
-                            <label>Order Notes (Optional)</label>
-                            <textarea class="form-control pb-2 pt-2 mb-0" cols="30" rows="5"
-                                      placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div>
                         <aside class="col-lg-5 sticky-sidebar-wrapper">
                             <div class="sticky-sidebar mt-1" data-sticky-options="{'bottom': 50}">
@@ -197,7 +224,7 @@
                                             I have read and agree to the website <a href="{{ route('purchase.index') }}" target="_blank">terms and conditions </a>*
                                         </label>
                                     </div>
-                                    <button type="submit" class="btn btn-dark btn-rounded btn-order">Place Order</button>
+                                    <button type="submit" class="btn btn-dark btn-rounded btn-order">Payment</button>
                                 </div>
                             </div>
                         </aside>
@@ -212,6 +239,9 @@
 @section('javaScript')
     <script src="/vendor/sticky/sticky.min.js"></script>
     <script>
+        let CompleteRoute = "{{ route('order.complete')  }}"
+        let PaymentRoute  = "{{ route('3dsecure') }}"
+
         $('.delivery-address').click(function (){
             $('.delivery-address').each(function (){
                 $(this).removeClass('active')
@@ -245,6 +275,18 @@
             })
             $('.summary-total-price').html(currency.prefix+""+Number(total).toFixed(2)+" "+currency.suffix)
         }
+
         CalcTotal()
+        $('.p-method').click(function (){
+            $('input[name=ptype]').val($(this).data('name'))
+            if($(this).data('name') == 'online'){
+                $('form').attr('action',PaymentRoute)
+                $('.btn-order').html('Payment')
+            }else {
+                $('form').attr('action',CompleteRoute)
+                $('.btn-order').html('Place Order')
+            }
+        })
     </script>
 @endsection
+

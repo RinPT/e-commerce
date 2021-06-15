@@ -10,14 +10,10 @@ class OrderController extends Controller
 {
     public function index() {
 
-        $currencies = Currencies::get();
-        $categories = Categories::get();
-        $items = Categories::tree();
+
 
         return view('order', [
-            'currencies' => $currencies,
-            'categories'  => $categories,
-            'items' => $items,
+
         ]);
     }
 }

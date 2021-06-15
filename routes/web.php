@@ -63,7 +63,8 @@ Route::post('/cart/coupon', [CartController::class, 'apply_coupon'])->name('coup
 Route::get('/cart/coupon/{code}/delete', [CartController::class, 'delete_coupon'])->name('coupon.delete');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
-Route::get('/order_summary', [OrderController::class, 'index'])->name('order.summary');
+Route::post('/3dsecure', [CheckoutController::class, 'secure_index'])->name('3dsecure')->middleware('auth');
+Route::post('/order/complete', [OrderController::class, 'index'])->name('order.complete');
 
 /**
  * Contracts
