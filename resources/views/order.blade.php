@@ -53,9 +53,9 @@
 
                 <div class="order-results">
                     <div class="overview-item">
-                        <span>Order number:</span>
+                        <span> @if($oids>1)Order numbers @else Order number @endif:</span>
                         @foreach($oids as $oid)
-                        <strong>{{ $oid }}</strong>
+                        <strong>#{{ $oid }}</strong>
                         @endforeach
                     </div>
                     <div class="overview-item">
@@ -76,7 +76,13 @@
                     </div>
                     <div class="overview-item">
                         <span>Payment method:</span>
-                        <strong class="text-capitalize">{{ $method }}</strong>
+                        <strong class="text-capitalize">
+                        @if($method == 'online')
+                            Online Payment
+                        @else
+                            Cash On Delivery
+                        @endif
+                        </strong>
                     </div>
                 </div>
 
@@ -101,8 +107,7 @@
                                     {{ $cookie_currency->prefix }}{{ number_format($product->product->price * $product->count,2,".","") }} {{ $cookie_currency->suffix }}
                                 </td>
                             </tr>
-                            @endforeach
-                            @if(!in_array($product->product->id,$pids))
+                            @if(!in_array($product->pid,$pids))
                                 <tr>
                                     <td class="product-name cargo-name">Cargo</td>
                                     <td class="product-total text-right" data-cargo-price="{{ $product->product->cargo_price }}">
@@ -110,6 +115,8 @@
                                 </tr>
                             @endif
                             @php ($pids[] = $product->product->id)
+                            @endforeach
+
                             @foreach($coupons as $c)
                                 <tr>
                                     <td class="product-name coupon-name">Coupon #{{ $c->code }}</td>

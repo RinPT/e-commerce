@@ -204,9 +204,11 @@
                                                 @endif
                                             </div>
                                             <div class="product-action-vertical">
+                                                <!--
                                                 @if($product->total_stock_count)
                                                     <a href="javascript:void(0)" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}"><i class="d-icon-bag"></i></a>
                                                 @endif
+                                                    -->
                                                 <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="btn-product-icon add-to-wishlist" data-id="{{ $product->id }}" title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                             </div>
                                             <div class="product-action">

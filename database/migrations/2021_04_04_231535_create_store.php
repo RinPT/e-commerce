@@ -58,7 +58,7 @@ class CreateStore extends Migration
                 'url' => 'www.store.com',
                 'tax_no' => '1234567',
                 'country_id' => 120,
-                'product_cat_id' => 2,
+                'product_cat_id' => 1,
                 'city' => 'denizli',
                 'address' =>'Altıntop, Lise Cd. No:2, 20010 Merkez',
                 'phone' => '+90 534 572 25 15',

@@ -51,6 +51,18 @@ class CreateProducts extends Migration
         ]);
 
         DB::table('products')->insert([
+            'store_id' => '2',
+            'name' => 'Women Fashion Bag',
+            'category_id' => '1',
+            'description' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
+            'price' => '70',
+            'cargo_price' => '20',
+            'currency_id' => '3',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
+
+        DB::table('products')->insert([
             'store_id' => '3',
             'name' => '[AR] Chair',
             'category_id' => '4',

@@ -120,7 +120,7 @@
                         <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
                             @forelse($images as $image)
                             <figure class="product-image">
-                                <img src="{{ $image->image }}"
+                                <img src="/photo/product/{{ $image->image }}"
                                      data-zoom-image="/photo/product/{{ $image->image }}"
                                      alt="{{ $product->name }}" width="800" height="900">
                             </figure>
@@ -393,7 +393,9 @@
                                     @endif
                                 </div>
                                 <div class="product-action-vertical">
+                                    <!--
                                     <a href="javascript:void(0)" class="btn-product-icon add-to-cart" data-id="{{ $product->id }}" style="min-width: initial;"><i class="d-icon-bag"></i></a>
+                                    -->
                                     <a @if(!auth()->check()) href="{{ route('login') }}" @else href="javascript:void(0)" @endif class="btn-product-icon add-to-wishlist" data-id="{{ $product->id }}" title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                 </div>
                                 <div class="product-action">

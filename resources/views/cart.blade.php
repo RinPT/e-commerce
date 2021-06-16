@@ -22,8 +22,8 @@
     <main class="main cart">
         <div class="page-content pt-7 pb-10">
             <div class="step-by pr-4 pl-4">
-                <h3 class="title title-simple title-step"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
-                <h3 class="title title-simple title-step active"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
+                <h3 class="title title-simple title-step active"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
+                <h3 class="title title-simple title-step"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
                 <h3 class="title title-simple title-step"><a href="#">3. Order Complete</a></h3>
             </div>
             <div class="container mt-7 mb-2">
@@ -177,7 +177,11 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <a href="{{ route('checkout') }}" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
+                                @if(count($cart_products) == 0)
+                                    <a class="btn btn-dark btn-rounded btn-checkout" style="opacity: 0.5;cursor:not-allowed;">Proceed to checkout</a>
+                                @else
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-rounded btn-checkout">Proceed to checkout</a>
+                                @endif
                             </div>
                         </div>
                     </aside>
@@ -249,6 +253,7 @@
             })
             $('.product-total').html(currency.prefix+""+total.toFixed(2)+" "+currency.suffix)
             $('.product-total').attr('data-price',total.toFixed(2))
+            CalcGeneralTotal()
         }
 
         function CalcCargoTotal(){

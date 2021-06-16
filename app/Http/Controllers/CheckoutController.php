@@ -23,6 +23,10 @@ class CheckoutController extends Controller
             $cart_products = [];
         }
 
+        if(count($cart_products)==0){
+            return redirect()->route('cart');
+        }
+
         if(isset($_COOKIE['used_coupones'])){
             $used_coupones = json_decode($_COOKIE['used_coupones']);
             $coupones = [];

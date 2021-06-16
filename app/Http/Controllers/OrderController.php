@@ -30,6 +30,10 @@ class OrderController extends Controller
             $cart_products = [];
         }
 
+        if(count($cart_products)==0){
+            return redirect()->route('cart');
+        }
+
         if(isset($_COOKIE['used_coupones'])){
             $used_coupones = json_decode($_COOKIE['used_coupones']);
             $coupones = [];
@@ -134,6 +138,7 @@ class OrderController extends Controller
                 'pcount' => $cart_product->count,
                 'pprice'=> $cart_product->product->price,
                 'cargoprice' => $cart_product->product->cargo_price,
+                'options' => $cart_product->options
             ];
             if(!in_array($cart_product->pid,$cargo_pids)){
                 $products[$cart_product->product->store_id]['coupones'][] = $used_coupones;
@@ -246,7 +251,12 @@ class OrderController extends Controller
             ]);
         }
 
+        foreach ($used_coupones as $id) {
+            ProductCoupon::destroy($id);
+        }
 
+        setcookie('cart_products',json_encode([]),time() + 86400 * 30,'/');
+        setcookie('used_coupones',json_encode([]),time() + 86400 * 30,'/');
 
         return view('order', [
             'oids'      => $oids,

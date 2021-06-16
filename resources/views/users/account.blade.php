@@ -38,6 +38,9 @@
                             <a class="nav-link @if(!(session('address.add') || session('address.update') || session('address.delete'))) active @endif" href="#orders">Orders</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link @if(!(session('address.add') || session('address.update') || session('address.delete'))) active @endif" href="#billings">Billings</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link @if(session('address.add') || session('address.update') || session('address.delete')) active @endif" href="#address">Address</a>
                         </li>
                         <li class="nav-item">

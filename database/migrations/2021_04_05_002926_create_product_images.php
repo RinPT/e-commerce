@@ -67,11 +67,29 @@ class CreateProductImages extends Migration
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
+            [
+                'product_id' => '3',
+                'image' => '3-1.jpg',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => '3',
+                'image' => '3-2.jpg',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => '3',
+                'image' => '3-3.jpg',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ],
         ]);
 
         DB::table('product_images')->insert([
             [
-                'product_id' => '3',
+                'product_id' => '4',
                 'image' => '/images/products/belair.jpg',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()

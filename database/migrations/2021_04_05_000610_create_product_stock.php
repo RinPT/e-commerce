@@ -49,6 +49,13 @@ class CreateProductStock extends Migration
                 'stock' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'product_id' => 3,
+                'name' => 'main',
+                'stock' => 20,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             ]
         ]);
     }
