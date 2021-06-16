@@ -13,7 +13,7 @@
             <input type="hidden" name="ptype" value="{{ $ptype }}">
             <input type="hidden" name="delivery_id" value="{{ $delivery_id }}">
             <input type="hidden" name="billing_id" value="{{ $billing_id }}">
-
+            <input type="hidden" name="status" value="paid">
             <button type="submit" style="
     background: black;
     display: block;

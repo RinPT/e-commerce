@@ -22,9 +22,9 @@
     <main class="main cart">
         <div class="page-content pt-7 pb-10">
             <div class="step-by pr-4 pl-4">
-                <h3 class="title title-simple title-step active"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
-                <h3 class="title title-simple title-step"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
-                <h3 class="title title-simple title-step"><a href="order.html">3. Order Complete</a></h3>
+                <h3 class="title title-simple title-step"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
+                <h3 class="title title-simple title-step active"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
+                <h3 class="title title-simple title-step"><a href="#">3. Order Complete</a></h3>
             </div>
             <div class="container mt-7 mb-2">
                 <div class="row">

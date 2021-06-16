@@ -25,9 +25,9 @@
     <main class="main order">
         <div class="page-content pt-7 pb-10 mb-10">
             <div class="step-by pr-4 pl-4">
-                <h3 class="title title-simple title-step"><a href="cart.html">1. Shopping Cart</a></h3>
-                <h3 class="title title-simple title-step"><a href="checkout.html">2. Checkout</a></h3>
-                <h3 class="title title-simple title-step active"><a href="order.html">3. Order Complete</a></h3>
+                <h3 class="title title-simple title-step"><a href="{{ route('cart') }}">1. Shopping Cart</a></h3>
+                <h3 class="title title-simple title-step"><a href="{{ route('checkout') }}">2. Checkout</a></h3>
+                <h3 class="title title-simple title-step active"><a href="#">3. Order Complete</a></h3>
             </div>
             <div class="container mt-8">
                 <div class="order-message mr-auto ml-auto">
@@ -54,27 +54,29 @@
                 <div class="order-results">
                     <div class="overview-item">
                         <span>Order number:</span>
-                        <strong>4935</strong>
+                        @foreach($oids as $oid)
+                        <strong>{{ $oid }}</strong>
+                        @endforeach
                     </div>
                     <div class="overview-item">
                         <span>Status:</span>
-                        <strong>Processing</strong>
+                        <strong class="text-capitalize">{{ $status }}</strong>
                     </div>
                     <div class="overview-item">
                         <span>Date:</span>
-                        <strong>November 20, 2020</strong>
+                        <strong>{{ $date->format('d.m.Y H:i') }}</strong>
                     </div>
                     <div class="overview-item">
                         <span>Email:</span>
-                        <strong>12345@gmail.com</strong>
+                        <strong>{{ $mail }}</strong>
                     </div>
                     <div class="overview-item">
                         <span>Total:</span>
-                        <strong>$312.00</strong>
+                        <strong>{{ $curr->prefix }}{{ number_format($total,2,".","") }} {{ $curr->suffix }}</strong>
                     </div>
                     <div class="overview-item">
                         <span>Payment method:</span>
-                        <strong>Cash on delivery</strong>
+                        <strong class="text-capitalize">{{ $method }}</strong>
                     </div>
                 </div>
 
@@ -90,63 +92,74 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php ($pids = [])
+                            @foreach($products as $key => $product)
                             <tr>
-                                <td class="product-name">Beige knitted shoes <span> <i class="fas fa-times"></i>
-                                        1</span></td>
-                                <td class="product-price">$84.00</td>
-                            </tr>
-                            <tr>
-                                <td class="product-name">Best dark blue pedestrian <span><i
-                                            class="fas fa-times"></i> 1</span></td>
-                                <td class="product-price">$76.00</td>
-                            </tr>
-                            <tr>
-                                <td class="product-name">Women's fashion handing <span><i class="fas fa-times"></i>
-                                        2</span></td>
-                                <td class="product-price">$152.00</td>
-                            </tr>
-                            <tr class="summary-subtotal">
-                                <td>
-                                    <h4 class="summary-subtitle">Subtotal:</h4>
+                                <td class="product-name">{{ $product->product->name }} <span> <i class="fas fa-times"></i>
+                                        {{ $product->count }}</span></td>
+                                <td class="product-price">
+                                    {{ $cookie_currency->prefix }}{{ number_format($product->product->price * $product->count,2,".","") }} {{ $cookie_currency->suffix }}
                                 </td>
-                                <td class="summary-subtotal-price">$312.00</td>
                             </tr>
-                            <tr class="summary-subtotal">
-                                <td>
-                                    <h4 class="summary-subtitle">Shipping:</h4>
-                                </td>
-                                <td class="summary-subtotal-price">Free shipping</td>
-                            </tr>
-                            <tr class="summary-subtotal">
-                                <td>
-                                    <h4 class="summary-subtitle">Payment method:</h4>
-                                </td>
-                                <td class="summary-subtotal-price">Cash on delivery</td>
-                            </tr>
+                            @endforeach
+                            @if(!in_array($product->product->id,$pids))
+                                <tr>
+                                    <td class="product-name cargo-name">Cargo</td>
+                                    <td class="product-total text-right" data-cargo-price="{{ $product->product->cargo_price }}">
+                                        {{ $cookie_currency->prefix }}{{ $product->product->cargo_price }} {{ $cookie_currency->suffix }}                                                </td>
+                                </tr>
+                            @endif
+                            @php ($pids[] = $product->product->id)
+                            @foreach($coupons as $c)
+                                <tr>
+                                    <td class="product-name coupon-name">Coupon #{{ $c->code }}</td>
+                                    <td class="product-total text-right" @if($c->rate > 0) data-d-rate="{{ $c->rate }}" @else data-d-price="{{ $c->price }}" @endif>-
+                                        @if($c->rate > 0)
+                                            {{ $c->rate."%" }}
+                                        @else
+                                            {{ $cookie_currency->prefix }} {{ $c->price }} {{ $cookie_currency->suffix }}
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                             <tr class="summary-subtotal">
                                 <td>
                                     <h4 class="summary-subtitle">Total:</h4>
                                 </td>
                                 <td>
-                                    <p class="summary-total-price">$312.00</p>
+                                    <p class="summary-total-price">{{ $curr->prefix }}{{ number_format($total,2,".","") }} {{ $curr->suffix }}</p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <h2 class="title title-simple text-left pt-10 mb-2">Billing Address</h2>
-                <div class="address-info pb-8 mb-6">
-                    <p class="address-detail pb-2">
-                        John Doe<br>
-                        Riode Company<br>
-                        Steven street<br>
-                        El Carjon, CA 92020<br>
-                        123456789
-                    </p>
-                    <p class="email">mail@riode.com</p>
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <a href="{{ route('cart') }}" class="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"><i class="d-icon-arrow-left"></i> Back to List</a>
+                    </div>
+                    <div class="col-md-4">
+                        <h2 class="title title-simple text-left pt-10 mb-2">Delivery Address</h2>
+                        <div class="address-info mb-6" style="line-height: 35px;">
+                            <div class="address-detail pb-2">
+                                <strong>{{ $delivery_address->name }} {{ $delivery_address->surname }}</strong><br>
+                                <div style="max-width: 300px;">{{ $delivery_address->address }}</div>
+                                {{ $delivery_address->city }}/{{ $delivery_address->country->name }}, {{ $delivery_address->postcode }}<br>
+                                {{ $delivery_address->telephone }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h2 class="title title-simple text-left pt-10 mb-2">Billing Address</h2>
+                        <div class="address-info mb-6" style="line-height: 35px;">
+                            <div class="address-detail pb-2">
+                                <strong>{{ $billing_address->name }} {{ $billing_address->surname }}</strong><br>
+                                <div style="max-width: 300px;">{{ $billing_address->address }}</div>
+                                {{ $billing_address->city }}/{{ $billing_address->country->name }}, {{ $billing_address->postcode }}<br>
+                                {{ $billing_address->telephone }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <a href="shop.html" class="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"><i class="d-icon-arrow-left"></i> Back to List</a>
             </div>
         </div>
     </main>

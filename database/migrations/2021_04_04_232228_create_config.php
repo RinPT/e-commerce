@@ -152,6 +152,12 @@ class CreateConfig extends Migration
                 'value' => 'https://instagram.com/ecoshop',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
+            ],
+            [
+                'key' => 'invoice_last',
+                'value' => '3673',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             ]
         ]);
     }

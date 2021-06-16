@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderPayment extends Migration
+class CreateBillings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,18 @@ class CreateOrderPayment extends Migration
      */
     public function up()
     {
-        Schema::create('order_payment', function (Blueprint $table) {
+        Schema::create('billings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->bigInteger('invoice_no');
+            //Store info
+            $table->bigInteger('store_id');
+            $table->string('store_name');
+            $table->string('store_tax_no');
+            $table->string('store_country');
+            $table->string('store_city');
+            $table->text('store_address');
+            $table->string('store_phone');
+            //Billing address
             $table->string('name');
             $table->string('surname');
             $table->enum('user_type',['individual', 'institutional']);
@@ -24,10 +33,17 @@ class CreateOrderPayment extends Migration
             $table->string('country');
             $table->string('city');
             $table->text('address');
+            $table->text('address_type');
             $table->string('post_code');
             $table->string('telephone');
-            $table->string('method');
+            //End Billing address
+            $table->enum('method',['','online','cash']);
             $table->string('bank');
+            $table->text('products');
+            $table->text('coupons');
+            $table->string('currency_code');
+            $table->string('currency_prefix');
+            $table->string('currency_suffix');
             $table->enum('status',['paid','unpaid']);
             $table->timestamps();
         });

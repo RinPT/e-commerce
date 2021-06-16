@@ -16,6 +16,7 @@ class CreateOrderShipping extends Migration
         Schema::create('order_shipping', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            //Delivery address
             $table->string('name');
             $table->string('surname');
             $table->enum('user_type',['individual', 'institutional']);
@@ -24,9 +25,11 @@ class CreateOrderShipping extends Migration
             $table->string('country');
             $table->string('city');
             $table->text('address');
+            $table->text('address_type');
             $table->string('post_code');
             $table->string('telephone');
-            $table->enum('method',['by hand','by kiss']);
+            //End Delivery address
+            $table->string('tracking_number',255);
             $table->enum('status',['preparing','transaction','delivered']);
             $table->timestamps();
         });
