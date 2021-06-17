@@ -567,12 +567,12 @@
 										</a>
                                         <ul class="nav nav-children">
                                             <li>
-                                                <a class="nav-link" href="#">
+                                                <a class="nav-link" href="{{ route('slider') }}">
                                                     Edit Slider
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="nav-link" href="#">
+                                                <a class="nav-link" href="{{ route('slider.create') }}">
                                                     Create Slider
                                                 </a>
                                             </li>
