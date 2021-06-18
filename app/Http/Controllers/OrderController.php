@@ -274,4 +274,21 @@ class OrderController extends Controller
             'delivery_address' => $delivery_address
         ]);
     }
+
+    public function destroy_order(Request $request){
+
+        $order = Order::find($request->id);
+        if($order->order_status == 'cancel request'){
+            Order::find($request->id)->update([
+                'order_status' => 'waiting'
+            ]);
+            return back()->with('order.success','Order cancellation request has been cancelled.');
+        }else{
+            Order::find($request->id)->update([
+                'order_status' => 'cancel request'
+            ]);
+            return back()->with('order.success','Order cancellation request has been sent.');
+        }
+
+    }
 }

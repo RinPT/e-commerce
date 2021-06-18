@@ -46,9 +46,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#account">Account details</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tickets">Support Tickets</a>
+                        </li>
                     </ul>
                     <div class="tab-content col-lg-9 col-md-8">
                         <div class="tab-pane @if(!(session('address.add') || session('address.update') || session('address.delete'))) active in @endif" id="orders">
+                            @if(session('order.success'))
+                                <div class="alert alert-success alert-simple alert-inline">
+                                    <h4 class="alert-title">Success :</h4>
+                                    {{ session('order.success') }}
+                                    <button type="button" class="btn btn-close">
+                                        <i class="d-icon-times"></i>
+                                    </button>
+                                </div>
+                            @endif
                             <table class="order-table">
                                 <thead>
                                     <tr>
@@ -101,8 +113,8 @@
                                         </td>
                                         <td>{{ $o->created_at->format('d.m.Y H:i') }}</td>
                                         <td class="order-action">
-                                            @if($o->order_status != 'cancelled')
-                                            <a href="routes" class="btn" style="padding: 10px 20px;">Cancel</a>
+                                            @if($o->order_status == 'waiting' || $o->order_status == 'cancel request')
+                                            <a href="{{ route('order.delete',['id' => $o->id]) }}" class="btn" style="padding: 10px 20px;">Cancel</a>
                                             @endif
                                         </td>
                                     </tr>
@@ -435,6 +447,51 @@
                                     <button type="submit" class="btn btn-primary">Reset Password</button>
                                 </fieldset>
                             </form>
+                        </div>
+                        <div class="tab-pane" id="tickets">
+                            <table class="order-table">
+                                <thead>
+                                <tr>
+                                    <th class="pl-2">Ticket ID</th>
+                                    <th>Title</th>
+                                    <th>Department</th>
+                                    <th>Urgency</th>
+                                    <th>Status</th>
+                                    <th>Opened At</th>
+                                    <th class="pr-2">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($bills as $b)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('invoice',['id'=> $b->invoice_no]) }}" target="_blank">#{{ $b->invoice_no }}</a>
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{ route('store.products',['name' => 'store', 'id' => $b->store_id ]) }}">{{ $b->store_name }}</a>
+                                        </td>
+                                        <td>
+                                            <span>{{ $b->currency_prefix }}{{ $b->total }} {{ $b->currency_suffix }}</span>
+                                        </td>
+                                        <td>
+                                            @if($b->status == 'unpaid')
+                                                <span class="badge badge-danger text-capitalize">{{ $b->status }}</span>
+                                            @else
+                                                <span class="badge badge-success text-capitalize">{{ $b->status }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $b->created_at->format('d.m.Y H:i') }}</td>
+                                        <td class="order-action">
+                                            <a target="_blank" href="{{ route('invoice',['id'=> $b->invoice_no]) }}" class="btn" style="padding: 10px 20px;">View</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">There is no billing for this account.</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

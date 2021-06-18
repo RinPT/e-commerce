@@ -67,6 +67,11 @@ Route::post('/3dsecure', [CheckoutController::class, 'secure_index'])->name('3ds
 Route::post('/order/complete', [OrderController::class, 'index'])->name('order.complete');
 
 /**
+ * Order
+ */
+Route::get('/order/delete/{id}', [OrderController::class, 'destroy_order'])->name('order.delete');
+
+/**
  * Invoice
  */
 Route::get('/invoice/{id}', [CartController::class, 'index'])->name('invoice');
