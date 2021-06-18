@@ -47,7 +47,7 @@
                             <form class="form-horizontal form-bordered" action="{{ route('store.discount.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputReadOnly">Read-Only Input</label>
+                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputReadOnly">Store Name</label>
                                     <div class="col-lg-6">
                                         <input type="text" value="{{ $stores->name }}" id="inputReadOnly" class="form-control" readonly="readonly">
                                     </div>

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Store;
 
-use App\Models\Store;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Models\StoreDiscount;
+use App\Models\ProductDiscount;
 use App\Http\Controllers\Controller;
 
-class DiscountController extends Controller
+class ProductDiscountController extends Controller
 {
-
     private $logged_author;
 
     public function __construct() {
@@ -18,32 +17,37 @@ class DiscountController extends Controller
 
     public function index() {
 
-        $discounts = StoreDiscount::where('store_id', '=', $this->logged_author->id)->get();
+        $products = Product::where('store_id', '=', $this->logged_author->id)->get();
 
-        return view('store.discounts.store.index', [
+        foreach($products as $product) {
+            $discounts = ProductDiscount::where('product_id', '=', $product->id)->get();
+        };
+
+        return view('store.discounts.product.index', [
             'discounts' => $discounts,
         ]);
     }
 
     public function create() {
-        $stores = Store::find($this->logged_author)->first();
 
-        return view('store.discounts.store.create', [
-            'stores' => $stores,
+        $products = Product::where('store_id', '=', $this->logged_author->id)->get();
+
+        return view('store.discounts.product.create', [
+            'products' => $products,
         ]);
     }
 
     public function store(Request $request) {
-
         $this->validate($request, [
-            'store_discount' => 'numeric',
+            'product_id' => 'required',
+            'store_discount' => 'required|numeric',
             'description' => 'required|max:255',
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
 
-        StoreDiscount::create([
-            'store_id' => $this->logged_author->id,
+        ProductDiscount::create([
+            'product_id' => $request->product_id,
             'store_discount' => $request->store_discount,
             'description' => $request->description,
             'start_date' => $request->start_date,
@@ -61,18 +65,18 @@ class DiscountController extends Controller
             'end_date' => 'required',
         ]);
 
-        StoreDiscount::find($discount_id)->update([
+        ProductDiscount::find($discount_id)->update([
             'store_discount' => $request->store_discount,
             'description' => $request->description,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
 
-        return back()->with("status", "Store Discount has been updated!");
+        return back()->with("status", "Product Discount has been updated!");
     }
 
     public function destroy($discount_id) {
-        StoreDiscount::find($discount_id)->delete();
+        ProductDiscount::find($discount_id)->delete();
         return back()->with("destroy", "Discount removed from the product!");
     }
 }
