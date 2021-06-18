@@ -218,6 +218,7 @@ class OrderController extends Controller
 
             Billing::create([
                 'invoice_no' => $iid,
+                'user_id' => auth()->user()->id,
                 'store_id' => $sid,
                 'store_name' => $info['store']['store_name'],
                 'store_tax_no' => $info['store']['store_tax_no'],
@@ -243,6 +244,7 @@ class OrderController extends Controller
                 'currency_code' => $cookie_curr->code,
                 'currency_prefix' => $cookie_curr->prefix,
                 'currency_suffix' => $cookie_curr->suffix,
+                'total'=> $total_price,
                 'status' => $request->status ?? "unpaid"
             ]);
 

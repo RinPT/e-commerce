@@ -16,6 +16,7 @@ class CreateBillings extends Migration
         Schema::create('billings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('invoice_no');
+            $table->bigInteger('user_id');
             //Store info
             $table->bigInteger('store_id');
             $table->string('store_name');
@@ -44,6 +45,7 @@ class CreateBillings extends Migration
             $table->string('currency_code');
             $table->string('currency_prefix');
             $table->string('currency_suffix');
+            $table->decimal('total','50');
             $table->enum('status',['paid','unpaid']);
             $table->timestamps();
         });

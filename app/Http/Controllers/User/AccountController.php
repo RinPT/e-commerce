@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Billing;
 use App\Models\Countries;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -28,13 +30,18 @@ class AccountController extends Controller
 
         $countries = Countries::all();
 
+        $bills  = Billing::where('user_id',auth()->user()->id)->orderBy('created_at','desc')->get();
+        $orders = Order::where('user_id',auth()->user()->id)->orderBy('created_at','desc')->get();
+
         return view('users.account', [
             'user' => $user,
             'addresses' => $addresses,
             'currencies' => $currencies,
             'categories'  => $categories,
             'items' => $items,
-            'countries' => $countries
+            'countries' => $countries,
+            'bills' => $bills,
+            'orders' => $orders
         ]);
     }
 
