@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+
+
+@if($logged_author_gtype == "admin")
     <div class="row">
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card-body py-4">
@@ -181,6 +184,7 @@
             </section>
         </div>
     </div>
+@endif
 
     <section class="card card-modern card-big-info">
         <div class="card-body">

@@ -23,4 +23,14 @@ Route::group(['prefix' => '/store'], function() {
     Route::post('product/discount/create/done', [ProductDiscountController::class, 'store'])->name('store.product.discount.store');
     Route::post('product/discount/{id}/update', [ProductDiscountController::class, 'update'])->name('store.product.discount.update');
     Route::delete('/discount/{id}/delete', [ProductDiscountController::class, 'destroy'])->name('store.product.discount.delete');
+
+
+    /**
+     * Product
+     */
+    Route::get('/product/list', [ProductController::class, 'index'])->name('store.product');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('store.product.create');
+    Route::post('/product/create/done', [ProductController::class, 'store'])->name('store.product.store');
+    Route::post('/product/{id}/update', [ProductController::class, 'update'])->name('store.product.update');
+    Route::delete('/product/{id}/delete', [ProductController::class, 'destroy'])->name('store.product.delete');
 });
