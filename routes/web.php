@@ -67,6 +67,12 @@ Route::post('/3dsecure', [CheckoutController::class, 'secure_index'])->name('3ds
 Route::post('/order/complete', [OrderController::class, 'index'])->name('order.complete');
 
 /**
+ * Invoice
+ */
+Route::get('/invoice/{id}', [CartController::class, 'index'])->name('invoice');
+Route::get('/invoice/pay/{id}', [CartController::class, 'index'])->name('invoice.pay');
+
+/**
  * Contracts
  */
 Route::get('/privacy-policy', [ContractController::class, 'index_privacy']) -> name('privacy.index');

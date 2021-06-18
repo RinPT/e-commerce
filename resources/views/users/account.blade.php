@@ -38,7 +38,7 @@
                             <a class="nav-link @if(!(session('address.add') || session('address.update') || session('address.delete'))) active @endif" href="#orders">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if(!(session('address.add') || session('address.update') || session('address.delete'))) active @endif" href="#billings">Billings</a>
+                            <a class="nav-link @if((session('address.add') || session('address.update') || session('address.delete'))) active @endif" href="#billings">Billings</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @if(session('address.add') || session('address.update') || session('address.delete')) active @endif" href="#address">Address</a>
@@ -52,56 +52,101 @@
                             <table class="order-table">
                                 <thead>
                                     <tr>
-                                        <th class="pl-2">Order</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
+                                        <th class="pl-2">Order ID</th>
+                                        <th>Store Name</th>
+                                        <th>Products</th>
                                         <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Order Date</th>
                                         <th class="pr-2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($orders as $o)
                                     <tr>
-                                        <td class="order-number"><a href="#">#3596</a></td>
-                                        <td class="order-date"><time>February 24, 2021</time></td>
-                                        <td class="order-status"><span>On hold</span></td>
-                                        <td class="order-total"><span>$900.00 for 5 items</span></td>
-                                        <td class="order-action"><a href="#" class="btn btn-primary btn-link btn-underline">View</a></td>
+                                        <td>
+                                            <a>#{{ $o->id }}</a>
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{ route('store.products',['name' => 'store', 'id' => $o->store_id ]) }}">{{ $o->store_name }}</a>
+                                        </td>
+                                        <td>
+                                            @foreach(json_decode($o->products) as $p)
+                                                <div>
+                                                    {{ $p->pname }} x {{ $p->pcount }}
+                                                    @if(count((array)$p->options))
+                                                    <div>
+                                                        <span style="font-size: 12px"><i class="fas fa-angle-double-right"></i> Options</span>
+                                                        @foreach($p->options as $key => $op)
+                                                            <div style="font-size: 12px" class="pl-3">{{ $key }}: {{ $op }}</div>
+                                                        @endforeach
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <span>{{ $o->currency_prefix }}{{ $o->total }} {{ $o->currency_suffix }}</span>
+                                        </td>
+                                        <td>
+                                            @if($o->order_status == 'waiting')
+                                                <span class="badge badge-warning text-capitalize">{{ $o->order_status }}</span>
+                                            @elseif($o->order_status == 'approved')
+                                                <span class="badge badge-success text-capitalize">{{ $o->order_status }}</span>
+                                            @elseif($o->order_status == 'cancelled')
+                                                <span class="badge badge-dark text-capitalize">{{ $o->order_status }}</span>
+                                            @else
+                                                <span class="badge badge-primary text-capitalize">{{ $o->order_status }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $o->created_at->format('d.m.Y H:i') }}</td>
+                                        <td class="order-action">
+                                            @if($o->order_status != 'cancelled')
+                                            <a href="routes" class="btn" style="padding: 10px 20px;">Cancel</a>
+                                            @endif
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td class="order-number"><a href="#">#3593</a></td>
-                                        <td class="order-date"><time>February 21, 2021</time></td>
-                                        <td class="order-status"><span>On hold</span></td>
-                                        <td class="order-total"><span>$290.00 for 2 items</span></td>
-                                        <td class="order-action"><a href="#" class="btn btn-primary btn-link btn-underline">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="order-number"><a href="#">#2547</a></td>
-                                        <td class="order-date"><time>January 4, 2021</time></td>
-                                        <td class="order-status"><span>On hold</span></td>
-                                        <td class="order-total"><span>$480.00 for 8 items</span></td>
-                                        <td class="order-action"><a href="#" class="btn btn-primary btn-link btn-underline">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="order-number"><a href="#">#2549</a></td>
-                                        <td class="order-date"><time>January 19, 2021</time></td>
-                                        <td class="order-status"><span>On hold</span></td>
-                                        <td class="order-total"><span>$680.00 for 5 items</span></td>
-                                        <td class="order-action"><a href="#" class="btn btn-primary btn-link btn-underline">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="order-number"><a href="#">#4523</a></td>
-                                        <td class="order-date"><time>Jun 6, 2021</time></td>
-                                        <td class="order-status"><span>On hold</span></td>
-                                        <td class="order-total"><span>$564.00 for 3 items</span></td>
-                                        <td class="order-action"><a href="#" class="btn btn-primary btn-link btn-underline">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="order-number"><a href="#">#4526</a></td>
-                                        <td class="order-date"><time>Jun 19, 2021</time></td>
-                                        <td class="order-status"><span>On hold</span></td>
-                                        <td class="order-total"><span>$123.00 for 8 items</span></td>
-                                        <td class="order-action"><a href="#" class="btn btn-primary btn-link btn-underline">View</a></td>
-                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane @if((session('address.add') || session('address.update') || session('address.delete'))) active in @endif" id="billings">
+                            <table class="order-table">
+                                <thead>
+                                <tr>
+                                    <th class="pl-2">Invoice ID</th>
+                                    <th>Store Name</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Creation Date</th>
+                                    <th class="pr-2">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($bills as $b)
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('invoice',['id'=> $b->invoice_no]) }}" target="_blank">#{{ $b->invoice_no }}</a>
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="{{ route('store.products',['name' => 'store', 'id' => $b->store_id ]) }}">{{ $b->store_name }}</a>
+                                    </td>
+                                    <td>
+                                        <span>{{ $b->currency_prefix }}{{ $b->total }} {{ $b->currency_suffix }}</span>
+                                    </td>
+                                    <td>
+                                        @if($b->status == 'unpaid')
+                                            <span class="badge badge-danger text-capitalize">{{ $b->status }}</span>
+                                        @else
+                                            <span class="badge badge-success text-capitalize">{{ $b->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $b->created_at->format('d.m.Y H:i') }}</td>
+                                    <td class="order-action">
+                                        <a target="_blank" href="{{ route('invoice',['id'=> $b->invoice_no]) }}" class="btn" style="padding: 10px 20px;">View</a>
+                                    </td>
+                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
