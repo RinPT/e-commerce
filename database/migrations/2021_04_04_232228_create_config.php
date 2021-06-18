@@ -83,7 +83,7 @@ class CreateConfig extends Migration
             ],
             [
                 'key' => 'smtp_server',
-                'value' => 'smtp.gmail.com',
+                'value' => 'plesk.dnshosting.me',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
@@ -95,13 +95,13 @@ class CreateConfig extends Migration
             ],
             [
                 'key' => 'smtp_username',
-                'value' => 'cemalcemali574@gmail.com',
+                'value' => 'info@darf.xyz',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'key' => 'smtp_password',
-                'value' => 'ttg123456',
+                'value' => 'Pg72j&3u',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
