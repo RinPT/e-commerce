@@ -39,10 +39,9 @@ Route::group(['prefix' => '/store'], function() {
      * Orders
      */
     Route::get('/order', [OrderController::class, 'index'])->name('store.orders');
-    Route::get('/order/create', [OrderController::class, 'create'])->name('store.orders.create');
-    Route::post('/order/create/done', [OrderController::class, 'store'])->name('store.orders.store');
     Route::post('/order/{id}/update/', [OrderController::class, 'update'])->name('store.orders.update');
     Route::delete('/order/{id}/delete/', [OrderController::class, 'destroy'])->name('store.orders.destroy');
     Route::get('/order/pending', [OrderController::class, 'show_pending'])->name('store.orders.show_pending');
     Route::get('/order/canceled', [OrderController::class, 'show_canceled'])->name('store.orders.show_canceled');
+    Route::get('/order/cancel_request', [OrderController::class, 'show_cancel_request'])->name('store.orders.show_cancel_request');
 });

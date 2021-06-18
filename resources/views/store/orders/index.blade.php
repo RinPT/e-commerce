@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="/admin/vendor/datatables/media/css/dataTables.bootstrap4.css" />
 @endsection
 
+@section('breadcrumb')
+    <h2>Order Management</h2>
+
+    <div class="right-wrapper text-right mr-2">
+        <ol class="breadcrumbs">
+            <li><span>All Orders</span></li>
+            <li><span>Order Management</span></li>
+            <li><span>Dashboard</span></li>
+        </ol>
+    </div>
+@endsection
+
 @section('content')
     <section class="card">
         <header class="card-header">
@@ -34,8 +46,7 @@
                 <thead>
                 <tr>
                     <th>Order ID</th>
-                    <th>Store Name</th>
-                    <th>Full Name</th>
+                    <th>Customer Name</th>
                     <th>Total</th>
                     <th>Order Status</th>
                     <th>Purchase Date</th>
@@ -46,7 +57,6 @@
                     @foreach($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->store_name }}</td>
                             <td>{{ $order->name }} {{ $order->surname }}</td>
                             <td>{{ $order->total }}</td>
                             <td>{{ $order->order_status }}</td>

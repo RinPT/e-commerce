@@ -666,17 +666,17 @@
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('admin.order.show_pending') }}">
+												<a class="nav-link" href="{{ route('store.orders.show_pending') }}">
 													Pending Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('store.orders.create') }}">
-													Send Orders
+												<a class="nav-link" href="{{ route('store.orders.show_cancel_request') }}">
+													Cancel Requests
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('admin.order.show_canceled') }}">
+												<a class="nav-link" href="{{ route('store.orders.show_canceled') }}">
 													Cancel Order Requests
 												</a>
 											</li>
