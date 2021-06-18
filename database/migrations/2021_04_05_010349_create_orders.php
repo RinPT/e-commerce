@@ -32,7 +32,7 @@ class CreateOrders extends Migration
             $table->text('products');
             $table->text('coupons');
             $table->decimal('total',50);
-            $table->enum('order_status',['waiting','approved','cancelled']);
+            $table->enum('order_status',['waiting', 'approved', 'cancel request', 'cancelled']);
             $table->string('currency_code');
             $table->string('currency_prefix');
             $table->string('currency_suffix');

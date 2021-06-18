@@ -661,22 +661,22 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{ route('store.orders') }}">
 													All Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{ route('admin.order.show_pending') }}">
 													Pending Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{ route('store.orders.create') }}">
 													Send Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{ route('admin.order.show_canceled') }}">
 													Cancel Order Requests
 												</a>
 											</li>
