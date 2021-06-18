@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::where('store_id', '=', $this->logged_author->id)->get();
+        $orders = Order::where('store_id', '=', $this->logged_author->id)->where('order_status', '=', 'approved')->get();
 
         return view('store.orders.index', [
             'orders' => $orders
@@ -35,7 +35,7 @@ class OrderController extends Controller
 
     public function show_canceled()
     {
-        $orders = Order::where('store_id', '=', $this->logged_author->id)->where('order_status', '=', 'waiting')->get();
+        $orders = Order::where('store_id', '=', $this->logged_author->id)->where('order_status', '=', 'cancelled')->get();
 
         return view('store.orders.index', [
             'orders' => $orders,
@@ -60,35 +60,20 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
-        try {
-            Order::findOrFail($id)->update([
-                'store_id' => $request->store_id,
-                'store_name' => $request->store_name,
-                'store_url'=> $request->store_url,
-                'user_id'=> $request->user_id,
-                'user_type'=> $request->store_id,
-                'name'=> $request->name,
-                'surname'=> $request->surname,
-                'username'=> $request->username,
-                'email'=> $request->email,
-                'gender'=> $request->gender,
-                'comment'=> $request->comment,
-                'total'=> $request->total,
-                'order_status'=> $request->order_status,
-                'currency_code'=> $request->currency_code,
-                'ip_address'=> $request->ip_address,
-                'user_agent'=> $request->user_agent,
-                'updated_at' => Carbon::now()
-            ]);
-            return back()->with('success', 'Information updated successfully');
-        } catch (\Exception $e) {
-            if ($e->getCode() == 23000) {
-                return back()->with('error', 'Error Updating Order');
-            }
-        }
-        return back();
+    public function update(Request $request, $id) {
+
+        $order = Order::find($id);
+
+        $this->validate($request, [
+            'order_status' => 'required',
+        ]);
+
+        $order->update([
+            'order_status' => $request->order_status,
+        ]);
+
+        return back()->with('updated', 'Order status has been updated! This order is now in "'.$order->order_status.'" table.');
+
     }
 
     public function destroy($id)

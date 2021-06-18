@@ -662,7 +662,7 @@
 										<ul class="nav nav-children">
 											<li>
 												<a class="nav-link" href="{{ route('store.orders') }}">
-													All Orders
+													Approved Orders
 												</a>
 											</li>
 											<li>
@@ -670,13 +670,13 @@
 													Pending Orders
 												</a>
 											</li>
-											<li>
-												<a class="nav-link" href="{{ route('store.orders.show_cancel_request') }}">
-													Cancel Requests
+                                            <li>
+												<a class="nav-link" href="{{ route('store.orders.show_canceled') }}">
+													Cancelled Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('store.orders.show_canceled') }}">
+												<a class="nav-link" href="{{ route('store.orders.show_cancel_request') }}">
 													Cancel Order Requests
 												</a>
 											</li>
