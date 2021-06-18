@@ -58,7 +58,7 @@ Route::post('/product/add/review/{product_id}',[ProductController::class, 'store
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::post('/cart/delete', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::get('/cart/{id}/delete', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/cart/coupon', [CartController::class, 'apply_coupon'])->name('coupon.apply');
 Route::get('/cart/coupon/{code}/delete', [CartController::class, 'delete_coupon'])->name('coupon.delete');
 

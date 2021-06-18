@@ -257,8 +257,8 @@ class OrderController extends Controller
             ProductCoupon::destroy($id);
         }
 
-        setcookie('cart_products',json_encode([]),time() + 86400 * 30,'/');
-        setcookie('used_coupones',json_encode([]),time() + 86400 * 30,'/');
+        setcookie('cart_products',null,-1,'/');
+        setcookie('used_coupones',null,-1,'/');
 
         return view('order', [
             'oids'      => $oids,

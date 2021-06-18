@@ -108,7 +108,7 @@
                                     </span>
                                 </td>
                                 <td class="product-close">
-                                    <a href="javascript:void(0)" class="product-remove" data-key="{{ $key }}" title="Remove this product">
+                                    <a href="{{ route('cart.destroy',['id' => $product->product->id]) }}" class="product-remove" data-key="{{ $key }}" title="Remove this product">
                                         <i class="fas fa-times"></i>
                                     </a>
                                 </td>

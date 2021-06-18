@@ -41,6 +41,8 @@ class CreateUsersTable extends Migration
             'photo' => '',
             'group' => '[2]',
             'status' => '1',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
         ]);
     }
 

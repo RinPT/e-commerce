@@ -204,7 +204,19 @@ class CartController extends Controller
         return back()->with('success','Coupone code removed successfully');
     }
 
-    public function destroy(){
-
+    public function destroy(TRequest $request,$id){
+        $cart_products = json_decode($_COOKIE['cart_products']);
+        foreach ($cart_products as $key => $cart_product) {
+            if($cart_product->pid == $id){
+                unset($cart_products[$key]);
+                break;
+            }
+        }
+        if(count($cart_products)){
+            setcookie('cart_products',json_encode(array_values($cart_products)),time() + 86400 * 30,'/');
+        }else{
+            setcookie('cart_products',null,-1,'/');
+        }
+        return back()->with('success','Product removed successfully');
     }
 }

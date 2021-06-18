@@ -62,7 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($orders as $o)
+                                @forelse($orders as $o)
                                     <tr>
                                         <td>
                                             <a>#{{ $o->id }}</a>
@@ -106,7 +106,11 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">There is no order for this account.</td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -123,7 +127,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($bills as $b)
+                                @forelse($bills as $b)
                                 <tr>
                                     <td>
                                         <a href="{{ route('invoice',['id'=> $b->invoice_no]) }}" target="_blank">#{{ $b->invoice_no }}</a>
@@ -146,7 +150,11 @@
                                         <a target="_blank" href="{{ route('invoice',['id'=> $b->invoice_no]) }}" class="btn" style="padding: 10px 20px;">View</a>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">There is no billing for this account.</td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                         </div>
