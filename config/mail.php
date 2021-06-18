@@ -36,13 +36,20 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-            'port' => env('MAIL_PORT', 465),
-            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
-            'username' => env('MAIL_USERNAME', 'cemalcemali574@gmail.com'),
-            'password' => env('MAIL_PASSWORD', 'ttg123456'),
+            'host' => env('MAIL_HOST','plesk.dnshosting.me'),
+            'port' => env('MAIL_PORT',465),
+            'encryption' => env('MAIL_ENCRYPTION','ssl'),
+            'username' => env('MAIL_USERNAME','info@darf.xyz'),
+            'password' => env('MAIL_PASSWORD','Pg72j&3u'),
             'timeout' => null,
             'auth_mode' => null,
+            'stream' => [
+                'ssl' => [
+                    'allow_self_signed' => true,
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                ],
+            ],
         ],
 
         'ses' => [
