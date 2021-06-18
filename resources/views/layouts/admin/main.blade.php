@@ -612,21 +612,45 @@
                                     @if (in_array(15, $logged_author->perms))
                                     <li class="nav-parent">
 										<a class="nav-link" href="#">
-											<i class='bx bxs-discount'></i>
-											<span>Discounts</span>
+											<i class='bx bxs-discount' ></i>
+											<span>Discount</span>
 										</a>
 										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="{{ route('store.discount') }}">
-													All Discounts
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="{{ route('store.discount.create') }}">
-													Add New Discount
-												</a>
-											</li>
-										</ul>
+				                            <li class="nav-parent">
+				                                <a class="nav-link" href="#">
+				                                    Store Discount
+				                                </a>
+				                                <ul class="nav nav-children">
+				                                    <li>
+				                                        <a href="{{ route('store.discount') }}">
+				                                            View Discounts
+				                                        </a>
+				                                    </li>
+				                                    <li>
+				                                        <a href="{{ route('store.discount.create') }}">
+				                                            Create Discount
+				                                        </a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+                                            <li class="nav-parent">
+				                                <a class="nav-link" href="#">
+				                                    Product Discount
+				                                </a>
+				                                <ul class="nav nav-children">
+				                                    <li>
+				                                        <a href="{{ route('store.product.discount') }}">
+				                                            View Discounts
+				                                        </a>
+				                                    </li>
+				                                    <li>
+				                                        <a href="{{ route('store.product.discount.create') }}">
+				                                            Create Discount
+				                                        </a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+				                        </ul>
 									</li>
                                     @endif
                                     @if(in_array(16,$logged_author->perms))
