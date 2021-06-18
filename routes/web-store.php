@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Store\DiscountController;
+use App\Http\Controllers\Store\OrderController;
 use App\Http\Controllers\Store\ProductDiscountController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::group(['prefix' => '/store'], function() {
     Route::delete('/discount/{id}/delete', [ProductDiscountController::class, 'destroy'])->name('store.product.discount.delete');
 
 
-    /**
+    /*
      * Product
      */
     Route::get('/product/list', [ProductController::class, 'index'])->name('store.product');
@@ -33,4 +34,15 @@ Route::group(['prefix' => '/store'], function() {
     Route::post('/product/create/done', [ProductController::class, 'store'])->name('store.product.store');
     Route::post('/product/{id}/update', [ProductController::class, 'update'])->name('store.product.update');
     Route::delete('/product/{id}/delete', [ProductController::class, 'destroy'])->name('store.product.delete');
+
+    /*
+     * Orders
+     */
+    Route::get('/order', [OrderController::class, 'index'])->name('store.orders');
+    Route::get('/order/create', [OrderController::class, 'create'])->name('store.orders.create');
+    Route::post('/order/create/done', [OrderController::class, 'store'])->name('store.orders.store');
+    Route::post('/order/{id}/update/', [OrderController::class, 'update'])->name('store.orders.update');
+    Route::delete('/order/{id}/delete/', [OrderController::class, 'destroy'])->name('store.orders.destroy');
+    Route::get('/order/pending', [OrderController::class, 'show_pending'])->name('store.orders.show_pending');
+    Route::get('/order/canceled', [OrderController::class, 'show_canceled'])->name('store.orders.show_canceled');
 });
