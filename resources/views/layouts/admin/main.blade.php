@@ -103,6 +103,8 @@
 								<li>
                                     @if($logged_author_type == "author")
                                         <a role="menuitem" tabindex="-1" href="{{ route('admin.author.edit',$logged_author->id) }}"><i class="bx bx-user-circle"></i> My Profile</a>
+									@elseif($logged_author_type == "store")
+                                        <a role="menuitem" tabindex="-1" href="{{ route('admin.store.edit',$logged_author->id) }}"><i class="bx bx-user-circle"></i> My Profile</a>
                                     @else
                                         <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
                                     @endif
