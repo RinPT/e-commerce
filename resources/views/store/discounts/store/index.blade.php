@@ -64,8 +64,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Store ID</th>
-                        <th>Store Discount</th>
-                        <th>Main Discount</th>
+                        <th>Store Discount ()%)</th>
                         <th>Description</th>
                         <th>Start Date</th>
                         <th>End Date</th>
@@ -79,7 +78,6 @@
                                 <td>{{ $discount->id }} </td>
                                 <td>{{ $discount->store_id }}</td>
                                 <td>{{ $discount->store_discount }}</td>
-                                <td>{{ $discount->main_discount }}</td>
                                 <td>{{ $discount->description }}</td>
                                 <td>{{ date('d/m/Y', strtotime($discount->start_date)) }}</td>
                                 <td>{{ date('d/m/Y', strtotime($discount->end_date)) }}</td>

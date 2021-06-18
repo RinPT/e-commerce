@@ -20,7 +20,7 @@ Route::group(['prefix' => '/store'], function() {
     Route::get('/discount/create', [DiscountController::class, 'create'])->name('store.discount.create');
     Route::post('/discount/create/done', [DiscountController::class, 'store'])->name('store.discount.store');
     Route::post('/discount/{id}/update', [DiscountController::class, 'update'])->name('store.discount.update');
-    Route::delete('/discount/{id}/delete', [DiscountController::class, 'destroy'])->name('store.discount.delete');
+    Route::delete('/store/discount/{id}/delete', [DiscountController::class, 'destroy'])->name('store.discount.delete');
 
     /*
      * Product Discount
