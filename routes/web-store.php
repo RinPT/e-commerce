@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Store\DiscountController;
-use App\Http\Controllers\Store\OrderController;
-use App\Http\Controllers\Store\ProductDiscountController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Store\OrderController;
+use App\Http\Controllers\Store\ProductController;
+use App\Http\Controllers\Store\DiscountController;
+use App\Http\Controllers\Store\ProductDiscountController;
 
 Route::group(['prefix' => '/store'], function() {
 
@@ -32,7 +33,7 @@ Route::group(['prefix' => '/store'], function() {
     Route::get('/product/list', [ProductController::class, 'index'])->name('store.product');
     Route::get('/product/create', [ProductController::class, 'create'])->name('store.product.create');
     Route::post('/product/create/done', [ProductController::class, 'store'])->name('store.product.store');
-    Route::post('/product/{id}/update', [ProductController::class, 'update'])->name('store.product.update');
+    Route::get('/product/{id}/update', [ProductController::class, 'update'])->name('store.product.update');
     Route::delete('/product/{id}/delete', [ProductController::class, 'destroy'])->name('store.product.delete');
 
     /*

@@ -597,12 +597,12 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{ route('store.product') }}">
 													All Products
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="#">
+												<a class="nav-link" href="{{ route('store.product.create') }}">
 													Add New Product
 												</a>
 											</li>

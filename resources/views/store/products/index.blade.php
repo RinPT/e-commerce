@@ -45,12 +45,11 @@
                     <td>Stok1</td>
                     <td>{{$product->updated_at->format('d.m.Y H:i')}}</td>
                     <td>
-                        <form action="{{ route('admin.product.edit', $product->id) }}" method="POST">
+                        <form action="{{ route('store.product.update', $product->id) }}" method="GET">
                             @csrf
-                            {{ method_field('GET') }}
                             <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px"><i class="fas fa-pencil-alt"></i></button>
                         </form>
-                        <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST">
+                        <form action="{{ route('store.product.delete', $product->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px"><i class="fas fa-times"></i></button>
