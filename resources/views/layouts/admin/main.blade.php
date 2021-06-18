@@ -137,12 +137,14 @@
 				            <nav id="menu" class="nav-main" role="navigation">
 
 				                <ul class="nav nav-main">
+                                    @if(in_array(1,$logged_author->perms))
 									<li>
 										<a class="nav-link" href="{{ route('admin.home') }}">
 											<i class="bx bx-home-alt" aria-hidden="true"></i>
 											<span>Dashboard</span>
 										</a>
 									</li>
+                                    @endif
                                     @if(in_array(1,$logged_author->perms))
 									<li>
 										<a class="nav-link" href="{{ route('admin.general-setting.edit') }}">
@@ -579,6 +581,14 @@
                                                 </a>
                                             </li>
                                         </ul>
+									</li>
+                                    @endif
+                                    @if(in_array(17,$logged_author->perms))
+									<li>
+										<a class="nav-link" href="{{ route('store.home') }}">
+											<i class="bx bx-home-alt" aria-hidden="true"></i>
+											<span>Dashboard</span>
+										</a>
 									</li>
                                     @endif
                                     @if(in_array(17,$logged_author->perms))

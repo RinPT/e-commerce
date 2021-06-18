@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Store\OrderController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Store\DiscountController;
+use App\Http\Controllers\Store\HomeController;
 use App\Http\Controllers\Store\ProductDiscountController;
 
 Route::group(['prefix' => '/store'], function() {
+    /*
+     * Dashboard
+     */
+    Route::get('/home', [HomeController::class, 'index'])->name('store.home');
 
     /*
      * Store Discount
