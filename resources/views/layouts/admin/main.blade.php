@@ -593,7 +593,7 @@
                                     @endif
                                     @if(in_array(17,$logged_author->perms))
 									<li>
-										<a class="nav-link" href="#">
+										<a class="nav-link" href="{{ route('store.tickets') }}">
 											<i class='bx bx-support'></i>
 											<span>Tickets</span>
 										</a>

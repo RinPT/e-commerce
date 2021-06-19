@@ -6,6 +6,7 @@ use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Store\DiscountController;
 use App\Http\Controllers\Store\HomeController;
 use App\Http\Controllers\Store\ProductDiscountController;
+use App\Http\Controllers\Store\TicketController;
 
 Route::group(['prefix' => '/store'], function() {
     /*
@@ -50,4 +51,11 @@ Route::group(['prefix' => '/store'], function() {
     Route::get('/order/pending', [OrderController::class, 'show_pending'])->name('store.orders.show_pending');
     Route::get('/order/canceled', [OrderController::class, 'show_canceled'])->name('store.orders.show_canceled');
     Route::get('/order/cancel_request', [OrderController::class, 'show_cancel_request'])->name('store.orders.show_cancel_request');
+
+    /*
+     * Tickets
+     */
+    Route::get('/tickets', [TicketController::class, 'index'])->name('store.tickets');
+    Route::get('tickets/{id}/view', [TicketController::class, 'view'])->name('store.tickets.view');
+    Route::delete('tickets/{id}/delete', [TicketController::class, 'destroy'])->name('store.tickets.destroy');
 });

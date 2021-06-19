@@ -64,7 +64,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Store ID</th>
-                        <th>Store Discount ()%)</th>
+                        <th>Store Discount (%)</th>
                         <th>Description</th>
                         <th>Start Date</th>
                         <th>End Date</th>
