@@ -22,8 +22,6 @@ class OrderController extends Controller
     public function show_pending() {
 
         $orders = Order::where('order_status', '=', 'waiting')->get();
-        $order = Order::find(1);
-        $product = json_decode($order->products);
 
         return view('admin.order.index', [
             'orders' => $orders,

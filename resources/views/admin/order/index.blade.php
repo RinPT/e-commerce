@@ -53,7 +53,7 @@
                 <tr>
                     <th>Order ID</th>
                     <th>Customer Name</th>
-                    <th>Product Name</th>
+                    <th>Product Name(s)</th>
                     <th>Total</th>
                     <th>Order Status</th>
                     <th>Purchase Date</th>
@@ -65,7 +65,11 @@
                             <tr>
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->name }} {{ $order->surname }}</td>
-                                <td>Clock</td>
+                                <td>
+                                    @foreach (json_decode($order->products) as $product)
+                                        {{ $product->pname }}
+                                    @endforeach
+                                </td>
                                 <td>{{ $order->total }}</td>
                                 <td>
                                     <form class="d-flex" action="{{ route('admin.order.update', $order->id) }}" method="POST">
