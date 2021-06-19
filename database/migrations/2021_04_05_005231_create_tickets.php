@@ -16,14 +16,16 @@ class CreateTickets extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('department_id')->constrained('ticket_departments')->onDelete('cascade');
-            $table->foreignId('store_id')->constrained('store')->onDelete('cascade');
+            $table->bigInteger('sender_id');
+            $table->string('sender_type');
+            $table->bigInteger('receiver_id');
+            $table->string('receiver_type');
             $table->string('title');
             $table->text('message');
             $table->enum('status',['open','answered','closed']);
             $table->enum('urgency',['low','medium','high','very high','critical']);
-            $table->json('attachments');
-            $table->tinyInteger('store_unread')->default(1);
-            $table->tinyInteger('author_unread')->default(1);
+            $table->tinyInteger('sender_unread')->default(1);
+            $table->tinyInteger('receiver_unread')->default(1);
             $table->timestamps();
         });
     }

@@ -16,10 +16,11 @@ class CreateTicketReplies extends Migration
         Schema::create('ticket_replies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ticket_id')->constrained('tickets')->onDelete('cascade');
-            $table->foreignId('store_id')->constrained('store')->onDelete('cascade');
-            $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
-            $table->integer('rate');
-            $table->json('attachments');
+            $table->bigInteger('sender_id');
+            $table->string('sender_type');
+            $table->bigInteger('receiver_id');
+            $table->string('receiver_type');
+            $table->text('message');
             $table->timestamps();
         });
     }
