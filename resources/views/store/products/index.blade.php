@@ -44,7 +44,7 @@
                     <td>{{$product->price}} {{$product->currency}}</td>
                     <td>{{$product->cargo_price}} {{$product->currency}}</td>
                     <td>{{$product->currency}}</td>
-                    <td>{{ $product->stock }}</td>
+                    <td>{{ $product->totalstock }}</td>
                     <td>{{$product->updated_at}}</td>
                     <td class="actions d-flex">
                         <a href="#productEdit{{ $logged_author->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
@@ -61,7 +61,7 @@
                                     <h2 class="card-title">Update Currency</h2>
                                 </header>
                                 <div class="card-body">
-                                    <form action="{{ route('store.product.update', $logged_author->id) }}" method="GET">
+                                    <form action="{{ route('store.product.update', $logged_author->id) }}" method="post">
                                         @csrf
                                         <div class="modal-wrapper mb-0">
                                             <div class="form-group row @error('name') has-danger @enderror">
@@ -99,13 +99,17 @@
                                                     @error('currency_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                 </div>
                                             </div>
+                                            @foreach ($product->stock as $p)
                                             <div class="form-group row @error('stock') has-danger @enderror">
                                                 <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Stock</label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" name="stock" class="form-control" id="inputDefault" value="{{ $product->stock }}">
+                                                    <label for="inputDefault" >{{ $p->name }}</label>
+                                                    <input type="hidden" name="option[]" value=" {{ $p->name }}">
+                                                    <input type="text" name="stock[]" class="form-control" id="inputDefault" value="{{ $p->stock}}">
                                                     @error('stock') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                 </div>
                                             </div>
+                                            @endforeach
                                         </div>
                                         <hr/>
                                         <div class="row">

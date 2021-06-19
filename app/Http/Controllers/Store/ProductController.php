@@ -14,6 +14,7 @@ use App\Models\Product_Images;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Product_Attribute_Stock;
+use App\Models\ProductAttribute;
 
 class ProductController extends Controller
 {
@@ -39,13 +40,14 @@ class ProductController extends Controller
         ->get();
 
         foreach ($products as $key => $product) {
-            $products[$key] ->stock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
+            $products[$key] -> stock = ProductStock::where('product_id', '=', $product->id)->get();
+            $products[$key] -> totalstock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
         };
 
-       
+
     	return view('store.products.index',[
     		'products'=> $products,
-            'categories'=> $categories,           
+            'categories'=> $categories,
             'currencies'=> $currencies,
             'stores'=> $stores,
     	]);
@@ -71,14 +73,22 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required|max:32',
             'description' => 'required',
-            'images' => 'required', 
+            'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'price' => 'required|numeric',
             'cargo_price' => 'required|numeric',
             'currency_id' => 'required|numeric',
             'ar' => 'nullable',
-            'option' => 'nullable',
-            'stock[]' => 'nullable|numeric',
+        ]);
+
+        $product = Product::create([
+            'name' => $request->name,
+            'store_id' => $this->logged_author->id,
+            'category_id' =>$this->logged_author->product_cat_id,
+            'description' => $request->description,
+            'price' => $request->price,
+            'cargo_price' => $request->cargo_price,
+            'currency_id' => $request->currency_id,
         ]);
 
         if($request->file('ar')!=null){
@@ -91,39 +101,9 @@ class ProductController extends Controller
             $request->file('ar')->move(public_path($folder), $arName. '.usdz');
 
             $product = Product::create([
-                'name' => $request->name,
-                'store_id' => $request->store_id,
-                'description' => $request->description,
-                'price' => $request->price,
                 'ar' => $filePath,
-                'cargo_price' => $request->cargo_price,
-                'currency_id' => $request->currency_id,
             ]);
         }
-        else {
-        $product = Product::create([
-            'name' => $request->name,
-            'store_id' => $this->logged_author->id,
-            'description' => $request->description,
-            'price' => $request->price,
-            'cargo_price' => $request->cargo_price,
-            'currency_id' => $request->currency_id,
-        ]);    
-        }
-
-        $option = $request->get('option');
-        $option = array_filter($option, 'strlen');
-        $stocks = $request->get('stock');
-        $stocks = array_filter($stocks, 'strlen');
-
-        for ($i=0; $i<count($optstock); $i++){ //TODO: Add presets to make it easier for seller (color size combinations, red small, blue medium)
-            $optstock = ProductOption::create([
-                'product_id' => $product->id,
-                'option' => $option[$i],
-                'stock' => $stocks[$i],
-            ]);
-        }
-
 
         $counter=0;
         foreach($request->file('images') as $image) {
@@ -142,21 +122,44 @@ class ProductController extends Controller
                 'image' => $filePath,
             ]);
         }
-/*
-        $attributes = $request->get('attribute');
-        $attributes = array_filter($attributes, 'strlen');
-        $stocks = $request->get('stock');
-        $stocks = array_filter($stocks, 'strlen');
-        
-        for ($i=0; $i<count($attributes); $i++){ //TODO: Add presets to make it easier for seller (color size combinations, red small, blue medium)
-            $attrstocks = Product_Attribute_Stock::create([
-                'product_id' => $product->id,
-                'attribute' => $attributes[$i],
-                'stock' => $stocks[$i],
+
+
+        /*
+        foreach ($request->attribute_value as $key=> $k){
+            $this->validate($request,[
+                'attribute_value'.$k => 'required',
+                'attribute_name'.$k => 'required',
+                'stock'.$k => 'required|numeric',
             ]);
         }*/
 
-        return back();
+        $attribute_values = $request->attribute_value;
+        $names = $request->attribute_name;
+
+        dd($attribute_values);
+        foreach ($attribute_values as $key=> $attribute){
+            if ($names[$key] != null){
+                ProductAttribute::create([
+                    'product_id' => $product->id,
+                    'name' => $names[$key],
+                    'value' => $attribute,
+                ]);
+            }
+        }
+
+        $stocks = $request->stock;
+
+        foreach ($stocks as $key=>$stock){
+            if ($stock>0 && $names[$key] != null) {
+                $attribute_stocks[] = ProductStock::create([
+                    'product_id' => $product->id,
+                    'stock' => $stock,
+                    'name' => $attribute_values[$key],
+                ]);
+            }
+        }
+
+        return back()->with('created','Product added to the system.');
     }
 
     /**
@@ -202,8 +205,8 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($product_id);
-        
-        
+
+
         if($request->file('images')!=null)
         {
             $productImages = Product_Images::where('product_id', $product_id);
@@ -239,7 +242,7 @@ class ProductController extends Controller
                 $dir = public_path($product->ar);
                 if(file_exists($dir)) {
                     unlink($dir);
-                }  
+                }
             }
 
 
@@ -263,6 +266,7 @@ class ProductController extends Controller
             'cargo_price' => $request->cargo_price,
             'currency_id' => $request->currency_id,
         ]);
+
 
         return back();
     }
