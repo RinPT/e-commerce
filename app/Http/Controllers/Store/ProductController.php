@@ -135,19 +135,19 @@ class ProductController extends Controller
 
         $attribute_values = $request->attribute_value;
         $names = $request->attribute_name;
+        $stocks = $request->stock;
 
-        dd($attribute_values);
-        foreach ($attribute_values as $key=> $attribute){
-            if ($names[$key] != null){
-                ProductAttribute::create([
+        foreach ($attribute_values as $key => $attribute){
+            if ($names[$key] != null && $attribute != null){
+                ProductOption::create([
                     'product_id' => $product->id,
                     'name' => $names[$key],
                     'value' => $attribute,
+                    'is_stock_value' => is_null($stocks[$key]) ? 0 : 1
                 ]);
             }
         }
 
-        $stocks = $request->stock;
 
         foreach ($stocks as $key=>$stock){
             if ($stock>0 && $names[$key] != null) {

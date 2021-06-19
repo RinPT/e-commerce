@@ -68,7 +68,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Images</label>
                     <div class="col-lg-6">
-                        <input type="file" name="images[]" multiple class="form-control" accept="image/*">
+                        <input type="file" name="images[]" multiple class="form-control" accept="image/*" required>
                     </div>
                 </div>
 
