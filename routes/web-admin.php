@@ -59,13 +59,12 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
      * Orders
      */
     Route::get('/order', [OrderController::class, 'index'])->name('admin.orders');
-    Route::get('/order/create', [OrderController::class, 'create'])->name('admin.order.create');
-    Route::post('/order/create', [OrderController::class, 'store'])->name('admin.order.store');
-    Route::get('/order/{id}/update/', [OrderController::class, 'edit'])->name('admin.order.edit');
-    Route::post('/order/{id}/update/', [OrderController::class, 'update'])->name('admin.order.update');
-    Route::get('/order/{id}/delete/', [OrderController::class, 'destroy'])->name('admin.order.destroy');
     Route::get('/order/pending', [OrderController::class, 'show_pending'])->name('admin.order.show_pending');
     Route::get('/order/canceled', [OrderController::class, 'show_canceled'])->name('admin.order.show_canceled');
+    Route::get('/order/cancel_requests', [OrderController::class, 'cancel_request'])->name('admin.order.cancel_request');
+    Route::post('/order/{id}/update/', [OrderController::class, 'update'])->name('admin.order.update');
+    Route::get('/order/{id}/delete/', [OrderController::class, 'destroy'])->name('admin.order.destroy');
+
 
     /**
      * Categories

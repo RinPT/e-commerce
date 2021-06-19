@@ -11,7 +11,7 @@
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>All Orders</span></li>
+            <li><span>Orders</span></li>
             <li><span>Order Management</span></li>
             <li><span>Dashboard</span></li>
         </ol>
@@ -30,16 +30,22 @@
             <p class="card-subtitle">You can see all available orders below.</p>
         </header>
         <div class="card-body">
-            @if(Session::has('success'))
-                <div class="alert alert-success">
+            @if(session('updated'))
+                <div class="alert alert-info">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Success</strong> {{ Session::get('success') }}
+                    <strong>Updated!</strong> {{ session('updated') }}
+                </div>
+            @endif
+            @if(session('deleted'))
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Deleted!</strong> {{ session('deleted') }}
                 </div>
             @endif
             @if(Session::has('error'))
-                <div class="alert alert-danger">
+                <div class="alert alert-warning">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Error!</strong> {{ Session::get('error') }}
+                    <strong>Whoops!</strong> {{ Session::get('error') }}
                 </div>
             @endif
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
@@ -47,25 +53,45 @@
                 <tr>
                     <th>Order ID</th>
                     <th>Customer Name</th>
+                    <th>Product Name(s)</th>
                     <th>Total</th>
                     <th>Order Status</th>
                     <th>Purchase Date</th>
-                    <th>#</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach($orders as $order)
-                        <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->name }} {{ $order->surname }}</td>
-                            <td>{{ $order->total }}</td>
-                            <td>{{ $order->order_status }}</td>
-                            <td>{{ is_null($order->created_at) ? "-" : Carbon\Carbon::parse($order->created_at)->format('d.m.Y H:i') }}</td>
-                            <td>
-                                <a href="{{ route('admin.order.edit',$order->id) }}" class="btn btn-success btn-sm"><i class='fas fa-pencil-alt'></i></a>
-                                <a href="{{ route('admin.order.destroy',$order->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->name }} {{ $order->surname }}</td>
+                                <td>
+                                    @foreach (json_decode($order->products) as $product)
+                                        {{ $product->pname }}
+                                    @endforeach
+                                </td>
+                                <td>{{ $order->total }}</td>
+                                <td>
+                                    <form class="d-flex" action="{{ route('store.orders.update', $order->id) }}" method="POST">
+                                        @csrf
+                                        <select name="order_status" class="form-control mb-0">
+                                            @if($order->order_status === "cancel request")
+                                                <option value="cancel request" selected>Cancel Request</option>
+                                                <option value="cancelled" >Cancelled</option>
+                                            @else
+                                                <option value="waiting" @if($order->order_status === 'waiting') selected @endif>Waiting</option>
+                                                <option value="approved" @if($order->order_status === 'approved') selected @endif>Approved</option>
+                                                <option value="cancelled" @if($order->order_status === 'cancelled') selected @endif>Cancelled</option>
+                                            @endif
+                                        </select>
+                                        <button type="submit" class="btn btn-link btn-sm"><i class='fas fa-save'></i></button>
+                                    </form>
+                                </td>
+                                <td>{{ is_null($order->created_at) ? "-" : Carbon\Carbon::parse($order->created_at)->format('d.m.Y H:i') }}</td>
+                                <td>
+                                    <a href="{{ route('store.orders.destroy',$order->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
                     @endforeach
                 </tbody>
             </table>

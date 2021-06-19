@@ -46,7 +46,7 @@ class LoginController extends Controller
                 $_SESSION['author'] = $store->id;
                 $_SESSION['author_type'] = "store";
                 $_SESSION['author_group_type'] = "store";
-                return redirect()->route('admin.home');
+                return redirect()->route('store.home');
             }
         }
 

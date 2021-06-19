@@ -114,37 +114,34 @@
                                     <th>Stock</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <tr>
                                     <td><input type="text" class="form-control" name="attribute[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <select name="option_value" class="form-control">
+                                    @foreach ($options as $option)
+                                        <option value="{{ $option->value }}">{{ $option->value }}</option>
+                                    @endforeach
+                                    </select>                                    
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <select name="option_value" class="form-control">
+                                    @foreach ($options as $option)
+                                        <option value="{{ $option->value }}">{{ $option->value }}</option>
+                                    @endforeach
+                                    </select>                                    
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
-                                    <td><input type="number" class="form-control" name="stock[]"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
-                                    <td><input type="number" class="form-control" name="stock[]"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
-                                    <td><input type="number" class="form-control" name="stock[]"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
-                                    <td><input type="number" class="form-control" name="stock[]"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <select name="option_value" class="form-control">
+                                    @foreach ($options as $option)
+                                        <option value="{{ $option->value }}">{{ $option->value }}</option>
+                                    @endforeach
+                                    </select>                                    
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                             </tbody>

@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Store\OrderController;
 use App\Http\Controllers\Store\ProductController;
 use App\Http\Controllers\Store\DiscountController;
+use App\Http\Controllers\Store\HomeController;
 use App\Http\Controllers\Store\ProductDiscountController;
 
 Route::group(['prefix' => '/store'], function() {
+    /*
+     * Dashboard
+     */
+    Route::get('/home', [HomeController::class, 'index'])->name('store.home');
 
     /*
      * Store Discount
@@ -15,7 +20,7 @@ Route::group(['prefix' => '/store'], function() {
     Route::get('/discount/create', [DiscountController::class, 'create'])->name('store.discount.create');
     Route::post('/discount/create/done', [DiscountController::class, 'store'])->name('store.discount.store');
     Route::post('/discount/{id}/update', [DiscountController::class, 'update'])->name('store.discount.update');
-    Route::delete('/discount/{id}/delete', [DiscountController::class, 'destroy'])->name('store.discount.delete');
+    Route::delete('/store/discount/{id}/delete', [DiscountController::class, 'destroy'])->name('store.discount.delete');
 
     /*
      * Product Discount
@@ -33,7 +38,7 @@ Route::group(['prefix' => '/store'], function() {
     Route::get('/product/list', [ProductController::class, 'index'])->name('store.product');
     Route::get('/product/create', [ProductController::class, 'create'])->name('store.product.create');
     Route::post('/product/create/done', [ProductController::class, 'store'])->name('store.product.store');
-    Route::get('/product/{id}/update', [ProductController::class, 'update'])->name('store.product.update');
+    Route::post('/product/{id}/update', [ProductController::class, 'update'])->name('store.product.update');
     Route::delete('/product/{id}/delete', [ProductController::class, 'destroy'])->name('store.product.delete');
 
     /*

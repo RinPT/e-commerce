@@ -137,12 +137,14 @@
 				            <nav id="menu" class="nav-main" role="navigation">
 
 				                <ul class="nav nav-main">
+                                    @if(in_array(1,$logged_author->perms))
 									<li>
 										<a class="nav-link" href="{{ route('admin.home') }}">
 											<i class="bx bx-home-alt" aria-hidden="true"></i>
 											<span>Dashboard</span>
 										</a>
 									</li>
+                                    @endif
                                     @if(in_array(1,$logged_author->perms))
 									<li>
 										<a class="nav-link" href="{{ route('admin.general-setting.edit') }}">
@@ -180,7 +182,7 @@
 										<ul class="nav nav-children">
 											<li>
 												<a class="nav-link" href="{{ route('admin.orders') }}">
-													All Orders
+													Approved Orders
 												</a>
 											</li>
 											<li>
@@ -188,13 +190,13 @@
 													Pending Orders
 												</a>
 											</li>
-											<li>
-												<a class="nav-link" href="{{ route('admin.order.create') }}">
-													Send Orders
+                                            <li>
+												<a class="nav-link" href="{{ route('admin.order.show_canceled') }}">
+													Cancelled Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('admin.order.show_canceled') }}">
+												<a class="nav-link" href="{{ route('admin.order.cancel_request') }}">
 													Cancel Order Requests
 												</a>
 											</li>
@@ -583,6 +585,14 @@
                                     @endif
                                     @if(in_array(17,$logged_author->perms))
 									<li>
+										<a class="nav-link" href="{{ route('store.home') }}">
+											<i class="bx bx-home-alt" aria-hidden="true"></i>
+											<span>Dashboard</span>
+										</a>
+									</li>
+                                    @endif
+                                    @if(in_array(17,$logged_author->perms))
+									<li>
 										<a class="nav-link" href="#">
 											<i class='bx bx-support'></i>
 											<span>Tickets</span>
@@ -662,7 +672,7 @@
 										<ul class="nav nav-children">
 											<li>
 												<a class="nav-link" href="{{ route('store.orders') }}">
-													All Orders
+													Approved Orders
 												</a>
 											</li>
 											<li>
@@ -670,13 +680,13 @@
 													Pending Orders
 												</a>
 											</li>
-											<li>
-												<a class="nav-link" href="{{ route('store.orders.show_cancel_request') }}">
-													Cancel Requests
+                                            <li>
+												<a class="nav-link" href="{{ route('store.orders.show_canceled') }}">
+													Cancelled Orders
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('store.orders.show_canceled') }}">
+												<a class="nav-link" href="{{ route('store.orders.show_cancel_request') }}">
 													Cancel Order Requests
 												</a>
 											</li>

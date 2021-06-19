@@ -6,9 +6,12 @@ use App\Models\Store;
 use App\Models\Product;
 use App\Models\Categories;
 use App\Models\Currencies;
-use Illuminate\Http\Request;
-use App\Models\Product_Images;
 use Illuminate\Support\Str;
+use App\Models\ProductStock;
+use Illuminate\Http\Request;
+use App\Models\ProductOption;
+use App\Models\Product_Images;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Product_Attribute_Stock;
 
@@ -26,9 +29,20 @@ class ProductController extends Controller
         $categories=Categories::get();
         $stores=Store::get();
         $currencies=Currencies::get();
+        //$products = Product::where('store_id', '=', $this->logged_author->id)->get();
 
-        $products = Product::where('store_id', '=', $this->logged_author->id)->get();
+        $products = DB::table('products')
+        ->join('currencies', 'currencies.id', '=', 'products.currency_id')
+        ->leftjoin('categories', 'categories.id', '=', 'products.category_id')
+        ->where('store_id', '=', $this->logged_author->id)
+        ->select( 'products.name', 'categories.id as cid', 'products.description', 'products.cargo_price', 'products.price', 'products.id', 'currencies.suffix as currency', 'products.updated_at')
+        ->get();
 
+        foreach ($products as $key => $product) {
+            $products[$key] ->stock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
+        };
+
+       
     	return view('store.products.index',[
     		'products'=> $products,
             'categories'=> $categories,           
@@ -42,11 +56,13 @@ class ProductController extends Controller
         $categories=Categories::get();
         $stores=Store::get();
         $currencies=Currencies::get();
+        $options=ProductOption::get();
 
         return view('store.products.create',[
             'categories'=> $categories,
             'stores'=> $stores,
             'currencies'=> $currencies,
+            'options' => $options,
     	]);
     }
 
@@ -55,14 +71,13 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required|max:32',
             'description' => 'required',
-            'category_id' => 'required|numeric',
             'images' => 'required', 
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'price' => 'required|numeric',
             'cargo_price' => 'required|numeric',
             'currency_id' => 'required|numeric',
             'ar' => 'nullable',
-            'attribute' => 'nullable', //TODO: CUSTOM VALIDATION FOR ATTRIBUTE AND STOCK, THE ARRAYS HAVE TO BE SAME AMOUNT
+            'option' => 'nullable',
             'stock[]' => 'nullable|numeric',
         ]);
 
@@ -79,7 +94,6 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'store_id' => $request->store_id,
                 'description' => $request->description,
-                'category_id' => $request->category_id,
                 'price' => $request->price,
                 'ar' => $filePath,
                 'cargo_price' => $request->cargo_price,
@@ -91,11 +105,23 @@ class ProductController extends Controller
             'name' => $request->name,
             'store_id' => $this->logged_author->id,
             'description' => $request->description,
-            'category_id' => $request->category_id,
             'price' => $request->price,
             'cargo_price' => $request->cargo_price,
             'currency_id' => $request->currency_id,
         ]);    
+        }
+
+        $option = $request->get('option');
+        $option = array_filter($option, 'strlen');
+        $stocks = $request->get('stock');
+        $stocks = array_filter($stocks, 'strlen');
+
+        for ($i=0; $i<count($optstock); $i++){ //TODO: Add presets to make it easier for seller (color size combinations, red small, blue medium)
+            $optstock = ProductOption::create([
+                'product_id' => $product->id,
+                'option' => $option[$i],
+                'stock' => $stocks[$i],
+            ]);
         }
 
 
@@ -116,7 +142,7 @@ class ProductController extends Controller
                 'image' => $filePath,
             ]);
         }
-
+/*
         $attributes = $request->get('attribute');
         $attributes = array_filter($attributes, 'strlen');
         $stocks = $request->get('stock');
@@ -128,7 +154,7 @@ class ProductController extends Controller
                 'attribute' => $attributes[$i],
                 'stock' => $stocks[$i],
             ]);
-        }
+        }*/
 
         return back();
     }
@@ -150,7 +176,6 @@ class ProductController extends Controller
 
         return view('store.products.edit',[
             'product'=> $edit_product,
-            'categories'=> $categories,
             'stores'=> $stores,
             'currencies'=> $currencies,
             'product_images'=> $product_images,
@@ -169,10 +194,8 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'name' => 'max:32',
-            'store_id' => 'numeric',
             'description' => 'required',
-            'category_id' => 'numeric',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            //'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'price' => 'numeric',
             'cargo_price' => 'numeric',
             'currency_id' => 'numeric',
@@ -235,28 +258,11 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $request->name,
-            'store_id' => $request->store_id,
             'description' => $request->description,
-            'category_id' => $request->category_id,
             'price' => $request->price,
             'cargo_price' => $request->cargo_price,
             'currency_id' => $request->currency_id,
         ]);
-
-        $attributes = $request->get('attribute');
-        $attributes = array_filter($attributes, 'strlen');
-        $stocks = $request->get('stock');
-        $stocks = array_filter($stocks, 'strlen');
-        $id = $request->get('id');
-        $id = array_filter($id, 'strlen');
-        
-        for ($i=0; $i<count($id); $i++){
-            Product_Attribute_Stock::find($id[$i])->update([
-                'product_id' => $product->id,
-                'attribute' => $attributes[$i],
-                'stock' => $stocks[$i],
-            ]);
-        }
 
         return back();
     }
