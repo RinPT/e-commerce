@@ -23,6 +23,17 @@ class CreateTicketDepartmentCfields extends Migration
             $table->tinyInteger('required');
             $table->timestamps();
         });
+
+        DB::table('ticket_department_cfields')->insert([
+            'department_id' => 2,
+            'name' => 'Custom Field',
+            'type' => 'text',
+            'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            'select_options' => "[]",
+            'required' => 1,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
+        ]);
     }
 
     /**

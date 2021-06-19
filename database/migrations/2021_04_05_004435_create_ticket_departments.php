@@ -21,6 +21,12 @@ class CreateTicketDepartments extends Migration
         });
 
         DB::table('ticket_departments')->insert([
+            'name' => 'Complaint',
+            'description' => 'If you have a problem with any product or thing, select here.',
+            'status' => 1
+        ]);
+
+        DB::table('ticket_departments')->insert([
             'name' => 'Pre-Sale',
             'description' => 'If you have any pre-sale questions, select here.',
             'status' => 1
@@ -29,12 +35,6 @@ class CreateTicketDepartments extends Migration
         DB::table('ticket_departments')->insert([
            'name' => 'Technical Support',
            'description' => 'If you have encountered any technical problems, select here.',
-            'status' => 1
-        ]);
-
-        DB::table('ticket_departments')->insert([
-            'name' => 'Complaint',
-            'description' => 'If you have a problem with any product or thing, select here.',
             'status' => 1
         ]);
     }

@@ -5,6 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Models\Billing;
 use App\Models\Countries;
 use App\Models\Order;
+use App\Models\Store;
+use App\Models\Ticket_Department_Cfields;
+use App\Models\Ticket_Departments;
+use App\Models\Tickets;
 use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -33,6 +37,18 @@ class AccountController extends Controller
         $bills  = Billing::where('user_id',auth()->user()->id)->orderBy('created_at','desc')->get();
         $orders = Order::where('user_id',auth()->user()->id)->orderBy('created_at','desc')->get();
 
+        $departments = Ticket_Departments::where('status','1')->get();
+        $stores = Store::where('status','1')->select('id','name')->get();
+        $cfields = Ticket_Department_Cfields::all();
+
+        $tickets = Tickets::where([
+             ['sender_id','=',auth()->user()->id],
+             ['sender_type','=','user']
+        ])
+            ->join('ticket_departments','ticket_departments.id','=','tickets.department_id')
+            ->select('tickets.*','ticket_departments.name as name')
+            ->get();
+
         return view('users.account', [
             'user' => $user,
             'addresses' => $addresses,
@@ -41,7 +57,11 @@ class AccountController extends Controller
             'items' => $items,
             'countries' => $countries,
             'bills' => $bills,
-            'orders' => $orders
+            'orders' => $orders,
+            'departments' => $departments,
+            'stores'      => $stores,
+            'cfields'     => $cfields,
+            'tickets'     => $tickets
         ]);
     }
 
@@ -100,9 +120,9 @@ class AccountController extends Controller
 	public function destroy() {
 
         $user = User::findOrFail(auth()->user()->id);
-
         $user->delete();
 
         return redirect()->route('home');
     }
+
 }

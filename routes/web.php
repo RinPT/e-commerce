@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StoresController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
@@ -110,5 +111,9 @@ Route::group(['middleware' => 'auth'],function (){
     Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist');
     Route::post('/wishlist/add', [WishListController::class, 'store'])->name('wishlist.add');
     Route::get('/wishlist/{id}/delete', [WishListController::class, 'destroy'])->name('wishlist.destroy');
+
+    Route::post('/ticket/create', [TicketController::class, 'create_ticket'])->name('ticket.create');
+    Route::get('/ticket/view/{tid}', [TicketController::class, 'view_ticket'])->name('ticket.view');
+    Route::post('/ticket/answer/{tid}', [TicketController::class, 'answer_ticket'])->name('ticket.answer');
 });
 
