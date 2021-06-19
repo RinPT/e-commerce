@@ -19,13 +19,15 @@
     </header>
     <div class="card-body">
         <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
+        
             <thead>
                 <tr>
                     <th>Product ID</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Store ID</th>
-                    <th>Category</th>
                     <th>Price</th>
+                    <th>Cargo Price</th>
                     <th>Currency</th>
                     <th>Stock</th>
                     <th>Last Update</th>
@@ -33,31 +35,92 @@
                 </tr>
             </thead>
             <tbody>
-            @if($products->count())
                 @foreach($products as $product)
                 <tr>
                     <td>#{{ $product->id}}</td>
                     <td>{{$product->name}}</td>
-                    <td>#{{ $product->store_id}}</td>
-                    <td>#{{$product->category_id}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>#{{$product->currency_id}}</td>
-                    <td>Stok1</td>
-                    <td>{{$product->updated_at->format('d.m.Y H:i')}}</td>
-                    <td>
-                        <form action="{{ route('store.product.update', $product->id) }}" method="GET">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px"><i class="fas fa-pencil-alt"></i></button>
-                        </form>
-                        <form action="{{ route('store.product.delete', $product->id) }}" method="POST">
+                    <td>{{$product->description}}</td>
+                    <td>#{{ $logged_author->id}}</td>
+                    <td>{{$product->price}} {{$product->currency}}</td>
+                    <td>{{$product->cargo_price}} {{$product->currency}}</td>
+                    <td>{{$product->currency}}</td>
+                    <td>{{ $product->stock }}</td>
+                    <td>{{$product->updated_at}}</td>
+                    <td class="actions d-flex">
+                        <a href="#productEdit{{ $logged_author->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
+                        <form action="{{ route('store.product.delete', $logged_author->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px"><i class="fas fa-times"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                         </form>
+
+                        <!-- Modal Animation -->
+                        <div id="productEdit{{ $logged_author->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+                            <section class="card">
+                                <header class="card-header">
+                                    <h2 class="card-title">Update Currency</h2>
+                                </header>
+                                <div class="card-body">
+                                    <form action="{{ route('store.product.update', $logged_author->id) }}" method="GET">
+                                        @csrf
+                                        <div class="modal-wrapper mb-0">
+                                            <div class="form-group row @error('name') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="name" class="form-control" id="inputDefault" value="{{ $product->name }}">
+                                                    @error('name') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('description') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="description" class="form-control" id="inputDefault" value="{{ $product->description }}">
+                                                    @error('description') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('price') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Price</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="price" class="form-control" id="inputDefault" value="{{ $product->price }}">
+                                                    @error('price') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('cargo_price') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Cargo Price</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="cargo_price" class="form-control" id="inputDefault" value="{{ $product->cargo_price }}">
+                                                    @error('cargo_price') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('currency_id') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Currency ID</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="currency_id" class="form-control" id="inputDefault" value="{{ $product->cid }}">
+                                                    @error('currency_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('stock') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Stock</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="stock" class="form-control" id="inputDefault" value="{{ $product->stock }}">
+                                                    @error('stock') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
-            @endif
             </tbody>
         </table>
     </div>
@@ -79,6 +142,7 @@
 @endsection
 
 @section('end-scripts')
+    <script src="/admin/js/examples/examples.modals.js"></script>
     <script>
         var $table = $('#datatable-tabletools');
 
