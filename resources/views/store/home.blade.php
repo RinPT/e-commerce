@@ -29,8 +29,6 @@
 
 @section('content')
 
-
-
     <div class="row">
         <div class="col-3">
             <section class="card card-featured-left card-featured-primary mb-4">

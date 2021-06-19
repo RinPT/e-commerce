@@ -36,10 +36,16 @@
                     <strong>Updated!</strong> {{ session('updated') }}
                 </div>
             @endif
-            @if(Session::has('error'))
+            @if(session('deleted'))
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Error!</strong> {{ Session::get('error') }}
+                    <strong>Deleted!</strong> {{ session('deleted') }}
+                </div>
+            @endif
+            @if(Session::has('error'))
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Whoops!</strong> {{ Session::get('error') }}
                 </div>
             @endif
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
@@ -63,9 +69,14 @@
                                     <form class="d-flex" action="{{ route('store.orders.update', $order->id) }}" method="POST">
                                         @csrf
                                         <select name="order_status" class="form-control mb-0">
-                                            <option value="waiting" @if($order->order_status === 'waiting') selected @endif>Waiting</option>
-                                            <option value="approved" @if($order->order_status === 'approved') selected @endif>Approved</option>
-                                            <option value="cancelled" @if($order->order_status === 'cancelled') selected @endif>Cancelled</option>
+                                            @if($order->order_status === "cancel request")
+                                                <option value="cancel request" selected>Cancel Request</option>
+                                                <option value="cancelled" >Cancelled</option>
+                                            @else
+                                                <option value="waiting" @if($order->order_status === 'waiting') selected @endif>Waiting</option>
+                                                <option value="approved" @if($order->order_status === 'approved') selected @endif>Approved</option>
+                                                <option value="cancelled" @if($order->order_status === 'cancelled') selected @endif>Cancelled</option>
+                                            @endif
                                         </select>
                                         <button type="submit" class="btn btn-link btn-sm"><i class='fas fa-save'></i></button>
                                     </form>

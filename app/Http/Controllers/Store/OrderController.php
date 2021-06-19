@@ -50,16 +50,6 @@ class OrderController extends Controller
         ]);
     }
 
-
-    public function edit($id)
-    {
-        $order = Order::findOrFail($id);
-        return view('admin.order.edit')->with([
-            'id' => $id,
-            'order' => $order
-        ]);
-    }
-
     public function update(Request $request, $id) {
 
         $order = Order::find($id);
@@ -79,6 +69,6 @@ class OrderController extends Controller
     public function destroy($id)
     {
         Order::findOrFail($id)->delete();
-        return back()->with('success', 'Order removed successfully.');
+        return back()->with('deleted', 'Order removed from the system successfully.');
     }
 }
