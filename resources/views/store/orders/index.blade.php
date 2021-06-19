@@ -83,7 +83,7 @@
                                 </td>
                                 <td>{{ is_null($order->created_at) ? "-" : Carbon\Carbon::parse($order->created_at)->format('d.m.Y H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('admin.order.destroy',$order->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{ route('store.orders.destroy',$order->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                     @endforeach

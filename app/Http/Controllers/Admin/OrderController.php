@@ -10,153 +10,59 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin.order.index')->with([
-            'orders' => Order::all()
+    public function index() {
+
+        $orders = Order::where('order_status', '=', 'approved')->get();
+
+        return view('admin.order.index', [
+            'orders' => $orders,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.order.create');
-    }
+    public function show_pending() {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        try {
-            $order = Order::create([
-                'store_id' => $request->store_id,
-                'store_name' => $request->store_name,
-                'store_url'=> $request->store_url,
-                'user_id'=> $request->user_id,
-                'user_type'=> $request->store_id,
-                'name'=> $request->name,
-                'surname'=> $request->surname,
-                'username'=> $request->username,
-                'email'=> $request->email,
-                'gender'=> $request->gender,
-                'comment'=> $request->comment,
-                'total'=> $request->total,
-                'order_status'=> $request->order_status,
-                'currency_code'=> $request->currency_code,
-                'ip_address'=> $request->ip_address,
-                'user_agent'=> $request->user_agent,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+        $orders = Order::where('order_status', '=', 'waiting')->get();
+        $order = Order::find(1);
+        $product = json_decode($order->products);
 
-
-            ]);          
-            return back()->with('success', 'New order added.');
-
-
-        } catch (\Exception $e) { // It's actually a QueryException but this works too
-            if ($e->getCode() == 23000) {
-
-                return back()->with('error', 'There is already an order for this name.');
-            }
-        }
-
-        return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show_pending()
-    {
-        return view('admin.order.index')->with([
-            'orders' => DB::select('select * from orders where order_status = ?', ['waiting'])
+        return view('admin.order.index', [
+            'orders' => $orders,
         ]);
     }
 
-    public function show_canceled()
-    {
-        return view('admin.order.index')->with([
-            'orders' => DB::select('select * from orders where order_status = ?', ['cancelled'])
+    public function show_canceled() {
+
+        $orders = Order::where('order_status', '=', 'cancelled')->get();
+
+        return view('admin.order.index', [
+            'orders' => $orders,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $order = Order::findOrFail($id);
-        return view('admin.order.edit')->with([
-            'id' => $id,
-            'order' => $order
+    public function cancel_request() {
+
+        $orders = Order::where('order_status', '=', 'cancell request')->get();
+
+        return view('admin.order.index', [
+            'orders' => $orders,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        try {
-            Order::findOrFail($id)->update([
-                'store_id' => $request->store_id,
-                'store_name' => $request->store_name,
-                'store_url'=> $request->store_url,
-                'user_id'=> $request->user_id,
-                'user_type'=> $request->store_id,
-                'name'=> $request->name,
-                'surname'=> $request->surname,
-                'username'=> $request->username,
-                'email'=> $request->email,
-                'gender'=> $request->gender,
-                'comment'=> $request->comment,
-                'total'=> $request->total,
-                'order_status'=> $request->order_status,
-                'currency_code'=> $request->currency_code,
-                'ip_address'=> $request->ip_address,
-                'user_agent'=> $request->user_agent,
-                'updated_at' => Carbon::now()
-            ]);
-            return back()->with('success', 'Information updated successfully');
-        } catch (\Exception $e) { // It's actually a QueryException but this works too
-            if ($e->getCode() == 23000) {
-                return back()->with('error', 'Error Updating Order');
-            }
-        }
-        return back();
+    public function update(Request $request, $id) {
+        $order = Order::find($id);
+
+        $this->validate($request, [
+            'order_status' => 'required',
+        ]);
+
+        $order->update([
+            'order_status' => $request->order_status,
+        ]);
+
+        return back()->with('updated', 'Order status has been updated! This order is now in "'.$order->order_status.'" table.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Order::findOrFail($id)->delete();
         return back()->with('success', 'Order removed successfully.');
     }
