@@ -166,6 +166,26 @@ class OrderController extends Controller
         $oids = [];
         foreach ($products as $sid => $info) {
 
+            $pprice = 0;
+            foreach ($info['products'] as $pp) {
+                $pprice += $pp['pprice'] * $pp['pcount'];
+            }
+
+            foreach ($used_coupones as $used_coupone) {
+                if($used_coupone->rate){
+                    $pprice -= $pprice * $used_coupone->rate / 100;
+                }else{
+                    $pprice -= $used_coupone->price;
+                }
+            }
+            $ppids = [];
+            foreach ($info['products'] as $pp) {
+                if(!in_array($pp['pid'],$ppids)){
+                    $pprice += $pp['cargoprice'];
+                }
+                $ppids[] = $pp['pid'];
+            }
+
             $oid = Order::insertGetId([
                 'store_id' => $sid,
                 'store_name' => $info['store']['store_name'],
@@ -182,7 +202,7 @@ class OrderController extends Controller
                 'gender'=> auth()->user()->gender,
                 'products' => json_encode($info['products']),
                 'coupons' => json_encode($info['coupones']),
-                'total'=> $total_price,
+                'total'=> $pprice,
                 'order_status' => 'waiting',
                 'currency_code' => $cookie_curr->code,
                 'currency_prefix' => $cookie_curr->prefix,
@@ -244,7 +264,7 @@ class OrderController extends Controller
                 'currency_code' => $cookie_curr->code,
                 'currency_prefix' => $cookie_curr->prefix,
                 'currency_suffix' => $cookie_curr->suffix,
-                'total'=> $total_price,
+                'total'=> $pprice,
                 'status' => $request->status ?? "unpaid"
             ]);
 

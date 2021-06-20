@@ -19,6 +19,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductProfileController;
+use App\Http\Controllers\User\InvoiceController;
 
 include('web-user.php');
 include('web-admin.php');
@@ -72,11 +73,6 @@ Route::post('/order/complete', [OrderController::class, 'index'])->name('order.c
  */
 Route::get('/order/delete/{id}', [OrderController::class, 'destroy_order'])->name('order.delete');
 
-/**
- * Invoice
- */
-Route::get('/invoice/{id}', [CartController::class, 'index'])->name('invoice');
-Route::get('/invoice/pay/{id}', [CartController::class, 'index'])->name('invoice.pay');
 
 /**
  * Contracts
@@ -115,5 +111,11 @@ Route::group(['middleware' => 'auth'],function (){
     Route::post('/ticket/create', [TicketController::class, 'create_ticket'])->name('ticket.create');
     Route::get('/ticket/view/{tid}', [TicketController::class, 'view_ticket'])->name('ticket.view');
     Route::post('/ticket/answer/{tid}', [TicketController::class, 'answer_ticket'])->name('ticket.answer');
+
+    /**
+     * Invoice
+     */
+    Route::get('/invoice/{id}', [InvoiceController::class, 'view_invoice'])->name('invoice');
+    Route::get('/invoice/pay/{id}', [CartController::class, 'index'])->name('invoice.pay');
 });
 

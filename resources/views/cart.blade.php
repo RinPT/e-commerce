@@ -75,7 +75,9 @@
                                             {{ $product->product->name }}
                                         </a>
                                     </div>
+                                    @if(count((array)$product->options))
                                     <span style="font-size: 12px;font-weight: 300;"><i class="fa fa-angle-double-right"></i> Options</span>
+                                    @endif
                                     @foreach($product->options as $name => $val)
                                     <div class="text-capitalize ml-2" style="font-size: 11px;font-weight: 300;">
                                         <span>{{ $name }} :</span>

@@ -17,6 +17,7 @@ class CreateBillings extends Migration
             $table->id();
             $table->bigInteger('invoice_no');
             $table->bigInteger('user_id');
+            $table->dateTime('date_paid')->nullable();
             //Store info
             $table->bigInteger('store_id');
             $table->string('store_name');

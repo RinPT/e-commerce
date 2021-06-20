@@ -37,14 +37,14 @@
 
 @section('content')
 <main class="main">
-    <nav class="breadcrumb-nav">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li><a href="{{ route('home') }}"><i class="d-icon-home"></i></a></li>
-                <li>Wishlist</li>
-            </ul>
-        </div>
-    </nav>
+    <div class="page-header" style="background-color: #2466cc;height: 200px;">
+        <h1 class="page-title">Wishlist</h1>
+        <ul class="breadcrumb">
+            <li><a href="{{ route('home') }}"><i class="d-icon-home"></i></a></li>
+            <li class="delimiter">/</li>
+            <li>Wishlist</li>
+        </ul>
+    </div>
     <div class="page-content pt-2 pb-10 mb-2">
         <div class="container">
             @if(session()->has('success'))

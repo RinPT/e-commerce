@@ -243,16 +243,16 @@
                             <h4 class="widget-title">My Account</h4>
                             <ul class="widget-body">
                                 <li>
-                                    <a href="about-us.html">About Us</a>
+                                    <a href="{{ route('account') }}">Billings</a>
                                 </li>
                                 <li>
-                                    <a href="#">Order History</a>
+                                    <a href="{{ route('account') }}">Order History</a>
                                 </li>
                                 <li>
-                                    <a href="#">Custom Service</a>
+                                    <a href="{{ route('wishlist') }}">Wishlist</a>
                                 </li>
                                 <li>
-                                    <a href="#">Terms &amp; Condition</a>
+                                    <a href="{{ route('ticket.create') }}">Create a Ticket</a>
                                 </li>
                             </ul>
                         </div>
