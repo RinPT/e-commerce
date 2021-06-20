@@ -471,13 +471,8 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a class="nav-link" href="{{ route('admin.view_create_new_ticket')}}">
-													Create New Ticket
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Add New Ticket Department
+												<a class="nav-link" href="{{ route('admin.ticket.department.create') }}">
+													Ticket Department Management
 												</a>
 											</li>
 											<li>
@@ -493,21 +488,6 @@
 											<li>
 												<a class="nav-link" href="{{ route('admin.view_store_tickets')}}">
 													User's Tickets
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Open Tickets
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Answered Tickets
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Closed Tickets
 												</a>
 											</li>
 										</ul>
