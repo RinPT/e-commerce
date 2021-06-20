@@ -109,9 +109,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row @error('currency_id') has-danger @enderror">
-                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Currency ID</label>
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Currency</label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" name="currency_id" class="form-control" id="inputDefault" value="{{ $product->cid }}">
+                                                    <select name="currency_id" id="">
+                                                        @foreach ($currencies as $currency)
+                                                        <option value="{{ $currency->id }}" @if($currency->id == $product->currency_id) selected @endif>{{ $currency->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                     @error('currency_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                 </div>
                                             </div>
@@ -222,5 +226,6 @@
         $table.DataTable().buttons().container().prependTo( '#datatable-tabletools_wrapper .dt-buttons' );
 
         $('#datatable-tabletools_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+
     </script>
 @endsection

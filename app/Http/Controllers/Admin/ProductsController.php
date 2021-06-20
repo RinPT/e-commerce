@@ -35,12 +35,16 @@ class ProductsController extends Controller
         ->join('currencies', 'currencies.id', '=', 'products.currency_id')
         ->leftjoin('store', 'store.id', '=', 'products.store_id')
         ->leftjoin('categories', 'categories.id', '=', 'products.category_id')
-        ->select( 'products.name', 'categories.id as cid', 'products.description', 'products.store_id', 'products.cargo_price', 'products.price', 'products.id', 'currencies.suffix as currency', 'products.updated_at')
+        ->select( 'products.name', 'categories.id as cid', 'products.description', 'products.currency_id', 'products.store_id', 'products.cargo_price', 'products.price', 'products.id', 'currencies.suffix as currency', 'products.updated_at')
         ->get();
 
         foreach ($products as $key => $product) {
 
             $product_options = ProductOption::where('product_id', '=', $product->id)->get();
+
+            if (count($product_options) == 0) {
+                $products[$key] -> option = [];
+            }
 
             foreach($product_options as $option) {
                 $products[$key] -> option[] = [
