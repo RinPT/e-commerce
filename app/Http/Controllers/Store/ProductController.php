@@ -40,7 +40,18 @@ class ProductController extends Controller
         ->get();
 
         foreach ($products as $key => $product) {
-            $products[$key] -> stock = ProductStock::where('product_id', '=', $product->id)->get();
+
+            $product_options = ProductOption::where('product_id', '=', $product->id)->get();
+
+            foreach($product_options as $option) {
+                $products[$key] -> option[] = [
+                    'option' => $option,
+                    'stock' => ProductStock::where([
+                        ['name', '=', $option->value],
+                        ['product_id', '=', $product->id]
+                        ])->get()
+                    ];
+            }
             $products[$key] -> totalstock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
         };
 
@@ -163,30 +174,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($product_id)
-    {
-        $edit_product = Product::find($product_id);
-        $categories=Categories::get();
-        $stores=Store::get();
-        $currencies=Currencies::get();
-        $product_images=Product_Images::where('product_id', $product_id)->pluck('image')->toArray();
-        $attribute = Product_Attribute_Stock::where('product_id', $product_id)->get()->toArray();
-
-        return view('store.products.edit',[
-            'product'=> $edit_product,
-            'stores'=> $stores,
-            'currencies'=> $currencies,
-            'product_images'=> $product_images,
-            'attributes'=> $attribute,
-    	]);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -205,6 +192,8 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($product_id);
+        $product_option = ProductOption::find($product_id);
+        $product_stock = ProductStock::find($product_id);
 
 
         if($request->file('images')!=null)
@@ -266,6 +255,56 @@ class ProductController extends Controller
             'cargo_price' => $request->cargo_price,
             'currency_id' => $request->currency_id,
         ]);
+
+        $attribute_values = $request->attribute_value;
+        $names = $request->attribute_name;
+        $stocks = $request->stock;
+
+        if(ProductOption::where('value', '=', $attribute_values)->exists() && ProductStock::where('name', '=', $names)->exists()){
+            foreach ($attribute_values as $key => $attribute){
+                if ($names[$key] != null && $attribute != null){
+                    $product_option->update([
+                        'product_id' => $product->id,
+                        'name' => $names[$key],
+                        'value' => $attribute,
+                        'is_stock_value' => is_null($stocks[$key]) ? 0 : 1
+                    ]);
+                }
+            }
+
+            foreach ($stocks as $key=>$stock){
+                if ($stock>0 && $names[$key] != null) {
+                    $product_stock->update([
+                        'product_id' => $product->id,
+                        'stock' => $stock,
+                        'name' => $attribute_values[$key],
+                    ]);
+                }
+            }
+        }
+        if(ProductOption::where('value', '!=', $attribute_values)->exists() || ProductStock::where('name', '!=', $names)->exists()){
+            foreach ($attribute_values as $key => $attribute){
+                if ($names[$key] != null && $attribute != null){
+                    ProductOption::create([
+                        'product_id' => $product->id,
+                        'name' => $names[$key],
+                        'value' => $attribute,
+                        'is_stock_value' => is_null($stocks[$key]) ? 0 : 1
+                    ]);
+                }
+            }
+
+
+            foreach ($stocks as $key=>$stock){
+                if ($stock>0 && $names[$key] != null) {
+                    $attribute_stocks[] = ProductStock::create([
+                        'product_id' => $product->id,
+                        'stock' => $stock,
+                        'name' => $attribute_values[$key],
+                    ]);
+                }
+            }
+        }
 
 
         return back();

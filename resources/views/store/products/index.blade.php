@@ -47,7 +47,7 @@
                     <td>{{ $product->totalstock }}</td>
                     <td>{{$product->updated_at}}</td>
                     <td class="actions d-flex">
-                        <a href="#productEdit{{ $product->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#productEdit{{ $logged_author->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
                         <form action="{{ route('store.product.delete', $logged_author->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -99,17 +99,39 @@
                                                     @error('currency_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                 </div>
                                             </div>
-                                            @foreach ($product->stock as $p)
-                                            <div class="form-group row @error('stock') has-danger @enderror">
-                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Stock</label>
-                                                <div class="col-lg-6">
-                                                    <label for="inputDefault" >{{ $p->name }}</label>
-                                                    <input type="hidden" name="option[]" value=" {{ $p->name }}">
-                                                    <input type="text" name="stock[]" class="form-control" id="inputDefault" value="{{ $p->stock}}">
-                                                    @error('stock') <p class="text-danger mb-0">{{ $message }}</p> @enderror
-                                                </div>
-                                            </div>
-                                            @endforeach
+                                            <table class="table table-bordered table-striped mb-0" id="datatable-custom">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Attribute</th>
+                                                        <th>Stock</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($product->option as $s)
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]" value="{{ $s->name }}"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]" value="{{ $s-> }}"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]" value="{{ $s->stock }}"></td>
+                                                    </tr>
+                                                    @endforeach
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                         <hr/>
                                         <div class="row">
