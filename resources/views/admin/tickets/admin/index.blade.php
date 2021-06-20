@@ -9,11 +9,12 @@
 @endsection
 
 @section('breadcrumb')
-    <h2>Tickets</h2>
+    <h2>Ticket Management</h2>
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>Tickets</span></li>
+            <li><span>Admin Tickets</span></li>
+            <li><span>Ticket Management</span></li>
             <li><span>Dashboard</span></li>
         </ol>
     </div>
@@ -21,24 +22,20 @@
 
 @section('content')
     @if(session('deleted'))
-        <div class="row mb-3">
-            <div class="col">
-                <div class="alert alert-danger mb-0">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Notification!</strong> {{ session('deleted') }}.
-                </div>
+    <div class="row mb-3">
+        <div class="col">
+            <div class="alert alert-danger mb-0">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Deleted!</strong> {{ session('deleted') }}.
             </div>
         </div>
+    </div>
     @endif
 
     <section class="card">
         <header class="card-header">
-            <div class="card-actions">
-                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-            </div>
-            <h2 class="card-title">Tickets</h2>
-            <p class="card-subtitle">You can see tickets from all users below.</p>
+            <h2 class="card-title">Admin Tickets</h2>
+            <p class="card-subtitle">You can see tickets from all admins below.</p>
         </header>
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
@@ -65,6 +62,11 @@
                                 <td>{{ date('d/m/Y', strtotime($ticket->created_at)) }}</td>
                                 <td class="actions d-flex">
                                     <a href="{{ route('store.tickets.view', $ticket->id) }}" class="btn btn-dark btn-sm text-white"><i class="fas fa-eye"></i></a>
+                                    <form action="{{ route('admin.ticket.delete', $ticket->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

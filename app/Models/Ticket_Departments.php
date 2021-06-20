@@ -9,5 +9,5 @@ class Ticket_Departments extends Model
 {
     use HasFactory;
     public $table = 'ticket_departments';
-    protected $primaryKey = 'department_id';
+    protected $guarded = [];
 }

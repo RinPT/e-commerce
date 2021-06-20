@@ -186,9 +186,14 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     /**
      * Ticket Management
      */
+    Route::get('/tickets/department/create', [TicketController::class, 'create'])->name('admin.ticket.department.create');
+    Route::post('/tickets/department/done', [TicketController::class, 'store'])->name('admin.ticket.department.store');
+    Route::post('/tickets/department/{id}/update', [TicketController::class, 'update'])->name('admin.ticket.department.update');
+    Route::delete('/tickets/department/{id}/delete', [TicketController::class, 'department_destroy'])->name('admin.ticket.department.delete');
     Route::get('/tickets/author', [TicketController::class, 'getAuthorTickets']) -> name('admin.view_author_tickets');
     Route::get('/tickets/store', [TicketController::class, 'getStoreTickets']) -> name('admin.view_store_tickets');
-    Route::get('/tickets/create', [TicketController::class, 'getCreateTicket']) -> name('admin.view_create_new_ticket');
+    Route::get('/tickets/user', [TicketController::class, 'getUserTickets']) -> name('admin.view_user_tickets');
+    Route::delete('/tickets/{id}/delete', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.delete');
 
     /**
      * Slider Management

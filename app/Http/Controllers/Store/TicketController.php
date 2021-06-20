@@ -71,9 +71,4 @@ class TicketController extends Controller
 
         return back()->with('success','Your message has been sent.');
     }
-
-    public function destroy($id) {
-        Tickets::find($id)->delete();
-        return back()->with('deleted', 'Ticket removed from the system!');
-    }
 }

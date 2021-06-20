@@ -24,7 +24,7 @@
 
 @section('content')
     @if(session('status'))
-        <div class="row">
+        <div class="row mb-3">
             <div class="col">
                 <div class="alert alert-success mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

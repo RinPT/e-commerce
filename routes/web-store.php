@@ -58,5 +58,4 @@ Route::group(['prefix' => '/store'], function() {
     Route::get('/tickets', [TicketController::class, 'index'])->name('store.tickets');
     Route::get('tickets/{id}/view', [TicketController::class, 'view_ticket'])->name('store.tickets.view');
     Route::post('/ticket/answer/{tid}', [TicketController::class, 'answer_ticket'])->name('store.ticket.answer');
-    Route::delete('tickets/{id}/delete', [TicketController::class, 'destroy'])->name('store.tickets.destroy');
 });
