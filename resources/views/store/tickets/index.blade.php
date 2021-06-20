@@ -64,7 +64,7 @@
                                 <td>{{ $ticket->status }}</td>
                                 <td>{{ date('d/m/Y', strtotime($ticket->created_at)) }}</td>
                                 <td class="actions d-flex">
-                                    <a href="#" class="btn btn-dark btn-sm text-white"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('store.tickets.view', $ticket->id) }}" class="btn btn-dark btn-sm text-white"><i class="fas fa-eye"></i></a>
                                     <form action="{{ route('store.tickets.destroy', $ticket->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
