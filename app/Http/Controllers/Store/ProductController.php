@@ -49,8 +49,8 @@ class ProductController extends Controller
                     'stock' => ProductStock::where([
                         ['name', '=', $option->value],
                         ['product_id', '=', $product->id]
-                        ])->get()
-                    ];
+                        ])->first()
+                ];
             }
             $products[$key] -> totalstock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
         };

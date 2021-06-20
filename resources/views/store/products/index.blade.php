@@ -108,11 +108,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($product->option as $s)
+                                                    @foreach($product->option as $opt)
                                                     <tr>
-                                                        <td><input type="text" class="form-control" name="attribute_name[]" value="{{ $s->name }}"></td>
-                                                        <td><input type="text" class="form-control" name="attribute_value[]" value="{{ $s-> }}"></td>
-                                                        <td><input type="number" class="form-control" name="stock[]" value="{{ $s->stock }}"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]" value="{{ $opt['option']->name }}"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]" value="{{ $opt['option']->value }}"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]" value="{{ $opt['stock']->stock ?? "" }}"></td>
                                                     </tr>
                                                     @endforeach
                                                     <tr>
