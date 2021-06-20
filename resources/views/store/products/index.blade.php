@@ -19,7 +19,7 @@
     </header>
     <div class="card-body">
         <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
-        
+
             <thead>
                 <tr>
                     <th>Product ID</th>
@@ -47,7 +47,7 @@
                     <td>{{ $product->totalstock }}</td>
                     <td>{{$product->updated_at}}</td>
                     <td class="actions d-flex">
-                        <a href="#productEdit{{ $logged_author->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#productEdit{{ $product->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
                         <form action="{{ route('store.product.delete', $logged_author->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
