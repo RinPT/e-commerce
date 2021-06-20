@@ -190,9 +190,15 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::post('/tickets/department/done', [TicketController::class, 'store'])->name('admin.ticket.department.store');
     Route::post('/tickets/department/{id}/update', [TicketController::class, 'update'])->name('admin.ticket.department.update');
     Route::delete('/tickets/department/{id}/delete', [TicketController::class, 'department_destroy'])->name('admin.ticket.department.delete');
+
     Route::get('/tickets/author', [TicketController::class, 'getAuthorTickets']) -> name('admin.view_author_tickets');
+
     Route::get('/tickets/store', [TicketController::class, 'getStoreTickets']) -> name('admin.view_store_tickets');
+    Route::get('/tickets/store/{id}/view', [TicketController::class, 'storeTicket']) -> name('admin.view_store_tickets.view');
+
     Route::get('/tickets/user', [TicketController::class, 'getUserTickets']) -> name('admin.view_user_tickets');
+    Route::get('/tickets/user/{id}/view', [TicketController::class, 'userTicket']) -> name('admin.view_user_tickets.view');
+
     Route::delete('/tickets/{id}/delete', [TicketController::class, 'ticket_destroy'])->name('admin.ticket.delete');
 
     /**
