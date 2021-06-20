@@ -102,7 +102,7 @@ class TicketController extends Controller
     public function getUserTickets() {
         $tickets = DB::table('tickets')
         ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
-        ->where('receiver_type', '=', 'user')
+        ->where('sender_type', '=', 'user')
         ->select('tickets.id', 'tickets.title', 'tickets.status', 'tickets.urgency', 'tickets.created_at', 'ticket_departments.name as department')
         ->get();
 

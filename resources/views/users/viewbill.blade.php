@@ -226,7 +226,7 @@ padding: 5px 10px;
         </tr>
 
         @foreach(json_decode($invoice->coupons) as $c)
-            @if(is_null($c[0]->code))
+            @if(count($c) == 0)
                 @break
             @endif
             <tr class="item">
