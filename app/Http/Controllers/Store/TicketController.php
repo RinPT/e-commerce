@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Store;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tickets;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Ticket_Departments;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -14,6 +17,18 @@ class TicketController extends Controller
     }
 
     public function index() {
-        return view('store.tickets.index');
+
+        $tickets = DB::table('tickets')
+        ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
+        ->where([
+            ['receiver_type', '=', 'store'],
+            ['receiver_id', '=', $this->logged_author->id],
+        ])
+        ->select('tickets.id', 'tickets.title', 'tickets.status', 'tickets.urgency', 'tickets.created_at', 'ticket_departments.name as department')
+        ->get();
+
+        return view('store.tickets.index', [
+            'tickets' => $tickets,
+        ]);
     }
 }

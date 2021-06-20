@@ -43,18 +43,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-item-id="">
-                        <td>1</td>
-                        <td>Help</td>
-                        <td>Stores</td>
-                        <td>High</td>
-                        <td>Active</td>
-                        <td>12/02/2012</td>
-                        <td class="actions d-flex">
-                            <a href="#" class="btn btn-dark btn-sm text-white"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
+                    @if($tickets->count())
+                        @foreach ($tickets as $ticket)
+                            <tr data-item-id="{{ $ticket->id }}">
+                                <td>{{ $ticket->id }}</td>
+                                <td>{{ $ticket->title }}</td>
+                                <td>{{ $ticket->department }}</td>
+                                <td>{{ $ticket->urgency }}</td>
+                                <td>{{ $ticket->status }}</td>
+                                <td>{{ date('d/m/Y', strtotime($ticket->created_at)) }}</td>
+                                <td class="actions d-flex">
+                                    <a href="#" class="btn btn-dark btn-sm text-white"><i class="fas fa-eye"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

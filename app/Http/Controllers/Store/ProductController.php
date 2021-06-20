@@ -39,6 +39,8 @@ class ProductController extends Controller
         ->select( 'products.name', 'categories.id as cid', 'products.description', 'products.cargo_price', 'products.price', 'products.id', 'currencies.suffix as currency', 'products.updated_at')
         ->get();
 
+        dd($products);
+
         foreach ($products as $key => $product) {
             $products[$key] -> stock = ProductStock::where('product_id', '=', $product->id)->get();
             $products[$key] -> totalstock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
