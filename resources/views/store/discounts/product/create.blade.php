@@ -24,7 +24,7 @@
 
 @section('content')
     @if(session('status'))
-        <div class="row">
+        <div class="row mb-2">
             <div class="col">
                 <div class="alert alert-success mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -33,6 +33,7 @@
             </div>
         </div>
     @endif
+
     <div class="row">
         <div class="col">
             <section class="card card-modern card-big-info">

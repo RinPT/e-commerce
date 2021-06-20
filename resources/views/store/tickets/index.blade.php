@@ -20,6 +20,17 @@
 @endsection
 
 @section('content')
+    @if(session('deleted'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger mb-0">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Notification!</strong> {{ session('deleted') }}.
+                </div>
+            </div>
+        </div>
+    @endif
+
     <section class="card">
         <header class="card-header">
             <div class="card-actions">
@@ -54,7 +65,11 @@
                                 <td>{{ date('d/m/Y', strtotime($ticket->created_at)) }}</td>
                                 <td class="actions d-flex">
                                     <a href="#" class="btn btn-dark btn-sm text-white"><i class="fas fa-eye"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></a>
+                                    <form action="{{ route('store.tickets.destroy', $ticket->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Store;
 use App\Models\Tickets;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Ticket_Departments;
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
@@ -30,5 +29,10 @@ class TicketController extends Controller
         return view('store.tickets.index', [
             'tickets' => $tickets,
         ]);
+    }
+
+    public function destroy($id) {
+        Tickets::find($id)->delete();
+        return back()->with('deleted', 'Ticket removed from the system!');
     }
 }
