@@ -48,20 +48,23 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store</label>
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
                     <div class="col-lg-6">
-                        <select name="store_id" class="form-control">
-                            @foreach ($stores as $store)
-                                <option value="{{ $store->id }}">{{ $store->name }}</option>
-                            @endforeach
-                        </select>
+                        <textarea type="text" class="form-control" rows="10" name="description"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Category ID</label>
                     <div class="col-lg-6">
-                        <textarea type="text" class="form-control" rows="10" name="description"></textarea>
+                        <textarea type="text" class="form-control" rows="10" name="category_id"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store ID</label>
+                    <div class="col-lg-6">
+                        <textarea type="text" class="form-control" rows="10" name="store_id"></textarea>
                     </div>
                 </div>
 
@@ -79,7 +82,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Images</label>
                     <div class="col-lg-6">
-                        <input type="file" name="images[]" multiple class="form-control" accept="image/*">
+                        <input type="file" name="images[]" multiple class="form-control" accept="image/*" required>
                     </div>
                 </div>
 
@@ -121,41 +124,46 @@
                         <table class="table table-bordered table-striped mb-0" id="datatable-custom">
                             <thead>
                                 <tr>
+                                    <th>Type</th>
                                     <th>Attribute</th>
                                     <th>Stock</th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
-                                    <td><input type="number" class="form-control" name="stock[]"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="attribute[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]"></td>
                                     <td><input type="number" class="form-control" name="stock[]"></td>
                                 </tr>
                             </tbody>

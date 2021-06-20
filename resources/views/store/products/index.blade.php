@@ -58,7 +58,7 @@
                         <div id="productEdit{{ $product->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title">Update Currency</h2>
+                                    <h2 class="card-title">Update Product</h2>
                                 </header>
                                 <div class="card-body">
                                     <form action="{{ route('store.product.update', $product->id) }}" method="post">
