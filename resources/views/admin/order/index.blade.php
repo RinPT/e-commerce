@@ -21,10 +21,6 @@
 @section('content')
     <section class="card">
         <header class="card-header">
-            <div class="card-actions">
-                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-            </div>
 
             <h2 class="card-title">Orders</h2>
             <p class="card-subtitle">You can see all available orders below.</p>

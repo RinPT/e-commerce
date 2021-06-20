@@ -256,11 +256,6 @@
 													Comments
 												</a>
 											</li>
-											<li>
-												<a class="nav-link" href="">
-													Complains
-												</a>
-											</li>
 										</ul>
 									</li>
                                     @endif
