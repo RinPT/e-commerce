@@ -397,7 +397,7 @@
 									</li>
                                     @endif
                                     @if(in_array(9,$logged_author->perms))
-									<li class="nav-parent @if(str_contains(url()->current(),'author'))) nav-expanded @endif">
+									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bx-user-circle' ></i>
 											<span>Author Management</span>
@@ -417,7 +417,7 @@
 									</li>
                                     @endif
                                     @if(in_array(10,$logged_author->perms))
-									<li class="nav-parent @if(str_contains(url()->current(),'store'))) nav-expanded @endif"">
+									<li class="nav-parent">
 										<a class="nav-link" href="#">
 											<i class='bx bxs-user-circle'></i>
 											<span>Store Management @if($store_requests_count) <span class="badge badge-warning">{{ $store_requests_count }}</span>@endif</span>

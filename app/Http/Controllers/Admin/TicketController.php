@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tickets;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Ticket_Departments;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
 {
@@ -59,8 +60,6 @@ class TicketController extends Controller
             ]);
         }
 
-
-
         $department->update([
             'description' => $request->description,
             'status' => ($request->status === 1 ? 1 : 0) || ($request->status === 0 ? 0 : 1),
@@ -69,7 +68,7 @@ class TicketController extends Controller
         return back()->with('updated', 'The department information has been updated.');
     }
 
-    public function destroy($id) {
+    public function depratment_destroy($id) {
         $department = Ticket_Departments::find($id);
         $department->delete();
 
@@ -84,10 +83,15 @@ class TicketController extends Controller
 	}
 
 	public function getStoreTickets() {
+		$tickets = DB::table('tickets')
+        ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
+        ->where('receiver_type', '=', 'store')
+        ->select('tickets.id', 'tickets.title', 'tickets.status', 'tickets.urgency', 'tickets.created_at', 'ticket_departments.name as department')
+        ->get();
 
-		return view('admin.store_tickets', [
-			'tickets' => Tickets::get(),
-		]);
+        return view('admin.tickets.store.index', [
+            'tickets' => $tickets,
+        ]);
 	}
 
     public function getUserTickets() {
@@ -99,4 +103,11 @@ class TicketController extends Controller
 
 		return view('admin.create_new_ticket');
 	}
+
+    public function ticket_destroy($id) {
+        $department = Tickets::find($id);
+        $department->delete();
+
+        return back()->with('deleted', 'The ticket has been deleted from the system!');
+    }
 }
