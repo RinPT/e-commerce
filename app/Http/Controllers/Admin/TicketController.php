@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Store;
+use App\Models\Author;
 use App\Models\Tickets;
 use Illuminate\Http\Request;
+use App\Models\Ticket_Replies;
 use App\Models\Ticket_Departments;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -87,6 +93,43 @@ class TicketController extends Controller
         ]);
 	}
 
+    public function authorTicket($tid) {
+        $ticket = Tickets::find($tid);
+
+        $replies = Ticket_Replies::where('ticket_id',$tid)->get();
+
+        foreach ($replies as $key => $reply) {
+            $replies[$key]->user = User::find($reply->sender_id);
+
+        }
+
+        $user = User::find($ticket->sender_id);
+
+        return view('admin.tickets.admin.viewTicket',[
+            'tid' => $tid,
+            'ticket' => $ticket,
+            'replies' => $replies,
+            'user' => $user,
+        ]);
+    }
+
+    public function answer_ticket($tid, Request $request){
+        $ticket = Tickets::find($tid);
+
+        Ticket_Replies::create([
+            'ticket_id' => $tid,
+            'sender_id' => $this->logged_author->id,
+            'sender_type'   => 'store',
+            'receiver_id' => $ticket->receiver_id,
+            'receiver_type' => $ticket->receiver_type,
+            'message' => $request->message,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return back()->with('success','Your message has been sent.');
+    }
+
 	public function getStoreTickets() {
 		$tickets = DB::table('tickets')
         ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
@@ -99,6 +142,28 @@ class TicketController extends Controller
         ]);
 	}
 
+    public function storeTicket($tid) {
+        $ticket = Tickets::find($tid);
+
+        $replies = Ticket_Replies::where('ticket_id',$tid)->get();
+
+        foreach ($replies as $key => $reply) {
+            $replies[$key]->user = User::find($reply->sender_id);
+
+        }
+
+        $user = User::find($ticket->sender_id);
+        $store = Store::find($ticket->receiver_id);
+
+        return view('admin.tickets.store.viewTicket',[
+            'tid' => $tid,
+            'ticket' => $ticket,
+            'replies' => $replies,
+            'user' => $user,
+            'store' => $store,
+        ]);
+    }
+
     public function getUserTickets() {
         $tickets = DB::table('tickets')
         ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
@@ -110,6 +175,29 @@ class TicketController extends Controller
             'tickets' => $tickets,
         ]);
 	}
+
+    public function userTicket($tid) {
+        $ticket = Tickets::find($tid);
+
+        $replies = Ticket_Replies::where('ticket_id',$tid)->get();
+
+        foreach ($replies as $key => $reply) {
+            if($reply->sender_type == 'admin'){
+                $replies[$key]->admin = Author::find($reply->sender_id);
+            }else{
+                $replies[$key]->admin = Store::find($reply->sender_id);
+            }
+        }
+
+        $user = User::find($ticket->sender_id);
+
+        return view('admin.tickets.user.viewTicket',[
+            'tid' => $tid,
+            'ticket' => $ticket,
+            'replies' => $replies,
+            'user' => $user
+        ]);
+    }
 
     public function getCreateTicket() {
 
