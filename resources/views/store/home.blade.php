@@ -43,7 +43,7 @@
                             <div class="summary">
                                 <h4 class="title">Total Products</h4>
                                 <div class="info">
-                                    <strong class="amount">1</strong>
+                                    <strong class="amount">{{ $products }}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -68,7 +68,7 @@
                             <div class="summary">
                                 <h4 class="title">Total Orders</h4>
                                 <div class="info">
-                                    <strong class="amount">1</strong>
+                                    <strong class="amount">{{ $orders }}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -91,7 +91,7 @@
                         </div>
                         <div class="widget-summary-col">
                             <div class="summary">
-                                <h4 class="title">Total Order</h4>
+                                <h4 class="title">Total Discount</h4>
                                 <div class="info">
                                     <strong class="amount">1</strong>
                                 </div>

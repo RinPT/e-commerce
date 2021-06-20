@@ -83,7 +83,7 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::get('/product/create', [ProductsController::class, 'create'])->name('admin.product.create');
     Route::post('/product/create', [ProductsController::class, 'store'])->name('admin.product.store');
     Route::get('/products/{product_id}/update', [ProductsController::class, 'edit'])->name('admin.product.edit');
-    Route::patch('/products/{product_id}/update', [ProductsController::class, 'update'])->name('admin.product.update');
+    Route::post('/products/{product_id}/update', [ProductsController::class, 'update'])->name('admin.product.update');
     Route::delete('/products/{product_id}/delete', [ProductsController::class, 'destroy'])->name('admin.product.destroy');
 
     /**
