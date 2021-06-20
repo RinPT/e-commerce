@@ -486,7 +486,7 @@
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="{{ route('admin.view_store_tickets')}}">
+												<a class="nav-link" href="{{ route('admin.view_user_tickets')}}">
 													User's Tickets
 												</a>
 											</li>

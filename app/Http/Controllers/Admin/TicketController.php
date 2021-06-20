@@ -76,10 +76,15 @@ class TicketController extends Controller
     }
 
 	public function getAuthorTickets() {
+		$tickets = DB::table('tickets')
+        ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
+        ->where('receiver_type', '=', 'admin')
+        ->select('tickets.id', 'tickets.title', 'tickets.status', 'tickets.urgency', 'tickets.created_at', 'ticket_departments.name as department')
+        ->get();
 
-		return view('admin.author_tickets', [
-			'tickets' => Tickets::get(),
-		]);
+        return view('admin.tickets.admin.index', [
+            'tickets' => $tickets,
+        ]);
 	}
 
 	public function getStoreTickets() {
@@ -95,8 +100,15 @@ class TicketController extends Controller
 	}
 
     public function getUserTickets() {
+        $tickets = DB::table('tickets')
+        ->join('ticket_departments', 'ticket_departments.id', '=', 'tickets.department_id')
+        ->where('receiver_type', '=', 'user')
+        ->select('tickets.id', 'tickets.title', 'tickets.status', 'tickets.urgency', 'tickets.created_at', 'ticket_departments.name as department')
+        ->get();
 
-
+        return view('admin.tickets.user.index', [
+            'tickets' => $tickets,
+        ]);
 	}
 
     public function getCreateTicket() {

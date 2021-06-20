@@ -13,7 +13,7 @@
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>Store Tickets</span></li>
+            <li><span>Admin Tickets</span></li>
             <li><span>Ticket Management</span></li>
             <li><span>Dashboard</span></li>
         </ol>
@@ -34,8 +34,8 @@
 
     <section class="card">
         <header class="card-header">
-            <h2 class="card-title">Store Tickets</h2>
-            <p class="card-subtitle">You can see tickets from all stores below.</p>
+            <h2 class="card-title">Admin Tickets</h2>
+            <p class="card-subtitle">You can see tickets from all admins below.</p>
         </header>
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
