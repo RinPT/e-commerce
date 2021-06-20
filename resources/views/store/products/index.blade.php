@@ -47,7 +47,7 @@
                     <td>{{ $product->totalstock }}</td>
                     <td>{{$product->updated_at}}</td>
                     <td class="actions d-flex">
-                        <a href="#productEdit{{ $logged_author->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#productEdit{{ $product->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
                         <form action="{{ route('store.product.delete', $logged_author->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -55,13 +55,13 @@
                         </form>
 
                         <!-- Modal Animation -->
-                        <div id="productEdit{{ $logged_author->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+                        <div id="productEdit{{ $product->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
                             <section class="card">
                                 <header class="card-header">
                                     <h2 class="card-title">Update Currency</h2>
                                 </header>
                                 <div class="card-body">
-                                    <form action="{{ route('store.product.update', $logged_author->id) }}" method="post">
+                                    <form action="{{ route('store.product.update', $product->id) }}" method="post">
                                         @csrf
                                         <div class="modal-wrapper mb-0">
                                             <div class="form-group row @error('name') has-danger @enderror">
