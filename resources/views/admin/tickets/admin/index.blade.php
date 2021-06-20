@@ -33,9 +33,81 @@
     @endif
 
     <section class="card">
-        <header class="card-header">
-            <h2 class="card-title">Admin Tickets</h2>
-            <p class="card-subtitle">You can see tickets from all admins below.</p>
+        <header class="card-header d-flex justify-content-between">
+            <div>
+                <h2 class="card-title">Admin Tickets</h2>
+                <p class="card-subtitle">You can see tickets from all admins below.</p>
+            </div>
+            <a href="#createTicket" class="modal-with-zoom-anim ws-normal btn btn-dark btn-lg" >Create New Ticket</a>
+
+            <!-- Create Ticket Modal -->
+            <div id="createTicket" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Create New Ticket</h2>
+                    </header>
+                    <div class="card-body">
+                        <form action="{{ route('admin.ticket.create') }}" method="POST">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Stores</label>
+                                <div class="col-lg-7">
+                                    <select name="store" class="form-control mb-3">
+                                        @if($stores->count())
+                                            @foreach($stores as $store)
+                                                <option value="{{ $store->id }}">{{ $store->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Departments</label>
+                                <div class="col-lg-7">
+                                    <select name="department" class="form-control mb-3">
+                                        @if($departments->count())
+                                            @foreach($departments as $department)
+                                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Title</label>
+                                <div class="col-lg-7">
+                                    <input type="text" name="title" class="form-control" id="inputDefault">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Urgency</label>
+                                <div class="col-lg-7">
+                                    <select name="urgency" class="form-control mb-3">
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="very high">Very High</option>
+                                        <option value="critical">Critical</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Message</label>
+                                <div class="col-lg-7">
+                                    <textarea class="form-control" name="message" rows="3" id="textareaAutosize" data-plugin-textarea-autosize></textarea>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-dark">Send</button>
+                                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
         </header>
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">

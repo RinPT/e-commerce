@@ -115,13 +115,23 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="messages" id="mbox">
-                            <div class="user-box">
-                                <div class="author-name">
-                                    {{ $user->name }} {{ $user->surname }}
-                                    <span class="at-user-group" style="float:right">{{ $ticket->created_at->format('d.m.Y H:i') }}</span>
+                            @if($ticket->sender_type === 'admin')
+                                <div class="author-box">
+                                    <div class="author-name">
+                                        {{ $logged_author->name }}
+                                        <span class="at-user-group" style="float:right">{{ $ticket->created_at->format('d.m.Y H:i') }}</span>
+                                    </div>
+                                    <p class="at-desc text-white">{{ $ticket->message }}</p>
                                 </div>
-                                <p class="at-desc text-white">{{ $ticket->message }}</p>
-                            </div>
+                            @elseif ($ticket->sender_type === 'user')
+                                <div class="user-box">
+                                    <div class="author-name">
+                                        {{ $user->name }} {{ $user->surname }}
+                                        <span class="at-user-group" style="float:right">{{ $ticket->created_at->format('d.m.Y H:i') }}</span>
+                                    </div>
+                                    <p class="at-desc text-white">{{ $ticket->message }}</p>
+                                </div>
+                            @endif
                             @foreach($replies as $r)
                                 @if($r->sender_type == 'user')
                                     <div class="user-box">

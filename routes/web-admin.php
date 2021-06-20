@@ -186,13 +186,15 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     /**
      * Ticket Management
      */
+    Route::post('/ticket/create', [TicketController::class, 'create_ticket'])->name('admin.ticket.create');
+
     Route::get('/tickets/department/create', [TicketController::class, 'create'])->name('admin.ticket.department.create');
     Route::post('/tickets/department/done', [TicketController::class, 'store'])->name('admin.ticket.department.store');
     Route::post('/tickets/department/{id}/update', [TicketController::class, 'update'])->name('admin.ticket.department.update');
     Route::delete('/tickets/department/{id}/delete', [TicketController::class, 'department_destroy'])->name('admin.ticket.department.delete');
 
     Route::get('/tickets/author', [TicketController::class, 'getAuthorTickets'])->name('admin.view_author_tickets');
-    Route::get('/tickets/author/{id}/view', [TicketController::class, 'authorTicket'])->name('admin.view_author_tickets.view');
+    Route::get('/tickets/author/{tid}/view', [TicketController::class, 'authorTicket'])->name('admin.view_author_tickets.view');
     Route::post('/tickets/answer/{tid}', [TicketController::class, 'answer_ticket'])->name('admin.ticket.answer');
 
     Route::get('/tickets/store', [TicketController::class, 'getStoreTickets']) -> name('admin.view_store_tickets');

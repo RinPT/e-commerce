@@ -88,8 +88,13 @@ class TicketController extends Controller
         ->select('tickets.id', 'tickets.title', 'tickets.status', 'tickets.urgency', 'tickets.created_at', 'ticket_departments.name as department')
         ->get();
 
+        $stores = Store::get();
+        $departments = Ticket_Departments::get();
+
         return view('admin.tickets.admin.index', [
             'tickets' => $tickets,
+            'stores' => $stores,
+            'departments' => $departments
         ]);
 	}
 
@@ -113,13 +118,34 @@ class TicketController extends Controller
         ]);
     }
 
+    public function create_ticket(Request $request){
+
+        $id = Tickets::create([
+            'department_id' => $request->department,
+            'sender_id' => $this->logged_author->id,
+            'sender_type' => 'admin',
+            'receiver_id' => $request->store,
+            'receiver_type' => 'store',
+            'title' => $request->title,
+            'message' => $request->message,
+            'status' => 'open',
+            'urgency' => $request->urgency,
+            'sender_unread' => 0,
+            'receiver_unread' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('admin.view_author_tickets.view',['tid' => $id ]);
+    }
+
     public function answer_ticket($tid, Request $request){
         $ticket = Tickets::find($tid);
 
         Ticket_Replies::create([
             'ticket_id' => $tid,
             'sender_id' => $this->logged_author->id,
-            'sender_type'   => 'store',
+            'sender_type'   => 'admin',
             'receiver_id' => $ticket->receiver_id,
             'receiver_type' => $ticket->receiver_type,
             'message' => $request->message,
