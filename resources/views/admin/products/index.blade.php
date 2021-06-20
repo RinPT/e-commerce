@@ -19,13 +19,16 @@
     </header>
     <div class="card-body">
         <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
+
             <thead>
                 <tr>
                     <th>Product ID</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Store ID</th>
-                    <th>Category</th>
+                    <th>Category ID</th>
                     <th>Price</th>
+                    <th>Cargo Price</th>
                     <th>Currency</th>
                     <th>Stock</th>
                     <th>Last Update</th>
@@ -33,32 +36,133 @@
                 </tr>
             </thead>
             <tbody>
-            @if($products->count())
                 @foreach($products as $product)
                 <tr>
                     <td>#{{ $product->id}}</td>
                     <td>{{$product->name}}</td>
+                    <td>{{$product->description}}</td>
                     <td>#{{ $product->store_id}}</td>
-                    <td>#{{$product->category_id}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>#{{$product->currency_id}}</td>
-                    <td>Stok1</td>
-                    <td>{{$product->updated_at->format('d.m.Y H:i')}}</td>
-                    <td>
-                        <form action="{{ route('admin.product.edit', $product->id) }}" method="POST">
-                            @csrf
-                            {{ method_field('GET') }}
-                            <button type="submit" class="btn btn-success btn-sm" style="font-size: 12px"><i class="fas fa-pencil-alt"></i></button>
-                        </form>
+                    <td>#{{ $product->cid}}</td>
+                    <td>{{$product->price}} {{$product->currency}}</td>
+                    <td>{{$product->cargo_price}} {{$product->currency}}</td>
+                    <td>{{$product->currency}}</td>
+                    <td>{{ $product->totalstock }}</td>
+                    <td>{{$product->updated_at}}</td>
+                    <td class="actions d-flex">
+                        <a href="#productEdit{{ $product->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
                         <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" style="font-size: 12px"><i class="fas fa-times"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                         </form>
+
+                        <!-- Modal Animation -->
+                        <div id="productEdit{{ $product->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+                            <section class="card">
+                                <header class="card-header">
+                                    <h2 class="card-title">Update Product</h2>
+                                </header>
+                                <div class="card-body">
+                                    <form action="{{ route('admin.product.update', $product->id) }}" method="post">
+                                        @csrf
+                                        <div class="modal-wrapper mb-0">
+                                            <div class="form-group row @error('name') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="name" class="form-control" id="inputDefault" value="{{ $product->name }}">
+                                                    @error('name') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('description') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Description</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="description" class="form-control" id="inputDefault" value="{{ $product->description }}">
+                                                    @error('description') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('category_id') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Category ID</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="category_id" class="form-control" id="inputDefault" value="{{ $product->cid }}">
+                                                    @error('category_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('store_id') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Store ID</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="store_id" class="form-control" id="inputDefault" value="{{ $product->store_id }}">
+                                                    @error('store_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('price') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Price</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="price" class="form-control" id="inputDefault" value="{{ $product->price }}">
+                                                    @error('price') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('cargo_price') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Cargo Price</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="cargo_price" class="form-control" id="inputDefault" value="{{ $product->cargo_price }}">
+                                                    @error('cargo_price') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row @error('currency_id') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Currency ID</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" name="currency_id" class="form-control" id="inputDefault" value="{{ $product->cid }}">
+                                                    @error('currency_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <table class="table table-bordered table-striped mb-0" id="datatable-custom">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Attribute</th>
+                                                        <th>Stock</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($product->option as $opt)
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]" value="{{ $opt['option']->name }}"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]" value="{{ $opt['option']->value }}"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]" value="{{ $opt['stock']->stock ?? "" }}"></td>
+                                                    </tr>
+                                                    @endforeach
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="attribute_name[]"></td>
+                                                        <td><input type="text" class="form-control" name="attribute_value[]"></td>
+                                                        <td><input type="number" class="form-control" name="stock[]"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
-            @endif
             </tbody>
         </table>
     </div>
@@ -80,6 +184,7 @@
 @endsection
 
 @section('end-scripts')
+    <script src="/admin/js/examples/examples.modals.js"></script>
     <script>
         var $table = $('#datatable-tabletools');
 
