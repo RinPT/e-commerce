@@ -493,56 +493,6 @@
 										</ul>
 									</li>
                                     @endif
-                                    @if(in_array(13,$logged_author->perms))
-									<li class="nav-parent ">
-										<a class="nav-link" href="#">
-											<i class='bx bx-money'></i>
-											<span>Payment Management</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="add.config_display">
-													Add New Payment Gateway
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Payment Gateways
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Add Bank Account
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="#">
-													Bank Accounts
-												</a>
-											</li>
-										</ul>
-									</li>
-                                    @endif
-                                    @if(in_array(14,$logged_author->perms))
-									<li class="nav-parent">
-										<a class="nav-link" href="#">
-											<i class='bx bxs-book'></i>
-											<span>Log Records</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a class="nav-link" href="">
-													Activity Logs
-												</a>
-											</li>
-											<li>
-												<a class="nav-link" href="">
-													Ticket Logs
-												</a>
-											</li>
-										</ul>
-									</li>
-                                    @endif
                                     @if (in_array(18, $logged_author->perms))
                                     <li class="nav-parent">
 										<a class="nav-link" href="#">
