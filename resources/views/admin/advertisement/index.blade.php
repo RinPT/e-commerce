@@ -51,7 +51,7 @@
                     <tr>
                         <td>{{ $advertisement->id }}</td>
                         <td>{{ $advertisement->category_id }}</td>
-                        <td> <img src="{{ $advertisement->image }}"></td>
+                        <td> <img src="/photo/advertisement/{{ $advertisement->image }}" style="max-height: 160px;"></td>
                         <td>{{ is_null($advertisement->created_at) ? "-" : Carbon\Carbon::parse($advertisement->created_at)->format('d.m.Y H:i') }}</td>
                         <td>{{ is_null($advertisement->updated_at) ? "-" : Carbon\Carbon::parse($advertisement->updated_at)->format('d.m.Y H:i') }}</td>
                         <td class="actions">

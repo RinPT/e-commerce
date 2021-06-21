@@ -368,21 +368,24 @@
 											<span>Permission Management</span>
 										</a>
 										<ul class="nav nav-children">
+                                            <!--
 											<li>
 												<a class="nav-link" href="{{ route('admin.perm.create') }}">
 													Add New Permission
 												</a>
 											</li>
+											-->
 											<li>
 												<a class="nav-link" href="{{ route('admin.group.create') }}">
 													Add New Group
 												</a>
 											</li>
+                                                <!--
 											<li>
 												<a class="nav-link" href="{{ route('admin.perms.index') }}">
 													Permissions
 												</a>
-											</li>
+											</li>-->
 											<li>
 												<a class="nav-link" href="{{ route('admin.groups.index') }}">
 													Groups

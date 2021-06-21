@@ -47,7 +47,7 @@
                     <td>{{$product->cargo_price}} {{$product->currency}}</td>
                     <td>{{$product->currency}}</td>
                     <td>{{ $product->totalstock }}</td>
-                    <td>{{$product->updated_at}}</td>
+                    <td>{{ date('d.m.Y H:i',strtotime($product->updated_at)) }}</td>
                     <td class="actions d-flex">
                         <a href="#productEdit{{ $product->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
                         <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST">
