@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Models\Slider;
 
@@ -213,5 +214,14 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::get('/slider/create', [SliderController::class, 'create'])->name('slider.create');
     Route::post('/slider/create/done', [SliderController::class, 'store'])->name('slider.store');
     Route::delete('/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
+
+    /**
+     * Coupons
+     */
+    Route::get('/coupons/list', [CouponController::class, 'index'])->name('admin.coupons');
+    Route::get('/coupons/create', [CouponController::class, 'create'])->name('admin.coupons.create');
+    Route::post('/coupons/store', [CouponController::class, 'store'])->name('admin.coupons.store');
+    Route::post('/coupon/{id}/update', [CouponController::class, 'update'])->name('admin.coupons.update');
+    Route::delete('/coupon/{id}/delete', [CouponController::class, 'destroy'])->name('admin.coupons.delete');
 });
 

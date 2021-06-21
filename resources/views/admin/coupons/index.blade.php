@@ -8,24 +8,24 @@
 @endsection
 
 @section('breadcrumb')
-    <h2>Currencies</h2>
+    <h2>Products</h2>
 
     <div class="right-wrapper text-right mr-2">
         <ol class="breadcrumbs">
-            <li><span>All Currencies</span></li>
-            <li><span>Currencies</span></li>
+            <li><span>Coupons</span></li>
+            <li><span>Products</span></li>
             <li><span>Dashboard</span></li>
         </ol>
     </div>
 @endsection
 
 @section('content')
-    @if(session('status'))
+    @if(session('updated'))
         <div class="row mb-3">
             <div class="col">
                 <div class="alert alert-info mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Info!</strong> {{ session('status') }}
+                    <strong>Info!</strong> {{ session('updated') }}
                 </div>
             </div>
         </div>
@@ -38,124 +38,90 @@
                 </div>
             </div>
         </div>
-    @elseif(session('destroy'))
+    @elseif(session('deleted'))
         <div class="row mb-3">
             <div class="col">
                 <div class="alert alert-danger mb-0">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <strong>Deleted!</strong> {{ session('destroy') }}
+                    <strong>Deleted!</strong> {{ session('deleted') }}
                 </div>
             </div>
         </div>
     @endif
     <section class="card">
         <header class="card-header">
-            <h2 class="card-title">Currencies</h2>
-            <p class="card-subtitle">You can see all available currencies below.</p>
+            <h2 class="card-title">Coupons</h2>
+            <p class="card-subtitle">You can see all available coupons below.</p>
         </header>
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
                         <th>Code</th>
-                        <th>Rate</th>
-                        <th>Status</th>
-                        <th>Last Update</th>
-                        <th>#</th>
+                        <th>Rate (%)</th>
+                        <th>Price</th>
+                        <th>End Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($currencies->count())
-                        @foreach ($currencies as $currency)
-                            <tr data-item-id="{{ $currency->id }}">
-                                <td>{{ $currency->id }} </td>
-                                <td>
-                                    {{ $currency->name }}
-                                    @if($currency->base)
-                                        <span class="badge badge-dark">Base</span>
-                                    @endif
-                                </td>
-                                <td>{{ $currency->code }}</td>
-                                <td>{{ $currency->rate }}</td>
-                                <td>
-                                    @if($currency->status)
-                                        <span class="badge badge-success">Active</span>
-                                    @else
-                                        <span class="badge badge-danger">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>{{ $currency->updated_at->format('d.m.Y H:i') }}</td>
+                    @if ($coupons->count())
+                        @foreach ($coupons as $coupon)
+                            <tr data-item-id="{{ $coupon->id }}">
+                                <td>{{ $coupon->id }}</td>
+                                <td>{{ $coupon->code }}</td>
+                                <td>{{ $coupon->rate }}</td>
+                                <td>{{ $coupon->price }}</td>
+                                <td>{{ date('d-m-Y', strtotime($coupon->end_date)) }}</td>
                                 <td class="actions d-flex">
-                                    <a href="#currencyEdit{{ $currency->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
-                                    <form action="{{ route('admin.currency.delete', $currency->id) }}" method="POST">
+                                    <a href="#couponEdit{{ $coupon->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>
+                                    <form action="{{ route('admin.coupons.delete', $coupon->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                                     </form>
 
                                     <!-- Modal Animation -->
-									<div id="currencyEdit{{ $currency->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+									<div id="couponEdit{{ $coupon->id }}" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Update Currency</h2>
+												<h2 class="card-title">Update Coupons</h2>
 											</header>
 											<div class="card-body">
-                                                <form action="{{ route('admin.currency.update', $currency->id) }}" method="POST">
+                                                <form action="{{ route('admin.coupons.update', $coupon->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-wrapper mb-0">
-                                                        <div class="form-group row @error('name') has-danger @enderror">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Name</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" name="name" class="form-control" id="inputDefault" value="{{ $currency->name }}">
-                                                                @error('name') <p class="text-danger mb-0">{{ $message }}</p> @enderror
-                                                            </div>
-                                                        </div>
                                                         <div class="form-group row @error('code') has-danger @enderror">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Code</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" name="code" class="form-control" id="inputDefault" value="{{ $currency->code }}">
-                                                                @error('code') <p class="text-danger mb-0">{{ $message }}</p> @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row @error('prefix') has-danger @enderror">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Prefix</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" name="prefix" class="form-control" id="inputDefault" value="{{ $currency->prefix }}">
-                                                                @error('prefix') <p class="text-danger mb-0">{{ $message }}</p> @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row @error('suffix') has-danger @enderror">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Suffix</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" name="suffix" class="form-control" id="inputDefault" value="{{ $currency->suffix }}">
-                                                                @error('suffix') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Coupon Code</label>
+                                                            <div class="col-lg-7">
+                                                                <input name="code" type="text" class="form-control" id="inputDefault" value="{{ $coupon->code }}">
+                                                                @error('code') <p class="text-danger">{{ $message }}</p> @enderror
                                                             </div>
                                                         </div>
                                                         <div class="form-group row @error('rate') has-danger @enderror">
                                                             <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Rate</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" name="rate" class="form-control" id="inputDefault" value="{{ $currency->rate }}">
-                                                                @error('rate') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                            <div class="col-lg-7">
+                                                                <input name="rate" type="number" class="form-control" id="inputDefault" value="{{ $coupon->rate }}">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row @error('base') has-danger @enderror">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Base</label>
-                                                            <div class="col-lg-6">
-                                                                <div class="switch switch-md switch-dark">
-                                                                    <input type="checkbox" name="base" data-plugin-ios-switch @if($currency->base) checked @endif/>
-                                                                </div>
-                                                                @error('base') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                        <div class="form-group row @error('price') has-danger @enderror">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Price</label>
+                                                            <div class="col-lg-7">
+                                                                <input name="price" type="number" class="form-control" id="inputDefault" value="{{ $coupon->price }}">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row @error('status') has-danger @enderror">
-                                                            <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Status</label>
-                                                            <div class="col-lg-6">
-                                                                <div class="switch switch-md switch-dark">
-                                                                    <input type="checkbox" name="status" data-plugin-ios-switch @if($currency->status) checked @endif/>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 control-label text-lg-right pt-2">End Date</label>
+                                                            <div class="col-lg-7">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-prepend">
+                                                                        <span class="input-group-text">
+                                                                            <i class="fas fa-calendar-alt"></i>
+                                                                        </span>
+                                                                    </span>
+                                                                    <input name="end_date" type="date" class="form-control @error('end_date')is-invalid @enderror" value="{{ date('Y-m-d', strtotime($coupon->end_date)) }}">
                                                                 </div>
-                                                                @error('status') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                             </div>
                                                         </div>
                                                     </div>

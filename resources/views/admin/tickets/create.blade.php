@@ -75,7 +75,14 @@
                                 <td>{{ $department->id }} </td>
                                 <td>{{ $department->name }}</td>
                                 <td>{{ $department->description }}</td>
-                                <td>{{ $department->status }}</td>
+                                <td>
+                                    @if($department->status === 1)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-warning">Not Active</span>
+                                    @endif
+
+                                </td>
                                 <td>{{ date('d/m/Y', strtotime($department->created_at)) }}</td>
                                 <td class="actions d-flex">
                                     <a href="#departmentEdit{{ $department->id }}" class="modal-with-zoom-anim ws-normal btn btn-success btn-sm text-white"><i class="fas fa-pencil-alt"></i></a>

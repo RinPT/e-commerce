@@ -242,12 +242,12 @@
 											</li>
 
 											<li>
-												<a class="nav-link" href="">
+												<a class="nav-link" href="{{ route('admin.coupons.create') }}">
 													Add New Coupon
 												</a>
 											</li>
 											<li>
-												<a class="nav-link" href="">
+												<a class="nav-link" href="{{ route('admin.coupons') }}">
 													Coupons
 												</a>
 											</li>
