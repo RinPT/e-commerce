@@ -21,6 +21,9 @@
             font-size: 5rem;
             line-height: 1.2;
         }
+        .product-media {
+            min-height: 315px;
+        }
     </style>
     <main class="main">
         <div class="page-content">

@@ -108,10 +108,10 @@
                                                     @error('cargo_price') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="form-group row @error('currency_id') has-danger @enderror">
+                                            <div class="form-group mb-4 row @error('currency_id') has-danger @enderror">
                                                 <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Currency</label>
                                                 <div class="col-lg-6">
-                                                    <select name="currency_id" id="">
+                                                    <select name="currency_id" id="" class="form-control">
                                                         @foreach ($currencies as $currency)
                                                         <option value="{{ $currency->id }}" @if($currency->id == $product->currency_id) selected @endif>{{ $currency->name }}</option>
                                                         @endforeach

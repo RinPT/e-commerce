@@ -35,23 +35,6 @@
             })
         })
 
-        $('.add-to-wishlist').click(function (){
-            $.ajax({
-                method: "POST",
-                url: "{{ route('wishlist.add') }}",
-                data : {
-                    id : $(this).data('id'),
-                    _token: "{{ csrf_token() }}"
-                }
-            }).done(function (data){
-                $('.wishlist-added').addClass('show');
-                setTimeout(function (){
-                    $('.wishlist-added').removeClass('show');
-                },'1500')
-            }).fail(function (msg){
-                console.log("An error occured.")
-            })
-        })
     </script>
 @endsection
 

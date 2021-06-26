@@ -90,7 +90,7 @@ class CreateProductImages extends Migration
         DB::table('product_images')->insert([
             [
                 'product_id' => '4',
-                'image' => '/images/products/belair.jpg',
+                'image' => '4-1.jpg',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],

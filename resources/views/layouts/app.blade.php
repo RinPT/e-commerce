@@ -388,6 +388,25 @@
 <script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 <script src="/vendor/owl-carousel/owl.carousel.min.js"></script>
 @yield('plugin-scripts')
+<script>
+    $('.add-to-wishlist').click(function (){
+        $.ajax({
+            method: "POST",
+            url: "{{ route('wishlist.add') }}",
+            data : {
+                id : $(this).data('id'),
+                _token: "{{ csrf_token() }}"
+            }
+        }).done(function (data){
+            $('.wishlist-added').addClass('show');
+            setTimeout(function (){
+                $('.wishlist-added').removeClass('show');
+            },'1500')
+        }).fail(function (msg){
+            console.log("An error occured.")
+        })
+    })
+</script>
 <!-- Main JS File -->
 <script src="/js/user/main.min.js"></script>
 

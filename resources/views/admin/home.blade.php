@@ -174,8 +174,8 @@
                 <div class="col-12">
                     <section class="card">
                         <header class="card-header">
-                            <h2 class="card-title">Monthly Sales</h2>
-                            <p class="card-subtitle">This table is the total income of the orders placed on a monthly basis.</p>
+                            <h2 class="card-title">Daily Sales</h2>
+                            <p class="card-subtitle">This table is the total income of the orders placed on a daily basis.</p>
                         </header>
                         <div class="card-body">
                             <div>

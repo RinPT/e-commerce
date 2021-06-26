@@ -8,6 +8,7 @@ use App\Models\Countries;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Ticket_Replies;
+use App\Models\Tickets;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Store_Requests;
@@ -87,7 +88,12 @@ class StoreController extends Controller
 
         $order_count = Order::where('store_id',$id)->count();
         $product_count = Product::where('store_id',$id)->count();
-        $ticket_count = Ticket_Replies::where('store_id',$id)->count();
+
+        $ticket_count = Tickets::where([
+            ['receiver_id','=',$id],
+            ['receiver_type','=','store'],
+        ])->count();
+
         $order_income = Order::where('store_id',$id)->sum('total');
 
         $orders = Order::where('store_id',$id)->get();

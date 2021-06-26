@@ -11,30 +11,6 @@
     <link rel="stylesheet" type="text/css" href="/vendor/nouislider/nouislider.min.css">
 @endsection
 
-@section('javaScript')
-<script>
-    $('.add-to-cart').click(function (){
-        $.ajax({
-            method: "POST",
-            url: "{{ route('cart.add') }}",
-            data : {
-                id : $(this).data('id'),
-                _token: "{{ csrf_token() }}",
-                count: 1
-            }
-        }).done(function (data){
-            $('.cart-count').html(data.count)
-            $('.cart-prod-added').addClass('show');
-            setTimeout(function (){
-                $('.cart-prod-added').removeClass('show');
-            },'1500')
-        }).fail(function (msg){
-            console.log("An error occured.")
-        })
-    })
-</script>
-@endsection
-
 @section('content')
 <main class="main">
     <div class="page-header" style="background-color: #2466cc;height: 200px;">
@@ -59,7 +35,6 @@
                     <th></th>
                     <th class="product-price"><span>Price</span></th>
                     <th class="product-stock-status"><span>Stock status</span></th>
-                    <th class="product-add-to-cart"></th>
                     <th class="product-remove"></th>
                 </tr>
                 </thead>
@@ -91,9 +66,6 @@
                             @else
                                 <label class="product-label " style="color: #ffffff;background: #e41f00;">Out of Stock</label>
                             @endif
-                        </td>
-                        <td class="product-add-to-cart">
-                            <a href="javascript:void(0)" class="btn-product btn-primary @if($w->total_stock_count) add-to-cart @endif" data-id="{{ $w->id }}" @if(!$w->total_stock_count) disabled style="opacity: 0.5;" @endif><span>Add to Cart</span></a>
                         </td>
                         <td class="product-remove">
                             <div>
