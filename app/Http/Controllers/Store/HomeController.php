@@ -26,8 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $discount = StoreDiscount::where('store_id', '=', $this->logged_author->id)->count();
-        $product = Product::get();
-        $orders = Order::limit(20)->get();
+        $product = Product::where('store_id', '=', $this->logged_author->id)->get();
+        $orders = Order::where('store_id', '=', $this->logged_author->id)->limit(20)->get();
         $order_count = Order::where('store_id', '=', $this->logged_author->id)->count();
         $ticket_count = Tickets::where('sender_id', '=', $this->logged_author->id)->count();
         $ticket_open = Tickets::where([
