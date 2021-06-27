@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="/admin/vendor/select2/css/select2.css" />
     <link rel="stylesheet" href="/admin/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="/admin/vendor/datatables/media/css/dataTables.bootstrap4.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 @endsection
 
 @section('content')
@@ -18,8 +20,13 @@
         <p class="card-subtitle">You can see all your products below.</p>
     </header>
     <div class="card-body">
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Success</strong> {{ Session::get('success') }}
+            </div>
+        @endif
         <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
-
             <thead>
                 <tr>
                     <th>Product ID</th>
@@ -61,7 +68,7 @@
                                     <h2 class="card-title">Update Product</h2>
                                 </header>
                                 <div class="card-body">
-                                    <form action="{{ route('store.product.update', $product->id) }}" method="post">
+                                    <form action="{{ route('store.product.update', $product->id) }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-wrapper mb-0">
                                             <div class="form-group row @error('name') has-danger @enderror">
@@ -99,6 +106,40 @@
                                                     @error('currency_id') <p class="text-danger mb-0">{{ $message }}</p> @enderror
                                                 </div>
                                             </div>
+                                            <div class="form-group mb-4 row @error('images') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Images(Optional)</label>
+                                                <div class="col-lg-6">
+                                                    <input type="file" name="images[]" multiple>
+                                                    @error('images') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4 row @error('ar') has-danger @enderror">
+                                                <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">AR</label>
+                                                <div class="col-lg-6">
+                                                    <input type="file" name="ar">
+                                                    @error('ar') <p class="text-danger mb-0">{{ $message }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            @if($product->ar)
+                                                <div class="form-group mb-4 row">
+                                                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">AR File</label>
+                                                    <div class="col-lg-6">
+                                                        <a rel="ar" href="{{ $product->ar }}">
+                                                            <button type="button" class="btn btn-dark"><i class="d-icon-mobile mr-2"></i>View on Phone</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="owl-carousel owl-theme">
+                                                @foreach($product->images as $image)
+                                                    <div style="background: #f0f0f0;padding: 5px;border-radius: 10px;">
+                                                        <img src="/photo/product/{{ $image->image }}">
+                                                        <div class="text-center mb-2 mt-3">
+                                                            <a href="{{ route('admin.product.image.delete',['id' => $image->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt text-white"></i></a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                             <table class="table table-bordered table-striped mb-0" id="datatable-custom">
                                                 <thead>
                                                     <tr>
@@ -108,6 +149,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @if(isset($product->option))
                                                     @foreach($product->option as $opt)
                                                     <tr>
                                                         <td><input type="text" class="form-control" name="attribute_name[]" value="{{ $opt['option']->name }}"></td>
@@ -115,6 +157,7 @@
                                                         <td><input type="number" class="form-control" name="stock[]" value="{{ $opt['stock']->stock ?? "" }}"></td>
                                                     </tr>
                                                     @endforeach
+                                                    @endif
                                                     <tr>
                                                         <td><input type="text" class="form-control" name="attribute_name[]"></td>
                                                         <td><input type="text" class="form-control" name="attribute_value[]"></td>
@@ -155,6 +198,7 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="/admin/vendor/select2/js/select2.js"></script>
     <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
@@ -168,6 +212,13 @@
 @endsection
 
 @section('end-scripts')
+    <script>
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                margin:20
+            });
+        });
+    </script>
     <script src="/admin/js/examples/examples.modals.js"></script>
     <script>
         var $table = $('#datatable-tabletools');

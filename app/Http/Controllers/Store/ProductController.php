@@ -36,7 +36,8 @@ class ProductController extends Controller
         ->join('currencies', 'currencies.id', '=', 'products.currency_id')
         ->leftjoin('categories', 'categories.id', '=', 'products.category_id')
         ->where('store_id', '=', $this->logged_author->id)
-        ->select( 'products.name', 'categories.id as cid', 'products.description', 'products.cargo_price', 'products.price', 'products.id', 'currencies.suffix as currency', 'products.updated_at')
+        ->select( 'products.name', 'categories.id as cid', 'products.description',
+            'products.cargo_price', 'products.price', 'products.id', 'currencies.suffix as currency', 'products.updated_at','products.ar')
         ->get();
 
         foreach ($products as $key => $product) {
@@ -53,6 +54,7 @@ class ProductController extends Controller
                 ];
             }
             $products[$key] -> totalstock = ProductStock::where('product_id', '=', $product->id)->sum('stock');
+            $products[$key]->images = Product_Images::where('product_id', '=', $product->id)->get();
         };
 
 
@@ -185,7 +187,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'max:32',
             'description' => 'required',
-            //'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'price' => 'numeric',
             'cargo_price' => 'numeric',
             'currency_id' => 'numeric',
@@ -196,26 +198,17 @@ class ProductController extends Controller
         $product_stock = ProductStock::find($product_id);
 
 
-        if($request->file('images')!=null)
+        if($request->file('images') != null)
         {
-            $productImages = Product_Images::where('product_id', $product_id);
-            foreach($productImages->get() as $image){
-                $dir = public_path($image->image);
-                if(file_exists($dir)) {
-                    unlink($dir);
-                }
-            }
-            $productImages->delete();
-
             $counter=0;
             foreach($request->file('images') as $image) {
                 $counter++;
                 // Make a image name based on user name and current timestamp
                 $imageName = Str::slug($request->input('name')).'_'.time().'_'.$counter;
                 // Define folder path
-                $folder = '/images/products/';
+                $folder = '/photo/product';
                 // Make a file path where image will be stored [ folder path + file name + file extension]
-                $filePath = $folder . $imageName. '.' . $image->extension();
+                $filePath = $imageName. '.' . $image->extension();
                 // Upload image
                 $image->move(public_path($folder), $imageName. '.' . $image->extension());
 
@@ -233,7 +226,6 @@ class ProductController extends Controller
                     unlink($dir);
                 }
             }
-
 
             $arName = Str::slug($request->input('name')).'_'.time().'_';
             // Define folder path
@@ -307,7 +299,7 @@ class ProductController extends Controller
         }
 
 
-        return back();
+        return back()->with('success','Product information updated successfully');
     }
 
     /**
