@@ -29,12 +29,14 @@ class StoreDiscountController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'store_id' => 'required',
+            'store_id' => 'required|unique:store_discount,store_id',
             'store_discount' => 'numeric',
             'main_discount' => 'required|numeric',
             'description' => 'required|max:255',
             'start_date' => 'required',
             'end_date' => 'required',
+        ],[
+            'store_id.unique' => 'Discount for this store is already exists in the system!'
         ]);
 
         StoreDiscount::create([

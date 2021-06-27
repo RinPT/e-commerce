@@ -42,7 +42,7 @@ class TicketController extends Controller
         $department = Ticket_Departments::create([
             'name' => $request->name,
             'description' => $request->description,
-            'status' => ($request->status === 1 ? 1 : 0) || ($request->status === 0 ? 0 : 1),
+            'status' => $request->status === 1 ? 1 : 0,
         ]);
 
         return back()->with('created', 'New department ('.$department->name.') is added to the system.');
@@ -68,7 +68,7 @@ class TicketController extends Controller
 
         $department->update([
             'description' => $request->description,
-            'status' => ($request->status === 1 ? 1 : 0) || ($request->status === 0 ? 0 : 1),
+            'status' => $request->status === 1 ? 1 : 0,
         ]);
 
         return back()->with('updated', 'The department information has been updated.');

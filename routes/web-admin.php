@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\CategoryProductController;
-use App\Http\Controllers\ContractController;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\Admin\CargoController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\StoreController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CurrencyController;
+use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\StoreDiscountController;
 use \App\Http\Controllers\Admin\AdvertisementController;
@@ -22,9 +26,6 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductsController as ProductsController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController as AdminLogoutController;
-use App\Http\Controllers\Admin\CouponController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Models\Slider;
 
 Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], function() {
 
@@ -223,5 +224,12 @@ Route::group(['prefix' => "/author", 'middleware' => ['authorisvalid']], functio
     Route::post('/coupons/store', [CouponController::class, 'store'])->name('admin.coupons.store');
     Route::post('/coupon/{id}/update', [CouponController::class, 'update'])->name('admin.coupons.update');
     Route::delete('/coupon/{id}/delete', [CouponController::class, 'destroy'])->name('admin.coupons.delete');
+
+        /**
+     * Comments
+     */
+    Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
+    Route::get('/comments/delete/{id}', [CommentController::class, 'destroy'])->name('admin.comments.delete');
+    Route::post('/comments/update/{id}', [CommentController::class, 'update'])->name('admin.comments.update');
 });
 

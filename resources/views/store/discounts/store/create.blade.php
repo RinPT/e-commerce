@@ -32,6 +32,15 @@
                 </div>
             </div>
         </div>
+    @elseif(session('error'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning mb-0">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Whoops!</strong> {{ session('error') }}.
+                </div>
+            </div>
+        </div>
     @endif
     <div class="row">
         <div class="col">

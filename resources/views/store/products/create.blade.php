@@ -55,17 +55,6 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Category</label>
-                    <div class="col-lg-6">
-                        <select name="category_id" class="form-control">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Images</label>
                     <div class="col-lg-6">
                         <input type="file" name="images[]" multiple class="form-control" accept="image/*" required>

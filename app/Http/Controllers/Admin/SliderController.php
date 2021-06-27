@@ -88,6 +88,11 @@ class SliderController extends Controller
             }
         }
 
+        $slider->update([
+            'banner' => isset($filename) ? $filename : "",
+
+        ]);
+
         return back()->with('updated', $slider->name.' updated!');
     }
 }
