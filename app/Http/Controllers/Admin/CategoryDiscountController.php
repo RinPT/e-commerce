@@ -29,12 +29,14 @@ class CategoryDiscountController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'category_id' => 'required',
+            'category_id' => 'required|unique:store_discount,category_id',
             'store_discount' => 'numeric',
             'main_discount' => 'required|numeric',
             'description' => 'required|max:255',
             'start_date' => 'required',
             'end_date' => 'required',
+        ], [
+            'category_id.unique' => 'Discount for this store is already exists in the system!'
         ]);
 
         CategoryDiscount::create([

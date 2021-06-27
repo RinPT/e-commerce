@@ -251,11 +251,6 @@
 													Coupons
 												</a>
 											</li>
-											<li>
-												<a class="nav-link" href="{{ route('admin.comments') }}">
-													Comments
-												</a>
-											</li>
 										</ul>
 									</li>
                                     @endif

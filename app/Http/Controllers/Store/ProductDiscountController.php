@@ -37,7 +37,15 @@ class ProductDiscountController extends Controller
         ]);
     }
 
+
+
     public function store(Request $request) {
+
+        $discount = ProductDiscount::find($this->logged_author->id);
+        if($discount !== null){
+            return back()->with("error", "Discount for this store is already exists in the system!");
+        }
+
         $this->validate($request, [
             'product_id' => 'required',
             'store_discount' => 'required|numeric',

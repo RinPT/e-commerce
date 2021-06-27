@@ -35,7 +35,7 @@ class StoreDiscountController extends Controller
             'description' => 'required|max:255',
             'start_date' => 'required',
             'end_date' => 'required',
-        ],[
+        ], [
             'store_id.unique' => 'Discount for this store is already exists in the system!'
         ]);
 
